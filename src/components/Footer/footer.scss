@@ -1,0 +1,8 @@
+@import '../../global-styles/variables';
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  background-color: lightgray;
+  padding: 0 40px;
+}

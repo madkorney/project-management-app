@@ -1,0 +1,11 @@
+@import '../../global-styles/variables';
+
+.header-container {
+  background-color: lightgray;
+
+  .nav-list {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+  }
+}
