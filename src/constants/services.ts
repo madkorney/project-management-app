@@ -1,5 +1,8 @@
 export const BASE_URL = 'http://localhost:3001';
 
+export const TEST_TOKEN =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNmMwZGJmYmNlNDU5OWU3OWU5NzYxMSIsImxvZ2luIjoiYWxleCIsImlhdCI6MTY2ODAyODIzMiwiZXhwIjoxNjY4MDcxNDMyfQ.16DnDrzldOCPuZKCifLfWJleVCGDtV8ZvljQ1EVdXxw';
+
 export enum StatusCodeEnum {
   OK = 200,
   BAD_REQUEST = 400,
