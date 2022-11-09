@@ -1,27 +1,20 @@
-export type TaskCreateParamsType = {
+export type TaskType = {
+  _id: string;
   title: string;
   order: number;
+  boardId: string;
+  columnId: string;
   description: string;
   userId: string;
   users: string[];
 };
 
-export type TasksUpdateParamsType = TaskCreateParamsType & {
-  columnId: string;
-};
+export type TaskCreateParamsType = Omit<TaskType, '_id' | 'boardId' | 'columnId'>;
 
-export type TaskType = TasksUpdateParamsType & {
-  _id: string;
-  boardId: string;
-  columnId: string;
-};
+export type TasksUpdateParamsType = Omit<TaskType, '_id' | 'boardId'>;
 
 export type TasksSetType = TaskType[];
 
-export type TasksSetUpdateParamsType = {
-  _id: string;
-  order: number;
-  columnId: string;
-};
+export type TasksSetUpdateParamsType = Pick<TaskType, '_id' | 'order' | 'columnId'>;
 
 export type TasksSetParamsType = TasksSetUpdateParamsType[];

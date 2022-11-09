@@ -1,22 +1,15 @@
-export type PointParamsType = {
+export type PointType = {
+  _id: string;
   title: string;
   taskId: string;
   boardId: string;
   done: boolean;
 };
 
-export type PointType = PointParamsType & {
-  _id: string;
-};
+export type PointParamsType = Omit<PointType, '_id'>;
 
 export type PointsListType = PointType[];
 
-export type PointsSetUpdateParamsType = {
-  _id: string;
-  done: boolean;
-}[];
+export type PointsSetUpdateParamsType = Pick<PointType, '_id' | 'done'>[];
 
-export type PointUpdateParamsType = {
-  title: string;
-  done: string;
-};
+export type PointUpdateParamsType = Pick<PointType, 'title' | 'done'>;

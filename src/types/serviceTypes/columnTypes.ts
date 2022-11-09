@@ -1,12 +1,11 @@
-export type ColumnParamsType = {
+export type ColumnType = {
+  _id: string;
   title: string;
   order: number;
-};
-
-export type ColumnType = ColumnParamsType & {
-  _id: string;
   boardId: string;
 };
+
+export type ColumnParamsType = Pick<ColumnType, 'title' | 'order'>;
 
 export type ColumnsArrayType = ColumnType[];
 

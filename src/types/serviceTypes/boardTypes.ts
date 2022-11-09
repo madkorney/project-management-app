@@ -1,11 +1,10 @@
-export type BoardParamsType = {
+export type BoardType = {
+  _id: string;
   title: string;
   owner: string;
   users: string[];
 };
 
-export type BoardType = BoardParamsType & {
-  _id: string;
-};
+export type BoardParamsType = Omit<BoardType, '_id'>;
 
 export type BoardsArrayType = BoardType[];
