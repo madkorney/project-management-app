@@ -7,11 +7,6 @@ export type AuthSuccessfulType = {
   token: string;
 };
 
-export type AuthErrorType = {
-  statusCode: number;
-  message: string;
-};
-
 export type UserSignUpType = AuthInfoType & {
   name: string;
 };

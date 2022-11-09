@@ -1,1 +1,1 @@
-export * from './serviceTypes/userTypes';
+export * from './serviceTypes';
