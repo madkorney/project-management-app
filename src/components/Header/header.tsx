@@ -13,9 +13,14 @@ const Header = () => {
             <li>
               <Link to="/">main</Link>
             </li>
-
             <li>
               <Link to="about">about</Link>
+            </li>
+            <li>
+              <Link to="sing-in">Sign in</Link>
+            </li>
+            <li>
+              <Link to="sing-out">Sign out</Link>
             </li>
           </ul>
         </nav>

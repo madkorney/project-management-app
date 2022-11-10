@@ -1,0 +1,46 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 300px;
+  width: 100%;
+  margin: 100px auto;
+  text-align: center;
+  border: 2px solid rgba(0, 0, 0, 0.24);
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(75, 102, 234, 0.52);
+
+  &Button {
+    margin: 18px auto 8px;
+    max-width: 50%;
+    width: 100%;
+  }
+
+  &Link {
+    color: #006b4b;
+    transition: color .2s linear;
+    text-decoration: none;
+
+    &:hover {
+      color: #ff00f5;
+      text-decoration: underline;
+
+    }
+
+    &:active {
+      color: red;
+      text-decoration: underline;
+
+    }
+
+  }
+
+  &Text {
+    display: inline-block;
+    max-width: 80%;
+    width: 100%;
+    margin: 20px auto;
+    font-size: 14px;
+  }
+
+}
