@@ -10,6 +10,9 @@ const SingIn = () => {
     name: '',
     password: '',
     showPassword: false,
+    errorPassword: false,
+    errorName: false,
+    errorLogin: false,
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,13 +32,19 @@ const SingIn = () => {
   return (
     <div className={styles.form}>
       <h2>Sing In</h2>
-      <InputText values={values} onChange={handleChange} nameElement="name" />
+      <InputText
+        values={values}
+        onChange={handleChange}
+        nameElement="name"
+        error={values.errorLogin}
+      />
       <InputPassword
         values={values}
         onChange={handleChange}
         nameElement="password"
         onClick={handleClickShowPassword}
         onMouseDown={handleMouseDownPassword}
+        error={values.errorPassword}
       />
       <Button className={styles.formButton} variant="contained">
         Sign In
