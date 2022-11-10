@@ -5,8 +5,12 @@ export type ColumnType = {
   boardId: string;
 };
 
-export type ColumnParamsType = Pick<ColumnType, 'title' | 'order'>;
+export type ColumnUpdateParamsType = Pick<ColumnType, 'title' | 'order'>;
+
+export type ColumnCreateParamsType = Omit<ColumnType, '_id'>;
 
 export type ColumnsArrayType = ColumnType[];
 
-export type ColumnsSetParamsType = ColumnParamsType[];
+export type ColumnsSetUpdateParamsType = ColumnUpdateParamsType[];
+
+export type ColumnsSetCreateParamsType = ColumnCreateParamsType[];
