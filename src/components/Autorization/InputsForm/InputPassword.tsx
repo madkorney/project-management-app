@@ -1,8 +1,7 @@
-import { FormControl, FormHelperText, InputLabel, OutlinedInput } from '@mui/material';
+import { FormControl, InputLabel, OutlinedInput } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import React from 'react';
 import { InputProps } from '../types';
 
 import styles from '../Authorization.module.scss';
