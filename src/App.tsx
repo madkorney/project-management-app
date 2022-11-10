@@ -20,7 +20,7 @@ const App = () => {
           <Route path="/" element={<Main />} />
           <Route path="about" element={<About />} />
           <Route path="sing-in" element={<SingIn />} />
-          <Route path="sing-out" element={<SingUp />} />
+          <Route path="sing-up" element={<SingUp />} />
           <Route path="*" element={<PageNotFound />} />
         </Route>
       </Routes>

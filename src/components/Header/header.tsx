@@ -20,7 +20,7 @@ const Header = () => {
               <Link to="sing-in">Sign in</Link>
             </li>
             <li>
-              <Link to="sing-out">Sign out</Link>
+              <Link to="sing-up">Sign up</Link>
             </li>
           </ul>
         </nav>

@@ -14,8 +14,12 @@ export const InputText = ({ values, onChange, nameElement, error }: InputProps) 
         error={error}
       />
       {nameElement === 'login'
-        ? values.errorLogin && <span className={styles.formError}>Enter valid Login</span>
-        : values.errorName && <span className={styles.formError}>Enter valid Name</span>}
+        ? values.errorLogin && (
+            <span className={styles.formError}>Enter valid Login(word, number)</span>
+          )
+        : values.errorName && (
+            <span className={styles.formError}>Enter valid Name(max one space)</span>
+          )}
     </FormControl>
   );
 };

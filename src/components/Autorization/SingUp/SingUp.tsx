@@ -2,7 +2,7 @@ import React, { ChangeEvent, useState } from 'react';
 import { AuthorizationState } from '../types';
 import { InputPassword, InputText, LinkAuthorization } from '../InputsForm';
 import { Button } from '@mui/material';
-import { validateLogin, validatePassword } from '../Authorization.utils';
+import { validateLogin, validateName, validatePassword } from '../Authorization.utils';
 
 import styles from '../Authorization.module.scss';
 
@@ -20,11 +20,17 @@ const SingUp = () => {
   const onSubmit = () => {
     const errorPass = validatePassword(values.password);
     const errorLogin = validateLogin(values.login || '');
-    setValues({ ...values, errorPassword: errorPass, errorLogin: errorLogin });
+    const errorName = validateName(values.name);
+    setValues({
+      ...values,
+      errorPassword: errorPass,
+      errorLogin: errorLogin,
+      errorName: errorName,
+    });
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setValues({ ...values, [event.target.name]: event.target.value });
+    // setValues({ ...values, [event.target.name]: event.target.value });
 
     if (event.target.name === 'password')
       setValues({
@@ -37,6 +43,12 @@ const SingUp = () => {
         ...values,
         [event.target.name]: event.target.value,
         errorLogin: false,
+      });
+    if (event.target.name === 'name')
+      setValues({
+        ...values,
+        [event.target.name]: event.target.value,
+        errorName: false,
       });
   };
 
