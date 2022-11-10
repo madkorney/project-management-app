@@ -1,10 +1,10 @@
-export * from './boardTypes';
+export * from './boardsTypes';
 
-export * from './columnTypes';
+export * from './columnsTypes';
 
-export * from './fileTypes';
+export * from './filesTypes';
 
-export * from './pointTypes';
+export * from './pointsTypes';
 
 export * from './tasksTypes';
 

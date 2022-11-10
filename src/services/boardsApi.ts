@@ -7,7 +7,7 @@ export const boardsApiSlice = baseApiSlice.injectEndpoints({
     getBoards: build.query<BoardsArrayType, unknown>({
       query: () => UrlEnum.BOARDS,
     }),
-    addBoard: build.mutation<BoardType, BoardParamsType>({
+    createBoard: build.mutation<BoardType, BoardParamsType>({
       query: (newParams) => ({
         url: UrlEnum.BOARDS,
         method: HttpMethodEnum.POST,
@@ -44,7 +44,7 @@ export const boardsApiSlice = baseApiSlice.injectEndpoints({
 
 export const {
   useGetBoardsQuery,
-  useAddBoardMutation,
+  useCreateBoardMutation,
   useGetBoardByIdQuery,
   useUpdateBoardByIdMutation,
   useDeleteBoardByIdMutation,

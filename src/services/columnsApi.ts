@@ -13,7 +13,7 @@ export const columnsApiSlice = baseApiSlice.injectEndpoints({
     getColumns: build.query<ColumnsArrayType, string>({
       query: (boardId) => `${UrlEnum.BOARDS}/${boardId}/${UrlEnum.COLUMNS}`,
     }),
-    addColumn: build.mutation<ColumnType, { boardId: string } & ColumnUpdateParamsType>({
+    createColumn: build.mutation<ColumnType, { boardId: string } & ColumnUpdateParamsType>({
       query: ({ boardId, ...newParams }) => ({
         url: `${UrlEnum.BOARDS}/${boardId}/${UrlEnum.COLUMNS}`,
         method: HttpMethodEnum.POST,
@@ -59,7 +59,7 @@ export const columnsApiSlice = baseApiSlice.injectEndpoints({
         body: newParams,
       }),
     }),
-    addColumnsSet: build.mutation<ColumnsArrayType, ColumnsSetCreateParamsType>({
+    createColumnsSet: build.mutation<ColumnsArrayType, ColumnsSetCreateParamsType>({
       query: (newParams) => ({
         url: UrlEnum.COLUMNSSET,
         method: HttpMethodEnum.POST,
@@ -71,11 +71,11 @@ export const columnsApiSlice = baseApiSlice.injectEndpoints({
 
 export const {
   useGetColumnsQuery,
-  useAddColumnMutation,
+  useCreateColumnMutation,
   useGetColumnByIdQuery,
   useUpdateColumnByIdMutation,
   useDeleteColumnByIdMutation,
   useGetColumnsSetByIdsOrUserIdQuery,
   useUpdateColumnsSetMutation,
-  useAddColumnsSetMutation,
+  useCreateColumnsSetMutation,
 } = columnsApiSlice;

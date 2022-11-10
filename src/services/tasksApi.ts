@@ -14,15 +14,16 @@ export const tasksApiSlice = baseApiSlice.injectEndpoints({
       query: ({ boardId, columnId }) =>
         `${UrlEnum.BOARDS}/${boardId}/${UrlEnum.COLUMNS}/${columnId}/${UrlEnum.TASKS}`,
     }),
-    addTask: build.mutation<TaskType, { boardId: string; columnId: string } & TaskCreateParamsType>(
-      {
-        query: ({ boardId, columnId, ...newParams }) => ({
-          url: `${UrlEnum.BOARDS}/${boardId}/${UrlEnum.COLUMNS}/${columnId}/${UrlEnum.TASKS}`,
-          method: HttpMethodEnum.POST,
-          body: newParams,
-        }),
-      }
-    ),
+    createTask: build.mutation<
+      TaskType,
+      { boardId: string; columnId: string } & TaskCreateParamsType
+    >({
+      query: ({ boardId, columnId, ...newParams }) => ({
+        url: `${UrlEnum.BOARDS}/${boardId}/${UrlEnum.COLUMNS}/${columnId}/${UrlEnum.TASKS}`,
+        method: HttpMethodEnum.POST,
+        body: newParams,
+      }),
+    }),
     getTaskById: build.query<TaskType, { boardId: string; columnId: string; taskId: string }>({
       query: ({ boardId, columnId, taskId }) =>
         `${UrlEnum.BOARDS}/${boardId}/${UrlEnum.COLUMNS}/${columnId}/${UrlEnum.TASKS}/${taskId}`,
@@ -73,7 +74,7 @@ export const tasksApiSlice = baseApiSlice.injectEndpoints({
 
 export const {
   useGetTasksQuery,
-  useAddTaskMutation,
+  useCreateTaskMutation,
   useGetTaskByIdQuery,
   useUpdateTaskByIdMutation,
   useDeleteTaskByIdMutation,
