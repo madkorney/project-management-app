@@ -1,5 +1,5 @@
 import { HttpMethodEnum, UrlEnum } from '../constants';
-import { BoardParamsType, BoardsArrayType, BoardType, UserSignUpType, UserType } from 'types';
+import { BoardParamsType, BoardsArrayType, BoardType } from 'types';
 import { baseApiSlice } from './baseApi';
 
 export const boardsApiSlice = baseApiSlice.injectEndpoints({
@@ -17,24 +17,27 @@ export const boardsApiSlice = baseApiSlice.injectEndpoints({
     getBoardById: build.query<BoardType, string>({
       query: (boardId) => `${UrlEnum.BOARDS}/${boardId}`,
     }),
-    updateBoardById: build.mutation<UserType, { id: string } & UserSignUpType>({
-      query: ({ id, name, login, password }) => ({
-        url: `${UrlEnum.USERS}/${id}`,
+    updateBoardById: build.mutation<BoardType, { boardId: string } & BoardParamsType>({
+      query: ({ boardId, title, owner, users }) => ({
+        url: `${UrlEnum.BOARDS}/${boardId}`,
         method: HttpMethodEnum.PUT,
-        body: { name, login, password },
+        body: { title, owner, users },
       }),
     }),
-    deleteBoardById: build.mutation<UserType, string>({
-      query: (id) => ({
-        url: `${UrlEnum.USERS}/${id}`,
+    deleteBoardById: build.mutation<BoardType, string>({
+      query: (boardId) => ({
+        url: `${UrlEnum.BOARDS}/${boardId}`,
         method: HttpMethodEnum.DELETE,
       }),
     }),
-    getBoardsSetByIds: build.query<UserType, string>({
-      query: (id) => `${UrlEnum.USERS}/${id}`,
+    getBoardsSetByIds: build.query<BoardType, string[]>({
+      query: (ids) => ({
+        url: UrlEnum.BOARDS,
+        params: { ids: ids.join(',') },
+      }),
     }),
-    getBoardsSetByUserId: build.query<UserType, string>({
-      query: (id) => `${UrlEnum.USERS}/${id}`,
+    getBoardsSetByUserId: build.query<BoardType, string>({
+      query: (userId) => `${UrlEnum.BOARDS}/${userId}`,
     }),
   }),
 });

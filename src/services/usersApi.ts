@@ -8,18 +8,18 @@ export const usersApiSlice = baseApiSlice.injectEndpoints({
       query: () => UrlEnum.USERS,
     }),
     getUserById: build.query<UserType, string>({
-      query: (id) => `${UrlEnum.USERS}/${id}`,
+      query: (userId) => `${UrlEnum.USERS}/${userId}`,
     }),
-    updateUserById: build.mutation<UserType, { id: string } & UserSignUpType>({
-      query: ({ id, name, login, password }) => ({
-        url: `${UrlEnum.USERS}/${id}`,
+    updateUserById: build.mutation<UserType, { userId: string } & UserSignUpType>({
+      query: ({ userId, name, login, password }) => ({
+        url: `${UrlEnum.USERS}/${userId}`,
         method: HttpMethodEnum.PUT,
         body: { name, login, password },
       }),
     }),
     deleteUserById: build.mutation<UserType, string>({
-      query: (id) => ({
-        url: `${UrlEnum.USERS}/${id}`,
+      query: (userId) => ({
+        url: `${UrlEnum.USERS}/${userId}`,
         method: HttpMethodEnum.DELETE,
       }),
     }),
