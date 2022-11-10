@@ -1,6 +1,7 @@
 import { FormControl, TextField } from '@mui/material';
 import React from 'react';
 import { InputProps } from '../types';
+import styles from '../Authorization.module.scss';
 
 export const InputText = ({ values, onChange, nameElement, error }: InputProps) => {
   return (
@@ -12,6 +13,9 @@ export const InputText = ({ values, onChange, nameElement, error }: InputProps) 
         onChange={onChange}
         error={error}
       />
+      {nameElement === 'login'
+        ? values.errorLogin && <span className={styles.formError}>Enter valid Login</span>
+        : values.errorName && <span className={styles.formError}>Enter valid Name</span>}
     </FormControl>
   );
 };
