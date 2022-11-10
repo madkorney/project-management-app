@@ -11,7 +11,7 @@ export type TaskType = {
 
 export type TaskCreateParamsType = Omit<TaskType, '_id' | 'boardId' | 'columnId'>;
 
-export type TasksUpdateParamsType = Omit<TaskType, '_id' | 'boardId'>;
+export type TaskUpdateParamsType = Omit<TaskType, '_id' | 'boardId'>;
 
 export type TasksSetType = TaskType[];
 
