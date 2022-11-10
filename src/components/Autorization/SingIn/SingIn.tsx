@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from '@mui/material';
 import { AuthorizationState } from '../types';
-import { NavLink } from 'react-router-dom';
 import { InputPassword, InputText, LinkAuthorization } from '../InputsForm';
 
 import styles from '../Authorization.module.scss';

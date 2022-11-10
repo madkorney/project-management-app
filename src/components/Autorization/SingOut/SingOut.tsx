@@ -1,6 +1,5 @@
 import React, { ChangeEvent, useState } from 'react';
 import { AuthorizationState } from '../types';
-import { NavLink } from 'react-router-dom';
 import { InputPassword, InputText, LinkAuthorization } from '../InputsForm';
 import { Button } from '@mui/material';
 
