@@ -4,6 +4,8 @@ export * from './columnTypes';
 
 export * from './fileTypes';
 
+export * from './pointTypes';
+
 export * from './tasksTypes';
 
 export * from './userTypes';
