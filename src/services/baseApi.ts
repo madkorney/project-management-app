@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from 'redux/types';
-import { BASE_URL, UrlEnum } from '../constants';
+import { BASE_URL, ENDPOINTS } from '../constants';
 
 export const baseApiSlice = createApi({
   reducerPath: 'pmaApi',
@@ -8,7 +8,7 @@ export const baseApiSlice = createApi({
     baseUrl: BASE_URL,
     prepareHeaders: (headers, { getState, endpoint }) => {
       const token = (getState() as RootState).auth.token;
-      if (token && !endpoint.includes(UrlEnum.AUTH)) {
+      if (token && !endpoint.includes(ENDPOINTS.AUTH)) {
         headers.set('Authorization', `Bearer ${token}`);
       }
       headers.set('Accept', 'application/json');

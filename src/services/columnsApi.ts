@@ -1,4 +1,4 @@
-import { HttpMethodEnum, UrlEnum } from '../constants';
+import { REQUEST_METHODS, ENDPOINTS } from '../constants';
 import {
   ColumnType,
   ColumnsArrayType,
@@ -11,33 +11,33 @@ import { baseApiSlice } from './baseApi';
 export const columnsApiSlice = baseApiSlice.injectEndpoints({
   endpoints: (build) => ({
     getColumns: build.query<ColumnsArrayType, string>({
-      query: (boardId) => `${UrlEnum.BOARDS}/${boardId}/${UrlEnum.COLUMNS}`,
+      query: (boardId) => `${ENDPOINTS.BOARDS}/${boardId}/${ENDPOINTS.COLUMNS}`,
     }),
     createColumn: build.mutation<ColumnType, { boardId: string } & ColumnUpdateParamsType>({
       query: ({ boardId, ...newParams }) => ({
-        url: `${UrlEnum.BOARDS}/${boardId}/${UrlEnum.COLUMNS}`,
-        method: HttpMethodEnum.POST,
+        url: `${ENDPOINTS.BOARDS}/${boardId}/${ENDPOINTS.COLUMNS}`,
+        method: REQUEST_METHODS.POST,
         body: newParams,
       }),
     }),
     getColumnById: build.query<ColumnType, { boardId: string; columnId: string }>({
       query: ({ boardId, columnId }) =>
-        `${UrlEnum.BOARDS}/${boardId}/${UrlEnum.COLUMNS}/${columnId}`,
+        `${ENDPOINTS.BOARDS}/${boardId}/${ENDPOINTS.COLUMNS}/${columnId}`,
     }),
     updateColumnById: build.mutation<
       ColumnType,
       { boardId: string; columnId: string } & ColumnUpdateParamsType
     >({
       query: ({ boardId, columnId, ...newParams }) => ({
-        url: `${UrlEnum.BOARDS}/${boardId}/${UrlEnum.COLUMNS}/${columnId}`,
-        method: HttpMethodEnum.PUT,
+        url: `${ENDPOINTS.BOARDS}/${boardId}/${ENDPOINTS.COLUMNS}/${columnId}`,
+        method: REQUEST_METHODS.PUT,
         body: newParams,
       }),
     }),
     deleteColumnById: build.mutation<ColumnType, { boardId: string; columnId: string }>({
       query: ({ boardId, columnId }) => ({
-        url: `${UrlEnum.BOARDS}/${boardId}/${UrlEnum.COLUMNS}/${columnId}`,
-        method: HttpMethodEnum.DELETE,
+        url: `${ENDPOINTS.BOARDS}/${boardId}/${ENDPOINTS.COLUMNS}/${columnId}`,
+        method: REQUEST_METHODS.DELETE,
       }),
     }),
     getColumnsSetByIdsOrUserId: build.query<
@@ -45,7 +45,7 @@ export const columnsApiSlice = baseApiSlice.injectEndpoints({
       { columnsIds: string[]; userId: string }
     >({
       query: ({ columnsIds, userId }) => ({
-        url: UrlEnum.COLUMNSSET,
+        url: ENDPOINTS.COLUMNSSET,
         params: {
           ids: columnsIds.join(','),
           userId,
@@ -54,15 +54,15 @@ export const columnsApiSlice = baseApiSlice.injectEndpoints({
     }),
     updateColumnsSet: build.mutation<ColumnsArrayType, ColumnsSetUpdateParamsType>({
       query: (newParams) => ({
-        url: UrlEnum.COLUMNSSET,
-        method: HttpMethodEnum.PATCH,
+        url: ENDPOINTS.COLUMNSSET,
+        method: REQUEST_METHODS.PATCH,
         body: newParams,
       }),
     }),
     createColumnsSet: build.mutation<ColumnsArrayType, ColumnsSetCreateParamsType>({
       query: (newParams) => ({
-        url: UrlEnum.COLUMNSSET,
-        method: HttpMethodEnum.POST,
+        url: ENDPOINTS.COLUMNSSET,
+        method: REQUEST_METHODS.POST,
         body: newParams,
       }),
     }),

@@ -3,7 +3,7 @@ export const BASE_URL = 'http://localhost:3001';
 export const TEST_TOKEN =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNmMwZGJmYmNlNDU5OWU3OWU5NzYxMSIsImxvZ2luIjoiYWxleCIsImlhdCI6MTY2ODAyODIzMiwiZXhwIjoxNjY4MDcxNDMyfQ.16DnDrzldOCPuZKCifLfWJleVCGDtV8ZvljQ1EVdXxw';
 
-export enum StatusCodeEnum {
+export enum STATUS_CODES {
   OK = 200,
   BAD_REQUEST = 400,
   UNAUTHORIZED = 401,
@@ -13,7 +13,7 @@ export enum StatusCodeEnum {
   CONFLICT = 409,
 }
 
-export enum UrlEnum {
+export enum ENDPOINTS {
   AUTH = '/auth',
   SIGNIN = '/signin',
   SIGNUP = '/signup',
@@ -28,7 +28,7 @@ export enum UrlEnum {
   POINTS = '/points',
 }
 
-export enum HttpMethodEnum {
+export enum REQUEST_METHODS {
   GET = 'GET',
   POST = 'POST',
   PUT = 'PUT',

@@ -1,4 +1,4 @@
-import { HttpMethodEnum, UrlEnum } from '../constants';
+import { REQUEST_METHODS, ENDPOINTS } from '../constants';
 import { FileType, FileListType } from 'types';
 import { baseApiSlice } from './baseApi';
 
@@ -9,7 +9,7 @@ export const filesApiSlice = baseApiSlice.injectEndpoints({
       { columnsIds: string[]; userId: string; taskId: string }
     >({
       query: ({ columnsIds, userId, taskId }) => ({
-        url: UrlEnum.FILE,
+        url: ENDPOINTS.FILE,
         params: {
           ids: columnsIds.join(','),
           userId,
@@ -19,16 +19,16 @@ export const filesApiSlice = baseApiSlice.injectEndpoints({
     }),
     TODO_uploadFile: build.mutation<FileListType, { boardId: string; taskId: string; file: File }>({
       query: ({ boardId, taskId, file }) => ({
-        url: UrlEnum.FILE,
-        method: HttpMethodEnum.POST,
+        url: ENDPOINTS.FILE,
+        method: REQUEST_METHODS.POST,
         body: { boardId, taskId, file },
       }),
     }),
     getFilesByBoardId: build.query<FileListType, string>({
-      query: (boardId) => `${UrlEnum.FILE}/${boardId}`,
+      query: (boardId) => `${ENDPOINTS.FILE}/${boardId}`,
     }),
     deleteFileById: build.mutation<FileType, string>({
-      query: (fileId) => `${UrlEnum.FILE}/${fileId}`,
+      query: (fileId) => `${ENDPOINTS.FILE}/${fileId}`,
     }),
   }),
 });

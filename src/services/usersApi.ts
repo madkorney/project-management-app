@@ -1,26 +1,26 @@
-import { HttpMethodEnum, UrlEnum } from '../constants';
+import { REQUEST_METHODS, ENDPOINTS } from '../constants';
 import { UsersArrayType, UserSignUpType, UserType } from 'types';
 import { baseApiSlice } from './baseApi';
 
 export const usersApiSlice = baseApiSlice.injectEndpoints({
   endpoints: (build) => ({
     getUsers: build.query<UsersArrayType, unknown>({
-      query: () => UrlEnum.USERS,
+      query: () => ENDPOINTS.USERS,
     }),
     getUserById: build.query<UserType, string>({
-      query: (userId) => `${UrlEnum.USERS}/${userId}`,
+      query: (userId) => `${ENDPOINTS.USERS}/${userId}`,
     }),
     updateUserById: build.mutation<UserType, { userId: string } & UserSignUpType>({
       query: ({ userId, name, login, password }) => ({
-        url: `${UrlEnum.USERS}/${userId}`,
-        method: HttpMethodEnum.PUT,
+        url: `${ENDPOINTS.USERS}/${userId}`,
+        method: REQUEST_METHODS.PUT,
         body: { name, login, password },
       }),
     }),
     deleteUserById: build.mutation<UserType, string>({
       query: (userId) => ({
-        url: `${UrlEnum.USERS}/${userId}`,
-        method: HttpMethodEnum.DELETE,
+        url: `${ENDPOINTS.USERS}/${userId}`,
+        method: REQUEST_METHODS.DELETE,
       }),
     }),
   }),
