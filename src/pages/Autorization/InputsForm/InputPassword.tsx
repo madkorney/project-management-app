@@ -5,6 +5,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { InputProps } from '../types';
 
 import styles from '../Authorization.module.scss';
+import { useAppSelector } from 'redux/hooks';
 
 export const InputPassword = ({
   values,
@@ -12,8 +13,8 @@ export const InputPassword = ({
   onChange,
   onClick,
   onMouseDown,
-  error,
 }: InputProps) => {
+  const { validateUser } = useAppSelector((state) => state.validate);
   return (
     <FormControl
       sx={{ m: 2, maxWidth: '30ch', width: '90%', paddingBottom: '15px' }}
@@ -21,11 +22,11 @@ export const InputPassword = ({
     >
       <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
       <OutlinedInput
-        type={values.showPassword ? 'text' : 'password'}
+        type={validateUser.showPassword ? 'text' : 'password'}
         name={nameElement}
         value={values.password}
         onChange={onChange}
-        error={error}
+        error={validateUser.errorPassword}
         endAdornment={
           <InputAdornment position="end">
             <IconButton
@@ -34,14 +35,14 @@ export const InputPassword = ({
               onMouseDown={onMouseDown}
               edge="end"
             >
-              {values.showPassword ? <VisibilityOff /> : <Visibility />}
+              {validateUser.showPassword ? <VisibilityOff /> : <Visibility />}
             </IconButton>
           </InputAdornment>
         }
         label="Password"
       />
-      {values.errorPassword && (
-        <span className={styles.formError}>Enter valid password abc!@#123ABC</span>
+      {validateUser.errorPassword && (
+        <span className={styles.formError}>Enter valid password abAB@#12</span>
       )}
     </FormControl>
   );

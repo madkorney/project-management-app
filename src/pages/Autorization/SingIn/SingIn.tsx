@@ -1,43 +1,38 @@
 import React, { ChangeEvent, useState } from 'react';
 
 import { Button } from '@mui/material';
-import { AuthorizationState } from '../types';
 import { InputPassword, InputText, LinkAuthorization } from '../InputsForm';
-import { validateName, validatePassword, validateReset } from '../Authorization.utils';
+import { resetError, validateName, validatePassword } from '../Authorization.utils';
 
 import styles from '../Authorization.module.scss';
+import { UserSignUpType } from '../../../types';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import { setShowPassword } from '../../../redux/validateUserSlice';
 
 const SingIn = () => {
-  const [values, setValues] = useState<AuthorizationState>({
+  const [values, setValues] = useState<UserSignUpType>({
     name: '',
     password: '',
-    showPassword: false,
-    errorPassword: false,
-    errorName: false,
-    errorLogin: false,
+    login: '',
   });
-  const onSubmit = () => {
-    const errorPass = validatePassword(values.password);
-    const errorName = validateName(values.name);
-    setValues({
-      ...values,
-      errorPassword: errorPass,
-      errorName: errorName,
-    });
+  const dispatch = useAppDispatch();
 
-    console.log(values);
+  const { validateUser } = useAppSelector((state) => state.validate);
+  const onSubmit = () => {
+    validatePassword(values.password, dispatch);
+    validateName(values.name, dispatch);
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    validateReset(event.target.name, event.target.value, values, setValues);
+    resetError(event.target.name, dispatch);
+    setValues({
+      ...values,
+      [event.target.name]: event.target.value,
+    });
   };
 
   const handleClickShowPassword = () => {
-    console.log(values.showPassword);
-    setValues({
-      ...values,
-      showPassword: !values.showPassword,
-    });
+    dispatch(setShowPassword(!validateUser.showPassword));
   };
 
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -48,19 +43,13 @@ const SingIn = () => {
     <div className={styles.form}>
       <h2>Sing In</h2>
       <form onSubmit={onSubmit}></form>
-      <InputText
-        values={values}
-        onChange={handleChange}
-        nameElement="name"
-        error={values.errorName}
-      />
+      <InputText values={values} onChange={handleChange} nameElement="name" />
       <InputPassword
         values={values}
         onChange={handleChange}
         nameElement="password"
         onClick={handleClickShowPassword}
         onMouseDown={handleMouseDownPassword}
-        error={values.errorPassword}
       />
       <Button className={styles.formButton} variant="contained" onClick={onSubmit}>
         Sign In
