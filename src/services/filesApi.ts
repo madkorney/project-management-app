@@ -21,9 +21,6 @@ export const filesApiSlice = baseApiSlice.injectEndpoints({
       query: ({ boardId, taskId, file }) => ({
         url: UrlEnum.FILE,
         method: HttpMethodEnum.POST,
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
         body: { boardId, taskId, file },
       }),
     }),

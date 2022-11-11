@@ -12,7 +12,10 @@ export const baseApiSlice = createApi({
         headers.set('Authorization', `Bearer ${token}`);
       }
       headers.set('Accept', 'application/json');
-      headers.set('Content-Type', 'application/json');
+      headers.set(
+        'Content-Type',
+        endpoint === 'uploadFile' ? 'multipart/form-data' : 'application/json'
+      );
       return headers;
     },
   }),
