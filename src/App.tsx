@@ -7,8 +7,8 @@ import About from './components/About/about';
 import PageNotFound from './components/PageNotFound/pageNotFound';
 
 import './App.scss';
-import SingUp from './components/Autorization';
-import SingIn from './components/Autorization/SingIn/SingIn';
+import SingUp from './pages/Autorization/SingUp';
+import SingIn from './pages/Autorization/SingIn';
 
 const BASENAME = '/project-management-app'; // todo - move to .env
 
