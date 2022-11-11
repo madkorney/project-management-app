@@ -1,19 +1,13 @@
-import React, { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
-// import { AuthorizationState } from '../types';
-import { InputPassword, InputText, LinkAuthorization } from '../InputsForm';
 import { Button } from '@mui/material';
+import { InputPassword, InputText, LinkAuthorization } from '../InputsForm';
 import { resetError, validateLogin, validateName, validatePassword } from '../Authorization.utils';
-
-import styles from '../Authorization.module.scss';
-import {
-  setShowPassword,
-  setValidateLogin,
-  setValidateName,
-  setValidatePassword,
-} from '../../../redux/validateUserSlice';
+import { setShowPassword } from '../../../redux/validateUserSlice';
 import { useAppSelector, useAppDispatch } from '../../../redux/hooks';
 import { UserSignUpType } from 'types';
+
+import styles from '../Authorization.module.scss';
 
 const SingUp = () => {
   const [values, setValues] = useState<UserSignUpType>({
@@ -21,17 +15,21 @@ const SingUp = () => {
     password: '',
     login: '',
   });
-  const dispatch = useAppDispatch();
 
+  const dispatch = useAppDispatch();
   const { validateUser } = useAppSelector((state) => state.validate);
+
   const onSubmit = () => {
-    validatePassword(values.password, dispatch);
-    validateLogin(values.login, dispatch);
-    validateName(values.name, dispatch);
+    validatePassword(values.password, dispatch, validateUser);
+    validateLogin(values.login, dispatch, validateUser);
+    validateName(values.name, dispatch, validateUser);
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    resetError(event.target.name, dispatch);
+    if (validateUser.errorPassword) resetError(event.target.name, dispatch, validateUser);
+    if (validateUser.errorLogin) resetError(event.target.name, dispatch, validateUser);
+    if (validateUser.errorName) resetError(event.target.name, dispatch, validateUser);
+
     setValues({
       ...values,
       [event.target.name]: event.target.value,

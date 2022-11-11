@@ -3,11 +3,11 @@ import React, { ChangeEvent, useState } from 'react';
 import { Button } from '@mui/material';
 import { InputPassword, InputText, LinkAuthorization } from '../InputsForm';
 import { resetError, validateName, validatePassword } from '../Authorization.utils';
-
-import styles from '../Authorization.module.scss';
 import { UserSignUpType } from '../../../types';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { setShowPassword } from '../../../redux/validateUserSlice';
+
+import styles from '../Authorization.module.scss';
 
 const SingIn = () => {
   const [values, setValues] = useState<UserSignUpType>({
@@ -15,16 +15,19 @@ const SingIn = () => {
     password: '',
     login: '',
   });
-  const dispatch = useAppDispatch();
 
+  const dispatch = useAppDispatch();
   const { validateUser } = useAppSelector((state) => state.validate);
+
   const onSubmit = () => {
-    validatePassword(values.password, dispatch);
-    validateName(values.name, dispatch);
+    validatePassword(values.password, dispatch, validateUser);
+    validateName(values.name, dispatch, validateUser);
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    resetError(event.target.name, dispatch);
+    if (validateUser.errorPassword) resetError(event.target.name, dispatch, validateUser);
+    if (validateUser.errorLogin) resetError(event.target.name, dispatch, validateUser);
+
     setValues({
       ...values,
       [event.target.name]: event.target.value,
