@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { baseApiSlice } from 'services';
 import authSliceReducer from './authSlice';
-import validateReducer from './validateUserSlice';
+import showPasswordReducer from './showUserPasswordSlice';
 
 const reducer = {
   auth: authSliceReducer,
-  validate: validateReducer,
+  password: showPasswordReducer,
   [baseApiSlice.reducerPath]: baseApiSlice.reducer,
 };
 export default configureStore({

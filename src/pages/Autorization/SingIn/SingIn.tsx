@@ -2,9 +2,9 @@ import { useForm } from 'react-hook-form';
 import { Button } from '@mui/material';
 
 import { InputPassword, InputLogin, LinkAuthorization } from '../InputsForm';
-import { setShowPassword } from '../../../redux/validateUserSlice';
+import { setShowPassword } from '../../../redux/showUserPasswordSlice';
 import { useAppSelector, useAppDispatch } from '../../../redux/hooks';
-import { UserSignUpType } from 'types';
+import { AuthInfoType, UserSignUpType } from 'types';
 
 import styles from '../Authorization.module.scss';
 
@@ -18,14 +18,14 @@ const SingIn = () => {
   });
 
   const dispatch = useAppDispatch();
-  const { validateUser } = useAppSelector((state) => state.validate);
+  const { showPassword } = useAppSelector((state) => state.password);
 
-  const onSubmit = (data: UserSignUpType) => {
+  const onSubmit = (data: AuthInfoType) => {
     console.log(data);
   };
 
   const handleClickShowPassword = () => {
-    dispatch(setShowPassword(!validateUser.showPassword));
+    dispatch(setShowPassword(!showPassword));
   };
 
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {

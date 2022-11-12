@@ -11,7 +11,7 @@ import { RegExpPasswordValidation } from '../../../templates/validationConstants
 export const InputPassword = ({ errors, register, onClick, onMouseDown }: InputPasswordProps) => {
   let errorBool: boolean;
   errors !== undefined ? (errorBool = true) : (errorBool = false);
-  const { validateUser } = useAppSelector((state) => state.validate);
+  const { showPassword } = useAppSelector((state) => state.password);
   return (
     <FormControl
       sx={{ m: 2, maxWidth: '30ch', width: '90%', paddingBottom: '15px' }}
@@ -26,7 +26,7 @@ export const InputPassword = ({ errors, register, onClick, onMouseDown }: InputP
       )}
       <OutlinedInput
         label="Password"
-        type={validateUser.showPassword ? 'text' : 'password'}
+        type={showPassword ? 'text' : 'password'}
         error={errorBool}
         {...register('password', {
           required: true,
@@ -40,7 +40,7 @@ export const InputPassword = ({ errors, register, onClick, onMouseDown }: InputP
               onMouseDown={onMouseDown}
               edge="end"
             >
-              {validateUser.showPassword ? <VisibilityOff /> : <Visibility />}
+              {showPassword ? <VisibilityOff /> : <Visibility />}
             </IconButton>
           </InputAdornment>
         }
