@@ -1,26 +1,17 @@
-import { ChangeEvent, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button } from '@mui/material';
 
-import { InputPassword, InputName, LinkAuthorization } from '../InputsForm';
+import { InputPassword, InputName, InputLogin, LinkAuthorization } from '../InputsForm';
 import { setShowPassword } from '../../../redux/validateUserSlice';
 import { useAppSelector, useAppDispatch } from '../../../redux/hooks';
 import { UserSignUpType } from 'types';
 
 import styles from '../Authorization.module.scss';
-import { InputLogin } from '../InputsForm/InputLogin';
 
 const SingUp = () => {
-  const [values, setValues] = useState<UserSignUpType>({
-    name: '',
-    password: '',
-    login: '',
-  });
-
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<UserSignUpType>({
     mode: 'onBlur',

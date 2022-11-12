@@ -9,11 +9,9 @@ type LinkProps = {
 export const LinkAuthorization = ({ linkNames }: LinkProps) => {
   return (
     <span className={styles.formText}>
-      {linkNames === 'sing-in'
-        ? 'Already have an account, please click '
-        : "Don't have an account. Click "}
+      {linkNames === 'sing-in' ? 'Already have an account. ' : "Don't have an account. "}
       <NavLink className={styles.formLink} to={`/${linkNames}`}>
-        Here
+        Click Here
       </NavLink>
     </span>
   );
