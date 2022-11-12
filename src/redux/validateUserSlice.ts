@@ -4,9 +4,6 @@ import { UserSignUpType } from '../types';
 
 export type UserValidate = UserSignUpType & {
   showPassword: boolean;
-  errorPassword: boolean;
-  errorName: boolean;
-  errorLogin: boolean;
 };
 
 type UserCheckValidate = {
@@ -19,9 +16,6 @@ export const initialState: UserCheckValidate = {
     login: '',
     password: '',
     showPassword: false,
-    errorPassword: false,
-    errorLogin: false,
-    errorName: false,
   },
 };
 
@@ -29,15 +23,6 @@ export const validateUserSlice = createSlice({
   name: 'validateUser',
   initialState,
   reducers: {
-    setValidatePassword(state: UserCheckValidate, action: PayloadAction<boolean>) {
-      state.validateUser.errorPassword = action.payload;
-    },
-    setValidateLogin(state: UserCheckValidate, action: PayloadAction<boolean>) {
-      state.validateUser.errorLogin = action.payload;
-    },
-    setValidateName(state: UserCheckValidate, action: PayloadAction<boolean>) {
-      state.validateUser.errorName = action.payload;
-    },
     setShowPassword(state: UserCheckValidate, action: PayloadAction<boolean>) {
       state.validateUser.showPassword = action.payload;
     },
@@ -53,14 +38,7 @@ export const validateUserSlice = createSlice({
   },
 });
 
-export const {
-  setValidatePassword,
-  setValidateName,
-  setValidateLogin,
-  setShowPassword,
-  setUserPassword,
-  setUserName,
-  setUserLogin,
-} = validateUserSlice.actions;
+export const { setShowPassword, setUserPassword, setUserName, setUserLogin } =
+  validateUserSlice.actions;
 
 export default validateUserSlice.reducer;

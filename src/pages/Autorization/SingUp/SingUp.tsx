@@ -1,13 +1,14 @@
 import { ChangeEvent, useState } from 'react';
-
+import { useForm } from 'react-hook-form';
 import { Button } from '@mui/material';
-import { InputPassword, InputText, LinkAuthorization } from '../InputsForm';
-import { resetError, validateLogin, validateName, validatePassword } from '../Authorization.utils';
+
+import { InputPassword, InputName, LinkAuthorization } from '../InputsForm';
 import { setShowPassword } from '../../../redux/validateUserSlice';
 import { useAppSelector, useAppDispatch } from '../../../redux/hooks';
 import { UserSignUpType } from 'types';
 
 import styles from '../Authorization.module.scss';
+import { InputLogin } from '../InputsForm/InputLogin';
 
 const SingUp = () => {
   const [values, setValues] = useState<UserSignUpType>({
@@ -16,24 +17,20 @@ const SingUp = () => {
     login: '',
   });
 
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<UserSignUpType>({
+    mode: 'onBlur',
+  });
+
   const dispatch = useAppDispatch();
   const { validateUser } = useAppSelector((state) => state.validate);
 
-  const onSubmit = () => {
-    validatePassword(values.password, dispatch, validateUser);
-    validateLogin(values.login, dispatch, validateUser);
-    validateName(values.name, dispatch, validateUser);
-  };
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (validateUser.errorPassword) resetError(event.target.name, dispatch, validateUser);
-    if (validateUser.errorLogin) resetError(event.target.name, dispatch, validateUser);
-    if (validateUser.errorName) resetError(event.target.name, dispatch, validateUser);
-
-    setValues({
-      ...values,
-      [event.target.name]: event.target.value,
-    });
+  const onSubmit = (data: UserSignUpType) => {
+    console.log(data);
   };
 
   const handleClickShowPassword = () => {
@@ -47,17 +44,16 @@ const SingUp = () => {
   return (
     <div className={styles.form}>
       <h2>Sing Up</h2>
-      <form onSubmit={onSubmit}>
-        <InputText values={values} onChange={handleChange} nameElement="name" />
-        <InputText values={values} onChange={handleChange} nameElement="login" />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <InputName errors={errors.name} register={register} />
+        <InputLogin errors={errors.login} register={register} />
         <InputPassword
-          values={values}
-          onChange={handleChange}
-          nameElement="password"
+          errors={errors.password}
+          register={register}
           onClick={handleClickShowPassword}
           onMouseDown={handleMouseDownPassword}
         />
-        <Button className={styles.formButton} variant="contained" onClick={onSubmit}>
+        <Button className={styles.formButton} variant="contained" type="submit">
           Sign Out
         </Button>
         <LinkAuthorization linkNames="sing-in" />
@@ -65,5 +61,4 @@ const SingUp = () => {
     </div>
   );
 };
-
 export default SingUp;
