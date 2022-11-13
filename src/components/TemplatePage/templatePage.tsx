@@ -7,13 +7,15 @@ import './templatePage.scss';
 
 const TemplatePage = () => {
   return (
-    <div className="body-container">
+    <>
       <Header />
-      <div className="main-container">
-        <Outlet />
+      <div className="body-container">
+        <div className="main-container">
+          <Outlet />
+        </div>
       </div>
       <Footer />
-    </div>
+    </>
   );
 };
 
