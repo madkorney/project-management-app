@@ -1,16 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { useAppSelector } from '../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import DeleteOutlineSharpIcon from '@mui/icons-material/DeleteOutlineSharp';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 import styles from './header.module.scss';
+import { setAuthorized } from 'redux/authorizedSlice';
 
 const Header = () => {
+  const dispatch = useAppDispatch();
   const { userAuthorized } = useAppSelector((state) => state.authorized);
   const name = localStorage.getItem('LoginUser');
+
+  const goOut = () => {
+    dispatch(setAuthorized(false));
+    localStorage.setItem('LoginUser', '');
+    localStorage.setItem('pma_token', '');
+  };
 
   return (
     <header className={styles.header}>
@@ -45,7 +53,7 @@ const Header = () => {
               {name}
             </li>
             <li>
-              <ExitToAppIcon className={styles.headerButton} />
+              <ExitToAppIcon className={styles.headerButton} onClick={goOut} />
               <DeleteOutlineSharpIcon className={styles.headerButton} />
             </li>
           </ul>
