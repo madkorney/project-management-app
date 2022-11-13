@@ -1,9 +1,13 @@
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 
 import { InputPassword, InputName, InputLogin, LinkAuthorization } from '../InputsForm';
-import { setShowPassword } from '../../../redux/validateUserSlice';
+import { setShowPassword } from '../../../redux/showUserPasswordSlice';
 import { useAppSelector, useAppDispatch } from '../../../redux/hooks';
+import { useSignInMutation, useSignUpMutation } from '../../../services';
+import { setAuthorized } from 'redux/authorizedSlice';
+
 import { UserSignUpType } from 'types';
 
 import styles from '../Authorization.module.scss';
@@ -17,15 +21,28 @@ const SingUp = () => {
     mode: 'onBlur',
   });
 
+  const navigate = useNavigate();
+  const [singUp] = useSignUpMutation();
+  const [signIn] = useSignInMutation();
   const dispatch = useAppDispatch();
-  const { validateUser } = useAppSelector((state) => state.validate);
+  const { showPassword } = useAppSelector((state) => state.password);
+  const { userAuthorized } = useAppSelector((state) => state.authorized);
 
-  const onSubmit = (data: UserSignUpType) => {
-    console.log(data);
+  const onSubmit = async (data: UserSignUpType) => {
+    await singUp(data).unwrap();
+    const userData = await signIn({
+      login: data.login,
+      password: data.password,
+    }).unwrap();
+
+    localStorage.setItem('pma_token', userData.token);
+    localStorage.setItem('LoginUser', data.login);
+    dispatch(setAuthorized(!userAuthorized));
+    navigate('/');
   };
 
   const handleClickShowPassword = () => {
-    dispatch(setShowPassword(!validateUser.showPassword));
+    dispatch(setShowPassword(!showPassword));
   };
 
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {

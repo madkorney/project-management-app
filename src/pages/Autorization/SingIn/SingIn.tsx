@@ -1,9 +1,13 @@
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 
 import { InputPassword, InputLogin, LinkAuthorization } from '../InputsForm';
 import { setShowPassword } from '../../../redux/showUserPasswordSlice';
 import { useAppSelector, useAppDispatch } from '../../../redux/hooks';
+import { useSignInMutation } from '../../../services';
+import { setAuthorized } from 'redux/authorizedSlice';
+
 import { AuthInfoType, UserSignUpType } from 'types';
 
 import styles from '../Authorization.module.scss';
@@ -17,11 +21,17 @@ const SingIn = () => {
     mode: 'onBlur',
   });
 
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const [sigIn] = useSignInMutation();
   const { showPassword } = useAppSelector((state) => state.password);
 
-  const onSubmit = (data: AuthInfoType) => {
-    console.log(data);
+  const onSubmit = async (data: AuthInfoType) => {
+    const pmaToken = await sigIn(data).unwrap();
+    localStorage.setItem('pma_token', pmaToken.token);
+    localStorage.setItem('LoginUser', data.login);
+    dispatch(setAuthorized(true));
+    navigate('/');
   };
 
   const handleClickShowPassword = () => {
@@ -34,7 +44,7 @@ const SingIn = () => {
 
   return (
     <div className={styles.form}>
-      <h2>Sing Up</h2>
+      <h2>Log In</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <InputLogin errors={errors.login} register={register} />
         <InputPassword
