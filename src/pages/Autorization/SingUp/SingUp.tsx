@@ -50,22 +50,24 @@ const SingUp = () => {
   };
 
   return (
-    <div className={styles.form}>
-      <h2>Sing Up</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <InputName errors={errors.name} register={register} />
-        <InputLogin errors={errors.login} register={register} />
-        <InputPassword
-          errors={errors.password}
-          register={register}
-          onClick={handleClickShowPassword}
-          onMouseDown={handleMouseDownPassword}
-        />
-        <Button className={styles.formButton} variant="contained" type="submit">
-          Sign Out
-        </Button>
-        <LinkAuthorization linkNames="sing-in" />
-      </form>
+    <div className={styles.formContainer}>
+      <div className={styles.form}>
+        <h2>Sing Up</h2>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <InputName errors={errors.name} register={register} />
+          <InputLogin errors={errors.login} register={register} />
+          <InputPassword
+            errors={errors.password}
+            register={register}
+            onClick={handleClickShowPassword}
+            onMouseDown={handleMouseDownPassword}
+          />
+          <Button className={styles.formButton} variant="contained" type="submit">
+            Sign Up
+          </Button>
+          <LinkAuthorization linkNames="sing-in" />
+        </form>
+      </div>
     </div>
   );
 };

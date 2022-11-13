@@ -4,13 +4,17 @@
   align-items: center;
   max-width: 300px;
   width: 100%;
-  margin: 100px auto;
+  margin: 0 auto;
   text-align: center;
   border: 2px solid #0000003d;
   border-radius: 15px;
   box-shadow: 0 0 15px #4b66ea85;
   padding: 15px;
 
+  &Container {
+    height: 100%;
+    padding-top: 100px;
+  }
   &Button {
     margin: 18px auto 8px;
     max-width: 50%;
@@ -19,21 +23,18 @@
 
   &Link {
     color: #006b4b;
-    transition: color .2s linear;
+    transition: color 0.2s linear;
     text-decoration: none;
 
     &:hover {
       color: #ff00f5;
       text-decoration: underline;
-
     }
 
     &:active {
       color: #ff0000;
       text-decoration: underline;
-
     }
-
   }
 
   &Text {
@@ -50,5 +51,4 @@
     text-align: left;
     padding-top: 4px;
   }
-
 }

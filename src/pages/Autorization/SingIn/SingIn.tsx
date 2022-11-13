@@ -43,21 +43,23 @@ const SingIn = () => {
   };
 
   return (
-    <div className={styles.form}>
-      <h2>Log In</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <InputLogin errors={errors.login} register={register} />
-        <InputPassword
-          errors={errors.password}
-          register={register}
-          onClick={handleClickShowPassword}
-          onMouseDown={handleMouseDownPassword}
-        />
-        <Button className={styles.formButton} variant="contained" type="submit">
-          Sign Out
-        </Button>
-        <LinkAuthorization linkNames="sing-up" />
-      </form>
+    <div className={styles.formContainer}>
+      <div className={styles.form}>
+        <h2>Log In</h2>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <InputLogin errors={errors.login} register={register} />
+          <InputPassword
+            errors={errors.password}
+            register={register}
+            onClick={handleClickShowPassword}
+            onMouseDown={handleMouseDownPassword}
+          />
+          <Button className={styles.formButton} variant="contained" type="submit">
+            Log In
+          </Button>
+          <LinkAuthorization linkNames="sing-up" />
+        </form>
+      </div>
     </div>
   );
 };

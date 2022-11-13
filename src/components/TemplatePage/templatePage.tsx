@@ -1,3 +1,4 @@
+import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -9,9 +10,9 @@ const TemplatePage = () => {
     <>
       <Header />
       <div className="body-container">
-        <div className="main-container">
+        <main className="main container">
           <Outlet />
-        </div>
+        </main>
       </div>
       <Footer />
     </>
