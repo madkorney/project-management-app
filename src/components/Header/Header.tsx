@@ -6,8 +6,9 @@ import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import DeleteOutlineSharpIcon from '@mui/icons-material/DeleteOutlineSharp';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
-import styles from './header.module.scss';
 import { setAuthorized } from 'redux/authorizedSlice';
+
+import styles from './Header.module.scss';
 
 const Header = () => {
   const dispatch = useAppDispatch();
