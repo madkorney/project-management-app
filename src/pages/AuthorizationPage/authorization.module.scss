@@ -1,0 +1,54 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 300px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  border: 2px solid #0000003d;
+  border-radius: 15px;
+  box-shadow: 0 0 15px #4b66ea85;
+  padding: 15px;
+
+  &Container {
+    height: 100%;
+    padding-top: 100px;
+  }
+  &Button {
+    margin: 18px auto 8px;
+    max-width: 50%;
+    width: 100%;
+  }
+
+  &Link {
+    color: #006b4b;
+    transition: color 0.2s linear;
+    text-decoration: none;
+
+    &:hover {
+      color: #ff00f5;
+      text-decoration: underline;
+    }
+
+    &:active {
+      color: #ff0000;
+      text-decoration: underline;
+    }
+  }
+
+  &Text {
+    display: inline-block;
+    max-width: 80%;
+    width: 100%;
+    margin: 20px auto;
+    font-size: 14px;
+  }
+
+  &Error {
+    color: #ff0000;
+    font-size: 14px;
+    text-align: left;
+    padding-top: 4px;
+  }
+}
