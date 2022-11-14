@@ -15,7 +15,6 @@ export const InputPassword = ({
   showPassword,
 }: InputPasswordProps) => {
   const errorBool = errors !== undefined;
-  // const { showPassword } = useAppSelector((state) => state.password);
   return (
     <FormControl
       sx={{ m: 2, maxWidth: '30ch', width: '90%', paddingBottom: '15px' }}
