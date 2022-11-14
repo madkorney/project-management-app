@@ -11,6 +11,7 @@ import { setAuthorized } from 'redux/authorizedSlice';
 import { AuthInfoType, UserSignUpType } from 'types';
 
 import styles from '../Authorization.module.scss';
+import { useState } from 'react';
 
 const SingIn = () => {
   const {
@@ -21,17 +22,25 @@ const SingIn = () => {
     mode: 'onBlur',
   });
 
+  const [errorLogIn, setErrorLogIn] = useState(false);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [sigIn] = useSignInMutation();
   const { showPassword } = useAppSelector((state) => state.password);
 
-  const onSubmit = async (data: AuthInfoType) => {
-    const pmaToken = await sigIn(data).unwrap();
-    localStorage.setItem('pma_token', pmaToken.token);
-    localStorage.setItem('LoginUser', data.login);
-    dispatch(setAuthorized(true));
-    navigate('/');
+  const onSubmit = async (dataLogin: AuthInfoType) => {
+    await sigIn(dataLogin)
+      .unwrap()
+      .then((data) => {
+        localStorage.setItem('pma_token', data.token);
+        localStorage.setItem('LoginUser', dataLogin.login);
+        dispatch(setAuthorized(true));
+        setErrorLogIn(false);
+        navigate('/');
+      })
+      .catch(() => {
+        return setErrorLogIn(true);
+      });
   };
 
   const handleClickShowPassword = () => {
@@ -46,6 +55,7 @@ const SingIn = () => {
     <div className={styles.formContainer}>
       <div className={styles.form}>
         <h2>Log In</h2>
+        {errorLogIn && <span className={styles.formError}>User is not found!</span>}
         <form onSubmit={handleSubmit(onSubmit)}>
           <InputLogin errors={errors.login} register={register} />
           <InputPassword
