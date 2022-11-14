@@ -6,9 +6,8 @@ import Main from './components/Main/main';
 import About from './components/About/about';
 import PageNotFound from './components/PageNotFound/pageNotFound';
 
+import { REACT_APP_BASENAME as BASENAME } from './constants';
 import './App.scss';
-
-const BASENAME = '/project-management-app'; // todo - move to .env
 
 const App = () => {
   return (
