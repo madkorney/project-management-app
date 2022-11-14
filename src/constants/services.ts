@@ -35,3 +35,5 @@ export enum REQUEST_METHODS {
   DELETE = 'DELETE',
   PATCH = 'PATCH',
 }
+
+export const { REACT_APP_BASENAME } = process.env;
