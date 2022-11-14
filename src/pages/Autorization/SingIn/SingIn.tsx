@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
@@ -11,7 +12,6 @@ import { setAuthorized } from 'redux/authorizedSlice';
 import { AuthInfoType, UserSignUpType } from 'types';
 
 import styles from '../Authorization.module.scss';
-import { useState } from 'react';
 
 const SingIn = () => {
   const {
@@ -39,7 +39,7 @@ const SingIn = () => {
         navigate('/');
       })
       .catch(() => {
-        return setErrorLogIn(true);
+        setErrorLogIn(true);
       });
   };
 
