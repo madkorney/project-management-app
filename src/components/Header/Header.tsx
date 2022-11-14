@@ -33,17 +33,17 @@ const Header = () => {
               <li>
                 <Link to="about">about</Link>
               </li>
+              {!userAuthorized && (
+                <>
+                  <li>
+                    <Link to="sing-in">Sign in</Link>
+                  </li>
+                  <li>
+                    <Link to="sing-up">Sign up</Link>
+                  </li>
+                </>
+              )}
             </ul>
-            {!userAuthorized && (
-              <>
-                <li>
-                  <Link to="sing-in">Sign in</Link>
-                </li>
-                <li>
-                  <Link to="sing-up">Sign up</Link>
-                </li>
-              </>
-            )}
           </nav>
         </div>
         {userAuthorized && (
