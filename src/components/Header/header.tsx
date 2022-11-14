@@ -16,8 +16,7 @@ const Header = () => {
 
   const goOut = () => {
     dispatch(setAuthorized(false));
-    localStorage.setItem('LoginUser', '');
-    localStorage.setItem('pma_token', '');
+    localStorage.clear();
   };
 
   return (
