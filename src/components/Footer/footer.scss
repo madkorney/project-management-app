@@ -36,16 +36,13 @@
     }
   }
 
-  .copyright {    
+  .copyright {
     display: flex;
     gap: 5px;
     color: var(--color-white-100);
     font-size: 1.2rem;
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    color: inherit;
+    text-decoration: none;
   }
 
   .rss-logo {
@@ -55,7 +52,7 @@
     background-repeat: no-repeat;
     background-size: contain;
     cursor: pointer;
-    transition: 1s;    
+    transition: 1s;
   }
 
   @media only screen and (max-width: 470px) {
