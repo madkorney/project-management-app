@@ -4,7 +4,6 @@ import IconButton from '@mui/material/IconButton';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { InputPasswordProps } from '../types';
 import { RegExpPasswordValidation } from '../../../constants';
-import { useAppSelector } from 'redux/hooks';
 
 import styles from '../authorization.module.scss';
 
