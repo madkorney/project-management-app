@@ -1,27 +1,26 @@
-import React from 'react';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 
-import TemplatePage from './components/TemplatePage/templatePage';
-import Main from './components/Main/main';
-import About from './components/About/about';
-import PageNotFound from './components/PageNotFound/pageNotFound';
-
-import './App.scss';
 import SingUp from './pages/Autorization/SingUp';
 import SingIn from './pages/Autorization/SingIn';
+import TemplatePage from './pages/TemplatePage/templatePage';
+import MainPage from './pages/MainPage/mainPage';
+import AboutPage from './pages/AboutPage/aboutPage';
+import NotFoundPage from './pages/NotFoundPage/notFoundPage';
 
-const BASENAME = '/project-management-app'; // todo - move to .env
+import { REACT_APP_BASENAME as BASENAME } from './constants';
+
+import './App.scss';
 
 const App = () => {
   return (
     <BrowserRouter basename={BASENAME}>
       <Routes>
         <Route path="/" element={<TemplatePage />}>
-          <Route path="/" element={<Main />} />
-          <Route path="about" element={<About />} />
+          <Route path="/" element={<MainPage />} />
+          <Route path="about" element={<AboutPage />} />
           <Route path="sing-in" element={<SingIn />} />
           <Route path="sing-up" element={<SingUp />} />
-          <Route path="*" element={<PageNotFound />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

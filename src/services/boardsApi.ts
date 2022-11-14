@@ -4,7 +4,7 @@ import { baseApiSlice } from './baseApi';
 
 export const boardsApiSlice = baseApiSlice.injectEndpoints({
   endpoints: (build) => ({
-    getBoards: build.query<BoardsArrayType, unknown>({
+    getBoards: build.query<BoardsArrayType, void>({
       query: () => ENDPOINTS.BOARDS,
     }),
     createBoard: build.mutation<BoardType, BoardParamsType>({
@@ -17,8 +17,8 @@ export const boardsApiSlice = baseApiSlice.injectEndpoints({
     getBoardById: build.query<BoardType, string>({
       query: (boardId) => `${ENDPOINTS.BOARDS}/${boardId}`,
     }),
-    updateBoardById: build.mutation<BoardType, { boardId: string } & BoardParamsType>({
-      query: ({ boardId, ...newParams }) => ({
+    updateBoardById: build.mutation<BoardType, BoardType>({
+      query: ({ _id: boardId, ...newParams }) => ({
         url: `${ENDPOINTS.BOARDS}/${boardId}`,
         method: REQUEST_METHODS.PUT,
         body: newParams,
