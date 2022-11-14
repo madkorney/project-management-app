@@ -4,9 +4,10 @@ import IconButton from '@mui/material/IconButton';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { InputPasswordProps } from '../types';
 
-import styles from '../Authorization.module.scss';
 import { useAppSelector } from 'redux/hooks';
 import { RegExpPasswordValidation } from '../../../templates/validationConstants';
+
+import styles from '../Authorization.module.scss';
 
 export const InputPassword = ({ errors, register, onClick, onMouseDown }: InputPasswordProps) => {
   let errorBool: boolean;

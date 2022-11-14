@@ -1,5 +1,5 @@
 import React from 'react';
-import { AuthInfoType, UserSignUpType } from 'types/services';
+import { UserSignUpType } from 'types/services';
 import { FieldError, UseFormRegister } from 'react-hook-form';
 
 export type FormInputsProps = {

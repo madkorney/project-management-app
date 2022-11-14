@@ -1,7 +1,8 @@
 import { FormControl, TextField } from '@mui/material';
 import { FormInputsProps } from '../types';
-import styles from '../Authorization.module.scss';
 import { RegExpNameValidation } from '../../../templates/validationConstants';
+
+import styles from '../Authorization.module.scss';
 
 export const InputName = ({ register, errors }: FormInputsProps) => {
   let errorBool: boolean;

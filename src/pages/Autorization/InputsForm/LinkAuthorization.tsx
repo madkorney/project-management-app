@@ -1,6 +1,6 @@
-import styles from '../Authorization.module.scss';
 import { NavLink } from 'react-router-dom';
-import React from 'react';
+
+import styles from '../Authorization.module.scss';
 
 type LinkProps = {
   linkNames: string;
