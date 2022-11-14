@@ -9,6 +9,7 @@ export type FormInputsProps = {
 };
 
 export type InputPasswordProps = FormInputsProps & {
+  showPassword: boolean;
   onClick?: () => void;
   onMouseDown?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };

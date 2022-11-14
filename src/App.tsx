@@ -1,7 +1,7 @@
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 
-import SingUp from './pages/Autorization/SingUp';
-import SingIn from './pages/Autorization/SingIn';
+import SignUp from './pages/Autorization/SignUp';
+import SignIn from './pages/Autorization/SignIn';
 import TemplatePage from './pages/TemplatePage/templatePage';
 import MainPage from './pages/MainPage/mainPage';
 import AboutPage from './pages/AboutPage/aboutPage';
@@ -18,8 +18,8 @@ const App = () => {
         <Route path="/" element={<TemplatePage />}>
           <Route path="/" element={<MainPage />} />
           <Route path="about" element={<AboutPage />} />
-          <Route path="sing-in" element={<SingIn />} />
-          <Route path="sing-up" element={<SingUp />} />
+          <Route path="sign-in" element={<SignIn />} />
+          <Route path="sign-up" element={<SignUp />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

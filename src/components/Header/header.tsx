@@ -7,7 +7,7 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 import { setAuthorized } from 'redux/authorizedSlice';
 
-import styles from './Header.module.scss';
+import styles from './header.module.scss';
 
 const Header = () => {
   const dispatch = useAppDispatch();
@@ -36,10 +36,10 @@ const Header = () => {
               {!userAuthorized && (
                 <>
                   <li>
-                    <Link to="sing-in">Sign in</Link>
+                    <Link to="sign-in">Sign in</Link>
                   </li>
                   <li>
-                    <Link to="sing-up">Sign up</Link>
+                    <Link to="sign-up">Sign up</Link>
                   </li>
                 </>
               )}

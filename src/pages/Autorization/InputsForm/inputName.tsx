@@ -1,12 +1,12 @@
 import { FormControl, TextField } from '@mui/material';
 import { FormInputsProps } from '../types';
-import { RegExpNameValidation } from '../../../templates/validationConstants';
 
-import styles from '../Authorization.module.scss';
+import { RegExpNameValidation } from '../../../constants';
+
+import styles from '../authorization.module.scss';
 
 export const InputName = ({ register, errors }: FormInputsProps) => {
-  let errorBool: boolean;
-  errors !== undefined ? (errorBool = true) : (errorBool = false);
+  const errorBool = errors !== undefined;
   return (
     <FormControl sx={{ m: 2, maxWidth: '30ch', width: '90%' }} variant="outlined">
       <TextField

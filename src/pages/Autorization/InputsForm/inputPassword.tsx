@@ -3,16 +3,20 @@ import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { InputPasswordProps } from '../types';
-
+import { RegExpPasswordValidation } from '../../../constants';
 import { useAppSelector } from 'redux/hooks';
-import { RegExpPasswordValidation } from '../../../templates/validationConstants';
 
-import styles from '../Authorization.module.scss';
+import styles from '../authorization.module.scss';
 
-export const InputPassword = ({ errors, register, onClick, onMouseDown }: InputPasswordProps) => {
-  let errorBool: boolean;
-  errors !== undefined ? (errorBool = true) : (errorBool = false);
-  const { showPassword } = useAppSelector((state) => state.password);
+export const InputPassword = ({
+  errors,
+  register,
+  onClick,
+  onMouseDown,
+  showPassword,
+}: InputPasswordProps) => {
+  const errorBool = errors !== undefined;
+  // const { showPassword } = useAppSelector((state) => state.password);
   return (
     <FormControl
       sx={{ m: 2, maxWidth: '30ch', width: '90%', paddingBottom: '15px' }}

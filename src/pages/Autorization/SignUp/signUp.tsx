@@ -3,17 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 
 import { InputPassword, InputName, InputLogin, LinkAuthorization } from '../InputsForm';
-import { setShowPassword } from '../../../redux/showUserPasswordSlice';
-import { useAppSelector, useAppDispatch } from '../../../redux/hooks';
-import { useSignInMutation, useSignUpMutation } from '../../../services';
+import { useAppSelector, useAppDispatch } from 'redux/hooks';
+import { useSignInMutation, useSignUpMutation } from 'services';
 import { setAuthorized } from 'redux/authorizedSlice';
 import { useState } from 'react';
 
 import { UserSignUpType } from 'types';
 
-import styles from '../Authorization.module.scss';
+import styles from '../authorization.module.scss';
 
-const SingUp = () => {
+const SignUp = () => {
   const {
     register,
     handleSubmit,
@@ -23,15 +22,15 @@ const SingUp = () => {
   });
 
   const [errorSignUp, setErrorSignUp] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-  const [singUp] = useSignUpMutation();
+  const [signUp] = useSignUpMutation();
   const [signIn] = useSignInMutation();
   const dispatch = useAppDispatch();
-  const { showPassword } = useAppSelector((state) => state.password);
   const { userAuthorized } = useAppSelector((state) => state.authorized);
 
   const onSubmit = async (dataUser: UserSignUpType) => {
-    await singUp(dataUser)
+    await signUp(dataUser)
       .unwrap()
       .then(async (data) => {
         await signIn({
@@ -53,7 +52,7 @@ const SingUp = () => {
   };
 
   const handleClickShowPassword = () => {
-    dispatch(setShowPassword(!showPassword));
+    setShowPassword(!showPassword);
   };
 
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -73,14 +72,15 @@ const SingUp = () => {
             register={register}
             onClick={handleClickShowPassword}
             onMouseDown={handleMouseDownPassword}
+            showPassword={showPassword}
           />
           <Button className={styles.formButton} variant="contained" type="submit">
             Sign Up
           </Button>
-          <LinkAuthorization linkNames="sing-in" />
+          <LinkAuthorization linkNames="sign-in" />
         </form>
       </div>
     </div>
   );
 };
-export default SingUp;
+export default SignUp;
