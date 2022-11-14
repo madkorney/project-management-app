@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import DeleteOutlineSharpIcon from '@mui/icons-material/DeleteOutlineSharp';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
