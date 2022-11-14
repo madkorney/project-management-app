@@ -38,7 +38,8 @@ const SingIn = () => {
         setErrorLogIn(false);
         navigate('/');
       })
-      .catch(() => {
+      .catch((er) => {
+        console.log(er);
         setErrorLogIn(true);
       });
   };
@@ -55,7 +56,7 @@ const SingIn = () => {
     <div className={styles.formContainer}>
       <div className={styles.form}>
         <h2>Log In</h2>
-        {errorLogIn && <span className={styles.formError}>User is not found!</span>}
+        {errorLogIn && <span className={styles.formError}>Authorization error!</span>}
         <form onSubmit={handleSubmit(onSubmit)}>
           <InputLogin errors={errors.login} register={register} />
           <InputPassword
