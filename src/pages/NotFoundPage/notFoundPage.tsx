@@ -1,6 +1,4 @@
-import React from 'react';
-
-const PageNotFound = () => {
+const NotFoundPage = () => {
   return (
     <div className="not-found-container">
       <p>Sorry! the page you requested not found ...</p>
@@ -8,4 +6,4 @@ const PageNotFound = () => {
   );
 };
 
-export default PageNotFound;
+export default NotFoundPage;

@@ -1,10 +1,9 @@
-import React from 'react';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 
-import TemplatePage from './components/TemplatePage/templatePage';
-import Main from './components/Main/main';
-import About from './components/About/about';
-import PageNotFound from './components/PageNotFound/pageNotFound';
+import TemplatePage from './pages/TemplatePage/templatePage';
+import MainPage from './pages/MainPage/mainPage';
+import AboutPage from './pages/AboutPage/aboutPage';
+import NotFoundPage from './pages/NotFoundPage/notFoundPage';
 
 import { REACT_APP_BASENAME as BASENAME } from './constants';
 import './App.scss';
@@ -14,9 +13,9 @@ const App = () => {
     <BrowserRouter basename={BASENAME}>
       <Routes>
         <Route path="/" element={<TemplatePage />}>
-          <Route path="/" element={<Main />} />
-          <Route path="about" element={<About />} />
-          <Route path="*" element={<PageNotFound />} />
+          <Route path="/" element={<MainPage />} />
+          <Route path="about" element={<AboutPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

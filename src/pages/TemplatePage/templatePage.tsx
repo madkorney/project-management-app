@@ -1,7 +1,6 @@
-import React from 'react';
 import { Outlet } from 'react-router-dom';
-import Header from '../Header/header';
-import Footer from '../Footer/footer';
+import Header from 'components/Header/header';
+import Footer from 'components/Footer/footer';
 
 import './templatePage.scss';
 
