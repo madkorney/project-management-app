@@ -38,8 +38,7 @@ const SingIn = () => {
         setErrorLogIn(false);
         navigate('/');
       })
-      .catch((er) => {
-        console.log(er);
+      .catch(() => {
         setErrorLogIn(true);
       });
   };
