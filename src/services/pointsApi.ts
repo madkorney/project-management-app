@@ -39,8 +39,8 @@ export const pointsApiSlice = baseApiSlice.injectEndpoints({
     getPointByTaskId: build.query<PointType, string>({
       query: (taskId) => `${ENDPOINTS.POINTS}/${taskId}`,
     }),
-    updatePointById: build.mutation<PointType, { pointId: string } & PointUpdateParamsType>({
-      query: ({ pointId, ...newParams }) => ({
+    updatePointById: build.mutation<PointType, PointUpdateParamsType>({
+      query: ({ _id: pointId, ...newParams }) => ({
         url: `${ENDPOINTS.POINTS}/${pointId}`,
         method: REQUEST_METHODS.PUT,
         body: { pointId, ...newParams },

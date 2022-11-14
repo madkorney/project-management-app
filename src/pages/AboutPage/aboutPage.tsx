@@ -1,6 +1,4 @@
-import React from 'react';
-
-const About = () => {
+const AboutPage = () => {
   return (
     <div>
       <p>Team 007 - about us</p>
@@ -8,4 +6,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default AboutPage;

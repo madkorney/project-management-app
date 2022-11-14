@@ -12,4 +12,4 @@ export type PointsListType = PointType[];
 
 export type PointsSetUpdateParamsType = Pick<PointType, '_id' | 'done'>[];
 
-export type PointUpdateParamsType = Pick<PointType, 'title' | 'done'>;
+export type PointUpdateParamsType = Pick<PointType, '_id' | 'title' | 'done'>;

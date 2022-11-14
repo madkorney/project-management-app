@@ -1,51 +1,37 @@
 import { REQUEST_METHODS, ENDPOINTS } from '../constants';
-import {
-  TaskType,
-  TaskCreateParamsType,
-  TaskUpdateParamsType,
-  TasksSetType,
-  TasksSetParamsType,
-} from 'types';
+import { TaskType, TasksSetType, TasksSetParamsType } from 'types';
 import { baseApiSlice } from './baseApi';
 
 export const tasksApiSlice = baseApiSlice.injectEndpoints({
   endpoints: (build) => ({
-    getTasks: build.query<TasksSetType, { boardId: string; columnId: string }>({
+    getTasks: build.query<TasksSetType, Pick<TaskType, 'boardId' | 'columnId'>>({
       query: ({ boardId, columnId }) =>
-        `${ENDPOINTS.BOARDS}/${boardId}/${ENDPOINTS.COLUMNS}/${columnId}/${ENDPOINTS.TASKS}`,
+        `${ENDPOINTS.BOARDS}/${boardId}${ENDPOINTS.COLUMNS}/${columnId}${ENDPOINTS.TASKS}`,
     }),
-    createTask: build.mutation<
-      TaskType,
-      { boardId: string; columnId: string } & TaskCreateParamsType
-    >({
+    createTask: build.mutation<TaskType, Omit<TaskType, '_id'>>({
       query: ({ boardId, columnId, ...newParams }) => ({
-        url: `${ENDPOINTS.BOARDS}/${boardId}/${ENDPOINTS.COLUMNS}/${columnId}/${ENDPOINTS.TASKS}`,
+        url: `${ENDPOINTS.BOARDS}/${boardId}${ENDPOINTS.COLUMNS}/${columnId}${ENDPOINTS.TASKS}`,
         method: REQUEST_METHODS.POST,
         body: newParams,
       }),
     }),
-    getTaskById: build.query<TaskType, { boardId: string; columnId: string; taskId: string }>({
-      query: ({ boardId, columnId, taskId }) =>
-        `${ENDPOINTS.BOARDS}/${boardId}/${ENDPOINTS.COLUMNS}/${columnId}/${ENDPOINTS.TASKS}/${taskId}`,
+    getTaskById: build.query<TaskType, Pick<TaskType, '_id' | 'boardId' | 'columnId'>>({
+      query: ({ boardId, columnId, _id: taskId }) =>
+        `${ENDPOINTS.BOARDS}/${boardId}${ENDPOINTS.COLUMNS}/${columnId}${ENDPOINTS.TASKS}/${taskId}`,
     }),
-    updateTaskById: build.mutation<
-      TaskType,
-      { boardId: string; taskId: string } & TaskUpdateParamsType
-    >({
-      query: ({ boardId, columnId, taskId, ...newParams }) => ({
-        url: `${ENDPOINTS.BOARDS}/${boardId}/${ENDPOINTS.COLUMNS}/${columnId}/${ENDPOINTS.TASKS}/${taskId}`,
+    updateTaskById: build.mutation<TaskType, TaskType>({
+      query: ({ boardId, columnId, _id: taskId, ...newParams }) => ({
+        url: `${ENDPOINTS.BOARDS}/${boardId}${ENDPOINTS.COLUMNS}/${columnId}${ENDPOINTS.TASKS}/${taskId}`,
         method: REQUEST_METHODS.PUT,
         body: { columnId, ...newParams },
       }),
     }),
-    deleteTaskById: build.mutation<TaskType, { boardId: string; columnId: string; taskId: string }>(
-      {
-        query: ({ boardId, columnId, taskId }) => ({
-          url: `${ENDPOINTS.BOARDS}/${boardId}/${ENDPOINTS.COLUMNS}/${columnId}/${ENDPOINTS.TASKS}/${taskId}`,
-          method: REQUEST_METHODS.DELETE,
-        }),
-      }
-    ),
+    deleteTaskById: build.mutation<TaskType, Pick<TaskType, '_id' | 'boardId' | 'columnId'>>({
+      query: ({ boardId, columnId, _id: taskId }) => ({
+        url: `${ENDPOINTS.BOARDS}/${boardId}${ENDPOINTS.COLUMNS}/${columnId}${ENDPOINTS.TASKS}/${taskId}`,
+        method: REQUEST_METHODS.DELETE,
+      }),
+    }),
     getTasksSetByIdsOrUserIdOrSearch: build.query<
       TasksSetType,
       { tasksIds: string[]; userId: string; search: string }
