@@ -9,8 +9,6 @@ import NotFoundPage from './pages/NotFoundPage/notFoundPage';
 
 import { REACT_APP_BASENAME as BASENAME } from './constants';
 
-import './App.scss';
-
 const App = () => {
   return (
     <BrowserRouter basename={BASENAME}>

@@ -9,11 +9,9 @@ const TemplatePage = () => {
   return (
     <>
       <Header />
-      <div className="body-container">
-        <main className="main container">
-          <Outlet />
-        </main>
-      </div>
+      <main className="main main-container">
+        <Outlet />
+      </main>
       <Footer />
     </>
   );
