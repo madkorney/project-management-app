@@ -1,0 +1,51 @@
+.header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background-color: #d3d3d3;
+  height: 60px;
+  padding: 5px;
+
+  &Container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  &Nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    gap: 40px;
+  }
+
+  &NavUser {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    :first-child {
+      margin-right: 10px;
+    }
+  }
+
+  &Button {
+    font-size: 26px;
+    width: 28px;
+    color: #0044ff;
+    &:hover {
+      transition: color 0.2s linear;
+      cursor: pointer;
+      color: #d112b1;
+      background: none;
+    }
+  }
+  &UserName {
+    display: flex;
+    align-items: center;
+  }
+}
