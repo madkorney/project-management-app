@@ -1,10 +1,16 @@
-@import '../../global-styles/variables';
+@import 'global-styles/variables';
+
+.footer {
+  width: 100%;
+  background-color: lightgray;
+}
 
 .footer-container {
+  margin: 0 auto;
+  width: $MAX_WIDTH;
   display: flex;
   justify-content: space-between;
-  background-color: lightgray;
-  padding: 0 40px;
+  padding: 10px 20px;
   align-items: center;
 
   .github {
