@@ -6,24 +6,21 @@
 }
 
 .footer-container {
-  margin: 0 auto;
-  width: $MAX_WIDTH;
   display: flex;
   justify-content: space-between;
-  padding: 10px 20px;
   align-items: center;
+  gap: 10px;
+  max-width: $MAX_WIDTH;
+  margin: 0 auto;
+  padding: 10px 20px;
 
   .github {
     display: flex;
     gap: 10px;
 
-    @media only screen and (max-width: 470px) {
-      padding-top: 1rem;
-    }
-
     .link {
-      width: 30px;
-      height: 30px;
+      width: 40px;
+      height: 40px;
       background-repeat: no-repeat;
       background-size: contain;
       border-radius: 50%;
@@ -44,15 +41,14 @@
 
   .copyright {
     display: flex;
-    gap: 5px;
-    color: var(--color-white-100);
+    gap: 10px;
     font-size: 1.2rem;
-    color: inherit;
+    color: $COLOR-PRIMARY;
     text-decoration: none;
   }
 
   .rss-logo {
-    width: 109px;
+    width: 110px;
     height: 40px;
     background: url('https://rs.school/images/rs_school_js.svg');
     background-repeat: no-repeat;
