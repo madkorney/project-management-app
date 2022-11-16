@@ -10,7 +10,12 @@ export * from './tasks';
 
 export * from './users';
 
-export type ErrorResponse = {
+type ErrorMessage = {
   statusCode: number;
   message: string;
+};
+
+export type ErrorResponse = {
+  status: number;
+  data: ErrorMessage;
 };

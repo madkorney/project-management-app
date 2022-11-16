@@ -13,7 +13,6 @@ const Header = () => {
   const dispatch = useAppDispatch();
   const { userAuthorized } = useAppSelector((state) => state.authorized);
   const user = useAppSelector((state) => state.auth.user);
-  // const name = localStorage.getItem('LoginUser');
 
   const goOut = () => {
     dispatch(setAuthorized(false));
@@ -23,7 +22,7 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.headerContainer}>
-        <p>Header - Nav - Profile - {user.id}</p>
+        <p>Header - Nav - Profile</p>
         <div>
           <nav className={styles.headerNav}>
             <ul className={styles.headerNav}>
