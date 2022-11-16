@@ -5,3 +5,9 @@ export const RegExpLoginValidation = /^[a-z]+([-_]?[a-z0-9]+){0,2}|[а-я]+([-_]
 
 export const RegExpNameValidation =
   /^((?!\s{2}).)*[a-zA-Zа-яА-ЯёЁ'][a-zA-Z-а-яА-ЯёЁ']+( [^ ]+[a-zA-Zа-яА-ЯёЁ']{})\s|^((?!\s{2}).)*[a-zA-Zа-яА-ЯёЁ'][a-zA-Z-а-яА-ЯёЁ']$/;
+
+export const REGEXP_PASSWORD_VALID_SYMBOLS = /^[\w!@+#%({}\[\]\\/)=$^<>&*-]{8,}$/;
+
+export const REGEXP_SPECIAL_CHARACTERS = /[!@_+#%({}\[\]\\/)=$^<>&*-]/;
+
+export const MIN_PASSWORD_LENGTH = 8;

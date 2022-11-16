@@ -19,7 +19,7 @@ const SignIn = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<UserSignUpType>({
-    mode: 'onBlur',
+    mode: 'onTouched',
   });
 
   const [showPassword, setShowPassword] = useState(false);

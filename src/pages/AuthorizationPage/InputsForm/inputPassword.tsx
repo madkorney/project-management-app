@@ -3,7 +3,11 @@ import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { InputPasswordProps } from '../types';
-import { RegExpPasswordValidation } from '../../../constants';
+import {
+  MIN_PASSWORD_LENGTH,
+  REGEXP_SPECIAL_CHARACTERS,
+  REGEXP_PASSWORD_VALID_SYMBOLS,
+} from '../../../constants';
 
 import styles from '../authorization.module.scss';
 
@@ -14,13 +18,14 @@ export const InputPassword = ({
   onMouseDown,
   showPassword,
 }: InputPasswordProps) => {
-  const errorBool = errors !== undefined;
+  const isError = !!errors;
+
   return (
     <FormControl
       sx={{ m: 2, maxWidth: '30ch', width: '90%', paddingBottom: '15px' }}
       variant="outlined"
     >
-      {errorBool ? (
+      {isError ? (
         <InputLabel sx={{ color: 'red' }} htmlFor="outlined-adornment-password">
           Password
         </InputLabel>
@@ -30,10 +35,25 @@ export const InputPassword = ({
       <OutlinedInput
         label="Password"
         type={showPassword ? 'text' : 'password'}
-        error={errorBool}
+        error={isError}
         {...register('password', {
-          required: true,
-          pattern: RegExpPasswordValidation,
+          required: { value: true, message: 'cannot be empty' },
+          validate: {
+            minLength: (pass) =>
+              pass.length >= MIN_PASSWORD_LENGTH ||
+              `must be at least ${MIN_PASSWORD_LENGTH} characters`,
+            onlyValidSymbols: (pass) =>
+              REGEXP_PASSWORD_VALID_SYMBOLS.test(pass) || 'contains non-valid symbol',
+            atLeastOneDigit: (pass) =>
+              new RegExp(/\d/).test(pass) || 'should contain at least one digit',
+            atLeastOneLowerCaseLetter: (pass) =>
+              new RegExp(/[a-z]/).test(pass) || 'should contain at least one lowercase letter',
+            atLeastOneUpperCaseLetter: (pass) =>
+              new RegExp(/[A-Z]/).test(pass) || 'should contain at least one capital letter',
+            atLeastOneSpecialCharacter: (pass) =>
+              REGEXP_SPECIAL_CHARACTERS.test(pass) ||
+              'should contain at least one special character',
+          },
         })}
         endAdornment={
           <InputAdornment position="end">
@@ -48,7 +68,7 @@ export const InputPassword = ({
           </InputAdornment>
         }
       />
-      {errors && <span className={styles.formError}>Enter valid password abAB@#12</span>}
+      {errors && <span className={styles.formError}>Password {errors.message}</span>}
     </FormControl>
   );
 };
