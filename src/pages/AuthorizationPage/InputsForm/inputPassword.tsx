@@ -6,7 +6,7 @@ import { InputPasswordProps } from '../types';
 import {
   MIN_PASSWORD_LENGTH,
   REGEXP_SPECIAL_CHARACTERS,
-  REGEXP_PASSWORD_VALID_SYMBOLS,
+  REGEXP_PASSWORD_VALID_CHARACTERS,
 } from '../../../constants';
 
 import styles from '../authorization.module.scss';
@@ -43,7 +43,7 @@ export const InputPassword = ({
               pass.length >= MIN_PASSWORD_LENGTH ||
               `must be at least ${MIN_PASSWORD_LENGTH} characters`,
             onlyValidSymbols: (pass) =>
-              REGEXP_PASSWORD_VALID_SYMBOLS.test(pass) || 'contains non-valid symbol',
+              REGEXP_PASSWORD_VALID_CHARACTERS.test(pass) || 'contains non-valid symbol',
             atLeastOneDigit: (pass) =>
               new RegExp(/\d/).test(pass) || 'should contain at least one digit',
             atLeastOneLowerCaseLetter: (pass) =>
