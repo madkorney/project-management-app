@@ -1,11 +1,12 @@
 import { FormControl, TextField } from '@mui/material';
 import { FormInputsProps } from '../types';
+import { REGEXP_LOGIN_VALID_CHARACTERS } from '../../../constants';
 
 import styles from '../authorization.module.scss';
-import { REGEXP_LOGIN_VALID_CHARACTERS } from '../../../constants';
 
 export const InputLogin = ({ register, errors }: FormInputsProps) => {
   const isError = !!errors;
+
   return (
     <FormControl sx={{ m: 2, maxWidth: '30ch', width: '90%' }} variant="outlined">
       <TextField

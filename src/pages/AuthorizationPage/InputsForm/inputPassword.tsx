@@ -38,10 +38,11 @@ export const InputPassword = ({
         error={isError}
         {...register('password', {
           required: { value: true, message: 'cannot be empty' },
+          minLength: {
+            value: MIN_PASSWORD_LENGTH,
+            message: `must be at least ${MIN_PASSWORD_LENGTH} characters`,
+          },
           validate: {
-            minLength: (pass) =>
-              pass.length >= MIN_PASSWORD_LENGTH ||
-              `must be at least ${MIN_PASSWORD_LENGTH} characters`,
             onlyValidSymbols: (pass) =>
               REGEXP_PASSWORD_VALID_CHARACTERS.test(pass) || 'contains non-valid symbol',
             atLeastOneDigit: (pass) =>
