@@ -9,7 +9,7 @@ export const InputLogin = ({ register, errors }: FormInputsProps) => {
   return (
     <FormControl sx={{ m: 2, maxWidth: '30ch', width: '90%' }} variant="outlined">
       <TextField
-        label="login"
+        label="Login"
         {...register('login', {
           required: true,
           pattern: RegExpLoginValidation,

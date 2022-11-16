@@ -10,7 +10,7 @@ export const InputName = ({ register, errors }: FormInputsProps) => {
   return (
     <FormControl sx={{ m: 2, maxWidth: '30ch', width: '90%' }} variant="outlined">
       <TextField
-        label="name"
+        label="Name"
         {...register('name', {
           required: true,
           pattern: RegExpNameValidation,

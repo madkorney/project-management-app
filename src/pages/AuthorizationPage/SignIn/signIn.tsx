@@ -6,7 +6,7 @@ import { Button } from '@mui/material';
 import { InputPassword, InputLogin, LinkAuthorization } from '../InputsForm';
 import { useAppDispatch } from 'redux/hooks';
 import { useSignInMutation } from 'services';
-import { setAuthorized } from 'redux/authorizedSlice';
+import { setCredentials } from 'redux/authSlice';
 
 import { AuthInfoType, ErrorResponse, UserSignUpType } from 'types';
 
@@ -32,7 +32,7 @@ const SignIn = () => {
       .unwrap()
       .then((data) => {
         localStorage.setItem('pma_token', data.token);
-        dispatch(setAuthorized(true));
+        dispatch(setCredentials(data));
         navigate('/');
       })
       .catch(() => {
@@ -63,7 +63,7 @@ const SignIn = () => {
             showPassword={showPassword}
           />
           <Button className={styles.formButton} variant="contained" type="submit">
-            Log In
+            Sign In
           </Button>
           <LinkAuthorization linkNames="sign-up" />
         </form>

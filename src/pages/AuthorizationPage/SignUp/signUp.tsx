@@ -1,17 +1,17 @@
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
+import Toast from 'components/Toast/toast';
 
 import { InputPassword, InputName, InputLogin, LinkAuthorization } from '../InputsForm';
-import { useAppSelector, useAppDispatch } from 'redux/hooks';
+import { useAppDispatch } from 'redux/hooks';
 import { useSignInMutation, useSignUpMutation } from 'services';
-import { setAuthorized } from 'redux/authorizedSlice';
 import { useState } from 'react';
+import { setCredentials } from 'redux/authSlice';
 
-import { UserSignUpType } from 'types';
+import { ErrorResponse, UserSignUpType } from 'types';
 
 import styles from '../authorization.module.scss';
-import { setCredentials } from 'redux/authSlice';
 
 const SignUp = () => {
   const {
@@ -22,13 +22,11 @@ const SignUp = () => {
     mode: 'onBlur',
   });
 
-  const [errorSignUp, setErrorSignUp] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-  const [signUp] = useSignUpMutation();
+  const [signUp, { error }] = useSignUpMutation();
   const [signIn] = useSignInMutation();
   const dispatch = useAppDispatch();
-  const { userAuthorized } = useAppSelector((state) => state.authorized);
 
   const onSubmit = async (dataUser: UserSignUpType) => {
     await signUp(dataUser)
@@ -43,13 +41,10 @@ const SignUp = () => {
             localStorage.setItem('pma_token', data.token);
             dispatch(setCredentials(data));
           });
-        localStorage.setItem('LoginUser', dataUser.login);
-        dispatch(setAuthorized(!userAuthorized));
-        setErrorSignUp(false);
         navigate('/');
       })
       .catch(() => {
-        setErrorSignUp(true);
+        localStorage.removeItem('pma_token');
       });
   };
 
@@ -64,8 +59,8 @@ const SignUp = () => {
   return (
     <div className={styles.formContainer}>
       <div className={styles.form}>
-        <h2>Sing Up</h2>
-        {errorSignUp && <span className={styles.formError}>Login already exist!</span>}
+        <h2>Sign Up</h2>
+        {error && <Toast message={(error as ErrorResponse).data.message} />}
         <form onSubmit={handleSubmit(onSubmit)}>
           <InputName errors={errors.name} register={register} />
           <InputLogin errors={errors.login} register={register} />
