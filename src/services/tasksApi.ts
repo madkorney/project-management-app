@@ -1,6 +1,6 @@
-import { REQUEST_METHODS, ENDPOINTS } from '../constants';
-import { TaskType, TasksSetType, TasksSetParamsType } from 'types';
 import { baseApiSlice } from './baseApi';
+import { TaskType, TasksSetType, TasksSetParamsType } from 'types';
+import { REQUEST_METHODS, ENDPOINTS } from 'data/constants';
 
 export const tasksApiSlice = baseApiSlice.injectEndpoints({
   endpoints: (build) => ({

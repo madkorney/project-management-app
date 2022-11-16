@@ -1,6 +1,6 @@
 import { FormControl, TextField } from '@mui/material';
 import { FormInputsProps } from '../types';
-import { REGEXP_LOGIN_VALID_CHARACTERS } from '../../../constants';
+import { REGEXP_LOGIN_VALID_CHARACTERS } from 'data/constants';
 
 import styles from '../authorization.module.scss';
 

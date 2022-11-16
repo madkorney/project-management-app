@@ -7,7 +7,7 @@ import {
   MIN_PASSWORD_LENGTH,
   REGEXP_SPECIAL_CHARACTERS,
   REGEXP_PASSWORD_VALID_CHARACTERS,
-} from '../../../constants';
+} from 'data/constants';
 
 import styles from '../authorization.module.scss';
 

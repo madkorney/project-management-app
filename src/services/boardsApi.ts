@@ -1,6 +1,6 @@
-import { REQUEST_METHODS, ENDPOINTS } from '../constants';
-import { BoardParamsType, BoardsArrayType, BoardType } from 'types';
 import { baseApiSlice } from './baseApi';
+import { BoardParamsType, BoardsArrayType, BoardType } from 'types';
+import { REQUEST_METHODS, ENDPOINTS } from 'data/constants';
 
 export const boardsApiSlice = baseApiSlice.injectEndpoints({
   endpoints: (build) => ({
