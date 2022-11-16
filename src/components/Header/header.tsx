@@ -12,7 +12,8 @@ import styles from './header.module.scss';
 const Header = () => {
   const dispatch = useAppDispatch();
   const { userAuthorized } = useAppSelector((state) => state.authorized);
-  const name = localStorage.getItem('LoginUser');
+  const user = useAppSelector((state) => state.auth.user);
+  // const name = localStorage.getItem('LoginUser');
 
   const goOut = () => {
     dispatch(setAuthorized(false));
@@ -22,7 +23,7 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.headerContainer}>
-        <p>Header - Nav - Profile</p>
+        <p>Header - Nav - Profile - {user.id}</p>
         <div>
           <nav className={styles.headerNav}>
             <ul className={styles.headerNav}>
@@ -49,7 +50,7 @@ const Header = () => {
           <ul className={styles.headerNavUser}>
             <li className={styles.headerUserName}>
               <AccountCircleRoundedIcon sx={{ color: '#d112b1', fontSize: 30 }} />
-              {name}
+              {user.login}
             </li>
             <li>
               <ExitToAppIcon className={styles.headerButton} onClick={goOut} />

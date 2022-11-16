@@ -11,6 +11,7 @@ import { useState } from 'react';
 import { UserSignUpType } from 'types';
 
 import styles from '../authorization.module.scss';
+import { setCredentials } from 'redux/authSlice';
 
 const SignUp = () => {
   const {
@@ -40,13 +41,14 @@ const SignUp = () => {
           .unwrap()
           .then((data) => {
             localStorage.setItem('pma_token', data.token);
+            dispatch(setCredentials(data));
           });
         localStorage.setItem('LoginUser', dataUser.login);
         dispatch(setAuthorized(!userAuthorized));
         setErrorSignUp(false);
         navigate('/');
       })
-      .catch((er) => {
+      .catch(() => {
         setErrorSignUp(true);
       });
   };
