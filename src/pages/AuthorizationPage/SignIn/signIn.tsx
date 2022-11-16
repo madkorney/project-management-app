@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 
 import { InputPassword, InputLogin, LinkAuthorization } from '../InputsForm';
-import { useAppDispatch } from 'redux/hooks';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { useSignInMutation } from 'services';
 import { setCredentials } from 'redux/authSlice';
 
@@ -26,6 +26,7 @@ const SignIn = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [signIn, { error }] = useSignInMutation();
+  const isAuthorized = useAppSelector((state) => state.auth.isAuthorized);
 
   const onSubmit = async (dataLogin: AuthInfoType) => {
     await signIn(dataLogin)
@@ -47,6 +48,10 @@ const SignIn = () => {
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
   };
+
+  if (isAuthorized) {
+    return <Navigate replace to="/" />;
+  }
 
   return (
     <div className={styles.formContainer}>
