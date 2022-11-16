@@ -1,13 +1,14 @@
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { useNavigate, Navigate } from 'react-router-dom';
-import { Button } from '@mui/material';
-import Toast from 'components/Toast/toast';
 
-import { InputPassword, InputName, InputLogin, LinkAuthorization } from '../InputsForm';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { useSignInMutation, useSignUpMutation } from 'services';
-import { useState } from 'react';
 import { setCredentials } from 'redux/authSlice';
+
+import { Button } from '@mui/material';
+import { InputPassword, InputName, InputLogin, LinkAuthorization } from '../InputsForm';
+import Toast from 'components/Toast/toast';
 
 import { ErrorResponse, UserSignUpType } from 'types';
 
@@ -28,6 +29,12 @@ const SignUp = () => {
   const [signIn] = useSignInMutation();
   const dispatch = useAppDispatch();
   const isAuthorized = useAppSelector((state) => state.auth.isAuthorized);
+
+  useEffect(() => {
+    if (isAuthorized) {
+      navigate('/', { replace: true });
+    }
+  });
 
   const onSubmit = async (dataUser: UserSignUpType) => {
     await signUp(dataUser)
@@ -56,10 +63,6 @@ const SignUp = () => {
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
   };
-
-  if (isAuthorized) {
-    return <Navigate replace to="/" />;
-  }
 
   return (
     <div className={styles.formContainer}>
