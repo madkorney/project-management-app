@@ -3,8 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { logOut } from 'redux/authSlice';
 
-import { useState } from 'react';
-import { UserButtons } from './HeaderButtons';
+import { useEffect, useState } from 'react';
+import { HeaderUserButtons } from './HeaderButtons';
 
 import styles from './header.module.scss';
 
@@ -25,6 +25,10 @@ const Header = () => {
     navigate('/user-page');
     setOpenUserPage(true);
   };
+
+  useEffect(() => {
+    location.pathname.includes('user-page') && setOpenUserPage(true);
+  }, []);
 
   return (
     <header className={styles.header}>
@@ -53,7 +57,7 @@ const Header = () => {
           </nav>
         </div>
         {isAuthorized && (
-          <UserButtons openUserPage={openUserPage} onClickOut={goOut} onClickUser={goUserProfile} />
+          <HeaderUserButtons openUserPage={openUserPage} onClickOut={goOut} onClickUser={goUserProfile} />
         )}
       </div>
     </header>

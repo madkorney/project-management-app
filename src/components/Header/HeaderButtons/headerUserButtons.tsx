@@ -1,8 +1,7 @@
+import styles from '../header.module.scss';
 import { Button } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-
-import styles from '../header.module.scss';
 
 type UserButtonProps = {
   openUserPage: boolean;
@@ -10,7 +9,7 @@ type UserButtonProps = {
   onClickUser: () => void;
 };
 
-export const UserButtons = ({ openUserPage, onClickUser, onClickOut }: UserButtonProps) => {
+export const HeaderUserButtons = ({ openUserPage, onClickUser, onClickOut }: UserButtonProps) => {
   return (
     <ul className={styles.headerNavUser}>
       <li>
