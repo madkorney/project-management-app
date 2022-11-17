@@ -1,20 +1,18 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { InputLogin, InputName, InputPassword, LinkAuthorization } from './InputsForm';
-import { Button } from '@mui/material';
+import { ButtonsForm, InputLogin, InputName, InputPassword, LinkAuthorization } from './InputsForm';
 import { UserSignUpType } from 'types';
-
-import styles from 'global-styles/authorization.module.scss';
 
 type FormProps = {
   onSubmit: (data: UserSignUpType) => Promise<void>;
   formName: string;
   formLink: string;
   nameFiled: boolean;
+  userPage?: boolean;
 };
 
-const Form = ({ onSubmit, formName, formLink, nameFiled }: FormProps) => {
+const Form = ({ onSubmit, formName, formLink, nameFiled, userPage }: FormProps) => {
   const {
     register,
     handleSubmit,
@@ -44,10 +42,9 @@ const Form = ({ onSubmit, formName, formLink, nameFiled }: FormProps) => {
         onMouseDown={handleMouseDownPassword}
         showPassword={showPassword}
       />
-      <Button className={styles.formButton} variant="contained" type="submit">
-        {formName}
-      </Button>
-      <LinkAuthorization linkName={formLink} />
+      <ButtonsForm formName={formName} userPage={userPage} />
+
+      {!userPage && <LinkAuthorization linkName={formLink} />}
     </form>
   );
 };
