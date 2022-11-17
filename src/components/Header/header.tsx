@@ -57,7 +57,11 @@ const Header = () => {
           </nav>
         </div>
         {isAuthorized && (
-          <HeaderUserButtons openUserPage={openUserPage} onClickOut={goOut} onClickUser={goUserProfile} />
+          <HeaderUserButtons
+            openUserPage={openUserPage}
+            onClickOut={goOut}
+            onClickUser={goUserProfile}
+          />
         )}
       </div>
     </header>
