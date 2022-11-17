@@ -3,24 +3,27 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { logOut } from 'redux/authSlice';
 
-import PersonIcon from '@mui/icons-material/Person';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import { useState } from 'react';
+import { UserButtons } from './HeaderButtons';
 
 import styles from './header.module.scss';
-import { Button, createTheme } from '@mui/material';
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const [openUserPage, setOpenUserPage] = useState(false);
   const { isAuthorized } = useAppSelector((state) => state.auth);
 
   const goOut = () => {
     localStorage.removeItem('pma_token');
     dispatch(logOut());
+    navigate('/');
+    setOpenUserPage(false);
   };
 
   const goUserProfile = () => {
-    navigate('./user-page');
+    navigate('/user-page');
+    setOpenUserPage(true);
   };
 
   return (
@@ -30,10 +33,10 @@ const Header = () => {
         <div>
           <nav className={styles.headerNav}>
             <ul className={styles.headerNav}>
-              <li>
+              <li onClick={() => setOpenUserPage(false)}>
                 <Link to="/">main</Link>
               </li>
-              <li>
+              <li onClick={() => setOpenUserPage(false)}>
                 <Link to="about">about</Link>
               </li>
               {!isAuthorized && (
@@ -50,26 +53,7 @@ const Header = () => {
           </nav>
         </div>
         {isAuthorized && (
-          <ul className={styles.headerNavUser}>
-            <li>
-              <Button
-                className={styles.MuiButtonBase}
-                startIcon={<PersonIcon className={styles.headerButton} />}
-                onClick={goUserProfile}
-              >
-                <span className={styles.headerTextButton}>profile</span>
-              </Button>
-            </li>
-            <li>
-              <Button
-                className={styles.MuiButtonBase}
-                startIcon={<ExitToAppIcon className={styles.headerButton} />}
-                onClick={goOut}
-              >
-                <span className={styles.headerTextButton}>Log Out</span>
-              </Button>
-            </li>
-          </ul>
+          <UserButtons openUserPage={openUserPage} onClickOut={goOut} onClickUser={goUserProfile} />
         )}
       </div>
     </header>
