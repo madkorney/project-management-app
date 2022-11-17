@@ -1,4 +1,4 @@
-@import 'global-styles/variables';
+@import '../../global-styles/variables';
 
 .header {
   display: flex;
@@ -30,24 +30,47 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
+
     :first-child {
-      margin-right: 10px;
+      margin-right: 4px;
+    }
+
+    & > li {
+      width: 90px;
     }
   }
 
   &Button {
-    font-size: 26px;
-    width: 28px;
-    color: #0044ff;
-    &:hover {
-      transition: color 0.2s linear;
-      cursor: pointer;
-      color: #d112b1;
-      background: none;
-    }
+    font-size: 16px;
+    width: 20px;
+    margin-right: 0;
   }
+
   &UserName {
     display: flex;
     align-items: center;
+  }
+
+  &TextButton {
+    width: 55px;
+    height: 20px;
+    font-size: 10px;
+    font-style: initial;
+    font-weight: bold;
+    padding-top: 2px;
+  }
+}
+
+.MenuItem {
+  width: 90px;
+  padding: 2px;
+
+  & > span:first-child {
+    width: 20px;
+    margin-right: 5px;
+  }
+
+  &:hover {
+    color: #a1f5d7;
   }
 }

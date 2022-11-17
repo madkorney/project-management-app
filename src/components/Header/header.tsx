@@ -1,22 +1,26 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { logOut } from 'redux/authSlice';
 
-import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
-import DeleteOutlineSharpIcon from '@mui/icons-material/DeleteOutlineSharp';
+import PersonIcon from '@mui/icons-material/Person';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 import styles from './header.module.scss';
+import { Button } from '@mui/material';
 
 const Header = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { isAuthorized } = useAppSelector((state) => state.auth);
-  const user = useAppSelector((state) => state.auth.user);
 
   const goOut = () => {
     localStorage.removeItem('pma_token');
     dispatch(logOut());
+  };
+
+  const goUserProfile = () => {
+    navigate('./user-page');
   };
 
   return (
@@ -47,13 +51,25 @@ const Header = () => {
         </div>
         {isAuthorized && (
           <ul className={styles.headerNavUser}>
-            <li className={styles.headerUserName}>
-              <AccountCircleRoundedIcon sx={{ color: '#d112b1', fontSize: 30 }} />
-              {user.login}
+            <li>
+              <Button
+                className={styles.MenuItem}
+                variant="contained"
+                startIcon={<PersonIcon className={styles.headerButton} />}
+                onClick={goUserProfile}
+              >
+                <span className={styles.headerTextButton}>profile</span>
+              </Button>
             </li>
             <li>
-              <ExitToAppIcon className={styles.headerButton} onClick={goOut} />
-              <DeleteOutlineSharpIcon className={styles.headerButton} />
+              <Button
+                className={styles.MenuItem}
+                variant="contained"
+                startIcon={<ExitToAppIcon className={styles.headerButton} />}
+                onClick={goOut}
+              >
+                <span className={styles.headerTextButton}>Log Out</span>
+              </Button>
             </li>
           </ul>
         )}
