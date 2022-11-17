@@ -1,4 +1,4 @@
-import { REQUEST_METHODS, ENDPOINTS } from '../constants';
+import { baseApiSlice } from './baseApi';
 import {
   PointType,
   PointParamsType,
@@ -6,7 +6,7 @@ import {
   PointsListType,
   PointsSetUpdateParamsType,
 } from 'types';
-import { baseApiSlice } from './baseApi';
+import { REQUEST_METHODS, ENDPOINTS } from 'data/constants';
 
 export const pointsApiSlice = baseApiSlice.injectEndpoints({
   endpoints: (build) => ({

@@ -1,4 +1,4 @@
-import { REQUEST_METHODS, ENDPOINTS } from '../constants';
+import { baseApiSlice } from './baseApi';
 import {
   ColumnType,
   ColumnsArrayType,
@@ -6,7 +6,7 @@ import {
   ColumnsSetUpdateParamsType,
   ColumnsSetCreateParamsType,
 } from 'types';
-import { baseApiSlice } from './baseApi';
+import { REQUEST_METHODS, ENDPOINTS } from 'data/constants';
 
 export const columnsApiSlice = baseApiSlice.injectEndpoints({
   endpoints: (build) => ({

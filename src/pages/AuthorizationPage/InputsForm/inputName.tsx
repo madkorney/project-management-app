@@ -1,23 +1,36 @@
 import { FormControl, TextField } from '@mui/material';
 import { FormInputsProps } from '../types';
-
-import { RegExpNameValidation } from '../../../constants';
+import { REGEXP_NAME_VALID_CHARACTERS } from 'data/constants';
 
 import styles from '../authorization.module.scss';
 
 export const InputName = ({ register, errors }: FormInputsProps) => {
-  const errorBool = errors !== undefined;
+  const isError = !!errors;
+
   return (
     <FormControl sx={{ m: 2, maxWidth: '30ch', width: '90%' }} variant="outlined">
       <TextField
-        label="name"
+        label="Name"
         {...register('name', {
-          required: true,
-          pattern: RegExpNameValidation,
+          required: { value: true, message: 'cannot be empty' },
+          minLength: {
+            value: 2,
+            message: 'must be at least 2 characters',
+          },
+          validate: {
+            containOnlyValidCharacters: (login) =>
+              REGEXP_NAME_VALID_CHARACTERS.test(login) ||
+              'can contain only latin letters, space and dash',
+            shouldStartFromLetter: (name) =>
+              new RegExp(/[А-ЯЁа-яёA-Za-z]/).test(name[0]) || 'should begin with letter',
+            shouldEndFromLetter: (name) =>
+              new RegExp(/[А-ЯЁа-яёA-Za-z]/).test(name[name.length - 1]) ||
+              'should end with letter',
+          },
         })}
-        error={errorBool}
+        error={isError}
       />
-      {errors && <span className={styles.formError}>Enter valid name</span>}
+      {errors && <span className={styles.formError}>Name {errors.message}</span>}
     </FormControl>
   );
 };

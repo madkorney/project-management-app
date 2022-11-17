@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from 'redux/types';
-import { BASE_URL, ENDPOINTS } from '../constants';
+import { BASE_URL, ENDPOINTS } from 'data/constants';
 
 export const baseApiSlice = createApi({
   reducerPath: 'pmaApi',

@@ -1,6 +1,6 @@
-import { REQUEST_METHODS, ENDPOINTS } from '../constants';
-import { AuthInfoType, AuthSuccessfulType, UserSignUpType, UserType } from 'types';
 import { baseApiSlice } from './baseApi';
+import { AuthInfoType, AuthSuccessfulType, UserSignUpType, UserType } from 'types';
+import { REQUEST_METHODS, ENDPOINTS } from 'data/constants';
 
 export const authApiSlice = baseApiSlice.injectEndpoints({
   endpoints: (build) => ({
