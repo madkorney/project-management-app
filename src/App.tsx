@@ -1,5 +1,5 @@
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
-import PrivateRoute from 'routes/privateRoute';
+import { PrivateRoute, PublicRoute } from 'routes';
 
 import SignUp from 'pages/AuthorizationPage/SignUp';
 import SignIn from 'pages/AuthorizationPage/SignIn';
@@ -21,8 +21,10 @@ const App = () => {
           <Route element={<PrivateRoute />}>
             <Route path="boards" element={<BoardsPage />} />
           </Route>
-          <Route path="sign-in" element={<SignIn />} />
-          <Route path="sign-up" element={<SignUp />} />
+          <Route element={<PublicRoute />}>
+            <Route path="sign-in" element={<SignIn />} />
+            <Route path="sign-up" element={<SignUp />} />
+          </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
