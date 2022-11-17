@@ -1,6 +1,6 @@
-import { REQUEST_METHODS, ENDPOINTS } from '../constants';
-import { UserFullInfoType, UsersArrayType, UserType } from 'types';
 import { baseApiSlice } from './baseApi';
+import { UserFullInfoType, UsersArrayType, UserType } from 'types';
+import { REQUEST_METHODS, ENDPOINTS } from 'data/constants';
 
 export const usersApiSlice = baseApiSlice.injectEndpoints({
   endpoints: (build) => ({

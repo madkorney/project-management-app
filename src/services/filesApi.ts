@@ -1,6 +1,6 @@
-import { REQUEST_METHODS, ENDPOINTS } from '../constants';
-import { FileType, FileListType } from 'types';
 import { baseApiSlice } from './baseApi';
+import { FileType, FileListType } from 'types';
+import { REQUEST_METHODS, ENDPOINTS } from 'data/constants';
 
 export const filesApiSlice = baseApiSlice.injectEndpoints({
   endpoints: (build) => ({

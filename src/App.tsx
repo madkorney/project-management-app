@@ -7,7 +7,7 @@ import MainPage from './pages/MainPage/mainPage';
 import AboutPage from './pages/AboutPage/aboutPage';
 import NotFoundPage from './pages/NotFoundPage/notFoundPage';
 
-import { REACT_APP_BASENAME as BASENAME } from './constants';
+import { REACT_APP_BASENAME as BASENAME } from './data/constants';
 
 const App = () => {
   return (

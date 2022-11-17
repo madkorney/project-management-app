@@ -1,22 +1,22 @@
 import { Link } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
+import { logOut } from 'redux/authSlice';
+
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import DeleteOutlineSharpIcon from '@mui/icons-material/DeleteOutlineSharp';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-
-import { setAuthorized } from 'redux/authorizedSlice';
 
 import styles from './header.module.scss';
 
 const Header = () => {
   const dispatch = useAppDispatch();
-  const { userAuthorized } = useAppSelector((state) => state.authorized);
-  const name = localStorage.getItem('LoginUser');
+  const { isAuthorized } = useAppSelector((state) => state.auth);
+  const user = useAppSelector((state) => state.auth.user);
 
   const goOut = () => {
-    dispatch(setAuthorized(false));
-    localStorage.clear();
+    localStorage.removeItem('pma_token');
+    dispatch(logOut());
   };
 
   return (
@@ -32,7 +32,7 @@ const Header = () => {
               <li>
                 <Link to="about">about</Link>
               </li>
-              {!userAuthorized && (
+              {!isAuthorized && (
                 <>
                   <li>
                     <Link to="sign-in">Sign in</Link>
@@ -45,11 +45,11 @@ const Header = () => {
             </ul>
           </nav>
         </div>
-        {userAuthorized && (
+        {isAuthorized && (
           <ul className={styles.headerNavUser}>
             <li className={styles.headerUserName}>
               <AccountCircleRoundedIcon sx={{ color: '#d112b1', fontSize: 30 }} />
-              {name}
+              {user.login}
             </li>
             <li>
               <ExitToAppIcon className={styles.headerButton} onClick={goOut} />
