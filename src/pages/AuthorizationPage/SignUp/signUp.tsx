@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+import { useAppDispatch } from 'redux/hooks';
 import { useSignInMutation, useSignUpMutation } from 'services';
 import { setCredentials } from 'redux/authSlice';
 
@@ -28,13 +28,6 @@ const SignUp = () => {
   const [signUp, { error }] = useSignUpMutation();
   const [signIn] = useSignInMutation();
   const dispatch = useAppDispatch();
-  const isAuthorized = useAppSelector((state) => state.auth.isAuthorized);
-
-  useEffect(() => {
-    if (isAuthorized) {
-      navigate('/', { replace: true });
-    }
-  });
 
   const onSubmit = async (dataUser: UserSignUpType) => {
     await signUp(dataUser)
