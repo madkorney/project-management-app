@@ -32,7 +32,14 @@ const Header = () => {
               <li>
                 <Link to="about">about</Link>
               </li>
-              {!isAuthorized && (
+              {isAuthorized ? (
+                <>
+                  <li>+ Add new board</li>
+                  <li>
+                    <Link to="boards">boards</Link>
+                  </li>
+                </>
+              ) : (
                 <>
                   <li>
                     <Link to="sign-in">Sign in</Link>

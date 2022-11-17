@@ -6,6 +6,7 @@ import TemplatePage from './pages/TemplatePage/templatePage';
 import MainPage from './pages/MainPage/mainPage';
 import AboutPage from './pages/AboutPage/aboutPage';
 import NotFoundPage from './pages/NotFoundPage/notFoundPage';
+import BoardsPage from 'pages/BoardsPage/boardsPage';
 
 import { REACT_APP_BASENAME as BASENAME } from './data/constants';
 
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/" element={<TemplatePage />}>
           <Route path="/" element={<MainPage />} />
           <Route path="about" element={<AboutPage />} />
+          <Route path="boards" element={<BoardsPage />} />
           <Route path="sign-in" element={<SignIn />} />
           <Route path="sign-up" element={<SignUp />} />
           <Route path="*" element={<NotFoundPage />} />
