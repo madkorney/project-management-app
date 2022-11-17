@@ -7,7 +7,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 import styles from './header.module.scss';
-import { Button } from '@mui/material';
+import { Button, createTheme } from '@mui/material';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -53,8 +53,7 @@ const Header = () => {
           <ul className={styles.headerNavUser}>
             <li>
               <Button
-                className={styles.MenuItem}
-                variant="contained"
+                className={styles.MuiButtonBase}
                 startIcon={<PersonIcon className={styles.headerButton} />}
                 onClick={goUserProfile}
               >
@@ -63,8 +62,7 @@ const Header = () => {
             </li>
             <li>
               <Button
-                className={styles.MenuItem}
-                variant="contained"
+                className={styles.MuiButtonBase}
                 startIcon={<ExitToAppIcon className={styles.headerButton} />}
                 onClick={goOut}
               >
