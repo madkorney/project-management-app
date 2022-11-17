@@ -25,13 +25,13 @@ const SignUpPage = () => {
     }
   });
 
-  const onSubmit = async (data: UserSignUpType) => {
-    await signUp(data)
+  const onSubmit = async (dataUser: UserSignUpType) => {
+    await signUp(dataUser)
       .unwrap()
-      .then(async (dataUser) => {
+      .then(async (data) => {
         await signIn({
-          login: dataUser.login,
-          password: data.password,
+          login: data.login,
+          password: dataUser.password,
         })
           .unwrap()
           .then((data) => {

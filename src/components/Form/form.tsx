@@ -7,14 +7,8 @@ import { UserSignUpType } from 'types';
 
 import styles from 'global-styles/authorization.module.scss';
 
-type FormData = {
-  name: string;
-  login: string;
-  password: string;
-};
-
 type FormProps = {
-  onSubmit: (data: FormData) => Promise<void>;
+  onSubmit: (data: UserSignUpType) => Promise<void>;
   formName: string;
   formLink: string;
   nameFiled: boolean;
