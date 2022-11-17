@@ -1,7 +1,7 @@
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 
-import SignUp from './pages/AuthorizationPage/SignUp';
-import SignIn from './pages/AuthorizationPage/SignIn';
+import SignUpPage from './pages/SignUpPage';
+import SignInPage from './pages/SignInPage';
 import TemplatePage from './pages/TemplatePage/templatePage';
 import MainPage from './pages/MainPage/mainPage';
 import AboutPage from './pages/AboutPage/aboutPage';
@@ -16,8 +16,8 @@ const App = () => {
         <Route path="/" element={<TemplatePage />}>
           <Route path="/" element={<MainPage />} />
           <Route path="about" element={<AboutPage />} />
-          <Route path="sign-in" element={<SignIn />} />
-          <Route path="sign-up" element={<SignUp />} />
+          <Route path="sign-in" element={<SignInPage />} />
+          <Route path="sign-up" element={<SignUpPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

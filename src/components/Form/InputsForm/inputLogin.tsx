@@ -2,7 +2,7 @@ import { FormControl, TextField } from '@mui/material';
 import { FormInputsProps } from '../types';
 import { REGEXP_LOGIN_VALID_CHARACTERS } from 'data/constants';
 
-import styles from '../authorization.module.scss';
+import styles from 'global-styles/authorization.module.scss';
 
 export const InputLogin = ({ register, errors }: FormInputsProps) => {
   const isError = !!errors;
