@@ -7,6 +7,7 @@ import './boardsPage.scss';
 const BoardsPage = () => {
   const userId = useAppSelector((store) => store.auth.user.id) as string;
   const { data } = useGetBoardsSetByUserIdQuery(userId);
+  console.log(data);
 
   return (
     <div className="boards-container">
