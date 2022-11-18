@@ -3,31 +3,32 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { logOut } from 'redux/authSlice';
 
-import { useEffect, useState } from 'react';
-import { HeaderUserButtons } from './HeaderButtons';
+import { useEffect } from 'react';
+import { HeaderUserButtons, HeaderUserLinks } from './HeaderButtons';
 
 import styles from './header.module.scss';
+import { setOpenUserPage } from '../../redux/modalUserSlice';
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const [openUserPage, setOpenUserPage] = useState(false);
   const { isAuthorized } = useAppSelector((state) => state.auth);
+  const { openUserPage } = useAppSelector((state) => state.userSettings);
 
   const goOut = () => {
     localStorage.removeItem('pma_token');
     dispatch(logOut());
     navigate('/');
-    setOpenUserPage(false);
+    dispatch(setOpenUserPage(false));
   };
 
   const goUserProfile = () => {
     navigate('/user-page');
-    setOpenUserPage(true);
+    dispatch(setOpenUserPage(true));
   };
 
   useEffect(() => {
-    location.pathname.includes('user-page') && setOpenUserPage(true);
+    location.pathname.includes('user-page') && dispatch(setOpenUserPage(true));
   }, []);
 
   return (
@@ -37,22 +38,13 @@ const Header = () => {
         <div>
           <nav className={styles.headerNav}>
             <ul className={styles.headerNav}>
-              <li onClick={() => setOpenUserPage(false)}>
+              <li onClick={() => dispatch(setOpenUserPage(false))}>
                 <Link to="/">main</Link>
               </li>
-              <li onClick={() => setOpenUserPage(false)}>
+              <li onClick={() => dispatch(setOpenUserPage(false))}>
                 <Link to="about">about</Link>
               </li>
-              {!isAuthorized && (
-                <>
-                  <li>
-                    <Link to="sign-in">Sign in</Link>
-                  </li>
-                  <li>
-                    <Link to="sign-up">Sign up</Link>
-                  </li>
-                </>
-              )}
+              {!isAuthorized && <HeaderUserLinks />}
             </ul>
           </nav>
         </div>
