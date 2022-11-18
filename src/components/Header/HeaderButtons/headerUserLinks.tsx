@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-const HeaderUserLink = () => {
+export const HeaderUserLinks = () => {
   return (
     <>
       <li>
