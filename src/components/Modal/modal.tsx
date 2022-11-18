@@ -26,6 +26,11 @@ const Modal = ({ children, buttonText, title, mode, onConfirm }: ModalPropsType)
     setOpen(false);
   };
 
+  const handleConfirm = () => {
+    onConfirm?.();
+    setOpen(false);
+  };
+
   return (
     <>
       <Button onClick={handleClickOpen} variant="outlined" size="small">
@@ -60,7 +65,7 @@ const Modal = ({ children, buttonText, title, mode, onConfirm }: ModalPropsType)
         </DialogContent>
         {mode === 'confirm' && (
           <DialogActions>
-            <Button autoFocus onClick={() => onConfirm?.()}>
+            <Button autoFocus onClick={handleConfirm}>
               Delete
             </Button>
             <Button onClick={handleClose}>Cancel</Button>
