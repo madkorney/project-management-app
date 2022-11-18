@@ -15,10 +15,12 @@
     align-self: center;
     margin: 0 auto;
   }
+
   &Button {
     margin: 18px auto 8px;
     max-width: 50%;
     width: 100%;
+
   }
 
   &Link {
@@ -50,5 +52,16 @@
     font-size: 12px;
     text-align: left;
     padding-top: 4px;
+  }
+
+  &GroupButton {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    @media (max-width: 378px) {
+      flex-direction: column;
+      width: 90%;
+      padding-bottom: 20px;
+    }
   }
 }
