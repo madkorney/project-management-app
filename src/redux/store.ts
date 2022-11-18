@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { baseApiSlice } from 'services';
 import authSliceReducer from './authSlice';
+import userSettingdSlice from './modalUserSlice';
 
 const reducer = {
   auth: authSliceReducer,
+  userSettings: userSettingdSlice,
   [baseApiSlice.reducerPath]: baseApiSlice.reducer,
 };
 
