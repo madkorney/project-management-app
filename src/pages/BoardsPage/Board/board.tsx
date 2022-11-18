@@ -1,8 +1,15 @@
 import { Card, CardContent, Typography, CardActions, Button } from '@mui/material';
 import Modal from 'components/Modal/modal';
 import { BoardType } from 'types';
+import { useDeleteBoardByIdMutation } from 'services';
 
 const Board = (board: BoardType) => {
+  const [deleteBoardById] = useDeleteBoardByIdMutation();
+
+  const handleDelete = async () => {
+    await deleteBoardById(board._id);
+  };
+
   return (
     <Card sx={{ width: 240, backgroundColor: '#b4b4b4' }}>
       <CardContent>
@@ -18,7 +25,7 @@ const Board = (board: BoardType) => {
         >
           Open
         </Button>
-        <Modal buttonText="X" title="board" mode="delete" id={board._id}>
+        <Modal buttonText="X" title="Delete board" mode="confirm" onConfirm={handleDelete}>
           <p>You want to delete this board. Are you sure?</p>
         </Modal>
       </CardActions>

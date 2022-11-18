@@ -6,37 +6,23 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { IconButton } from '@mui/material';
 import { Close } from '@mui/icons-material';
-import { useDeleteBoardByIdMutation } from 'services';
 
 type ModalPropsType = {
   children: JSX.Element;
   buttonText: string;
   title: string;
   mode?: string;
-  id?: string;
+  onConfirm?: () => Promise<void>;
 };
 
-const Modal = ({ children, buttonText, title, mode, id }: ModalPropsType) => {
+const Modal = ({ children, buttonText, title, mode, onConfirm }: ModalPropsType) => {
   const [open, setOpen] = useState(false);
-  const [deleteBoard] = useDeleteBoardByIdMutation();
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleDelete = async () => {
-    switch (title) {
-      case 'board':
-        await deleteBoard(id as string);
-        break;
-      default:
-        return;
-    }
-
     setOpen(false);
   };
 
@@ -48,7 +34,7 @@ const Modal = ({ children, buttonText, title, mode, id }: ModalPropsType) => {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>
           {title}
-          {mode !== 'delete' && (
+          {mode !== 'confirm' && (
             <IconButton
               onClick={handleClose}
               sx={{
@@ -72,9 +58,11 @@ const Modal = ({ children, buttonText, title, mode, id }: ModalPropsType) => {
               : null;
           })}
         </DialogContent>
-        {mode === 'delete' && (
+        {mode === 'confirm' && (
           <DialogActions>
-            <Button onClick={handleDelete}>Delete</Button>
+            <Button autoFocus onClick={() => onConfirm?.()}>
+              Delete
+            </Button>
             <Button onClick={handleClose}>Cancel</Button>
           </DialogActions>
         )}
