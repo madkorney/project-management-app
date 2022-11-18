@@ -23,11 +23,8 @@ const AddBoard = ({ onClose }: AddBoardType) => {
   const userId = useAppSelector((state) => state.auth.user.id) as string;
 
   const onSubmit: SubmitHandler<Pick<BoardParamsType, 'title' | 'description'>> = async (data) => {
-    try {
-      await addBoard({ ...data, owner: userId, users: [] }).unwrap();
-    } finally {
-      onClose?.();
-    }
+    await addBoard({ ...data, owner: userId, users: [] }).unwrap();
+    onClose?.();
   };
 
   return (
@@ -62,7 +59,7 @@ const AddBoard = ({ onClose }: AddBoardType) => {
       />
       {errors.description && <span>{errors.description.message}</span>}
       <Button variant="contained" type="submit">
-        Submit
+        Add
       </Button>
       {error && <Toast message={(error as ErrorResponse).data.message} />}
     </form>

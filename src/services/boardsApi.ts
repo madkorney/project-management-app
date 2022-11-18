@@ -34,6 +34,7 @@ export const boardsApiSlice = baseApiSlice.injectEndpoints({
         url: `${ENDPOINTS.BOARDS}/${boardId}`,
         method: REQUEST_METHODS.DELETE,
       }),
+      invalidatesTags: ['Boards'],
     }),
     getBoardsSetByIds: build.query<BoardsArrayType, string[]>({
       query: (ids) => ({

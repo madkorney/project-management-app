@@ -1,17 +1,13 @@
 import { Button, Card, CardActions, CardContent, Typography } from '@mui/material';
 import { useAppSelector } from 'redux/hooks';
 import { useGetBoardsSetByUserIdQuery } from 'services';
-import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 
 import './boardsPage.scss';
+import Modal from 'components/Modal/modal';
 
 const BoardsPage = () => {
   const userId = useAppSelector((store) => store.auth.user.id) as string;
   const { data } = useGetBoardsSetByUserIdQuery(userId);
-
-  const handleDeleteClick = (event: React.MouseEvent) => {
-    console.log(event.target);
-  };
 
   return (
     <div className="boards-container">
@@ -23,15 +19,17 @@ const BoardsPage = () => {
               <Typography>{board.description}</Typography>
             </CardContent>
             <CardActions>
-              <Button size="small" variant="contained">
+              <Button
+                size="small"
+                variant="contained"
+                sx={{ marginRight: 'auto' }}
+                aria-label="Delete board"
+              >
                 Open
               </Button>
-              <DeleteForeverOutlinedIcon
-                id={board._id}
-                onClick={handleDeleteClick}
-                fontSize="large"
-                sx={{ marginLeft: 'auto' }}
-              />
+              <Modal buttonText="X" title="board" mode="delete" id={board._id}>
+                <p>You want to delete this board. Are you sure?</p>
+              </Modal>
             </CardActions>
           </Card>
         ))}
