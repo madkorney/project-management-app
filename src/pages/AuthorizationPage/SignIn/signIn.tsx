@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+import { useAppDispatch } from 'redux/hooks';
 import { useSignInMutation } from 'services';
 import { setCredentials } from 'redux/authSlice';
 
@@ -27,13 +27,6 @@ const SignIn = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [signIn, { error }] = useSignInMutation();
-  const isAuthorized = useAppSelector((state) => state.auth.isAuthorized);
-
-  useEffect(() => {
-    if (isAuthorized) {
-      navigate('/', { replace: true });
-    }
-  });
 
   const onSubmit = async (dataLogin: AuthInfoType) => {
     await signIn(dataLogin)
