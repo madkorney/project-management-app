@@ -69,7 +69,7 @@ const ModalUpdateUser = () => {
   useEffect(() => {
     setTimeout(() => {
       dispatch(setMessageUser(''));
-    }, 4000);
+    }, 3000);
   }, [isMessageUser]);
   return (
     <>
