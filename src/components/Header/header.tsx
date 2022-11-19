@@ -13,7 +13,7 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { isAuthorized } = useAppSelector((state) => state.auth);
-  const { openUserPage } = useAppSelector((state) => state.userSettings);
+  const { isOpenUserPage } = useAppSelector((state) => state.userSettings);
 
   const goOut = () => {
     localStorage.removeItem('pma_token');
@@ -50,7 +50,7 @@ const Header = () => {
         </div>
         {isAuthorized && (
           <HeaderUserButtons
-            openUserPage={openUserPage}
+            openUserPage={isOpenUserPage}
             onClickOut={goOut}
             onClickUser={goUserProfile}
           />
