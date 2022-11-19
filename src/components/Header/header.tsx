@@ -23,6 +23,9 @@ const Header = () => {
     dispatch(setOpenUserPage(false));
   };
 
+  const closeUserProfile = () => {
+    dispatch(setOpenUserPage(false));
+  };
   const goUserProfile = () => {
     navigate('/user-page');
     dispatch(setOpenUserPage(true));
@@ -54,6 +57,7 @@ const Header = () => {
             openUserPage={isOpenUserPage}
             onClickOut={goOut}
             onClickUser={goUserProfile}
+            closeUserLink={closeUserProfile}
           />
         )}
       </div>
