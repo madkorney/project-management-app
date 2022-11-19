@@ -15,7 +15,7 @@ const TemplatePage = () => {
           <Outlet />
         </Suspense>
       </main>
-      <Footer />;
+      <Footer />
     </>
   );
 };
