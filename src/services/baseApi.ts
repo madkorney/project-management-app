@@ -4,6 +4,7 @@ import { BASE_URL, ENDPOINTS } from 'data/constants';
 
 export const baseApiSlice = createApi({
   reducerPath: 'pmaApi',
+  tagTypes: ['Boards'],
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,
     prepareHeaders: (headers, { getState, endpoint }) => {
