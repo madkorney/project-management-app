@@ -30,7 +30,10 @@ const SignInPage = () => {
       .then((data) => {
         localStorage.setItem('pma_token', data.token);
         dispatch(setCredentials(data));
-        navigate('/');
+
+        setTimeout(() => {
+          navigate('/boards');
+        }, 50);
       })
       .catch(() => {
         localStorage.removeItem('pma_token');
