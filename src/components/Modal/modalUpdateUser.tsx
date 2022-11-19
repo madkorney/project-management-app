@@ -1,4 +1,6 @@
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { setCloseModal, setMessageUser } from 'redux/modalUserSlice';
 import { logOut, setCredentials } from 'redux/authSlice';
@@ -15,7 +17,6 @@ import {
 } from '@mui/material';
 import { updateProfile } from './modalUpadteUser.utils';
 import { ErrorResponse } from 'types';
-import { useEffect } from 'react';
 
 enum ModalText {
   UPDATE = 'Are you sure you want to update your account?',

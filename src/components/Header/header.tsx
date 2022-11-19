@@ -6,8 +6,9 @@ import { logOut } from 'redux/authSlice';
 import { useEffect } from 'react';
 import { HeaderUserButtons, HeaderUserLinks } from './HeaderButtons';
 
+import { setOpenUserPage } from 'redux/modalUserSlice';
+
 import styles from './header.module.scss';
-import { setOpenUserPage } from '../../redux/modalUserSlice';
 
 const Header = () => {
   const navigate = useNavigate();
