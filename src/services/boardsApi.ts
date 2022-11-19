@@ -6,6 +6,10 @@ export const boardsApiSlice = baseApiSlice.injectEndpoints({
   endpoints: (build) => ({
     getBoards: build.query<BoardsArrayType, void>({
       query: () => ENDPOINTS.BOARDS,
+      providesTags: (result) =>
+        result
+          ? [...result.map(({ _id }) => ({ type: 'Boards' as const, _id })), 'Boards']
+          : ['Boards'],
     }),
     createBoard: build.mutation<BoardType, BoardParamsType>({
       query: (newParams) => ({
@@ -13,6 +17,7 @@ export const boardsApiSlice = baseApiSlice.injectEndpoints({
         method: REQUEST_METHODS.POST,
         body: newParams,
       }),
+      invalidatesTags: ['Boards'],
     }),
     getBoardById: build.query<BoardType, string>({
       query: (boardId) => `${ENDPOINTS.BOARDS}/${boardId}`,
@@ -29,6 +34,7 @@ export const boardsApiSlice = baseApiSlice.injectEndpoints({
         url: `${ENDPOINTS.BOARDS}/${boardId}`,
         method: REQUEST_METHODS.DELETE,
       }),
+      invalidatesTags: ['Boards'],
     }),
     getBoardsSetByIds: build.query<BoardsArrayType, string[]>({
       query: (ids) => ({
@@ -38,6 +44,10 @@ export const boardsApiSlice = baseApiSlice.injectEndpoints({
     }),
     getBoardsSetByUserId: build.query<BoardsArrayType, string>({
       query: (userId) => `${ENDPOINTS.BOARDSSET}/${userId}`,
+      providesTags: (result) =>
+        result
+          ? [...result.map(({ _id }) => ({ type: 'Boards' as const, _id })), 'Boards']
+          : ['Boards'],
     }),
   }),
 });

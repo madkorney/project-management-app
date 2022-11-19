@@ -8,6 +8,8 @@ import DeleteOutlineSharpIcon from '@mui/icons-material/DeleteOutlineSharp';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 import styles from './header.module.scss';
+import Modal from 'components/Modal/modal';
+import AddBoard from 'components/Forms/addBoard';
 
 const Header = () => {
   const dispatch = useAppDispatch();
@@ -32,7 +34,18 @@ const Header = () => {
               <li>
                 <Link to="about">about</Link>
               </li>
-              {!isAuthorized && (
+              {isAuthorized ? (
+                <>
+                  <li>
+                    <Modal buttonText="+ Add new board" title="Add new board">
+                      <AddBoard />
+                    </Modal>
+                  </li>
+                  <li>
+                    <Link to="boards">boards</Link>
+                  </li>
+                </>
+              ) : (
                 <>
                   <li>
                     <Link to="sign-in">Sign in</Link>
