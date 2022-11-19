@@ -10,9 +10,19 @@ type FormProps = {
   formLink: string;
   nameFiled: boolean;
   userPage?: boolean;
+  userDel?: () => void;
+  className?: string;
 };
 
-const Form = ({ onSubmit, formName, formLink, nameFiled, userPage }: FormProps) => {
+const Form = ({
+  className,
+  onSubmit,
+  formName,
+  formLink,
+  nameFiled,
+  userPage,
+  userDel,
+}: FormProps) => {
   const {
     register,
     handleSubmit,
@@ -32,7 +42,7 @@ const Form = ({ onSubmit, formName, formLink, nameFiled, userPage }: FormProps) 
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className={className}>
       {nameFiled && <InputName errors={errors.name} register={register} />}
       <InputLogin errors={errors.login} register={register} />
       <InputPassword
@@ -42,7 +52,7 @@ const Form = ({ onSubmit, formName, formLink, nameFiled, userPage }: FormProps) 
         onMouseDown={handleMouseDownPassword}
         showPassword={showPassword}
       />
-      <ButtonsForm formName={formName} userPage={userPage} />
+      <ButtonsForm formName={formName} userPage={userPage} delUser={userDel} />
 
       {!userPage && <LinkAuthorization linkName={formLink} />}
     </form>
