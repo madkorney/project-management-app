@@ -1,8 +1,8 @@
 import { useAppSelector } from 'redux/hooks';
 import { useGetBoardsSetByUserIdQuery } from 'services';
+import Board from './Board/board';
 
 import './boardsPage.scss';
-import Board from './Board/board';
 
 const BoardsPage = () => {
   const userId = useAppSelector((store) => store.auth.user.id) as string;

@@ -30,7 +30,6 @@ const SignInPage = () => {
       .then((data) => {
         localStorage.setItem('pma_token', data.token);
         dispatch(setCredentials(data));
-
         setTimeout(() => {
           navigate('/boards');
         }, 50);
