@@ -1,10 +1,10 @@
-import Form from 'components/Form';
+import Form from 'components/Forms/FormAuthorization';
 import { UserSignUpType } from 'types';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { setOpenUpdateModal, setUpdateUserData } from 'redux/modalUserSlice';
 
-import ModalUpdateUser from 'components/Modal';
+import ModalUpdateUser from 'components/Modal/ModalUser';
 
 import styles from './userPage.module.scss';
 

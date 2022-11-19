@@ -36,7 +36,6 @@ const userUpdateData = createSlice({
     },
     setCloseModal: (state, action: PayloadAction<boolean>) => {
       state.isOpen = action.payload;
-      state.isOpenUserPage = false;
       state.updateUserData = initialState.updateUserData;
     },
     setOpenUserPage: (state, action: PayloadAction<boolean>) => {
@@ -45,7 +44,6 @@ const userUpdateData = createSlice({
     setUpdateUserData: (state, action: PayloadAction<UpdateUser>) => {
       state.updateUserData = action.payload;
       state.isOpen = true;
-      state.isOpenUserPage = false;
       state.isModalType = false;
     },
     setMessageUser: (state, action: PayloadAction<string>) => {

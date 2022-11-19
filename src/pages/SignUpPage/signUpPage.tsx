@@ -5,7 +5,7 @@ import { useSignInMutation, useSignUpMutation } from 'services';
 import { setCredentials } from 'redux/authSlice';
 
 import Toast from 'components/Toast/toast';
-import Form from 'components/Form';
+import Form from 'components/Forms/FormAuthorization';
 
 import { ErrorResponse, UserSignUpType } from 'types';
 

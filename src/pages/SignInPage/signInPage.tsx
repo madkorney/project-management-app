@@ -10,7 +10,7 @@ import Toast from 'components/Toast/toast';
 import { AuthInfoType, ErrorResponse } from 'types';
 
 import styles from 'global-styles/authorization.module.scss';
-import Form from 'components/Form';
+import Form from 'components/Forms/FormAuthorization';
 
 const SignInPage = () => {
   const navigate = useNavigate();

@@ -6,7 +6,7 @@ import { setCloseModal, setMessageUser } from 'redux/modalUserSlice';
 import { logOut, setCredentials } from 'redux/authSlice';
 import { useDeleteUserByIdMutation, useSignInMutation, useUpdateUserByIdMutation } from 'services';
 
-import Toast from '../Toast/toast';
+import Toast from '../../Toast/toast';
 import {
   Button,
   Dialog,
@@ -37,6 +37,9 @@ const ModalUpdateUser = () => {
 
   const handleClose = () => {
     dispatch(setCloseModal(false));
+    setTimeout(() => {
+      dispatch(setMessageUser(''));
+    }, 4000);
   };
 
   const handleUpdate = async () => {
@@ -53,10 +56,9 @@ const ModalUpdateUser = () => {
               localStorage.setItem('pma_token', data.token);
               dispatch(setCredentials(data));
             });
-          dispatch(setMessageUser(ModalText.PROFILE_UPDATE));
         })
         .catch((er) => handleClose());
-
+    dispatch(setMessageUser(ModalText.PROFILE_UPDATE));
     handleClose();
   };
 
@@ -67,12 +69,6 @@ const ModalUpdateUser = () => {
     handleClose();
   };
 
-  useEffect(() => {
-    setTimeout(() => {
-      dispatch(setMessageUser(''));
-    }, 4000);
-  }),
-    [isMessageUser];
   return (
     <>
       {error && <Toast message={(error as ErrorResponse).data.message} />}
