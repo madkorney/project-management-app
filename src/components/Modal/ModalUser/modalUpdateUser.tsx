@@ -16,6 +16,7 @@ import {
 } from '@mui/material';
 import { updateProfile } from './modalUpadteUser.utils';
 import { ErrorResponse } from 'types';
+import { useEffect } from 'react';
 
 enum ModalText {
   UPDATE = 'Are you sure you want to update your account?',
@@ -36,9 +37,6 @@ const ModalUpdateUser = () => {
 
   const handleClose = () => {
     dispatch(setCloseModal(false));
-    setTimeout(() => {
-      dispatch(setMessageUser(''));
-    }, 4000);
   };
 
   const handleUpdate = async () => {
@@ -54,10 +52,11 @@ const ModalUpdateUser = () => {
             .then((data) => {
               localStorage.setItem('pma_token', data.token);
               dispatch(setCredentials(data));
+              dispatch(setMessageUser(ModalText.PROFILE_UPDATE));
             });
         })
         .catch((er) => handleClose());
-    dispatch(setMessageUser(ModalText.PROFILE_UPDATE));
+
     handleClose();
   };
 
@@ -67,11 +66,15 @@ const ModalUpdateUser = () => {
     navigate('/');
     handleClose();
   };
-
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(setMessageUser(''));
+    }, 4000);
+  }, [isMessageUser]);
   return (
     <>
       {error && <Toast message={(error as ErrorResponse).data.message} />}
-      {isMessageUser && <Toast message={isMessageUser} />}
+      {!error && isMessageUser && <Toast message={isMessageUser} />}
       <Dialog
         open={isOpen}
         onClose={handleClose}
