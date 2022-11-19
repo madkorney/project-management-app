@@ -1,7 +1,7 @@
 .user {
   display: flex;
   width: 60%;
-  height:46%;
+  max-height:50%;
   margin: 14% auto 0;
   padding: 10px;
   justify-content: center;
@@ -31,12 +31,12 @@
   }
   @media (max-width: 998px) {
     width: 90%;
-    height: 50%;
   }
   @media (max-width: 498px) {
     flex-direction: column;
     width: 90%;
-    height: 600px;
+    max-height: 600px;
     margin-bottom: 20px;
+    padding: 4px;
   }
 }
