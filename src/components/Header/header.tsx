@@ -26,6 +26,7 @@ const Header = () => {
   const closeUserProfile = () => {
     dispatch(setOpenUserPage(false));
   };
+
   const goUserProfile = () => {
     navigate('/user-page');
     dispatch(setOpenUserPage(true));

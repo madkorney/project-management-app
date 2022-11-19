@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { setCloseModal, setMessageUser } from 'redux/modalUserSlice';
