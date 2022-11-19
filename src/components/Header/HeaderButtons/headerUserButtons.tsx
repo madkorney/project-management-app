@@ -30,8 +30,9 @@ export const HeaderUserButtons = ({
       <li onClick={closeUserLink}>
         <Link to="boards">boards</Link>
       </li>
-      <li>
-        {!openUserPage && (
+
+      {!openUserPage && (
+        <li>
           <Button
             className={styles.MuiButtonBase}
             startIcon={<PersonIcon className={styles.headerButton} />}
@@ -39,8 +40,8 @@ export const HeaderUserButtons = ({
           >
             <span className={styles.headerTextButton}>profile</span>
           </Button>
-        )}
-      </li>
+        </li>
+      )}
       <li>
         <Button
           className={styles.MuiButtonBase}
