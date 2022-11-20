@@ -2,6 +2,7 @@ import { Card, CardContent, Typography, CardActions, Button } from '@mui/materia
 import Modal from 'components/Modal/modal';
 import { BoardType } from 'types';
 import { useDeleteBoardByIdMutation } from 'services';
+import { Link } from 'react-router-dom';
 
 const Board = (board: BoardType) => {
   const [deleteBoardById] = useDeleteBoardByIdMutation();
@@ -23,7 +24,7 @@ const Board = (board: BoardType) => {
           sx={{ marginRight: 'auto' }}
           aria-label="Delete board"
         >
-          Open
+          <Link to={board._id}>Open</Link>
         </Button>
         <Modal buttonText="X" title="Delete board" mode="confirm" onConfirm={handleDelete}>
           <p>You want to delete this board. Are you sure?</p>
