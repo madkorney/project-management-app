@@ -6,6 +6,10 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { IconButton } from '@mui/material';
 import { Close } from '@mui/icons-material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { ModalText } from '../../pages/UserPage/userPage';
+import { useAppDispatch } from '../../redux/hooks';
+import { setOpenUserPage } from 'redux/authSlice';
 
 type ModalPropsType = {
   children: JSX.Element;
@@ -17,7 +21,7 @@ type ModalPropsType = {
 
 const Modal = ({ children, buttonText, title, mode, onConfirm }: ModalPropsType) => {
   const [open, setOpen] = useState(false);
-
+  const dispatch = useAppDispatch();
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -29,11 +33,19 @@ const Modal = ({ children, buttonText, title, mode, onConfirm }: ModalPropsType)
   const handleConfirm = () => {
     onConfirm?.();
     setOpen(false);
+    if (title === ModalText.DELETE_USER) {
+      dispatch(setOpenUserPage(false));
+    }
   };
 
   return (
     <>
-      <Button onClick={handleClickOpen} variant="outlined" size="small">
+      <Button
+        onClick={handleClickOpen}
+        variant={mode === 'confirm' ? 'contained' : 'outlined'}
+        size="small"
+        startIcon={mode === 'confirm' && <DeleteIcon />}
+      >
         {buttonText}
       </Button>
       <Dialog open={open} onClose={handleClose}>

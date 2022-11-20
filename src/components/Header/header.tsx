@@ -1,25 +1,39 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { logOut } from 'redux/authSlice';
 
-import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
-import DeleteOutlineSharpIcon from '@mui/icons-material/DeleteOutlineSharp';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import { useEffect } from 'react';
+import { HeaderUserButtons, HeaderUserLinks } from './HeaderButtons';
+
+import { setOpenUserPage } from 'redux/authSlice';
 
 import styles from './header.module.scss';
-import Modal from 'components/Modal/modal';
-import AddBoard from 'components/Forms/addBoard';
 
 const Header = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { isAuthorized } = useAppSelector((state) => state.auth);
-  const user = useAppSelector((state) => state.auth.user);
+  const { isAuthorized, isOpenUserPage } = useAppSelector((state) => state.auth);
 
   const goOut = () => {
     localStorage.removeItem('pma_token');
     dispatch(logOut());
+    dispatch(setOpenUserPage(false));
+    navigate('/');
   };
+
+  const closeUserProfile = () => {
+    if (isOpenUserPage) dispatch(setOpenUserPage(false));
+  };
+
+  const goUserProfile = () => {
+    navigate('/user-page');
+    dispatch(setOpenUserPage(true));
+  };
+
+  useEffect(() => {
+    location.pathname.includes('user-page') && dispatch(setOpenUserPage(true));
+  }, []);
 
   return (
     <header className={styles.header}>
@@ -28,47 +42,23 @@ const Header = () => {
         <div>
           <nav className={styles.headerNav}>
             <ul className={styles.headerNav}>
-              <li>
+              <li onClick={closeUserProfile}>
                 <Link to="/">main</Link>
               </li>
-              <li>
+              <li onClick={closeUserProfile}>
                 <Link to="about">about</Link>
               </li>
-              {isAuthorized ? (
-                <>
-                  <li>
-                    <Modal buttonText="+ Add new board" title="Add new board">
-                      <AddBoard />
-                    </Modal>
-                  </li>
-                  <li>
-                    <Link to="boards">boards</Link>
-                  </li>
-                </>
-              ) : (
-                <>
-                  <li>
-                    <Link to="sign-in">Sign in</Link>
-                  </li>
-                  <li>
-                    <Link to="sign-up">Sign up</Link>
-                  </li>
-                </>
-              )}
+              {!isAuthorized && <HeaderUserLinks />}
             </ul>
           </nav>
         </div>
         {isAuthorized && (
-          <ul className={styles.headerNavUser}>
-            <li className={styles.headerUserName}>
-              <AccountCircleRoundedIcon sx={{ color: '#d112b1', fontSize: 30 }} />
-              {user.login}
-            </li>
-            <li>
-              <ExitToAppIcon className={styles.headerButton} onClick={goOut} />
-              <DeleteOutlineSharpIcon className={styles.headerButton} />
-            </li>
-          </ul>
+          <HeaderUserButtons
+            openUserPage={isOpenUserPage}
+            onClickOut={goOut}
+            onClickUser={goUserProfile}
+            closeUserLink={closeUserProfile}
+          />
         )}
       </div>
     </header>
