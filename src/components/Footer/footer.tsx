@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
+
 import GithubLink from './GithubLink';
+
 import './footer.scss';
 
 const Footer = () => (

@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
+
 import { Button } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import Modal from 'components/Modal/modal';
+import { Modal } from 'components';
 import AddBoard from 'components/Forms/addBoard';
 
 import styles from '../header.module.scss';

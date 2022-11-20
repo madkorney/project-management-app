@@ -1,8 +1,10 @@
-import { Card, CardContent, Typography, CardActions, Button } from '@mui/material';
-import Modal from 'components/Modal/modal';
-import { BoardType } from 'types';
-import { useDeleteBoardByIdMutation } from 'services';
 import { Link } from 'react-router-dom';
+
+import { useDeleteBoardByIdMutation } from 'services';
+import { BoardType } from 'types';
+
+import { Card, CardContent, Typography, CardActions, Button } from '@mui/material';
+import { Modal } from 'components';
 
 const CardBoard = (board: BoardType) => {
   const [deleteBoardById] = useDeleteBoardByIdMutation();

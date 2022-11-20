@@ -1,13 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch } from 'redux/hooks';
-import { useSignInMutation } from 'services';
 import { setCredentials } from 'redux/authSlice';
+import { useSignInMutation } from 'services';
+import { AuthInfoType, ErrorResponse } from 'types';
 
 import Form from 'components/Forms/FormAuthorization';
-import Toast from 'components/Toast/toast';
-
-import { AuthInfoType, ErrorResponse } from 'types';
+import { Toast } from 'components';
 
 import styles from 'global-styles/authorization.module.scss';
 

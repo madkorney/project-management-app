@@ -1,8 +1,10 @@
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Toast from 'components/Toast/toast';
 import { SubmitHandler, useForm } from 'react-hook-form';
+
 import { useAppSelector } from 'redux/hooks';
+
+import { Button, TextField } from '@mui/material';
+import { Toast } from 'components';
+
 import { useCreateBoardMutation } from 'services';
 import { BoardParamsType, ErrorResponse } from 'types';
 

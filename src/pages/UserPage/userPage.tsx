@@ -1,15 +1,14 @@
-import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-
-import Form from 'components/Forms/FormAuthorization';
-import Toast from 'components/Toast/toast';
+import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
-import { updateProfile } from './userPage.utils';
 import { logOut, setCredentials } from 'redux/authSlice';
 import { useDeleteUserByIdMutation, useSignInMutation, useUpdateUserByIdMutation } from 'services';
-
+import { updateProfile } from './userPage.utils';
 import { ErrorResponse, UserSignUpType } from 'types';
+
+import Form from 'components/Forms/FormAuthorization';
+import { Toast } from 'components';
 
 import styles from './userPage.module.scss';
 

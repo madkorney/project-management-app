@@ -1,5 +1,6 @@
 import { useAppSelector } from 'redux/hooks';
 import { useGetBoardsSetByUserIdQuery } from 'services';
+
 import CardBoard from './CardBoard';
 
 import './boardsPage.scss';
