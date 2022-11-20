@@ -6,15 +6,14 @@ import { logOut } from 'redux/authSlice';
 import { useEffect } from 'react';
 import { HeaderUserButtons, HeaderUserLinks } from './HeaderButtons';
 
-import { setOpenUserPage } from 'redux/pageUserSlice';
+import { setOpenUserPage } from 'redux/authSlice';
 
 import styles from './header.module.scss';
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { isAuthorized } = useAppSelector((state) => state.auth);
-  const { isOpenUserPage } = useAppSelector((state) => state.userSettings);
+  const { isAuthorized, isOpenUserPage } = useAppSelector((state) => state.auth);
 
   const goOut = () => {
     localStorage.removeItem('pma_token');

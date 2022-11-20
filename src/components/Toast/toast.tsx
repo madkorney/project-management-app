@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
-import { useAppSelector } from 'redux/hooks';
+import { ModalText } from 'pages/UserPage/userPage';
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -12,8 +12,6 @@ type ToastPropsType = {
 };
 
 const Toast = ({ message }: ToastPropsType) => {
-  const isMessageUser = useAppSelector((state) => state.userSettings.isMessageUser);
-
   const [open, setOpen] = React.useState(true);
 
   return (
@@ -25,7 +23,7 @@ const Toast = ({ message }: ToastPropsType) => {
     >
       <Alert
         onClose={() => setOpen(false)}
-        severity={isMessageUser ? 'success' : 'error'}
+        severity={message === ModalText.PROFILE_UPDATE ? 'success' : 'error'}
         sx={{ width: '100%' }}
       >
         {message}

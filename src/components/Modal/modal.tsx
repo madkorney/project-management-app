@@ -9,7 +9,7 @@ import { Close } from '@mui/icons-material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { ModalText } from '../../pages/UserPage/userPage';
 import { useAppDispatch } from '../../redux/hooks';
-import { setOpenUserPage } from '../../redux/pageUserSlice';
+import { setOpenUserPage } from 'redux/authSlice';
 
 type ModalPropsType = {
   children: JSX.Element;

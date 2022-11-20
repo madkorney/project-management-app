@@ -1,11 +1,10 @@
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import Form from 'components/Forms/FormAuthorization';
 import Toast from 'components/Toast/toast';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
-import { setMessageUser } from 'redux/pageUserSlice';
 import { updateProfile } from './userPage.utils';
 import { logOut, setCredentials } from 'redux/authSlice';
 import { useDeleteUserByIdMutation, useSignInMutation, useUpdateUserByIdMutation } from 'services';
@@ -27,7 +26,7 @@ const UserPage = () => {
   const [deleteUser] = useDeleteUserByIdMutation();
   const [updateUser, { error }] = useUpdateUserByIdMutation();
   const { id, login } = useAppSelector((state) => state.auth.user);
-  const { isMessageUser } = useAppSelector((state) => state.userSettings);
+  const [isMessageUser, setMessageUser] = useState('');
 
   const handleDeleteUser = async () => {
     await deleteUser(id!);
@@ -48,16 +47,16 @@ const UserPage = () => {
             .then((data) => {
               localStorage.setItem('pma_token', data.token);
               dispatch(setCredentials(data));
-              dispatch(setMessageUser(ModalText.PROFILE_UPDATE));
+              setMessageUser(ModalText.PROFILE_UPDATE);
             });
         })
-        .catch(() => dispatch(setMessageUser('')));
+        .catch(() => setMessageUser(''));
   };
 
   useEffect(() => {
     if (isMessageUser.length) {
       setTimeout(() => {
-        dispatch(setMessageUser(''));
+        setMessageUser('');
       }, 3000);
     }
   }, [isMessageUser]);

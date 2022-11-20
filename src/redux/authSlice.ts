@@ -9,6 +9,7 @@ type UserAuthStateType = {
 };
 
 type AuthStateType = {
+  isOpenUserPage: boolean;
   isAuthorized: boolean;
   token: string | null;
   user: UserAuthStateType;
@@ -17,6 +18,7 @@ type AuthStateType = {
 const token = localStorage.getItem('pma_token') || null;
 
 const initialState: AuthStateType = {
+  isOpenUserPage: false,
   isAuthorized: !!token,
   token,
   user: (token && jwt_decode(token)) as UserAuthStateType,
@@ -36,9 +38,12 @@ const authSlice = createSlice({
       state.token = null;
       state.user = { id: null, login: null };
     },
+    setOpenUserPage: (state, action: PayloadAction<boolean>) => {
+      state.isOpenUserPage = action.payload;
+    },
   },
 });
 
-export const { setCredentials, logOut } = authSlice.actions;
+export const { setCredentials, logOut, setOpenUserPage } = authSlice.actions;
 
 export default authSlice.reducer;

@@ -1,11 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { baseApiSlice } from 'services';
 import authSliceReducer from './authSlice';
-import userPageSlice from './pageUserSlice';
 
 const reducer = {
   auth: authSliceReducer,
-  userSettings: userPageSlice,
   [baseApiSlice.reducerPath]: baseApiSlice.reducer,
 };
 
