@@ -23,7 +23,7 @@ export const HeaderUserButtons = ({
   return (
     <ul className={styles.headerNavUser}>
       <li onClick={closeUserLink}>
-        <Modal buttonText="+ Add new board" title="Add new board">
+        <Modal buttonText="+ Add board" title="Add new board">
           <AddBoard />
         </Modal>
       </li>

@@ -9,6 +9,7 @@ type FormProps = {
   formName: string;
   formLink: string;
   nameFiled: boolean;
+  isConfirm?: () => Promise<void>;
   userPage?: boolean;
   userDel?: () => void;
   className?: string;
@@ -21,7 +22,7 @@ const Form = ({
   formLink,
   nameFiled,
   userPage,
-  userDel,
+  isConfirm,
 }: FormProps) => {
   const {
     register,
@@ -52,7 +53,7 @@ const Form = ({
         onMouseDown={handleMouseDownPassword}
         showPassword={showPassword}
       />
-      <ButtonsForm formName={formName} userPage={userPage} delUser={userDel} />
+      <ButtonsForm formName={formName} userPage={userPage} isConfirm={isConfirm!} />
 
       {!userPage && <LinkAuthorization linkName={formLink} />}
     </form>

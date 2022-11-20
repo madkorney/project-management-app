@@ -30,10 +30,8 @@ const SignUpPage = () => {
             localStorage.setItem('pma_token', data.token);
             dispatch(setCredentials(data));
           });
-        setTimeout(() => {
-          navigate('/boards');
-        }, 50);
       })
+      .then(() => navigate('/boards'))
       .catch(() => {
         localStorage.removeItem('pma_token');
       });

@@ -6,7 +6,7 @@ import { logOut } from 'redux/authSlice';
 import { useEffect } from 'react';
 import { HeaderUserButtons, HeaderUserLinks } from './HeaderButtons';
 
-import { setOpenUserPage } from 'redux/modalUserSlice';
+import { setOpenUserPage } from 'redux/pageUserSlice';
 
 import styles from './header.module.scss';
 
@@ -19,12 +19,12 @@ const Header = () => {
   const goOut = () => {
     localStorage.removeItem('pma_token');
     dispatch(logOut());
-    navigate('/');
     dispatch(setOpenUserPage(false));
+    navigate('/');
   };
 
   const closeUserProfile = () => {
-    dispatch(setOpenUserPage(false));
+    if (isOpenUserPage) dispatch(setOpenUserPage(false));
   };
 
   const goUserProfile = () => {
@@ -43,10 +43,10 @@ const Header = () => {
         <div>
           <nav className={styles.headerNav}>
             <ul className={styles.headerNav}>
-              <li onClick={() => dispatch(setOpenUserPage(false))}>
+              <li onClick={closeUserProfile}>
                 <Link to="/">main</Link>
               </li>
-              <li onClick={() => dispatch(setOpenUserPage(false))}>
+              <li onClick={closeUserProfile}>
                 <Link to="about">about</Link>
               </li>
               {!isAuthorized && <HeaderUserLinks />}

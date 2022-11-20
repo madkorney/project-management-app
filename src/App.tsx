@@ -8,11 +8,11 @@ import TemplatePage from './pages/TemplatePage/templatePage';
 import MainPage from './pages/MainPage/mainPage';
 import AboutPage from './pages/AboutPage/aboutPage';
 import NotFoundPage from './pages/NotFoundPage/notFoundPage';
-import UserPage from './pages/UserPage';
 
 import { REACT_APP_BASENAME as BASENAME } from './data/constants';
 
 const BoardsPage = lazy(() => import('pages/BoardsPage/boardsPage'));
+const UserPage = lazy(() => import('pages/UserPage'));
 
 const App = () => {
   return (
