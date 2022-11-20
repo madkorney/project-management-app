@@ -1,6 +1,6 @@
 import { useAppSelector } from 'redux/hooks';
 import { useGetBoardsSetByUserIdQuery } from 'services';
-import Board from './Board/board';
+import CardBoard from './CardBoard';
 
 import './boardsPage.scss';
 
@@ -10,7 +10,7 @@ const BoardsPage = () => {
 
   return (
     <div className="boards-container">
-      {data && data.map((board) => <Board {...board} key={board._id} />)}
+      {data && data.map((board) => <CardBoard {...board} key={board._id} />)}
     </div>
   );
 };

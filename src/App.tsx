@@ -8,7 +8,7 @@ import TemplatePage from 'pages/TemplatePage/templatePage';
 import MainPage from 'pages/MainPage/mainPage';
 import AboutPage from 'pages/AboutPage/aboutPage';
 import NotFoundPage from 'pages/NotFoundPage/notFoundPage';
-import SingleBoardPage from 'pages/BoardPage/boardPage';
+import SingleBoardPage from 'pages/SingleBoardPage/singleBoardPage';
 
 import { REACT_APP_BASENAME as BASENAME } from './data/constants';
 

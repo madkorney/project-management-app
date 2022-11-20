@@ -4,7 +4,7 @@ import { BoardType } from 'types';
 import { useDeleteBoardByIdMutation } from 'services';
 import { Link } from 'react-router-dom';
 
-const Board = (board: BoardType) => {
+const CardBoard = (board: BoardType) => {
   const [deleteBoardById] = useDeleteBoardByIdMutation();
 
   const handleDelete = async () => {
@@ -34,4 +34,4 @@ const Board = (board: BoardType) => {
   );
 };
 
-export default Board;
+export default CardBoard;
