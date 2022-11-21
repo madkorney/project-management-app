@@ -1,6 +1,6 @@
 import { Button, Typography } from '@mui/material';
 import { Modal } from 'components';
-import AddBoard from 'components/Forms/addBoard';
+import FormBoard from 'components/Forms/formBoard';
 import { Link, useParams } from 'react-router-dom';
 
 import { useGetBoardByIdQuery, useGetColumnsQuery } from 'services';
@@ -26,19 +26,19 @@ const SingleBoardPage = () => {
         </Button>
         <Typography variant="h4">{boardData?.title}</Typography>
         <Modal buttonText="Edit" title="Edit board">
-          <AddBoard />
+          <FormBoard mode="edit" boardId={boardId} />
         </Modal>
       </div>
       <div className="board-container">
         <Modal buttonText="+ Add column" title="Add column">
-          <AddBoard />
+          <FormBoard mode="add" />
         </Modal>
         {columnsData &&
           columnsData.map((column) => (
             <div className="board-column" key={column._id}>
               {column.title}
               <Modal buttonText="+ Add task" title="Add task">
-                <AddBoard />
+                <FormBoard mode="edit" />
               </Modal>
             </div>
           ))}

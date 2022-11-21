@@ -21,6 +21,7 @@ export const boardsApiSlice = baseApiSlice.injectEndpoints({
     }),
     getBoardById: build.query<BoardType, string>({
       query: (boardId) => `${ENDPOINTS.BOARDS}/${boardId}`,
+      providesTags: (result, error, id) => [{ type: 'Boards', id }],
     }),
     updateBoardById: build.mutation<BoardType, BoardType>({
       query: ({ _id: boardId, ...newParams }) => ({
@@ -28,6 +29,7 @@ export const boardsApiSlice = baseApiSlice.injectEndpoints({
         method: REQUEST_METHODS.PUT,
         body: newParams,
       }),
+      invalidatesTags: ['Boards'],
     }),
     deleteBoardById: build.mutation<BoardType, string>({
       query: (boardId) => ({

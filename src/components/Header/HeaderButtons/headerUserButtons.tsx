@@ -4,7 +4,7 @@ import { Button } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { Modal } from 'components';
-import AddBoard from 'components/Forms/addBoard';
+import BoardForm from 'components/Forms/formBoard';
 
 import styles from '../header.module.scss';
 
@@ -25,7 +25,7 @@ export const HeaderUserButtons = ({
     <ul className={styles.headerNavUser}>
       <li onClick={closeUserLink}>
         <Modal buttonText="+ Add board" title="Add new board">
-          <AddBoard />
+          <BoardForm mode="add" />
         </Modal>
       </li>
       <li onClick={closeUserLink}>

@@ -33,7 +33,7 @@ const SignInPage = () => {
       <div className={styles.form}>
         <h2>Sign In</h2>
         {error && <Toast message={(error as ErrorResponse).data.message} />}
-        <Form onSubmit={onSubmit} formName="Sing In" formLink="sign-up" nameFiled={false} />
+        <Form onSubmit={onSubmit} formName="Sign In" formLink="sign-up" nameFiled={false} />
       </div>
     </div>
   );

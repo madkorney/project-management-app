@@ -5,16 +5,23 @@ import { useAppSelector } from 'redux/hooks';
 import { Autocomplete, Button, TextField } from '@mui/material';
 import { Toast } from 'components';
 
-import { useCreateBoardMutation, useGetUsersQuery } from 'services';
+import {
+  useCreateBoardMutation,
+  useUpdateBoardByIdMutation,
+  useGetUsersQuery,
+  useGetBoardByIdQuery,
+} from 'services';
 import { BoardParamsType, ErrorResponse } from 'types';
 
-import './addBoard.scss';
+import './formBoard.scss';
 
-type AddBoardType = {
+type BoardFormType = {
+  mode: 'edit' | 'add';
+  boardId?: string;
   onClose?: () => void;
 };
 
-const AddBoard = ({ onClose }: AddBoardType) => {
+const BoardForm = ({ mode, boardId, onClose }: BoardFormType) => {
   const {
     register,
     handleSubmit,
@@ -22,27 +29,42 @@ const AddBoard = ({ onClose }: AddBoardType) => {
     formState: { errors },
   } = useForm<BoardParamsType>();
 
-  const [addBoard, { error }] = useCreateBoardMutation();
+  const [addBoard, { error: addError }] = useCreateBoardMutation();
+  const [updateBoard, { error: editError }] = useUpdateBoardByIdMutation();
   const userId = useAppSelector((state) => state.auth.user.id) as string;
   const { data: users } = useGetUsersQuery();
+  const { data: board } = useGetBoardByIdQuery(boardId as string);
 
-  const onSubmit: SubmitHandler<Omit<BoardParamsType, 'owner'>> = async (data) =>
-    await addBoard({ ...data, owner: userId })
-      .unwrap()
-      .then(() => onClose?.());
+  const onSubmit: SubmitHandler<Omit<BoardParamsType, 'owner'>> = async (data) => {
+    if (mode === 'add') {
+      await addBoard({ ...data, owner: userId })
+        .unwrap()
+        .then(() => onClose?.());
+    }
+    if (mode === 'edit') {
+      await updateBoard({ _id: boardId as string, ...data, owner: board?.owner as string })
+        .unwrap()
+        .then(() => onClose?.());
+    }
+  };
 
   return (
-    <form className="add-board-form" onSubmit={handleSubmit(onSubmit)}>
+    <form className="form-board" onSubmit={handleSubmit(onSubmit)}>
       <TextField
         autoFocus
         margin="dense"
         id="title"
         label="Board title"
+        value={board?.title}
         fullWidth
         {...register('title', {
           required: {
             value: true,
             message: 'Title cannot be empty',
+          },
+          minLength: {
+            value: 5,
+            message: 'Please write more detailed title',
           },
         })}
       />
@@ -52,6 +74,7 @@ const AddBoard = ({ onClose }: AddBoardType) => {
         id="description"
         label="Board description"
         multiline
+        value={board?.description}
         rows={3}
         fullWidth
         {...register('description', {
@@ -72,6 +95,7 @@ const AddBoard = ({ onClose }: AddBoardType) => {
           id="users"
           options={users.filter((user) => user._id !== userId)}
           getOptionLabel={(option) => option.name}
+          defaultValue={[...users.filter((user) => board?.users.includes(user._id))]}
           filterSelectedOptions
           limitTags={2}
           noOptionsText="No users found"
@@ -88,11 +112,12 @@ const AddBoard = ({ onClose }: AddBoardType) => {
         />
       )}
       <Button variant="contained" type="submit">
-        Add
+        {mode}
       </Button>
-      {error && <Toast message={(error as ErrorResponse).data.message} />}
+      {addError && <Toast message={(addError as ErrorResponse).data.message} />}
+      {editError && <Toast message={(editError as ErrorResponse).data.message} />}
     </form>
   );
 };
 
-export default AddBoard;
+export default BoardForm;
