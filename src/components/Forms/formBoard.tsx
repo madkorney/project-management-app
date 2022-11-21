@@ -1,4 +1,4 @@
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 import { useAppSelector } from 'redux/hooks';
 
@@ -25,7 +25,7 @@ const BoardForm = ({ mode, boardId, onClose }: BoardFormType) => {
   const {
     register,
     handleSubmit,
-    setValue,
+    control,
     formState: { errors },
   } = useForm<BoardParamsType>();
 
@@ -42,6 +42,7 @@ const BoardForm = ({ mode, boardId, onClose }: BoardFormType) => {
         .then(() => onClose?.());
     }
     if (mode === 'edit') {
+      console.log(data);
       await updateBoard({ _id: boardId as string, ...data, owner: board?.owner as string })
         .unwrap()
         .then(() => onClose?.());
@@ -55,7 +56,7 @@ const BoardForm = ({ mode, boardId, onClose }: BoardFormType) => {
         margin="dense"
         id="title"
         label="Board title"
-        value={board?.title}
+        defaultValue={board?.title}
         fullWidth
         {...register('title', {
           required: {
@@ -74,7 +75,7 @@ const BoardForm = ({ mode, boardId, onClose }: BoardFormType) => {
         id="description"
         label="Board description"
         multiline
-        value={board?.description}
+        defaultValue={board?.description}
         rows={3}
         fullWidth
         {...register('description', {
@@ -90,24 +91,34 @@ const BoardForm = ({ mode, boardId, onClose }: BoardFormType) => {
       />
       {errors.description && <span>{errors.description.message}</span>}
       {users && (
-        <Autocomplete
-          multiple
-          id="users"
-          options={users.filter((user) => user._id !== userId)}
-          getOptionLabel={(option) => option.name}
-          defaultValue={[...users.filter((user) => board?.users.includes(user._id))]}
-          filterSelectedOptions
-          limitTags={2}
-          noOptionsText="No users found"
-          {...register('users')}
-          onChange={(_, value) =>
-            setValue(
-              'users',
-              value.map((key) => key._id)
-            )
-          }
-          renderInput={(params) => (
-            <TextField {...params} variant="standard" label="Assigned users" placeholder="Users" />
+        <Controller
+          control={control}
+          name="users"
+          defaultValue={[
+            ...users.filter((user) => board?.users.includes(user._id)).map((user) => user._id),
+          ]}
+          render={({ field: { ref, onChange, ...field } }) => (
+            <Autocomplete
+              multiple
+              id="users"
+              options={users.filter((user) => user._id !== userId)}
+              defaultValue={[...users.filter((user) => board?.users.includes(user._id))]}
+              getOptionLabel={(option) => option.name}
+              filterSelectedOptions
+              limitTags={2}
+              noOptionsText="No users found"
+              onChange={(_, value) => onChange(value.map((key) => key._id))}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  {...field}
+                  inputRef={ref}
+                  variant="standard"
+                  label="Assigned users"
+                  placeholder="Users"
+                />
+              )}
+            />
           )}
         />
       )}
