@@ -26,10 +26,10 @@ const AddBoard = ({ onClose }: AddBoardType) => {
   const userId = useAppSelector((state) => state.auth.user.id) as string;
   const { data: users } = useGetUsersQuery();
 
-  const onSubmit: SubmitHandler<Omit<BoardParamsType, 'owner'>> = async (data) => {
-    await addBoard({ ...data, owner: userId }).unwrap();
-    onClose?.();
-  };
+  const onSubmit: SubmitHandler<Omit<BoardParamsType, 'owner'>> = async (data) =>
+    await addBoard({ ...data, owner: userId })
+      .unwrap()
+      .then(() => onClose?.());
 
   return (
     <form className="add-board-form" onSubmit={handleSubmit(onSubmit)}>
@@ -73,10 +73,9 @@ const AddBoard = ({ onClose }: AddBoardType) => {
           options={users.filter((user) => user._id !== userId)}
           getOptionLabel={(option) => option.name}
           filterSelectedOptions
+          limitTags={2}
           noOptionsText="No users found"
-          {...register('users', {
-            required: true,
-          })}
+          {...register('users')}
           onChange={(_, value) =>
             setValue(
               'users',

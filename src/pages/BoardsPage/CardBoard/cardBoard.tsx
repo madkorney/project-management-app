@@ -28,7 +28,7 @@ const CardBoard = (board: BoardType) => {
         >
           <Link to={board._id}>Open</Link>
         </Button>
-        <Modal buttonText="X" title="Delete board" mode="confirm" onConfirm={handleDelete}>
+        <Modal buttonText="Delete" title="Delete board" mode="confirm" onConfirm={handleDelete}>
           <p>You want to delete this board. Are you sure?</p>
         </Modal>
       </CardActions>
