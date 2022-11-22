@@ -1,19 +1,24 @@
 import { Children, cloneElement, isValidElement, ReactNode, useState } from 'react';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import { IconButton } from '@mui/material';
-import { Close } from '@mui/icons-material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { ModalText } from '../../pages/UserPage/userPage';
-import { useAppDispatch } from '../../redux/hooks';
+
+import { useAppDispatch } from 'redux/hooks';
 import { setOpenUserPage } from 'redux/authSlice';
+
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  IconButton,
+} from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import DeleteIcon from '@mui/icons-material/Delete';
+
+import { ModalText } from 'pages/UserPage/userPage';
 
 type ModalPropsType = {
   children: JSX.Element;
-  buttonText: string;
+  buttonText?: string;
   title: string;
   mode?: string;
   onConfirm?: () => Promise<void>;
@@ -45,6 +50,7 @@ const Modal = ({ children, buttonText, title, mode, onConfirm }: ModalPropsType)
         variant={mode === 'confirm' ? 'contained' : 'outlined'}
         size="small"
         startIcon={mode === 'confirm' && <DeleteIcon />}
+        sx={{ minWidth: 'auto' }}
       >
         {buttonText}
       </Button>
@@ -61,7 +67,7 @@ const Modal = ({ children, buttonText, title, mode, onConfirm }: ModalPropsType)
                 color: (theme) => theme.palette.grey[500],
               }}
             >
-              <Close />
+              <CloseIcon />
             </IconButton>
           )}
         </DialogTitle>

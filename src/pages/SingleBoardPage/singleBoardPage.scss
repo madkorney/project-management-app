@@ -1,0 +1,41 @@
+.single-board-page {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.board-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.board-container {
+  position: relative;
+  flex-grow: 1;
+  width: 100%;
+}
+
+.board {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  padding-bottom: 10px;
+}
+
+.board-column {
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  overflow-x: auto;
+}

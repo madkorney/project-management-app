@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
+
 import { Button } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import Modal from 'components/Modal/modal';
-import AddBoard from 'components/Forms/addBoard';
+import { Modal } from 'components';
+import BoardForm from 'components/Forms/boardForm';
 
 import styles from '../header.module.scss';
 
@@ -24,7 +25,7 @@ export const HeaderUserButtons = ({
     <ul className={styles.headerNavUser}>
       <li onClick={closeUserLink}>
         <Modal buttonText="+ Add board" title="Add new board">
-          <AddBoard />
+          <BoardForm mode="add" />
         </Modal>
       </li>
       <li onClick={closeUserLink}>

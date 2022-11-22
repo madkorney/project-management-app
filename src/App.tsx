@@ -1,17 +1,21 @@
-import { Route, Routes, BrowserRouter } from 'react-router-dom';
-import { PrivateRoute, PublicRoute } from 'routes';
 import { lazy } from 'react';
+import { Route, Routes, BrowserRouter } from 'react-router-dom';
 
-import SignUpPage from './pages/SignUpPage';
-import SignInPage from './pages/SignInPage';
-import TemplatePage from './pages/TemplatePage/templatePage';
-import MainPage from './pages/MainPage/mainPage';
-import AboutPage from './pages/AboutPage/aboutPage';
-import NotFoundPage from './pages/NotFoundPage/notFoundPage';
+import { PrivateRoute, PublicRoute } from 'routes';
+
+import {
+  MainPage,
+  NotFoundPage,
+  SignUpPage,
+  SignInPage,
+  SingleBoardPage,
+  TemplatePage,
+} from 'pages/';
+import AboutPage from 'pages/AboutPage/aboutPage';
 
 import { REACT_APP_BASENAME as BASENAME } from './data/constants';
 
-const BoardsPage = lazy(() => import('pages/BoardsPage/boardsPage'));
+const BoardsPage = lazy(() => import('pages/BoardsPage'));
 const UserPage = lazy(() => import('pages/UserPage'));
 
 const App = () => {
@@ -23,6 +27,7 @@ const App = () => {
           <Route path="about" element={<AboutPage />} />
           <Route element={<PrivateRoute />}>
             <Route path="boards" element={<BoardsPage />} />
+            <Route path="boards/:boardId" element={<SingleBoardPage />} />
             <Route path="user-page" element={<UserPage />} />
           </Route>
           <Route element={<PublicRoute />}>

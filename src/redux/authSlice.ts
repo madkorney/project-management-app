@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+
 import jwt_decode from 'jwt-decode';
+
 import { AuthSuccessfulType } from 'types';
 
 type UserAuthStateType = {

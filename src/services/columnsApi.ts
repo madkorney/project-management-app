@@ -12,6 +12,10 @@ export const columnsApiSlice = baseApiSlice.injectEndpoints({
   endpoints: (build) => ({
     getColumns: build.query<ColumnsArrayType, string>({
       query: (boardId) => `${ENDPOINTS.BOARDS}/${boardId}${ENDPOINTS.COLUMNS}`,
+      providesTags: (result) =>
+        result
+          ? [...result.map(({ _id }) => ({ type: 'Columns' as const, _id })), 'Columns']
+          : ['Columns'],
     }),
     createColumn: build.mutation<ColumnType, ColumnCreateParamsType>({
       query: ({ boardId, ...newParams }) => ({
@@ -19,6 +23,7 @@ export const columnsApiSlice = baseApiSlice.injectEndpoints({
         method: REQUEST_METHODS.POST,
         body: newParams,
       }),
+      invalidatesTags: ['Columns'],
     }),
     getColumnById: build.query<ColumnType, Pick<ColumnType, '_id' | 'boardId'>>({
       query: ({ boardId, _id: columnId }) =>
@@ -30,12 +35,14 @@ export const columnsApiSlice = baseApiSlice.injectEndpoints({
         method: REQUEST_METHODS.PUT,
         body: newParams,
       }),
+      invalidatesTags: ['Columns'],
     }),
     deleteColumnById: build.mutation<ColumnType, Pick<ColumnType, '_id' | 'boardId'>>({
       query: ({ boardId, _id: columnId }) => ({
         url: `${ENDPOINTS.BOARDS}/${boardId}${ENDPOINTS.COLUMNS}/${columnId}`,
         method: REQUEST_METHODS.DELETE,
       }),
+      invalidatesTags: ['Columns'],
     }),
     getColumnsSetByIdsOrUserId: build.query<
       ColumnsArrayType,
