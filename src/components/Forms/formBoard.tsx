@@ -97,12 +97,13 @@ const BoardForm = ({ mode, boardId, onClose }: BoardFormType) => {
           defaultValue={[
             ...users.filter((user) => board?.users.includes(user._id)).map((user) => user._id),
           ]}
-          render={({ field: { ref, onChange, ...field } }) => (
+          shouldUnregister
+          render={({ field: { ref, onChange, value, ...field } }) => (
             <Autocomplete
               multiple
               id="users"
               options={users.filter((user) => user._id !== userId)}
-              defaultValue={[...users.filter((user) => board?.users.includes(user._id))]}
+              value={users.filter((user) => value.includes(user._id))}
               getOptionLabel={(option) => option.name}
               filterSelectedOptions
               limitTags={2}
