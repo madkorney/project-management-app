@@ -1,5 +1,7 @@
 .single-board-page {
-  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .board-info {
@@ -7,14 +9,29 @@
 }
 
 .board-container {
+  position: relative;
+  flex-grow: 1;
+  width: 100%;
+}
+
+.board {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
   display: flex;
-  overflow-x: hidden;
-  overflow-y: auto;
+  gap: 10px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+
 }
 
 .board-column {
+  min-width: 200px;
   display: flex;
   flex-direction: column;
   max-height: 100%;
-  overflow-y: auto;
+  overflow-x: auto;
 }

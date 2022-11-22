@@ -35,12 +35,14 @@ export const columnsApiSlice = baseApiSlice.injectEndpoints({
         method: REQUEST_METHODS.PUT,
         body: newParams,
       }),
+      invalidatesTags: ['Columns'],
     }),
     deleteColumnById: build.mutation<ColumnType, Pick<ColumnType, '_id' | 'boardId'>>({
       query: ({ boardId, _id: columnId }) => ({
         url: `${ENDPOINTS.BOARDS}/${boardId}${ENDPOINTS.COLUMNS}/${columnId}`,
         method: REQUEST_METHODS.DELETE,
       }),
+      invalidatesTags: ['Columns'],
     }),
     getColumnsSetByIdsOrUserId: build.query<
       ColumnsArrayType,
