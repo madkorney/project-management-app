@@ -27,7 +27,6 @@ const ColumnForm = ({ boardId, onClose }: ColumnFormType) => {
     await addColumn({ ...data, boardId, order: columns?.length as number })
       .unwrap()
       .then(() => onClose?.());
-    console.log(data);
   };
 
   return (

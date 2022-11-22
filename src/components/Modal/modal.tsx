@@ -18,7 +18,7 @@ import { ModalText } from 'pages/UserPage/userPage';
 
 type ModalPropsType = {
   children: JSX.Element;
-  buttonText: string;
+  buttonText?: string;
   title: string;
   mode?: string;
   onConfirm?: () => Promise<void>;
@@ -50,6 +50,7 @@ const Modal = ({ children, buttonText, title, mode, onConfirm }: ModalPropsType)
         variant={mode === 'confirm' ? 'contained' : 'outlined'}
         size="small"
         startIcon={mode === 'confirm' && <DeleteIcon />}
+        sx={{ minWidth: 'auto' }}
       >
         {buttonText}
       </Button>

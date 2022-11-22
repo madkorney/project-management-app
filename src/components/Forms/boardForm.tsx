@@ -100,7 +100,7 @@ const BoardForm = ({ mode, boardId, onClose }: BoardFormType) => {
             <Autocomplete
               multiple
               id="users"
-              options={users.filter((user) => user._id !== board?.owner)}
+              options={users.filter((user) => ![board?.owner, userId].includes(user._id))}
               value={users.filter((user) => value.includes(user._id))}
               getOptionLabel={(option) => option.name}
               filterSelectedOptions

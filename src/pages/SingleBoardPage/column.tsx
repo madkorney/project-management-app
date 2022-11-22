@@ -21,7 +21,7 @@ const BoardColumn = (column: ColumnType) => {
         <Modal buttonText="+ Add task" title="Add task">
           <BoardForm mode="edit" />
         </Modal>
-        <Modal buttonText="Delete" title="Delete column" mode="confirm" onConfirm={handleDelete}>
+        <Modal title="Delete column" mode="confirm" onConfirm={handleDelete}>
           <p>You want to delete this column. Are you sure?</p>
         </Modal>
       </CardActions>

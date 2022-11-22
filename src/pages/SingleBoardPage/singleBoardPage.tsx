@@ -41,7 +41,10 @@ const SingleBoardPage = () => {
             &lt; Back to boards
           </Link>
         </Button>
-        <Typography variant="h4">{boardData?.title}</Typography>
+        <div className="board-about">
+          <Typography variant="h4">{boardData?.title}</Typography>
+          <Typography>{boardData?.description}</Typography>
+        </div>
         <Modal buttonText="Edit" title="Edit board">
           <BoardForm mode="edit" boardId={boardId} />
         </Modal>
