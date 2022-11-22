@@ -29,6 +29,7 @@ const UserPage = () => {
   const [isMessageUser, setMessageUser] = useState('');
 
   const handleDeleteUser = async () => {
+    localStorage.removeItem('pma_token');
     await deleteUser(id!);
     dispatch(logOut());
     navigate('/');
