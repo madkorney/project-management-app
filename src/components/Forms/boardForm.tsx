@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 import { useAppSelector } from 'redux/hooks';
@@ -13,7 +15,7 @@ import {
 } from 'services';
 import { BoardParamsType, ErrorResponse } from 'types';
 
-import './formBoard.scss';
+import './boardForm.scss';
 
 type BoardFormType = {
   mode: 'edit' | 'add';
@@ -29,11 +31,14 @@ const BoardForm = ({ mode, boardId, onClose }: BoardFormType) => {
     formState: { errors },
   } = useForm<BoardParamsType>();
 
+  const navigate = useNavigate();
   const [addBoard, { error: addError }] = useCreateBoardMutation();
   const [updateBoard, { error: editError }] = useUpdateBoardByIdMutation();
   const userId = useAppSelector((state) => state.auth.user.id) as string;
   const { data: users } = useGetUsersQuery();
   const { data: board } = useGetBoardByIdQuery(boardId as string);
+
+  const assignedUsers = [board?.owner as string, ...(board?.users as string[])];
 
   const onSubmit: SubmitHandler<Omit<BoardParamsType, 'owner'>> = async (data) => {
     if (mode === 'add') {
@@ -42,12 +47,17 @@ const BoardForm = ({ mode, boardId, onClose }: BoardFormType) => {
         .then(() => onClose?.());
     }
     if (mode === 'edit') {
-      console.log(data);
       await updateBoard({ _id: boardId as string, ...data, owner: board?.owner as string })
         .unwrap()
         .then(() => onClose?.());
     }
   };
+
+  useEffect(() => {
+    if (!assignedUsers.includes(userId)) {
+      navigate('/boards', { replace: true });
+    }
+  });
 
   return (
     <form className="form-board" onSubmit={handleSubmit(onSubmit)}>
@@ -97,23 +107,22 @@ const BoardForm = ({ mode, boardId, onClose }: BoardFormType) => {
           defaultValue={[
             ...users.filter((user) => board?.users.includes(user._id)).map((user) => user._id),
           ]}
-          shouldUnregister
-          render={({ field: { ref, onChange, value, ...field } }) => (
+          render={({ field: { onChange, value, ...field } }) => (
             <Autocomplete
               multiple
               id="users"
-              options={users.filter((user) => user._id !== userId)}
+              options={users.filter((user) => user._id !== board?.owner)}
               value={users.filter((user) => value.includes(user._id))}
               getOptionLabel={(option) => option.name}
               filterSelectedOptions
               limitTags={2}
               noOptionsText="No users found"
               onChange={(_, value) => onChange(value.map((key) => key._id))}
+              isOptionEqualToValue={(option, value) => option._id === value._id}
               renderInput={(params) => (
                 <TextField
                   {...params}
                   {...field}
-                  inputRef={ref}
                   variant="standard"
                   label="Assigned users"
                   placeholder="Users"
@@ -124,7 +133,7 @@ const BoardForm = ({ mode, boardId, onClose }: BoardFormType) => {
         />
       )}
       <Button variant="contained" type="submit">
-        {mode}
+        {mode === 'edit' ? 'save' : mode}
       </Button>
       {addError && <Toast message={(addError as ErrorResponse).data.message} />}
       {editError && <Toast message={(editError as ErrorResponse).data.message} />}

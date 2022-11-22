@@ -4,7 +4,7 @@ import { Button } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { Modal } from 'components';
-import BoardForm from 'components/Forms/formBoard';
+import BoardForm from 'components/Forms/boardForm';
 
 import styles from '../header.module.scss';
 
