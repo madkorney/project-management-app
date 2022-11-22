@@ -2,7 +2,9 @@ import { Button, Typography } from '@mui/material';
 import { Modal } from 'components';
 import BoardForm from 'components/Forms/boardForm';
 import ColumnForm from 'components/Forms/columnForm';
-import { Link, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useAppSelector } from 'redux/hooks';
 
 import { useGetBoardByIdQuery, useGetColumnsQuery } from 'services';
 
@@ -13,9 +15,21 @@ type SingleBoardRouterPropsType = {
 };
 
 const SingleBoardPage = () => {
+  const navigate = useNavigate();
   const { boardId } = useParams<SingleBoardRouterPropsType>();
   const { data: boardData } = useGetBoardByIdQuery(boardId as string);
   const { data: columnsData } = useGetColumnsQuery(boardId as string);
+  const userId = useAppSelector((state) => state.auth.user.id) as string;
+
+  useEffect(() => {
+    if (boardData) {
+      const assignedUsers = [boardData?.owner as string, ...(boardData?.users as string[])];
+
+      if (!assignedUsers.includes(userId)) {
+        navigate('/boards', { replace: true });
+      }
+    }
+  });
 
   return (
     <section className="single-board-page">

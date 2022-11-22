@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 import { useAppSelector } from 'redux/hooks';
@@ -31,14 +29,11 @@ const BoardForm = ({ mode, boardId, onClose }: BoardFormType) => {
     formState: { errors },
   } = useForm<BoardParamsType>();
 
-  const navigate = useNavigate();
   const [addBoard, { error: addError }] = useCreateBoardMutation();
   const [updateBoard, { error: editError }] = useUpdateBoardByIdMutation();
   const userId = useAppSelector((state) => state.auth.user.id) as string;
   const { data: users } = useGetUsersQuery();
   const { data: board } = useGetBoardByIdQuery(boardId as string);
-
-  const assignedUsers = [board?.owner as string, ...(board?.users as string[])];
 
   const onSubmit: SubmitHandler<Omit<BoardParamsType, 'owner'>> = async (data) => {
     if (mode === 'add') {
@@ -52,12 +47,6 @@ const BoardForm = ({ mode, boardId, onClose }: BoardFormType) => {
         .then(() => onClose?.());
     }
   };
-
-  useEffect(() => {
-    if (!assignedUsers.includes(userId)) {
-      navigate('/boards', { replace: true });
-    }
-  });
 
   return (
     <form className="form-board" onSubmit={handleSubmit(onSubmit)}>
