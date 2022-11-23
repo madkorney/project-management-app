@@ -7,6 +7,7 @@ import { ModalText } from 'pages/UserPage/userPage';
 import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CloseIcon from '@mui/icons-material/Close';
+import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 
 import {
   Button,
@@ -41,7 +42,7 @@ const Modal = ({
   const handleClickOpen = () => {
     setOpen(true);
   };
-
+  console.log(mode);
   const handleClose = () => {
     setOpen(false);
   };
@@ -61,7 +62,13 @@ const Modal = ({
         variant={mode === 'confirm' ? 'contained' : undefined}
         className={style}
         startIcon={
-          mode === 'confirm' ? <DeleteIcon /> : <DashboardCustomizeIcon className={styleText} />
+          mode === 'confirm' ? (
+            <DeleteIcon />
+          ) : mode === 'add' ? (
+            <PlaylistAddIcon />
+          ) : (
+            <DashboardCustomizeIcon className={styleText} />
+          )
         }
       >
         <span className={styleText}>{buttonText}</span>

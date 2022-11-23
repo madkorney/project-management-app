@@ -18,7 +18,7 @@ const BoardColumn = (column: ColumnType) => {
         <Typography variant="h6">{column.title}</Typography>
       </CardContent>
       <CardActions>
-        <Modal buttonText="+ Add task" title="Add task">
+        <Modal buttonText="Add task" title="Add task" mode="add">
           <BoardForm mode="edit" />
         </Modal>
         <Modal title="Delete column" mode="confirm" onConfirm={handleDelete}>

@@ -52,7 +52,7 @@ const SingleBoardPage = () => {
       <div className="board-container">
         <div className="board">
           {columnsData && columnsData.map((column) => <BoardColumn {...column} key={column._id} />)}
-          <Modal buttonText="+ Add column" title="Add column">
+          <Modal buttonText="+ Add column" title="Add column" mode="add">
             <ColumnForm boardId={boardId as string} />
           </Modal>
         </div>
