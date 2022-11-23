@@ -45,7 +45,7 @@ const SingleBoardPage = () => {
           <Typography variant="h4">{boardData?.title}</Typography>
           <Typography>{boardData?.description}</Typography>
         </div>
-        <Modal buttonText="Edit" title="Edit board">
+        <Modal buttonText="Edit" title="Edit board" mode="edit">
           <BoardForm mode="edit" boardId={boardId} />
         </Modal>
       </div>

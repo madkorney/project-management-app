@@ -8,6 +8,7 @@ import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CloseIcon from '@mui/icons-material/Close';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
 
 import {
   Button,
@@ -42,7 +43,6 @@ const Modal = ({
   const handleClickOpen = () => {
     setOpen(true);
   };
-  console.log(mode);
   const handleClose = () => {
     setOpen(false);
   };
@@ -66,6 +66,8 @@ const Modal = ({
             <DeleteIcon />
           ) : mode === 'add' ? (
             <PlaylistAddIcon />
+          ) : mode === 'edit' ? (
+            <BorderColorIcon />
           ) : (
             <DashboardCustomizeIcon className={styleText} />
           )
