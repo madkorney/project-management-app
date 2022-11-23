@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 import Modal from 'components/Modal/modal';
 import AddBoard from 'components/Forms/addBoard';
 
@@ -11,24 +11,35 @@ type UserButtonProps = {
   openUserPage: boolean;
   onClickOut: () => void;
   onClickUser: () => void;
-  closeUserLink: () => void;
+  onGoBoards?: () => void;
 };
 
 export const HeaderUserButtons = ({
   openUserPage,
   onClickUser,
   onClickOut,
-  closeUserLink,
+  onGoBoards,
 }: UserButtonProps) => {
   return (
     <ul className={styles.headerNavUser}>
-      <li onClick={closeUserLink}>
-        <Modal buttonText="+ Add board" title="Add new board">
+      <li onClick={onGoBoards}>
+        <Modal
+          buttonText="Add board"
+          title="Add new board"
+          style={styles.MuiButtonBase}
+          styleText={styles.headerTextButton}
+        >
           <AddBoard />
         </Modal>
       </li>
-      <li onClick={closeUserLink}>
-        <Link to="boards">boards</Link>
+      <li onClick={onGoBoards}>
+        <Button
+          className={styles.MuiButtonBase}
+          startIcon={<DashboardIcon className={styles.headerButton} />}
+          onClick={onClickUser}
+        >
+          <span className={styles.headerTextButton}>boards</span>
+        </Button>
       </li>
 
       {!openUserPage && (

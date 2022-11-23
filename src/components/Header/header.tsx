@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { logOut } from 'redux/authSlice';
@@ -16,9 +16,9 @@ const Header = () => {
   const { isAuthorized, isOpenUserPage } = useAppSelector((state) => state.auth);
 
   const goOut = () => {
+    dispatch(setOpenUserPage(false));
     localStorage.removeItem('pma_token');
     dispatch(logOut());
-    dispatch(setOpenUserPage(false));
     navigate('/');
   };
 
@@ -31,6 +31,19 @@ const Header = () => {
     dispatch(setOpenUserPage(true));
   };
 
+  const goBoards = () => {
+    navigate('/boards');
+    dispatch(setOpenUserPage(false));
+  };
+
+  const goSignIn = () => {
+    navigate('/sign-in');
+  };
+
+  const goSignUp = () => {
+    navigate('/sign-up');
+  };
+
   useEffect(() => {
     location.pathname.includes('user-page') && dispatch(setOpenUserPage(true));
   }, []);
@@ -39,27 +52,28 @@ const Header = () => {
     <header className={styles.header}>
       <div className={styles.headerContainer}>
         <p>Header - Nav - Profile</p>
-        <div>
-          <nav className={styles.headerNav}>
+        <nav className={styles.headerNav}>
+          {!isAuthorized && (
             <ul className={styles.headerNav}>
-              <li onClick={closeUserProfile}>
-                <Link to="/">main</Link>
-              </li>
-              <li onClick={closeUserProfile}>
-                <Link to="about">about</Link>
-              </li>
-              {!isAuthorized && <HeaderUserLinks />}
+              {!isAuthorized && <HeaderUserLinks onSignIn={goSignIn} onSignUp={goSignUp} />}
+              {isAuthorized && (
+                <HeaderUserButtons
+                  openUserPage={isOpenUserPage}
+                  onClickOut={goOut}
+                  onClickUser={goUserProfile}
+                />
+              )}
             </ul>
-          </nav>
-        </div>
-        {isAuthorized && (
-          <HeaderUserButtons
-            openUserPage={isOpenUserPage}
-            onClickOut={goOut}
-            onClickUser={goUserProfile}
-            closeUserLink={closeUserProfile}
-          />
-        )}
+          )}
+          {isAuthorized && (
+            <HeaderUserButtons
+              openUserPage={isOpenUserPage}
+              onClickOut={goOut}
+              onClickUser={goUserProfile}
+              onGoBoards={goBoards}
+            />
+          )}
+        </nav>
       </div>
     </header>
   );

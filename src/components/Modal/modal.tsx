@@ -4,6 +4,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
 import { IconButton } from '@mui/material';
 import { Close } from '@mui/icons-material';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -16,10 +17,20 @@ type ModalPropsType = {
   buttonText: string;
   title: string;
   mode?: string;
+  style?: string;
+  styleText?: string;
   onConfirm?: () => Promise<void>;
 };
 
-const Modal = ({ children, buttonText, title, mode, onConfirm }: ModalPropsType) => {
+const Modal = ({
+  children,
+  buttonText,
+  title,
+  mode,
+  onConfirm,
+  style,
+  styleText,
+}: ModalPropsType) => {
   const [open, setOpen] = useState(false);
   const dispatch = useAppDispatch();
   const handleClickOpen = () => {
@@ -42,11 +53,13 @@ const Modal = ({ children, buttonText, title, mode, onConfirm }: ModalPropsType)
     <>
       <Button
         onClick={handleClickOpen}
-        variant={mode === 'confirm' ? 'contained' : 'outlined'}
-        size="small"
-        startIcon={mode === 'confirm' && <DeleteIcon />}
+        variant={mode === 'confirm' ? 'contained' : undefined}
+        className={style}
+        startIcon={
+          mode === 'confirm' ? <DeleteIcon /> : <DashboardCustomizeIcon className={styleText} />
+        }
       >
-        {buttonText}
+        <span className={styleText}>{buttonText}</span>
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>

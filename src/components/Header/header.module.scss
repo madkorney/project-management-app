@@ -23,18 +23,23 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    gap: 40px;
+    gap: 10px;
   }
 
   &NavUser {
     display: flex;
     align-items: center;
-    width: 50%;
+    gap: 6px;
     justify-content: space-around;
 
-    & > li {
-      width: 120px;
+    & li:first-child {
+      width: 124px;
+
+      & > button {
+        width: inherit;
+      }
     }
+
   }
 
   &Button {
@@ -48,7 +53,7 @@
   }
 
   &TextButton {
-    width: 120px;
+    width: 100px;
     height: 20px;
     font-style: initial;
     font-weight: bold;
@@ -56,14 +61,16 @@
 }
 
 .MuiButtonBase {
+  position: relative;
+  width: 100px;
   background: #000;
-  width: 110px;
   font-size: 14px;
+  font-weight: bold;
   padding: 0;
 
   & > span:first-child {
-    width: 20px;
-    margin-right: 5px;
+    position: absolute;
+    left: 0;
   }
 
   &:hover {
