@@ -1,8 +1,10 @@
-@import '../../global-styles/variables';
+@import 'global-styles/variables';
 
 .main-container {
   flex-grow: 1;
   display: flex;
-  max-width: 1200px;
+  max-width: $MAX_WIDTH;
+  width: 100%;
   padding: 0 20px;
+  margin: 0 auto;
 }

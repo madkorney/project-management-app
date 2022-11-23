@@ -1,6 +1,8 @@
 import * as React from 'react';
+
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
+
 import { ModalText } from 'pages/UserPage/userPage';
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>((props, ref) => {

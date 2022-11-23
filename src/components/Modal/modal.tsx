@@ -4,19 +4,22 @@ import { setOpenUserPage } from 'redux/authSlice';
 
 import { ModalText } from 'pages/UserPage/userPage';
 
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
 import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
-import { IconButton } from '@mui/material';
-import { Close } from '@mui/icons-material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import CloseIcon from '@mui/icons-material/Close';
+
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  IconButton,
+} from '@mui/material';
 
 type ModalPropsType = {
   children: JSX.Element;
-  buttonText: string;
+  buttonText?: string;
   title: string;
   mode?: string;
   style?: string;
@@ -76,7 +79,7 @@ const Modal = ({
                 color: (theme) => theme.palette.grey[500],
               }}
             >
-              <Close />
+              <CloseIcon />
             </IconButton>
           )}
         </DialogTitle>

@@ -1,12 +1,10 @@
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
-import { logOut } from 'redux/authSlice';
+import { logOut, setOpenUserPage } from 'redux/authSlice';
 
-import { useEffect } from 'react';
 import { HeaderUserButtons, HeaderUserLinks } from './HeaderButtons';
-
-import { setOpenUserPage } from 'redux/authSlice';
 
 import styles from './header.module.scss';
 
