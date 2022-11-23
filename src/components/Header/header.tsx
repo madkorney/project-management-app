@@ -22,10 +22,6 @@ const Header = () => {
     navigate('/');
   };
 
-  const closeUserProfile = () => {
-    if (isOpenUserPage) dispatch(setOpenUserPage(false));
-  };
-
   const goUserProfile = () => {
     navigate('/user-page');
     dispatch(setOpenUserPage(true));
@@ -33,7 +29,7 @@ const Header = () => {
 
   const goBoards = () => {
     navigate('/boards');
-    dispatch(setOpenUserPage(false));
+    if (isOpenUserPage) dispatch(setOpenUserPage(false));
   };
 
   const goSignIn = () => {

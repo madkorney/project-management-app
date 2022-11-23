@@ -1,9 +1,10 @@
-import { Button } from '@mui/material';
-import PersonIcon from '@mui/icons-material/Person';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import DashboardIcon from '@mui/icons-material/Dashboard';
 import Modal from 'components/Modal/modal';
 import AddBoard from 'components/Forms/addBoard';
+
+import { Button } from '@mui/material';
+import HowToRegIcon from '@mui/icons-material/HowToReg';
+import LogoutIcon from '@mui/icons-material/Logout';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 
 import styles from '../header.module.scss';
 
@@ -46,7 +47,7 @@ export const HeaderUserButtons = ({
         <li>
           <Button
             className={styles.MuiButtonBase}
-            startIcon={<PersonIcon className={styles.headerButton} />}
+            startIcon={<HowToRegIcon className={styles.headerButton} />}
             onClick={onClickUser}
           >
             <span className={styles.headerTextButton}>profile</span>
@@ -56,7 +57,7 @@ export const HeaderUserButtons = ({
       <li>
         <Button
           className={styles.MuiButtonBase}
-          startIcon={<ExitToAppIcon className={styles.headerButton} />}
+          startIcon={<LogoutIcon className={styles.headerButton} />}
           onClick={onClickOut}
         >
           <span className={styles.headerTextButton}>Log Out</span>
