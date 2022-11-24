@@ -21,10 +21,7 @@ export const InputPassword = ({
   const isError = !!errors;
 
   return (
-    <FormControl
-      sx={{ m: 2, maxWidth: '30ch', width: '90%', paddingBottom: '15px' }}
-      variant="outlined"
-    >
+    <FormControl sx={{ m: 1, maxWidth: '30ch', width: '90%' }} variant="outlined">
       {isError ? (
         <InputLabel sx={{ color: 'red' }} htmlFor="outlined-adornment-password">
           Password
@@ -69,7 +66,11 @@ export const InputPassword = ({
           </InputAdornment>
         }
       />
-      {errors && <span className={styles.formError}>Password {errors.message}</span>}
+      {errors ? (
+        <span className={styles.formError}>Password {errors.message}</span>
+      ) : (
+        <span className={styles.formError}> </span>
+      )}
     </FormControl>
   );
 };

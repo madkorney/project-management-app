@@ -31,14 +31,19 @@ const TaskForm = ({ mode, boardId, columnId, taskId, onClose }: TaskFormType) =>
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<TaskParamsType>();
+  } = useForm<TaskParamsType>({
+    mode: 'onTouched',
+  });
 
   const [addTask, { error: addError }] = useCreateTaskMutation();
   const [updateTask, { error: editError }] = useUpdateTaskByIdMutation();
 
   const userId = useAppSelector((state) => state.auth.user.id) as string;
   const { data: users } = useGetUsersQuery();
-  const { data: taskData } = useGetTaskByIdQuery({ boardId, columnId, _id: taskId as string });
+  const { data: taskData } = useGetTaskByIdQuery(
+    { boardId, columnId, _id: taskId as string },
+    { skip: mode === 'add' }
+  );
 
   const onSubmit: SubmitHandler<TaskParamsType> = async (data) => {
     if (mode === 'add') {
@@ -54,12 +59,13 @@ const TaskForm = ({ mode, boardId, columnId, taskId, onClose }: TaskFormType) =>
   };
 
   return (
-    <form className="form-board" onSubmit={handleSubmit(onSubmit)}>
+    <form className="form" onSubmit={handleSubmit(onSubmit)}>
       <TextField
-        autoFocus
         margin="dense"
         id="title"
         label="Task title"
+        error={!!errors?.title?.message}
+        helperText={errors?.title?.message || ' '}
         defaultValue={taskData?.title}
         fullWidth
         {...register('title', {
@@ -73,7 +79,6 @@ const TaskForm = ({ mode, boardId, columnId, taskId, onClose }: TaskFormType) =>
           },
         })}
       />
-      {errors.title && <span>{errors.title.message}</span>}
       <TextField
         margin="dense"
         id="description"
@@ -81,6 +86,8 @@ const TaskForm = ({ mode, boardId, columnId, taskId, onClose }: TaskFormType) =>
         multiline
         defaultValue={taskData?.description}
         rows={3}
+        error={!!errors?.description?.message}
+        helperText={errors?.description?.message || ' '}
         fullWidth
         {...register('description', {
           required: {
@@ -93,7 +100,6 @@ const TaskForm = ({ mode, boardId, columnId, taskId, onClose }: TaskFormType) =>
           },
         })}
       />
-      {errors.description && <span>{errors.description.message}</span>}
       {users && (
         <Controller
           control={control}

@@ -10,13 +10,7 @@ type EditColumnTitleProps = {
 const EditColumnTitle = ({ title, onSubmit }: EditColumnTitleProps) => {
   return (
     <div className="edit-title">
-      <TextField
-        hiddenLabel
-        id="filled-hidden-label-small"
-        defaultValue={title}
-        variant="standard"
-        size="small"
-      />
+      <TextField hiddenLabel defaultValue={title} variant="standard" size="small" />
       <IconButton aria-label="save" onClick={onSubmit} size="small">
         <CheckIcon />
       </IconButton>

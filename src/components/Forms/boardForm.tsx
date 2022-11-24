@@ -27,13 +27,15 @@ const BoardForm = ({ mode, boardId, onClose }: BoardFormType) => {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<BoardParamsType>();
+  } = useForm<BoardParamsType>({
+    mode: 'onTouched',
+  });
 
   const [addBoard, { error: addError }] = useCreateBoardMutation();
   const [updateBoard, { error: editError }] = useUpdateBoardByIdMutation();
   const userId = useAppSelector((state) => state.auth.user.id) as string;
   const { data: users } = useGetUsersQuery();
-  const { data: board } = useGetBoardByIdQuery(boardId as string);
+  const { data: board } = useGetBoardByIdQuery(boardId as string, { skip: mode === 'add' });
 
   const onSubmit: SubmitHandler<Omit<BoardParamsType, 'owner'>> = async (data) => {
     if (mode === 'add') {
@@ -49,12 +51,13 @@ const BoardForm = ({ mode, boardId, onClose }: BoardFormType) => {
   };
 
   return (
-    <form className="form-board" onSubmit={handleSubmit(onSubmit)}>
+    <form className="form" onSubmit={handleSubmit(onSubmit)}>
       <TextField
-        autoFocus
         margin="dense"
         id="title"
         label="Board title"
+        error={!!errors?.title?.message}
+        helperText={errors?.title?.message || ' '}
         defaultValue={board?.title}
         fullWidth
         {...register('title', {
@@ -68,7 +71,6 @@ const BoardForm = ({ mode, boardId, onClose }: BoardFormType) => {
           },
         })}
       />
-      {errors.title && <span>{errors.title.message}</span>}
       <TextField
         margin="dense"
         id="description"
@@ -76,6 +78,8 @@ const BoardForm = ({ mode, boardId, onClose }: BoardFormType) => {
         multiline
         defaultValue={board?.description}
         rows={3}
+        error={!!errors?.description?.message}
+        helperText={errors?.description?.message || ' '}
         fullWidth
         {...register('description', {
           required: {
@@ -88,7 +92,6 @@ const BoardForm = ({ mode, boardId, onClose }: BoardFormType) => {
           },
         })}
       />
-      {errors.description && <span>{errors.description.message}</span>}
       {users && (
         <Controller
           control={control}

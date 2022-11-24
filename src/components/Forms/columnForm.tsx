@@ -18,7 +18,9 @@ const ColumnForm = ({ boardId, onClose }: ColumnFormType) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<{ title: string }>();
+  } = useForm<{ title: string }>({
+    mode: 'onTouched',
+  });
 
   const [addColumn, { error }] = useCreateColumnMutation();
   const { data: columns } = useGetColumnsQuery(boardId);
@@ -30,12 +32,13 @@ const ColumnForm = ({ boardId, onClose }: ColumnFormType) => {
   };
 
   return (
-    <form className="form-board" onSubmit={handleSubmit(onSubmit)}>
+    <form className="form" onSubmit={handleSubmit(onSubmit)}>
       <TextField
-        autoFocus
         margin="dense"
         id="title"
         label="Column title"
+        error={!!errors?.title?.message}
+        helperText={errors.title?.message || ' '}
         fullWidth
         {...register('title', {
           required: {
@@ -48,7 +51,6 @@ const ColumnForm = ({ boardId, onClose }: ColumnFormType) => {
           },
         })}
       />
-      {errors.title && <span>{errors.title.message}</span>}
       <Button variant="contained" type="submit">
         Add
       </Button>
