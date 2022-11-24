@@ -5,23 +5,18 @@ import { useAppSelector } from 'redux/hooks';
 import { Autocomplete, Button, TextField } from '@mui/material';
 import { Toast } from 'components';
 
-import {
-  useCreateBoardMutation,
-  useUpdateBoardByIdMutation,
-  useGetUsersQuery,
-  useGetBoardByIdQuery,
-} from 'services';
-import { BoardParamsType, ErrorResponse } from 'types';
+import { useCreateBoardMutation, useUpdateBoardByIdMutation, useGetUsersQuery } from 'services';
+import { BoardParamsType, BoardType, ErrorResponse } from 'types';
 
 import './boardForm.scss';
 
 type BoardFormType = {
   mode: 'edit' | 'add';
-  boardId?: string;
+  board?: BoardType;
   onClose?: () => void;
 };
 
-const BoardForm = ({ mode, boardId, onClose }: BoardFormType) => {
+const BoardForm = ({ mode, board, onClose }: BoardFormType) => {
   const {
     register,
     handleSubmit,
@@ -35,7 +30,6 @@ const BoardForm = ({ mode, boardId, onClose }: BoardFormType) => {
   const [updateBoard, { error: editError }] = useUpdateBoardByIdMutation();
   const userId = useAppSelector((state) => state.auth.user.id) as string;
   const { data: users } = useGetUsersQuery();
-  const { data: board } = useGetBoardByIdQuery(boardId as string, { skip: mode === 'add' });
 
   const onSubmit: SubmitHandler<Omit<BoardParamsType, 'owner'>> = async (data) => {
     if (mode === 'add') {
@@ -44,7 +38,7 @@ const BoardForm = ({ mode, boardId, onClose }: BoardFormType) => {
         .then(() => onClose?.());
     }
     if (mode === 'edit') {
-      await updateBoard({ _id: boardId as string, ...data, owner: board?.owner as string })
+      await updateBoard({ _id: board?._id as string, ...data, owner: board?.owner as string })
         .unwrap()
         .then(() => onClose?.());
     }

@@ -5,7 +5,7 @@ import { ColumnType } from 'types';
 import { Card, CardContent, CardActions, Button, CardHeader } from '@mui/material';
 import { Modal } from 'components';
 import TaskForm from 'components/Forms/taskForm';
-import EditColumnTitle from './editColumnTitle';
+import ColumnForm from 'components/Forms/columnForm';
 
 const BoardColumn = (column: ColumnType) => {
   const [deleteColumnById] = useDeleteColumnByIdMutation();
@@ -21,10 +21,6 @@ const BoardColumn = (column: ColumnType) => {
     setIsEditColumnTitle(!isEditColumnTitle);
   };
 
-  const handleSubmit = async () => {
-    handleClickColumnTitle();
-  };
-
   return (
     <Card className="board-column" sx={{ width: 240, backgroundColor: '#f4f4f4' }}>
       {!isEditColumnTitle ? (
@@ -34,14 +30,19 @@ const BoardColumn = (column: ColumnType) => {
           onClick={handleClickColumnTitle}
         />
       ) : (
-        <EditColumnTitle title={column.title} onSubmit={handleSubmit} />
+        <ColumnForm
+          mode="edit"
+          boardId={column.boardId}
+          column={column}
+          onClose={handleClickColumnTitle}
+        />
       )}
       <CardContent className="column-tasks">
         {data && data.map((task) => <Button key={task._id}>{task.title}</Button>)}
       </CardContent>
       <CardActions>
         <Modal buttonText="+ Add task" title="Add task">
-          <TaskForm boardId={column.boardId} columnId={column._id} mode="add" />
+          <TaskForm mode="add" boardId={column.boardId} columnId={column._id} />
         </Modal>
         <Modal title="Delete column" mode="confirm" onConfirm={handleDelete}>
           <p>You want to delete this column. Are you sure?</p>

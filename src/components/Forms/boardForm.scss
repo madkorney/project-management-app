@@ -1,3 +1,9 @@
 .form {
   width: 400px;
 }
+
+.form.edit {
+  width: unset;
+  display: flex;
+  padding: 1rem;
+}
