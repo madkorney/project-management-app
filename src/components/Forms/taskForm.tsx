@@ -42,11 +42,11 @@ const TaskForm = ({ mode, boardId, columnId, task, onClose }: TaskFormType) => {
         .unwrap()
         .then(() => onClose?.());
     }
-    /* if (mode === 'edit') {
-      await updateTask({ _id: boardId as string, ...data, owner: board?.owner as string })
+    if (mode === 'edit') {
+      await updateTask({ ...(task as TaskType), ...data })
         .unwrap()
         .then(() => onClose?.());
-    } */
+    }
   };
 
   return (

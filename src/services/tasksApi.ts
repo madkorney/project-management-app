@@ -30,6 +30,7 @@ export const tasksApiSlice = baseApiSlice.injectEndpoints({
         method: REQUEST_METHODS.PUT,
         body: { columnId, ...newParams },
       }),
+      invalidatesTags: ['Tasks'],
     }),
     deleteTaskById: build.mutation<TaskType, Pick<TaskType, '_id' | 'boardId' | 'columnId'>>({
       query: ({ boardId, columnId, _id: taskId }) => ({
