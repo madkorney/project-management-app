@@ -36,6 +36,7 @@ export const tasksApiSlice = baseApiSlice.injectEndpoints({
         url: `${ENDPOINTS.BOARDS}/${boardId}${ENDPOINTS.COLUMNS}/${columnId}${ENDPOINTS.TASKS}/${taskId}`,
         method: REQUEST_METHODS.DELETE,
       }),
+      invalidatesTags: ['Tasks'],
     }),
     getTasksSetByIdsOrUserIdOrSearch: build.query<
       TasksSetType,
