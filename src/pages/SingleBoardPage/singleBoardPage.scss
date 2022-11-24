@@ -42,11 +42,13 @@
 .column-tasks {
   display: flex;
   flex-direction: column;
+  gap: 10px;
   overflow-y: auto;
   overflow-x: hidden;
 }
 
-.edit-title {
+.task {
   display: flex;
-  padding: 1rem;
+  justify-content: space-between;
+  gap: 5px;
 }

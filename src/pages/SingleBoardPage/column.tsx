@@ -2,10 +2,11 @@ import { useState } from 'react';
 import { useDeleteColumnByIdMutation, useGetTasksQuery } from 'services';
 import { ColumnType } from 'types';
 
-import { Card, CardContent, CardActions, Button, CardHeader } from '@mui/material';
+import { Card, CardContent, CardActions, CardHeader } from '@mui/material';
 import { Modal } from 'components';
 import TaskForm from 'components/Forms/taskForm';
 import ColumnForm from 'components/Forms/columnForm';
+import Task from './task';
 
 const BoardColumn = (column: ColumnType) => {
   const [deleteColumnById] = useDeleteColumnByIdMutation();
@@ -38,7 +39,7 @@ const BoardColumn = (column: ColumnType) => {
         />
       )}
       <CardContent className="column-tasks">
-        {data && data.map((task) => <Button key={task._id}>{task.title}</Button>)}
+        {data && data.map((task) => <Task {...task} key={task._id} />)}
       </CardContent>
       <CardActions>
         <Modal buttonText="+ Add task" title="Add task">

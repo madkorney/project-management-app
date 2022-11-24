@@ -5,12 +5,7 @@ import { useAppSelector } from 'redux/hooks';
 import { Autocomplete, Button, TextField } from '@mui/material';
 import { Toast } from 'components';
 
-import {
-  useGetUsersQuery,
-  useCreateTaskMutation,
-  useUpdateTaskByIdMutation,
-  useGetTaskByIdQuery,
-} from 'services';
+import { useGetUsersQuery, useCreateTaskMutation, useUpdateTaskByIdMutation } from 'services';
 import { ErrorResponse, TaskType } from 'types';
 
 import './boardForm.scss';
@@ -19,13 +14,13 @@ type TaskFormType = {
   mode: 'edit' | 'add';
   boardId: string;
   columnId: string;
-  taskId?: string;
+  task?: TaskType;
   onClose?: () => void;
 };
 
 type TaskParamsType = Pick<TaskType, 'title' | 'description' | 'users'>;
 
-const TaskForm = ({ mode, boardId, columnId, taskId, onClose }: TaskFormType) => {
+const TaskForm = ({ mode, boardId, columnId, task, onClose }: TaskFormType) => {
   const {
     register,
     handleSubmit,
@@ -40,10 +35,6 @@ const TaskForm = ({ mode, boardId, columnId, taskId, onClose }: TaskFormType) =>
 
   const userId = useAppSelector((state) => state.auth.user.id) as string;
   const { data: users } = useGetUsersQuery();
-  const { data: taskData } = useGetTaskByIdQuery(
-    { boardId, columnId, _id: taskId as string },
-    { skip: mode === 'add' }
-  );
 
   const onSubmit: SubmitHandler<TaskParamsType> = async (data) => {
     if (mode === 'add') {
@@ -66,7 +57,7 @@ const TaskForm = ({ mode, boardId, columnId, taskId, onClose }: TaskFormType) =>
         label="Task title"
         error={!!errors?.title?.message}
         helperText={errors?.title?.message || ' '}
-        defaultValue={taskData?.title}
+        defaultValue={task?.title}
         fullWidth
         {...register('title', {
           required: {
@@ -84,7 +75,7 @@ const TaskForm = ({ mode, boardId, columnId, taskId, onClose }: TaskFormType) =>
         id="description"
         label="Task description"
         multiline
-        defaultValue={taskData?.description}
+        defaultValue={task?.description}
         rows={3}
         error={!!errors?.description?.message}
         helperText={errors?.description?.message || ' '}
@@ -105,13 +96,13 @@ const TaskForm = ({ mode, boardId, columnId, taskId, onClose }: TaskFormType) =>
           control={control}
           name="users"
           defaultValue={[
-            ...users.filter((user) => taskData?.users.includes(user._id)).map((user) => user._id),
+            ...users.filter((user) => task?.users.includes(user._id)).map((user) => user._id),
           ]}
           render={({ field: { onChange, value, ...field } }) => (
             <Autocomplete
               multiple
               id="users"
-              options={users.filter((user) => ![taskData?.userId, userId].includes(user._id))}
+              options={users.filter((user) => ![task?.userId, userId].includes(user._id))}
               value={users.filter((user) => value.includes(user._id))}
               getOptionLabel={(option) => option.name}
               filterSelectedOptions
