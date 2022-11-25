@@ -1,5 +1,6 @@
 @import '../../global-styles/variables';
 
+
 .header {
   display: flex;
   align-items: center;
@@ -24,6 +25,9 @@
     align-items: center;
     justify-content: space-around;
     gap: 10px;
+    @media (max-width: 900px) {
+      display: none;
+    }
   }
 
   &NavUser {
@@ -42,6 +46,27 @@
 
   }
 
+  &NavAdaptive {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    gap: 10px;
+    padding: 0 20px;
+    max-width: 460px;
+    width: 100%;
+    font-size: 20px;
+
+    &  li {
+      width: 80%;
+    }
+
+    & button {
+      width: inherit;
+      text-align: left;
+    }
+  }
+
   &Button {
     width: 20px;
     margin-right: 0;
@@ -55,6 +80,14 @@
   &TextButton {
     width: 100px;
     height: 20px;
+    font-style: initial;
+    font-weight: bold;
+  }
+
+  &TextButtonBurger {
+    width: 100px;
+    height: 20px;
+    font-size: 22px;
     font-style: initial;
     font-weight: bold;
   }

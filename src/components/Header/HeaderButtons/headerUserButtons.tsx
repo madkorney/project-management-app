@@ -3,8 +3,7 @@ import BoardForm from 'components/Forms/boardForm';
 
 import { Button } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-
+import LogoutIcon from '@mui/icons-material/Logout';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 
 import styles from '../header.module.scss';
@@ -14,6 +13,7 @@ type UserButtonProps = {
   onClickOut: () => void;
   onClickUser: () => void;
   onGoBoards?: () => void;
+  style?: string;
 };
 
 export const HeaderUserButtons = ({
@@ -21,9 +21,10 @@ export const HeaderUserButtons = ({
   onClickUser,
   onClickOut,
   onGoBoards,
+  style,
 }: UserButtonProps) => {
   return (
-    <ul className={styles.headerNavUser}>
+    <>
       <li onClick={onGoBoards}>
         <Modal
           buttonText="Add board"
@@ -58,12 +59,12 @@ export const HeaderUserButtons = ({
       <li>
         <Button
           className={styles.MuiButtonBase}
-          startIcon={<ExitToAppIcon className={styles.headerButton} />}
+          startIcon={<LogoutIcon className={styles.headerButton} />}
           onClick={onClickOut}
         >
           <span className={styles.headerTextButton}>Log Out</span>
         </Button>
       </li>
-    </ul>
+    </>
   );
 };
