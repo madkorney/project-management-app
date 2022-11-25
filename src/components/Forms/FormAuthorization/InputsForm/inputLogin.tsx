@@ -2,13 +2,11 @@ import { FormControl, TextField } from '@mui/material';
 import { FormInputsProps } from '../types';
 import { REGEXP_LOGIN_VALID_CHARACTERS } from 'data/constants';
 
-import styles from 'global-styles/authorization.module.scss';
-
 export const InputLogin = ({ register, errors }: FormInputsProps) => {
   const isError = !!errors;
 
   return (
-    <FormControl sx={{ m: 2, maxWidth: '30ch', width: '90%' }} variant="outlined">
+    <FormControl sx={{ m: 1, maxWidth: '30ch', width: '90%' }} variant="outlined">
       <TextField
         label="Login"
         {...register('login', {
@@ -26,8 +24,8 @@ export const InputLogin = ({ register, errors }: FormInputsProps) => {
           },
         })}
         error={isError}
+        helperText={errors ? `Login ${errors.message}` : ' '}
       />
-      {errors && <span className={styles.formError}>Login {errors.message}</span>}
     </FormControl>
   );
 };

@@ -5,40 +5,53 @@ import { useAppSelector } from 'redux/hooks';
 import { Autocomplete, Button, TextField } from '@mui/material';
 import { Toast } from 'components';
 
-import { useCreateBoardMutation, useUpdateBoardByIdMutation, useGetUsersQuery } from 'services';
-import { BoardParamsType, BoardType, ErrorResponse } from 'types';
+import {
+  useGetUsersQuery,
+  useCreateTaskMutation,
+  useUpdateTaskByIdMutation,
+  useGetBoardByIdQuery,
+} from 'services';
+import { ErrorResponse, TaskType } from 'types';
 
 import './boardForm.scss';
 
-type BoardFormType = {
+type TaskFormType = {
   mode: 'edit' | 'add';
-  board?: BoardType;
+  boardId: string;
+  columnId: string;
+  task?: TaskType;
   onClose?: () => void;
 };
 
-const BoardForm = ({ mode, board, onClose }: BoardFormType) => {
+type TaskParamsType = Pick<TaskType, 'title' | 'description' | 'users'>;
+
+const TaskForm = ({ mode, boardId, columnId, task, onClose }: TaskFormType) => {
   const {
     register,
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<BoardParamsType>({
+  } = useForm<TaskParamsType>({
     mode: 'onTouched',
   });
 
-  const [addBoard, { error: addError }] = useCreateBoardMutation();
-  const [updateBoard, { error: editError }] = useUpdateBoardByIdMutation();
+  const [addTask, { error: addError }] = useCreateTaskMutation();
+  const [updateTask, { error: editError }] = useUpdateTaskByIdMutation();
+  const { data: boardData } = useGetBoardByIdQuery(boardId);
+
+  const responsibleUsers = [...(boardData?.users as string[]), boardData?.owner as string];
+
   const userId = useAppSelector((state) => state.auth.user.id) as string;
   const { data: users } = useGetUsersQuery();
 
-  const onSubmit: SubmitHandler<Omit<BoardParamsType, 'owner'>> = async (data) => {
+  const onSubmit: SubmitHandler<TaskParamsType> = async (data) => {
     if (mode === 'add') {
-      await addBoard({ ...data, owner: userId })
+      await addTask({ ...data, userId, boardId, columnId, order: 0 })
         .unwrap()
         .then(() => onClose?.());
     }
     if (mode === 'edit') {
-      await updateBoard({ _id: board?._id as string, ...data, owner: board?.owner as string })
+      await updateTask({ ...(task as TaskType), ...data })
         .unwrap()
         .then(() => onClose?.());
     }
@@ -49,10 +62,10 @@ const BoardForm = ({ mode, board, onClose }: BoardFormType) => {
       <TextField
         margin="dense"
         id="title"
-        label="Board title"
+        label="Task title"
         error={!!errors?.title?.message}
         helperText={errors?.title?.message || ' '}
-        defaultValue={board?.title}
+        defaultValue={task?.title}
         fullWidth
         {...register('title', {
           required: {
@@ -68,9 +81,9 @@ const BoardForm = ({ mode, board, onClose }: BoardFormType) => {
       <TextField
         margin="dense"
         id="description"
-        label="Board description"
+        label="Task description"
         multiline
-        defaultValue={board?.description}
+        defaultValue={task?.description}
         rows={3}
         error={!!errors?.description?.message}
         helperText={errors?.description?.message || ' '}
@@ -91,13 +104,13 @@ const BoardForm = ({ mode, board, onClose }: BoardFormType) => {
           control={control}
           name="users"
           defaultValue={[
-            ...users.filter((user) => board?.users.includes(user._id)).map((user) => user._id),
+            ...users.filter((user) => task?.users.includes(user._id)).map((user) => user._id),
           ]}
           render={({ field: { onChange, value, ...field } }) => (
             <Autocomplete
               multiple
               id="users"
-              options={users.filter((user) => ![board?.owner, userId].includes(user._id))}
+              options={users.filter((user) => responsibleUsers.includes(user._id))}
               value={users.filter((user) => value.includes(user._id))}
               getOptionLabel={(option) => option.name}
               filterSelectedOptions
@@ -110,7 +123,7 @@ const BoardForm = ({ mode, board, onClose }: BoardFormType) => {
                   {...params}
                   {...field}
                   variant="standard"
-                  label="Assigned users"
+                  label="Resposible users"
                   placeholder="Users"
                 />
               )}
@@ -127,4 +140,4 @@ const BoardForm = ({ mode, board, onClose }: BoardFormType) => {
   );
 };
 
-export default BoardForm;
+export default TaskForm;

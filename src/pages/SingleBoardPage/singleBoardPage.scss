@@ -37,5 +37,18 @@
   display: flex;
   flex-direction: column;
   max-height: 100%;
-  overflow-x: auto;
+}
+
+.column-tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
 }
