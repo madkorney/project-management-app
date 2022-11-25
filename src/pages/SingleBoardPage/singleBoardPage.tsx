@@ -21,7 +21,7 @@ const SingleBoardPage = () => {
   const { boardId } = useParams<SingleBoardRouterPropsType>();
   const { data: boardData } = useGetBoardByIdQuery(boardId as string);
   const { data: columnsData } = useGetColumnsQuery(boardId as string);
-  const userId = useAppSelector((state) => state.auth.user.id) as string;
+  const userId = useAppSelector((state) => state.auth.user?.id) as string;
 
   useEffect(() => {
     if (boardData) {
