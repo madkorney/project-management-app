@@ -5,7 +5,12 @@ import { useAppSelector } from 'redux/hooks';
 import { Autocomplete, Button, TextField } from '@mui/material';
 import { Toast } from 'components';
 
-import { useGetUsersQuery, useCreateTaskMutation, useUpdateTaskByIdMutation } from 'services';
+import {
+  useGetUsersQuery,
+  useCreateTaskMutation,
+  useUpdateTaskByIdMutation,
+  useGetBoardByIdQuery,
+} from 'services';
 import { ErrorResponse, TaskType } from 'types';
 
 import './boardForm.scss';
@@ -32,6 +37,9 @@ const TaskForm = ({ mode, boardId, columnId, task, onClose }: TaskFormType) => {
 
   const [addTask, { error: addError }] = useCreateTaskMutation();
   const [updateTask, { error: editError }] = useUpdateTaskByIdMutation();
+  const { data: boardData } = useGetBoardByIdQuery(boardId);
+
+  const responsibleUsers = [...(boardData?.users as string[]), boardData?.owner as string];
 
   const userId = useAppSelector((state) => state.auth.user.id) as string;
   const { data: users } = useGetUsersQuery();
@@ -102,7 +110,7 @@ const TaskForm = ({ mode, boardId, columnId, task, onClose }: TaskFormType) => {
             <Autocomplete
               multiple
               id="users"
-              options={users.filter((user) => ![task?.userId, userId].includes(user._id))}
+              options={users.filter((user) => responsibleUsers.includes(user._id))}
               value={users.filter((user) => value.includes(user._id))}
               getOptionLabel={(option) => option.name}
               filterSelectedOptions

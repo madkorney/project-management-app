@@ -22,6 +22,7 @@ const BoardColumn = (column: ColumnType) => {
           await deleteTaskById({ _id: task._id, columnId: task.columnId, boardId: task.boardId });
         })
       );
+
     await deleteColumnById({ boardId: column.boardId, _id: column._id });
   };
 
