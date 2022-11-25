@@ -19,7 +19,9 @@ type AuthStateType = {
 
 const token = localStorage.getItem('pma_token') || null;
 
-const initialState: AuthStateType = isExpired(token as string)
+const isTokenExpired = isExpired(token as string);
+
+const initialState: AuthStateType = isTokenExpired
   ? {
       isOpenUserPage: false,
       isAuthorized: false,
@@ -32,6 +34,8 @@ const initialState: AuthStateType = isExpired(token as string)
       token,
       user: (token && decodeToken(token)) as UserAuthStateType,
     };
+
+isTokenExpired && localStorage.removeItem('pma_token');
 
 const authSlice = createSlice({
   name: 'auth',
