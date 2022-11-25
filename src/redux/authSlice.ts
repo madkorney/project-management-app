@@ -1,30 +1,37 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-import jwt_decode from 'jwt-decode';
+import { isExpired, decodeToken } from 'react-jwt';
 
 import { AuthSuccessfulType } from 'types';
 
 type UserAuthStateType = {
-  id: string | null;
-  login: string | null;
+  id: string;
+  login: string;
 };
 
 type AuthStateType = {
   isOpenUserPage: boolean;
   isAuthorized: boolean;
   token: string | null;
-  user: UserAuthStateType;
+  user: UserAuthStateType | null;
 };
 
 const token = localStorage.getItem('pma_token') || null;
 
-const initialState: AuthStateType = {
-  isOpenUserPage: false,
-  isAuthorized: !!token,
-  token,
-  user: (token && jwt_decode(token)) as UserAuthStateType,
-};
+const initialState: AuthStateType = isExpired(token as string)
+  ? {
+      isOpenUserPage: false,
+      isAuthorized: false,
+      token: null,
+      user: null,
+    }
+  : {
+      isOpenUserPage: false,
+      isAuthorized: !!token,
+      token,
+      user: (token && decodeToken(token)) as UserAuthStateType,
+    };
 
 const authSlice = createSlice({
   name: 'auth',
@@ -33,12 +40,12 @@ const authSlice = createSlice({
     setCredentials: (state, action: PayloadAction<AuthSuccessfulType>) => {
       state.isAuthorized = true;
       state.token = action.payload.token;
-      state.user = jwt_decode(action.payload.token);
+      state.user = decodeToken(action.payload.token) as UserAuthStateType;
     },
     logOut: (state) => {
       state.isAuthorized = false;
       state.token = null;
-      state.user = { id: null, login: null };
+      state.user = null;
     },
     setOpenUserPage: (state, action: PayloadAction<boolean>) => {
       state.isOpenUserPage = action.payload;

@@ -28,7 +28,7 @@ const BoardForm = ({ mode, board, onClose }: BoardFormType) => {
 
   const [addBoard, { error: addError }] = useCreateBoardMutation();
   const [updateBoard, { error: editError }] = useUpdateBoardByIdMutation();
-  const userId = useAppSelector((state) => state.auth.user.id) as string;
+  const userId = useAppSelector((state) => state.auth.user?.id) as string;
   const { data: users } = useGetUsersQuery();
 
   const onSubmit: SubmitHandler<Omit<BoardParamsType, 'owner'>> = async (data) => {

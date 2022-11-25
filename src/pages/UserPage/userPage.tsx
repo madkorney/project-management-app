@@ -24,7 +24,7 @@ const UserPage = () => {
   const [signIn] = useSignInMutation();
   const [deleteUser] = useDeleteUserByIdMutation();
   const [updateUser, { error }] = useUpdateUserByIdMutation();
-  const { id, login } = useAppSelector((state) => state.auth.user);
+  const { id, login } = useAppSelector((state) => state.auth.user!);
   const [isMessageUser, setMessageUser] = useState('');
 
   const handleDeleteUser = async () => {

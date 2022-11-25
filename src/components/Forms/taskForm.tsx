@@ -41,7 +41,7 @@ const TaskForm = ({ mode, boardId, columnId, task, onClose }: TaskFormType) => {
 
   const responsibleUsers = [...(boardData?.users as string[]), boardData?.owner as string];
 
-  const userId = useAppSelector((state) => state.auth.user.id) as string;
+  const userId = useAppSelector((state) => state.auth.user?.id) as string;
   const { data: users } = useGetUsersQuery();
 
   const onSubmit: SubmitHandler<TaskParamsType> = async (data) => {
