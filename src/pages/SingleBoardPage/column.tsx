@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDeleteColumnByIdMutation, useGetTasksQuery } from 'services';
+import { useDeleteColumnByIdMutation, useDeleteTaskByIdMutation, useGetTasksQuery } from 'services';
 import { ColumnType } from 'types';
 
 import { Card, CardContent, CardActions, CardHeader } from '@mui/material';
@@ -10,11 +10,18 @@ import Task from './task';
 
 const BoardColumn = (column: ColumnType) => {
   const [deleteColumnById] = useDeleteColumnByIdMutation();
+  const [deleteTaskById] = useDeleteTaskByIdMutation();
   const [isEditColumnTitle, setIsEditColumnTitle] = useState(false);
 
   const { data } = useGetTasksQuery({ boardId: column.boardId, columnId: column._id });
 
   const handleDelete = async () => {
+    data &&
+      Promise.all(
+        data.map(async (task) => {
+          await deleteTaskById({ _id: task._id, columnId: task.columnId, boardId: task.boardId });
+        })
+      );
     await deleteColumnById({ boardId: column.boardId, _id: column._id });
   };
 
@@ -46,7 +53,7 @@ const BoardColumn = (column: ColumnType) => {
           <TaskForm mode="add" boardId={column.boardId} columnId={column._id} />
         </Modal>
         <Modal title="Delete column" mode="confirm" onConfirm={handleDelete}>
-          <p>You want to delete this column. Are you sure?</p>
+          <p>You want to delete this column with all tasks in it. Are you sure?</p>
         </Modal>
       </CardActions>
     </Card>
