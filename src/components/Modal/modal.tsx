@@ -43,9 +43,12 @@ const Modal = ({
   const handleClickOpen = () => {
     setOpen(true);
   };
+
   const handleClose = () => {
     setOpen(false);
   };
+
+  console.log(mode);
 
   const handleConfirm = () => {
     onConfirm?.();
@@ -68,7 +71,7 @@ const Modal = ({
             <PlaylistAddIcon />
           ) : mode === 'edit' ? (
             <BorderColorIcon />
-          ) : (
+          ) : mode === 'task' ? undefined : (
             <DashboardCustomizeIcon className={styleText} />
           )
         }
