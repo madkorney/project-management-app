@@ -48,8 +48,6 @@ const Modal = ({
     setOpen(false);
   };
 
-  console.log(mode);
-
   const handleConfirm = () => {
     onConfirm?.();
     setOpen(false);
