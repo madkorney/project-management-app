@@ -1,9 +1,10 @@
-import { Box, Drawer, IconButton, Paper } from '@mui/material';
+import { Box, Divider, Drawer, IconButton, Paper } from '@mui/material';
 import { useState } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 
 import styles from '../header.module.scss';
-import { useAppSelector } from '../../../redux/hooks';
+import { useAppSelector } from 'redux/hooks';
 import { HeaderUserButtons, HeaderUserLinks } from '../HeaderButtons';
 
 type BurgerProps = {
@@ -68,6 +69,11 @@ export const HeaderBurger = ({ func }: BurgerProps) => {
         sx={{ width: '500px' }}
         keepMounted
       >
+        <IconButton sx={{ mt: 2 }}>
+          <CloseIcon onClick={() => toggleDrawer(false)} />
+        </IconButton>
+
+        <Divider sx={{ mb: 2 }} />
         <Box
           sx={{
             height: '100%',

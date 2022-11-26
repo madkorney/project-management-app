@@ -62,8 +62,15 @@
     }
 
     & button {
+      display: block;
       width: inherit;
       text-align: left;
+      font-size: 18px;
+      padding-left: 20px;
+
+      & span:first-child{
+        top: 10px;
+      }
     }
   }
 
