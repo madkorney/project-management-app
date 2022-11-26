@@ -3,9 +3,10 @@ import { useState } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 
-import styles from '../header.module.scss';
 import { useAppSelector } from 'redux/hooks';
 import { HeaderUserButtons, HeaderUserLinks } from '../HeaderButtons';
+
+import styles from '../header.module.scss';
 
 type BurgerProps = {
   func: { [name: string]: () => void };
