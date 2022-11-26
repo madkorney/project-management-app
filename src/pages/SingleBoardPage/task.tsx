@@ -16,7 +16,7 @@ const Task = (task: TaskType) => {
 
   return (
     <div className="task">
-      <Modal buttonText={task.title} title="Edit task">
+      <Modal buttonText={task.title} title="Edit task" mode="task">
         <TaskForm mode="edit" boardId={task.boardId} columnId={task.columnId} task={task} />
       </Modal>
       <Modal title="Delete task" mode="confirm" onConfirm={handleDelete}>

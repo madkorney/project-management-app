@@ -50,7 +50,7 @@ const BoardColumn = (column: ColumnType) => {
         {data && data.map((task) => <Task {...task} key={task._id} />)}
       </CardContent>
       <CardActions>
-        <Modal buttonText="+ Add task" title="Add task">
+        <Modal buttonText="Add task" title="Add task" mode="add">
           <TaskForm mode="add" boardId={column.boardId} columnId={column._id} />
         </Modal>
         <Modal title="Delete column" mode="confirm" onConfirm={handleDelete}>

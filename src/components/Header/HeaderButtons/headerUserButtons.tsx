@@ -1,10 +1,10 @@
-import { Link } from 'react-router-dom';
+import Modal from 'components/Modal/modal';
+import BoardForm from 'components/Forms/boardForm';
 
 import { Button } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import { Modal } from 'components';
-import BoardForm from 'components/Forms/boardForm';
+import LogoutIcon from '@mui/icons-material/Logout';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 
 import styles from '../header.module.scss';
 
@@ -12,24 +12,37 @@ type UserButtonProps = {
   openUserPage: boolean;
   onClickOut: () => void;
   onClickUser: () => void;
-  closeUserLink: () => void;
+  onGoBoards?: () => void;
+  style?: string;
 };
 
 export const HeaderUserButtons = ({
   openUserPage,
   onClickUser,
   onClickOut,
-  closeUserLink,
+  onGoBoards,
+  style,
 }: UserButtonProps) => {
   return (
-    <ul className={styles.headerNavUser}>
-      <li onClick={closeUserLink}>
-        <Modal buttonText="+ Add board" title="Add new board">
-          <BoardForm mode="add" />
+    <>
+      <li onClick={onGoBoards}>
+        <Modal
+          buttonText="Add board"
+          title="Add new board"
+          style={styles.MuiButtonBase}
+          styleText={styles.headerTextButton}
+        >
+          <BoardForm mode={'add'} />
         </Modal>
       </li>
-      <li onClick={closeUserLink}>
-        <Link to="boards">boards</Link>
+      <li onClick={onGoBoards}>
+        <Button
+          className={styles.MuiButtonBase}
+          startIcon={<DashboardIcon className={styles.headerButton} />}
+          onClick={onClickUser}
+        >
+          <span className={styles.headerTextButton}>boards</span>
+        </Button>
       </li>
 
       {!openUserPage && (
@@ -46,12 +59,12 @@ export const HeaderUserButtons = ({
       <li>
         <Button
           className={styles.MuiButtonBase}
-          startIcon={<ExitToAppIcon className={styles.headerButton} />}
+          startIcon={<LogoutIcon className={styles.headerButton} />}
           onClick={onClickOut}
         >
           <span className={styles.headerTextButton}>Log Out</span>
         </Button>
       </li>
-    </ul>
+    </>
   );
 };

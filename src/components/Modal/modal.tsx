@@ -1,7 +1,14 @@
 import { Children, cloneElement, isValidElement, ReactNode, useState } from 'react';
-
 import { useAppDispatch } from 'redux/hooks';
 import { setOpenUserPage } from 'redux/authSlice';
+
+import { ModalText } from 'pages/UserPage/userPage';
+
+import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
+import DeleteIcon from '@mui/icons-material/Delete';
+import CloseIcon from '@mui/icons-material/Close';
+import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
 
 import {
   Button,
@@ -11,20 +18,26 @@ import {
   DialogTitle,
   IconButton,
 } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
-import DeleteIcon from '@mui/icons-material/Delete';
-
-import { ModalText } from 'pages/UserPage/userPage';
 
 type ModalPropsType = {
   children: JSX.Element;
   buttonText?: string;
   title: string;
   mode?: string;
+  style?: string;
+  styleText?: string;
   onConfirm?: () => Promise<void>;
 };
 
-const Modal = ({ children, buttonText, title, mode, onConfirm }: ModalPropsType) => {
+const Modal = ({
+  children,
+  buttonText,
+  title,
+  mode,
+  onConfirm,
+  style,
+  styleText,
+}: ModalPropsType) => {
   const [open, setOpen] = useState(false);
   const dispatch = useAppDispatch();
   const handleClickOpen = () => {
@@ -47,12 +60,21 @@ const Modal = ({ children, buttonText, title, mode, onConfirm }: ModalPropsType)
     <>
       <Button
         onClick={handleClickOpen}
-        variant={mode === 'confirm' ? 'contained' : 'outlined'}
-        size="small"
-        startIcon={mode === 'confirm' && <DeleteIcon />}
-        sx={{ minWidth: 'auto' }}
+        variant={mode === 'confirm' ? 'contained' : undefined}
+        className={style}
+        startIcon={
+          mode === 'confirm' ? (
+            <DeleteIcon />
+          ) : mode === 'add' ? (
+            <PlaylistAddIcon />
+          ) : mode === 'edit' ? (
+            <BorderColorIcon />
+          ) : mode === 'task' ? undefined : (
+            <DashboardCustomizeIcon className={styleText} />
+          )
+        }
       >
-        {buttonText}
+        <span className={styleText}>{buttonText}</span>
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>

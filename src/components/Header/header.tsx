@@ -1,10 +1,12 @@
+import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { logOut, setOpenUserPage } from 'redux/authSlice';
 
 import { HeaderUserButtons, HeaderUserLinks } from './HeaderButtons';
+import { HeaderBurger } from './HeaderBurger/headerBurger';
+import { HeaderLogo } from './HeaderLogo/headerLogo';
 
 import styles from './header.module.scss';
 
@@ -16,12 +18,7 @@ const Header = () => {
   const goOut = () => {
     localStorage.removeItem('pma_token');
     dispatch(logOut());
-    dispatch(setOpenUserPage(false));
     navigate('/');
-  };
-
-  const closeUserProfile = () => {
-    if (isOpenUserPage) dispatch(setOpenUserPage(false));
   };
 
   const goUserProfile = () => {
@@ -29,35 +26,50 @@ const Header = () => {
     dispatch(setOpenUserPage(true));
   };
 
+  const goBoards = () => {
+    navigate('/boards');
+    dispatch(setOpenUserPage(false));
+  };
+
+  const goSignIn = () => {
+    navigate('/sign-in');
+  };
+
+  const goSignUp = () => {
+    navigate('/sign-up');
+  };
+
   useEffect(() => {
     location.pathname.includes('user-page') && dispatch(setOpenUserPage(true));
-  }, []);
+  }, [dispatch]);
 
   return (
     <header className={styles.header}>
       <div className={styles.headerContainer}>
-        <p>Header - Nav - Profile</p>
-        <div>
-          <nav className={styles.headerNav}>
-            <ul className={styles.headerNav}>
-              <li onClick={closeUserProfile}>
-                <Link to="/">main</Link>
-              </li>
-              <li onClick={closeUserProfile}>
-                <Link to="about">about</Link>
-              </li>
-              {!isAuthorized && <HeaderUserLinks />}
-            </ul>
-          </nav>
-        </div>
-        {isAuthorized && (
-          <HeaderUserButtons
-            openUserPage={isOpenUserPage}
-            onClickOut={goOut}
-            onClickUser={goUserProfile}
-            closeUserLink={closeUserProfile}
-          />
-        )}
+        <HeaderLogo />
+        <nav className={styles.headerNav}>
+          <ul className={!isAuthorized ? styles.headerNav : styles.headerNavUser}>
+            {!isAuthorized ? (
+              <HeaderUserLinks onSignIn={goSignIn} onSignUp={goSignUp} />
+            ) : (
+              <HeaderUserButtons
+                openUserPage={isOpenUserPage}
+                onClickOut={goOut}
+                onClickUser={goUserProfile}
+                onGoBoards={goBoards}
+              />
+            )}
+          </ul>
+        </nav>
+        <HeaderBurger
+          func={{
+            goSignIn,
+            goSignUp,
+            goOut,
+            goUserProfile,
+            goBoards,
+          }}
+        />
       </div>
     </header>
   );

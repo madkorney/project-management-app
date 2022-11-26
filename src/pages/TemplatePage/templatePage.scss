@@ -4,5 +4,7 @@
   flex-grow: 1;
   display: flex;
   max-width: $MAX_WIDTH;
+  width: 100%;
   padding: 0 20px;
+  margin: 0 auto;
 }

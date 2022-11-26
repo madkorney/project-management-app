@@ -45,14 +45,14 @@ const SingleBoardPage = () => {
           <Typography variant="h4">{boardData?.title}</Typography>
           <Typography>{boardData?.description}</Typography>
         </div>
-        <Modal buttonText="Edit" title="Edit board">
+        <Modal buttonText="Edit" title="Edit board" mode="edit">
           <BoardForm mode="edit" board={boardData} />
         </Modal>
       </div>
       <div className="board-container">
         <div className="board">
           {columnsData && columnsData.map((column) => <BoardColumn {...column} key={column._id} />)}
-          <Modal buttonText="+ Add column" title="Add column">
+          <Modal buttonText="Add column" title="Add column" mode="add">
             <ColumnForm boardId={boardId as string} mode="add" />
           </Modal>
         </div>
