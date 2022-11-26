@@ -1,5 +1,5 @@
-import Modal from 'components/Modal/modal';
-import BoardForm from 'components/Forms/boardForm';
+import Modal from 'components/Modal';
+import { BoardForm } from 'components/Forms';
 
 import { Button } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';

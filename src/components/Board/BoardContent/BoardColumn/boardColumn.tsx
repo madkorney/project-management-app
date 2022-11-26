@@ -1,12 +1,12 @@
 import { useState } from 'react';
+
 import { useDeleteColumnByIdMutation, useDeleteTaskByIdMutation, useGetTasksQuery } from 'services';
 import { ColumnType } from 'types';
 
 import { Card, CardContent, CardActions, CardHeader } from '@mui/material';
 import { Modal } from 'components';
-import TaskForm from 'components/Forms/taskForm';
-import ColumnForm from 'components/Forms/columnForm';
-import Task from './task';
+import { ColumnForm, TaskForm } from 'components/Forms';
+import Task from './Task';
 
 const BoardColumn = (column: ColumnType) => {
   const [deleteColumnById] = useDeleteColumnByIdMutation();
@@ -18,8 +18,8 @@ const BoardColumn = (column: ColumnType) => {
   const handleDelete = async () => {
     data &&
       Promise.all(
-        data.map(async (task) => {
-          await deleteTaskById({ _id: task._id, columnId: task.columnId, boardId: task.boardId });
+        data.map(async ({ _id, columnId, boardId }) => {
+          await deleteTaskById({ _id, columnId, boardId });
         })
       );
 
@@ -49,7 +49,7 @@ const BoardColumn = (column: ColumnType) => {
       <CardContent className="column-tasks">
         {data && data.map((task) => <Task {...task} key={task._id} />)}
       </CardContent>
-      <CardActions>
+      <CardActions className="column-actions">
         <Modal buttonText="Add task" title="Add task" mode="add">
           <TaskForm mode="add" boardId={column.boardId} columnId={column._id} />
         </Modal>

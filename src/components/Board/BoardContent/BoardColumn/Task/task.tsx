@@ -1,7 +1,8 @@
-import { Modal, Toast } from 'components';
-import TaskForm from 'components/Forms/taskForm';
 import { useDeleteTaskByIdMutation } from 'services';
 import { ErrorResponse, TaskType } from 'types';
+
+import { Modal, Toast } from 'components';
+import { TaskForm } from 'components/Forms';
 
 const Task = (task: TaskType) => {
   const [deleteTask, { error }] = useDeleteTaskByIdMutation();

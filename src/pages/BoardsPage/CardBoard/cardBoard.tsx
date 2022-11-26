@@ -11,15 +11,19 @@ import { BoardType } from 'types';
 
 import { Card, CardContent, Typography, CardActions, Button } from '@mui/material';
 import { Modal } from 'components';
+import { useState } from 'react';
 
 const CardBoard = (board: BoardType) => {
+  const [skip, setSkip] = useState(true);
   const [deleteBoardById] = useDeleteBoardByIdMutation();
   const [deleteColumnById] = useDeleteColumnByIdMutation();
   const [deleteTaskById] = useDeleteTaskByIdMutation();
-  const { data: columns } = useGetColumnsQuery(board._id);
-  const { data: tasks } = useGetTasksByBoardIdQuery(board._id);
+  const { data: columns } = useGetColumnsQuery(board._id, { skip });
+  const { data: tasks } = useGetTasksByBoardIdQuery(board._id, { skip });
 
   const handleDelete = async () => {
+    setSkip(false);
+
     tasks &&
       Promise.all(
         tasks.map(async ({ _id, columnId, boardId }) => {

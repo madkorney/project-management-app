@@ -5,13 +5,13 @@
   width: 100%;
 }
 
-.board-info {
+.board-header {
   display: flex;
   align-items: center;
   gap: 20px;
 }
 
-.board-container {
+.board-content {
   position: relative;
   flex-grow: 1;
   width: 100%;
