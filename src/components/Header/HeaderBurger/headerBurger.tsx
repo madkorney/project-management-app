@@ -69,8 +69,11 @@ export const HeaderBurger = ({ func }: BurgerProps) => {
         sx={{ width: '500px' }}
         keepMounted
       >
-        <IconButton sx={{ mt: 2 }}>
-          <CloseIcon onClick={() => toggleDrawer(false)} />
+        <IconButton
+          sx={{ mt: 2, ':hover': { color: 'red', background: 'none' } }}
+          onClick={() => toggleDrawer(false)}
+        >
+          <CloseIcon />
         </IconButton>
 
         <Divider sx={{ mb: 2 }} />
