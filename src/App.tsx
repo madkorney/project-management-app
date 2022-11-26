@@ -1,21 +1,17 @@
 import { lazy } from 'react';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 
-import { PrivateRoute, PublicRoute } from 'routes';
-
-import {
-  MainPage,
-  NotFoundPage,
-  SignUpPage,
-  SignInPage,
-  SingleBoardPage,
-  TemplatePage,
-} from 'pages/';
-
 import { REACT_APP_BASENAME as BASENAME } from './data/constants';
 
+import { PrivateRoute, PublicRoute } from 'routes';
+
+import { MainPage, NotFoundPage, TemplatePage } from 'pages/';
+
+const SignUpPage = lazy(() => import('pages/SignUpPage'));
+const SignInPage = lazy(() => import('pages/SignInPage'));
 const BoardsPage = lazy(() => import('pages/BoardsPage'));
 const UserPage = lazy(() => import('pages/UserPage'));
+const SingleBoardPage = lazy(() => import('pages/SingleBoardPage'));
 
 const App = () => {
   return (
