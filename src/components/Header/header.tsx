@@ -41,7 +41,7 @@ const Header = () => {
 
   useEffect(() => {
     location.pathname.includes('user-page') && dispatch(setOpenUserPage(true));
-  }, []);
+  }, [dispatch]);
 
   return (
     <header className={styles.header}>

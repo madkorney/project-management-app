@@ -50,6 +50,7 @@ const authSlice = createSlice({
       state.isAuthorized = false;
       state.token = null;
       state.user = null;
+      state.isOpenUserPage = false;
     },
     setOpenUserPage: (state, action: PayloadAction<boolean>) => {
       state.isOpenUserPage = action.payload;
