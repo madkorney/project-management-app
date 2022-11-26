@@ -13,7 +13,6 @@ type UserButtonProps = {
   onClickOut: () => void;
   onClickUser: () => void;
   onGoBoards?: () => void;
-  style?: string;
 };
 
 export const HeaderUserButtons = ({
@@ -21,7 +20,6 @@ export const HeaderUserButtons = ({
   onClickUser,
   onClickOut,
   onGoBoards,
-  style,
 }: UserButtonProps) => {
   return (
     <>

@@ -11,7 +11,6 @@ import {
   SingleBoardPage,
   TemplatePage,
 } from 'pages/';
-import AboutPage from 'pages/AboutPage/aboutPage';
 
 import { REACT_APP_BASENAME as BASENAME } from './data/constants';
 
@@ -24,7 +23,6 @@ const App = () => {
       <Routes>
         <Route path="/" element={<TemplatePage />}>
           <Route path="/" element={<MainPage />} />
-          <Route path="about" element={<AboutPage />} />
           <Route element={<PrivateRoute />}>
             <Route path="boards" element={<BoardsPage />} />
             <Route path="boards/:boardId" element={<SingleBoardPage />} />

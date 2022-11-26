@@ -3,7 +3,7 @@ import { RootState } from 'redux/types';
 import { BASE_URL, ENDPOINTS } from 'data/constants';
 
 export const baseApiSlice = createApi({
-  reducerPath: 'pmaApi',
+  reducerPath: 'api',
   tagTypes: ['Boards', 'Columns', 'Tasks', 'Users'],
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,

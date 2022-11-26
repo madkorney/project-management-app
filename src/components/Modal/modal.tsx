@@ -1,8 +1,4 @@
 import { Children, cloneElement, isValidElement, ReactNode, useState } from 'react';
-import { useAppDispatch } from 'redux/hooks';
-import { setOpenUserPage } from 'redux/authSlice';
-
-import { ModalText } from 'pages/UserPage/userPage';
 
 import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -39,7 +35,7 @@ const Modal = ({
   styleText,
 }: ModalPropsType) => {
   const [open, setOpen] = useState(false);
-  const dispatch = useAppDispatch();
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -51,9 +47,6 @@ const Modal = ({
   const handleConfirm = () => {
     onConfirm?.();
     setOpen(false);
-    if (title === ModalText.DELETE_USER) {
-      dispatch(setOpenUserPage(false));
-    }
   };
 
   return (
