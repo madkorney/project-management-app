@@ -10,6 +10,7 @@ import {
   useCreateTaskMutation,
   useUpdateTaskByIdMutation,
   useGetBoardByIdQuery,
+  useGetTasksQuery,
 } from 'services';
 import { ErrorResponse, TaskType } from 'types';
 
@@ -43,10 +44,14 @@ const TaskForm = ({ mode, boardId, columnId, task, onClose }: TaskFormType) => {
 
   const userId = useAppSelector((state) => state.auth.user?.id) as string;
   const { data: users } = useGetUsersQuery();
+  const { data: tasks, error: getError } = useGetTasksQuery(
+    { columnId, boardId },
+    { skip: mode === 'edit' }
+  );
 
   const onSubmit: SubmitHandler<TaskParamsType> = async (data) => {
     if (mode === 'add') {
-      await addTask({ ...data, userId, boardId, columnId, order: 0 })
+      await addTask({ ...data, userId, boardId, columnId, order: tasks?.length as number })
         .unwrap()
         .then(() => onClose?.());
     }
@@ -137,6 +142,7 @@ const TaskForm = ({ mode, boardId, columnId, task, onClose }: TaskFormType) => {
       </Button>
       {addError && <Toast message={(addError as ErrorResponse).data.message} />}
       {editError && <Toast message={(editError as ErrorResponse).data.message} />}
+      {getError && <Toast message={(getError as ErrorResponse).data.message} />}
     </form>
   );
 };

@@ -58,6 +58,7 @@ export const tasksApiSlice = baseApiSlice.injectEndpoints({
         method: REQUEST_METHODS.PATCH,
         body: newParams,
       }),
+      invalidatesTags: ['Tasks'],
     }),
     getTasksByBoardId: build.query<TasksSetType, string>({
       query: (boardId) => `${ENDPOINTS.TASKSSET}/${boardId}`,
