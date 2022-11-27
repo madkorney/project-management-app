@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Droppable } from '@hello-pangea/dnd';
 
 import {
   useDeleteColumnByIdMutation,
@@ -63,13 +64,22 @@ const BoardColumn = (column: ColumnType) => {
           onClose={handleClickColumnTitle}
         />
       )}
-      <CardContent className="column-tasks">
-        {tasks &&
-          tasks
-            .slice()
-            .sort((prevTask, curTask) => prevTask.order - curTask.order)
-            .map((task) => <Task {...task} key={task._id} />)}
-      </CardContent>
+      <Droppable droppableId={_id}>
+        {(provided) => (
+          <CardContent
+            className="column-tasks"
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+          >
+            {tasks &&
+              tasks
+                .slice()
+                .sort((prevTask, curTask) => prevTask.order - curTask.order)
+                .map((task) => <Task {...task} key={task._id} />)}
+            {provided.placeholder}
+          </CardContent>
+        )}
+      </Droppable>
       <CardActions className="column-actions">
         <Modal buttonText="Add task" title="Add task" mode="add">
           <TaskForm mode="add" boardId={boardId} columnId={_id} />

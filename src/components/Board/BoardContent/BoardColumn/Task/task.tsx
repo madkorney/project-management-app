@@ -1,3 +1,5 @@
+import { Draggable } from '@hello-pangea/dnd';
+
 import {
   useDeleteTaskByIdMutation,
   useLazyGetTasksQuery,
@@ -31,15 +33,24 @@ const Task = (task: TaskType) => {
   };
 
   return (
-    <div className="task">
-      <Modal buttonText={title} title="Edit task" mode="task">
-        <TaskForm mode="edit" boardId={boardId} columnId={columnId} task={task} />
-      </Modal>
-      <Modal title="Delete task" mode="confirm" onConfirm={handleDelete}>
-        <p>You want to delete this task. Are you sure?</p>
-      </Modal>
-      {error && <Toast message={(error as ErrorResponse).data.message} />}
-    </div>
+    <Draggable draggableId={_id} index={order}>
+      {(provided) => (
+        <div
+          className="task"
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          ref={provided.innerRef}
+        >
+          <Modal buttonText={title} title="Edit task" mode="task">
+            <TaskForm mode="edit" boardId={boardId} columnId={columnId} task={task} />
+          </Modal>
+          <Modal title="Delete task" mode="confirm" onConfirm={handleDelete}>
+            <p>You want to delete this task. Are you sure?</p>
+          </Modal>
+          {error && <Toast message={(error as ErrorResponse).data.message} />}
+        </div>
+      )}
+    </Draggable>
   );
 };
 
