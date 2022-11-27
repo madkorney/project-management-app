@@ -47,6 +47,7 @@ const BoardForm = ({ mode, board, onClose }: BoardFormType) => {
   return (
     <form className="form" onSubmit={handleSubmit(onSubmit)}>
       <TextField
+        autoFocus
         margin="dense"
         id="title"
         label="Board title"

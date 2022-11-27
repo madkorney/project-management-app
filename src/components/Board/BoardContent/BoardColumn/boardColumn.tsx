@@ -35,8 +35,9 @@ const BoardColumn = (column: ColumnType) => {
     await deleteColumnById({ boardId, _id });
 
     const columns = (await getColumns(boardId)).data;
+
     if (columns) {
-      if (order < columns.length) {
+      if (order < columns.length - 1) {
         const newParamsColumn = columns
           .filter((column) => column.order > order)
           .map((column) => ({ _id: column._id, order: column.order - 1 }));

@@ -60,6 +60,7 @@ const TaskForm = ({ mode, boardId, columnId, task, onClose }: TaskFormType) => {
   return (
     <form className="form" onSubmit={handleSubmit(onSubmit)}>
       <TextField
+        autoFocus
         margin="dense"
         id="title"
         label="Task title"

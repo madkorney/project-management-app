@@ -69,7 +69,7 @@ const Modal = ({
       >
         <span className={styleText}>{buttonText}</span>
       </Button>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open} onClose={handleClose} disableRestoreFocus>
         <DialogTitle>
           {title}
           {mode !== 'confirm' && (

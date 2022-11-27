@@ -52,6 +52,7 @@ const ColumnForm = ({ boardId, mode, column, onClose }: ColumnFormType) => {
       {mode === 'add' ? (
         <>
           <TextField
+            autoFocus
             margin="dense"
             id="title"
             label="Column title"
