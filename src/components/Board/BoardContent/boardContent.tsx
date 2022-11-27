@@ -14,7 +14,11 @@ const BoardContent = ({ boardId }: BoardContentProps) => {
   return (
     <div className="board-content">
       <div className="board">
-        {columns && columns.map((column) => <BoardColumn {...column} key={column._id} />)}
+        {columns &&
+          columns
+            .slice()
+            .sort((prevColumn, curColumn) => prevColumn.order - curColumn.order)
+            .map((column) => <BoardColumn {...column} key={column._id} />)}
         <Modal buttonText="Add column" title="Add column" mode="add">
           <ColumnForm boardId={boardId} mode="add" />
         </Modal>
