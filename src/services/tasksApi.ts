@@ -67,6 +67,7 @@ export const tasksApiSlice = baseApiSlice.injectEndpoints({
 
 export const {
   useGetTasksQuery,
+  useLazyGetTasksQuery,
   useCreateTaskMutation,
   useGetTaskByIdQuery,
   useUpdateTaskByIdMutation,

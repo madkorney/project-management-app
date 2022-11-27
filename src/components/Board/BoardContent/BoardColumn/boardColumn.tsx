@@ -21,8 +21,8 @@ const BoardColumn = (column: ColumnType) => {
   const [deleteColumnById] = useDeleteColumnByIdMutation();
   const [deleteTaskById] = useDeleteTaskByIdMutation();
   const [getColumns] = useLazyGetColumnsQuery();
-  const { data: tasks } = useGetTasksQuery({ boardId, columnId: _id });
   const [updateColumnsSet, { error }] = useUpdateColumnsSetMutation();
+  const { data: tasks } = useGetTasksQuery({ boardId, columnId: _id });
 
   const handleDelete = async () => {
     tasks &&
@@ -64,7 +64,11 @@ const BoardColumn = (column: ColumnType) => {
         />
       )}
       <CardContent className="column-tasks">
-        {tasks && tasks.map((task) => <Task {...task} key={task._id} />)}
+        {tasks &&
+          tasks
+            .slice()
+            .sort((prevTask, curTask) => prevTask.order - curTask.order)
+            .map((task) => <Task {...task} key={task._id} />)}
       </CardContent>
       <CardActions className="column-actions">
         <Modal buttonText="Add task" title="Add task" mode="add">
