@@ -28,7 +28,7 @@ const ColumnForm = ({ boardId, mode, column, onClose }: ColumnFormType) => {
 
   const [addColumn, { error: addError }] = useCreateColumnMutation();
   const [updateColumn, { error: updateError }] = useUpdateColumnByIdMutation();
-  const { data: columns } = useGetColumnsQuery(boardId);
+  const { data: columns, error: getError } = useGetColumnsQuery(boardId, { skip: mode === 'edit' });
 
   const onSubmit: SubmitHandler<{ title: string }> = async (data) => {
     if (mode === 'add') {
@@ -80,6 +80,7 @@ const ColumnForm = ({ boardId, mode, column, onClose }: ColumnFormType) => {
             defaultValue={column?.title}
             variant="standard"
             size="small"
+            error={!!errors?.title?.message}
             {...register('title', {
               required: {
                 value: true,
@@ -101,6 +102,7 @@ const ColumnForm = ({ boardId, mode, column, onClose }: ColumnFormType) => {
       )}
       {addError && <Toast message={(addError as ErrorResponse).data.message} />}
       {updateError && <Toast message={(updateError as ErrorResponse).data.message} />}
+      {getError && <Toast message={(getError as ErrorResponse).data.message} />}
     </form>
   );
 };

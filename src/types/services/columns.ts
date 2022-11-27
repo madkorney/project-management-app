@@ -5,7 +5,7 @@ export type ColumnType = {
   boardId: string;
 };
 
-export type ColumnUpdateParamsType = Pick<ColumnType, 'title' | 'order'>;
+export type ColumnUpdateParamsType = Pick<ColumnType, '_id' | 'order'>;
 
 export type ColumnCreateParamsType = Omit<ColumnType, '_id'>;
 

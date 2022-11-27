@@ -62,6 +62,7 @@ export const columnsApiSlice = baseApiSlice.injectEndpoints({
         method: REQUEST_METHODS.PATCH,
         body: newParams,
       }),
+      invalidatesTags: ['Columns'],
     }),
     createColumnsSet: build.mutation<ColumnsArrayType, ColumnsSetCreateParamsType>({
       query: (newParams) => ({
@@ -75,6 +76,7 @@ export const columnsApiSlice = baseApiSlice.injectEndpoints({
 
 export const {
   useGetColumnsQuery,
+  useLazyGetColumnsQuery,
   useCreateColumnMutation,
   useGetColumnByIdQuery,
   useUpdateColumnByIdMutation,
