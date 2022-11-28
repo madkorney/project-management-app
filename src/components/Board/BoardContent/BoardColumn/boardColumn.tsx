@@ -71,11 +71,7 @@ const BoardColumn = (column: ColumnType) => {
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
-            {tasks &&
-              tasks
-                .slice()
-                .sort((prevTask, curTask) => prevTask.order - curTask.order)
-                .map((task) => <Task {...task} key={task._id} />)}
+            {tasks && tasks.map((task) => <Task {...task} key={task._id} />)}
             {provided.placeholder}
           </CardContent>
         )}

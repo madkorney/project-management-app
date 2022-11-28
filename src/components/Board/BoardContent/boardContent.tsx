@@ -4,7 +4,7 @@ import BoardColumn from './BoardColumn';
 import { Modal } from 'components';
 import { ColumnForm } from 'components/Forms';
 
-import { useGetColumnsQuery } from 'services';
+import { useGetColumnsQuery, useLazyGetTasksQuery, useUpdateTasksSetMutation } from 'services';
 
 type BoardContentProps = {
   boardId: string;
@@ -12,9 +12,30 @@ type BoardContentProps = {
 
 const BoardContent = ({ boardId }: BoardContentProps) => {
   const { data: columns } = useGetColumnsQuery(boardId);
+  const [getTasks] = useLazyGetTasksQuery();
+  const [updateTasksSet] = useUpdateTasksSetMutation();
 
-  const handleDragEnd = (result: DropResult) => {
-    // TODO: handle onDragEnd with columns
+  const handleDragEnd = async (result: DropResult) => {
+    const { destination, source, draggableId } = result;
+
+    if (!destination) {
+      return;
+    }
+
+    if (destination.droppableId === source.droppableId && destination.index === source.index) {
+      return;
+    }
+
+    const tasks = (await getTasks({ columnId: source.droppableId, boardId }, true)).data;
+
+    if (tasks) {
+      const newTasks = tasks.slice();
+
+      newTasks.splice(source.index, 1);
+      newTasks.splice(destination.index, 0, ...tasks.filter((task) => task._id === draggableId));
+
+      await updateTasksSet(newTasks.map((task, index) => ({ ...task, order: index })));
+    }
   };
 
   return (

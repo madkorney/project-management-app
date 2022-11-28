@@ -25,7 +25,7 @@ const Task = (task: TaskType) => {
       if (order < tasks.length - 1) {
         const newParamsColumn = tasks
           .filter((task) => task.order > order)
-          .map((task) => ({ _id: task._id, order: task.order - 1, columnId }));
+          .map((task) => ({ ...task, order: task.order - 1 }));
 
         await updateTasksSet(newParamsColumn);
       }
