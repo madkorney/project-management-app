@@ -26,15 +26,47 @@ const BoardContent = ({ boardId }: BoardContentProps) => {
       return;
     }
 
-    const tasks = (await getTasks({ columnId: source.droppableId, boardId }, true)).data;
+    const startColumnTasks = (await getTasks({ columnId: source.droppableId, boardId }, true)).data;
+    const endColumnTasks = (await getTasks({ columnId: destination.droppableId, boardId }, true))
+      .data;
 
-    if (tasks) {
-      const newTasks = tasks.slice();
+    if (startColumnTasks) {
+      if (startColumnTasks === endColumnTasks) {
+        const newTasks = startColumnTasks.slice();
 
-      newTasks.splice(source.index, 1);
-      newTasks.splice(destination.index, 0, ...tasks.filter((task) => task._id === draggableId));
+        newTasks.splice(source.index, 1);
+        newTasks.splice(
+          destination.index,
+          0,
+          ...startColumnTasks.filter((task) => task._id === draggableId)
+        );
 
-      await updateTasksSet(newTasks.map((task, index) => ({ ...task, order: index })));
+        await updateTasksSet(newTasks.map((task, index) => ({ ...task, order: index })));
+        return;
+      }
+
+      const newStartTasks = startColumnTasks.slice();
+      newStartTasks.splice(source.index, 1);
+      console.log(newStartTasks);
+
+      if (endColumnTasks) {
+        const newEndTasks = endColumnTasks.slice();
+        newEndTasks.splice(
+          destination.index,
+          0,
+          ...startColumnTasks.filter((task) => task._id === draggableId)
+        );
+        console.log(newEndTasks);
+
+        updateTasksSet([
+          ...newStartTasks.map((task, index) => ({ ...task, order: index })),
+          ...newEndTasks.map((task, index) => ({
+            ...task,
+            order: index,
+            columnId: destination.droppableId,
+          })),
+        ]);
+      }
     }
   };
 

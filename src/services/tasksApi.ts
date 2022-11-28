@@ -63,13 +63,9 @@ export const tasksApiSlice = baseApiSlice.injectEndpoints({
       }),
       onQueryStarted(newParams, { dispatch, queryFulfilled }) {
         const patchResult = dispatch(
-          tasksApiSlice.util.updateQueryData(
-            'getTasks',
-            { columnId: newParams[0].columnId, boardId: newParams[0].boardId },
-            (draft) => {
-              Object.assign(draft, newParams);
-            }
-          )
+          tasksApiSlice.util.updateQueryData('getTasksByBoardId', newParams[0].boardId, (draft) => {
+            Object.assign(draft, newParams);
+          })
         );
         queryFulfilled.catch(patchResult.undo);
       },
@@ -77,6 +73,10 @@ export const tasksApiSlice = baseApiSlice.injectEndpoints({
     }),
     getTasksByBoardId: build.query<TasksSetType, string>({
       query: (boardId) => `${ENDPOINTS.TASKSSET}/${boardId}`,
+      providesTags: (result) =>
+        result
+          ? [...result.map(({ _id }) => ({ type: 'Tasks' as const, _id })), 'Tasks']
+          : ['Tasks'],
     }),
   }),
 });

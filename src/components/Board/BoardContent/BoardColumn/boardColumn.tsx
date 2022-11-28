@@ -5,8 +5,8 @@ import {
   useDeleteColumnByIdMutation,
   useDeleteTaskByIdMutation,
   useLazyGetColumnsQuery,
-  useGetTasksQuery,
   useUpdateColumnsSetMutation,
+  useGetTasksByBoardIdQuery,
 } from 'services';
 import { ColumnType, ErrorResponse } from 'types';
 
@@ -23,14 +23,16 @@ const BoardColumn = (column: ColumnType) => {
   const [deleteTaskById] = useDeleteTaskByIdMutation();
   const [getColumns] = useLazyGetColumnsQuery();
   const [updateColumnsSet, { error }] = useUpdateColumnsSetMutation();
-  const { data: tasks } = useGetTasksQuery({ boardId, columnId: _id });
+  const { data: tasks } = useGetTasksByBoardIdQuery(boardId);
 
   const handleDelete = async () => {
     tasks &&
       Promise.all(
-        tasks.map(async ({ _id, columnId, boardId }) => {
-          await deleteTaskById({ _id, columnId, boardId });
-        })
+        tasks
+          .filter((task) => task.columnId === _id)
+          .map(async ({ _id, columnId, boardId }) => {
+            await deleteTaskById({ _id, columnId, boardId });
+          })
       );
 
     await deleteColumnById({ boardId, _id });
@@ -71,7 +73,12 @@ const BoardColumn = (column: ColumnType) => {
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
-            {tasks && tasks.map((task) => <Task {...task} key={task._id} />)}
+            {tasks &&
+              tasks
+                .slice()
+                .filter((task) => task.columnId === _id)
+                .sort((prevTask, curTask) => prevTask.order - curTask.order)
+                .map((task) => <Task {...task} key={task._id} />)}
             {provided.placeholder}
           </CardContent>
         )}

@@ -42,7 +42,6 @@
 .column-tasks {
   display: flex;
   flex-direction: column;
-  gap: 10px;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -52,4 +51,5 @@
   display: flex;
   justify-content: space-between;
   gap: 5px;
+  margin: 5px 0;
 }
