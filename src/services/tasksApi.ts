@@ -7,8 +7,8 @@ export const tasksApiSlice = baseApiSlice.injectEndpoints({
     getTasks: build.query<TasksSetType, Pick<TaskType, 'boardId' | 'columnId'>>({
       query: ({ boardId, columnId }) =>
         `${ENDPOINTS.BOARDS}/${boardId}${ENDPOINTS.COLUMNS}/${columnId}${ENDPOINTS.TASKS}`,
-      transformResponse: (rawResult: TasksSetType) => {
-        return rawResult.sort((a, b) => a.order - b.order);
+      transformResponse: (tasks: TasksSetType) => {
+        return tasks.sort((prevTask, curTask) => prevTask.order - curTask.order);
       },
       providesTags: (result) =>
         result

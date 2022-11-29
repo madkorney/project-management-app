@@ -78,6 +78,7 @@ const ColumnForm = ({ boardId, mode, column, onClose }: ColumnFormType) => {
         <>
           <TextField
             hiddenLabel
+            autoFocus
             defaultValue={column?.title}
             variant="standard"
             size="small"

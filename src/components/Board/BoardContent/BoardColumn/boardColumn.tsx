@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Droppable } from '@hello-pangea/dnd';
+import { Draggable, Droppable } from '@hello-pangea/dnd';
 
 import {
   useDeleteColumnByIdMutation,
@@ -43,7 +43,7 @@ const BoardColumn = (column: ColumnType) => {
       if (order < columns.length - 1) {
         const newParamsColumn = columns
           .filter((column) => column.order > order)
-          .map((column) => ({ _id: column._id, order: column.order - 1 }));
+          .map((column) => ({ ...column, order: column.order - 1 }));
 
         await updateColumnsSet(newParamsColumn);
       }
@@ -55,44 +55,54 @@ const BoardColumn = (column: ColumnType) => {
   };
 
   return (
-    <Card className="board-column" sx={{ width: 240, backgroundColor: '#f4f4f4' }}>
-      {!isEditColumnTitle ? (
-        <CardHeader className="column-title" title={title} onClick={handleClickColumnTitle} />
-      ) : (
-        <ColumnForm
-          mode="edit"
-          boardId={boardId}
-          column={column}
-          onClose={handleClickColumnTitle}
-        />
+    <Draggable draggableId={_id} index={order}>
+      {(provided) => (
+        <Card
+          className="board-column"
+          sx={{ width: 240, backgroundColor: '#f4f4f4' }}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          ref={provided.innerRef}
+        >
+          {!isEditColumnTitle ? (
+            <CardHeader className="column-title" title={title} onClick={handleClickColumnTitle} />
+          ) : (
+            <ColumnForm
+              mode="edit"
+              boardId={boardId}
+              column={column}
+              onClose={handleClickColumnTitle}
+            />
+          )}
+          <Droppable droppableId={_id} type="task">
+            {(provided) => (
+              <CardContent
+                className="column-tasks"
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+              >
+                {tasks &&
+                  tasks
+                    .slice()
+                    .filter((task) => task.columnId === _id)
+                    .sort((prevTask, curTask) => prevTask.order - curTask.order)
+                    .map((task) => <Task {...task} key={task._id} />)}
+                {provided.placeholder}
+              </CardContent>
+            )}
+          </Droppable>
+          <CardActions className="column-actions">
+            <Modal buttonText="Add task" title="Add task" mode="add">
+              <TaskForm mode="add" boardId={boardId} columnId={_id} />
+            </Modal>
+            <Modal title="Delete column" mode="confirm" onConfirm={handleDelete}>
+              <p>You want to delete this column with all tasks in it. Are you sure?</p>
+            </Modal>
+          </CardActions>
+          {error && <Toast message={(error as ErrorResponse).data.message} />}
+        </Card>
       )}
-      <Droppable droppableId={_id}>
-        {(provided) => (
-          <CardContent
-            className="column-tasks"
-            ref={provided.innerRef}
-            {...provided.droppableProps}
-          >
-            {tasks &&
-              tasks
-                .slice()
-                .filter((task) => task.columnId === _id)
-                .sort((prevTask, curTask) => prevTask.order - curTask.order)
-                .map((task) => <Task {...task} key={task._id} />)}
-            {provided.placeholder}
-          </CardContent>
-        )}
-      </Droppable>
-      <CardActions className="column-actions">
-        <Modal buttonText="Add task" title="Add task" mode="add">
-          <TaskForm mode="add" boardId={boardId} columnId={_id} />
-        </Modal>
-        <Modal title="Delete column" mode="confirm" onConfirm={handleDelete}>
-          <p>You want to delete this column with all tasks in it. Are you sure?</p>
-        </Modal>
-      </CardActions>
-      {error && <Toast message={(error as ErrorResponse).data.message} />}
-    </Card>
+    </Draggable>
   );
 };
 

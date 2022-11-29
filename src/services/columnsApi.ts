@@ -3,7 +3,6 @@ import {
   ColumnType,
   ColumnsArrayType,
   ColumnCreateParamsType,
-  ColumnsSetUpdateParamsType,
   ColumnsSetCreateParamsType,
 } from 'types';
 import { REQUEST_METHODS, ENDPOINTS } from 'data/constants';
@@ -12,6 +11,9 @@ export const columnsApiSlice = baseApiSlice.injectEndpoints({
   endpoints: (build) => ({
     getColumns: build.query<ColumnsArrayType, string>({
       query: (boardId) => `${ENDPOINTS.BOARDS}/${boardId}${ENDPOINTS.COLUMNS}`,
+      transformResponse: (columns: ColumnsArrayType) => {
+        return columns.sort((prevColumn, curColumn) => prevColumn.order - curColumn.order);
+      },
       providesTags: (result) =>
         result
           ? [...result.map(({ _id }) => ({ type: 'Columns' as const, _id })), 'Columns']
@@ -56,12 +58,20 @@ export const columnsApiSlice = baseApiSlice.injectEndpoints({
         },
       }),
     }),
-    updateColumnsSet: build.mutation<ColumnsArrayType, ColumnsSetUpdateParamsType>({
+    updateColumnsSet: build.mutation<ColumnsArrayType, ColumnsArrayType>({
       query: (newParams) => ({
         url: ENDPOINTS.COLUMNSSET,
         method: REQUEST_METHODS.PATCH,
-        body: newParams,
+        body: newParams.map(({ _id, order }) => ({ _id, order })),
       }),
+      onQueryStarted(newParams, { dispatch, queryFulfilled }) {
+        const patchResult = dispatch(
+          columnsApiSlice.util.updateQueryData('getColumns', newParams[0].boardId, (draft) => {
+            Object.assign(draft, newParams);
+          })
+        );
+        queryFulfilled.catch(patchResult.undo);
+      },
       invalidatesTags: ['Columns'],
     }),
     createColumnsSet: build.mutation<ColumnsArrayType, ColumnsSetCreateParamsType>({
