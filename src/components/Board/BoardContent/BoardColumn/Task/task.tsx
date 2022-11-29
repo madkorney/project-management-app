@@ -8,7 +8,7 @@ import {
 import { ErrorResponse, TaskType } from 'types';
 
 import { Modal, Toast } from 'components';
-import { TaskForm } from 'components/Forms';
+import { TaskForm } from 'components/Forms/ModalForm';
 
 const Task = (task: TaskType) => {
   const { _id, columnId, boardId, title, order } = task;

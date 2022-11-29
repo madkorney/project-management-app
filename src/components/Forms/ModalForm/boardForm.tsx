@@ -4,11 +4,12 @@ import { useAppSelector } from 'redux/hooks';
 
 import { Autocomplete, Button, TextField } from '@mui/material';
 import { Toast } from 'components';
+import InputModal from './InputModal';
 
 import { useCreateBoardMutation, useUpdateBoardByIdMutation, useGetUsersQuery } from 'services';
-import { BoardParamsType, BoardType, ErrorResponse } from 'types';
+import { BoardType, ErrorResponse, FormPropsType } from 'types';
 
-import './boardForm.scss';
+import './modalForm.scss';
 
 type BoardFormType = {
   mode: 'edit' | 'add';
@@ -22,7 +23,7 @@ const BoardForm = ({ mode, board, onClose }: BoardFormType) => {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<BoardParamsType>({
+  } = useForm<FormPropsType>({
     mode: 'onTouched',
   });
 
@@ -31,7 +32,7 @@ const BoardForm = ({ mode, board, onClose }: BoardFormType) => {
   const userId = useAppSelector((state) => state.auth.user?.id) as string;
   const { data: users } = useGetUsersQuery();
 
-  const onSubmit: SubmitHandler<Omit<BoardParamsType, 'owner'>> = async (data) => {
+  const onSubmit: SubmitHandler<Omit<FormPropsType, 'owner'>> = async (data) => {
     if (mode === 'add') {
       await addBoard({ ...data, owner: userId })
         .unwrap()
@@ -46,46 +47,19 @@ const BoardForm = ({ mode, board, onClose }: BoardFormType) => {
 
   return (
     <form className="form" onSubmit={handleSubmit(onSubmit)}>
-      <TextField
-        autoFocus
-        margin="dense"
-        id="title"
-        label="Board title"
-        error={!!errors?.title?.message}
-        helperText={errors?.title?.message || ' '}
-        defaultValue={board?.title}
-        fullWidth
-        {...register('title', {
-          required: {
-            value: true,
-            message: 'Title cannot be empty',
-          },
-          minLength: {
-            value: 5,
-            message: 'Please write more detailed title',
-          },
-        })}
+      <InputModal
+        errors={errors.title}
+        register={register}
+        label="title"
+        type="Board"
+        value={board?.title as string}
       />
-      <TextField
-        margin="dense"
-        id="description"
-        label="Board description"
-        multiline
-        defaultValue={board?.description}
-        rows={3}
-        error={!!errors?.description?.message}
-        helperText={errors?.description?.message || ' '}
-        fullWidth
-        {...register('description', {
-          required: {
-            value: true,
-            message: 'Description cannot be empty',
-          },
-          minLength: {
-            value: 20,
-            message: 'Please write more detailed description',
-          },
-        })}
+      <InputModal
+        errors={errors.description}
+        register={register}
+        label="description"
+        type="Board"
+        value={board?.description as string}
       />
       {users && (
         <Controller

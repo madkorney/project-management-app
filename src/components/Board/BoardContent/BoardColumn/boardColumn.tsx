@@ -12,7 +12,7 @@ import { ColumnType, ErrorResponse } from 'types';
 
 import { Card, CardContent, CardActions, CardHeader, Typography } from '@mui/material';
 import { Modal, Toast } from 'components';
-import { ColumnForm, TaskForm } from 'components/Forms';
+import { ColumnForm, TaskForm } from 'components/Forms/ModalForm';
 import Task from './Task';
 
 const BoardColumn = (column: ColumnType) => {
@@ -88,7 +88,7 @@ const BoardColumn = (column: ColumnType) => {
               <CardContent
                 sx={{
                   '&::-webkit-scrollbar': {
-                    width: 20,
+                    width: 10,
                   },
                   '&::-webkit-scrollbar-track': {
                     backgroundColor: 'orange',

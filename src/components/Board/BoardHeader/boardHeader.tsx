@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import { Button, Typography } from '@mui/material';
-import { BoardForm } from 'components/Forms';
+import { BoardForm } from 'components/Forms/ModalForm';
 import { Modal } from 'components';
 
 import { BoardType } from 'types';

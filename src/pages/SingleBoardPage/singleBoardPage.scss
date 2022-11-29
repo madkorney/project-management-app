@@ -58,6 +58,11 @@
   overflow-x: hidden;
 }
 
+.column-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
 .task {
   background-color: #e4e4e4;
   display: flex;

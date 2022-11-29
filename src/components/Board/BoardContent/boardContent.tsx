@@ -2,7 +2,7 @@ import { DragDropContext, Droppable, DropResult } from '@hello-pangea/dnd';
 
 import BoardColumn from './BoardColumn';
 import { Modal } from 'components';
-import { ColumnForm } from 'components/Forms';
+import { ColumnForm } from 'components/Forms/ModalForm';
 
 import {
   useGetColumnsQuery,

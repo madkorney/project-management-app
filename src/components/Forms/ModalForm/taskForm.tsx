@@ -4,6 +4,7 @@ import { useAppSelector } from 'redux/hooks';
 
 import { Autocomplete, Button, TextField } from '@mui/material';
 import { Toast } from 'components';
+import InputModal from './InputModal';
 
 import {
   useGetUsersQuery,
@@ -12,9 +13,9 @@ import {
   useGetBoardByIdQuery,
   useGetTasksQuery,
 } from 'services';
-import { ErrorResponse, TaskType } from 'types';
+import { ErrorResponse, FormPropsType, TaskType } from 'types';
 
-import './boardForm.scss';
+import './modalForm.scss';
 
 type TaskFormType = {
   mode: 'edit' | 'add';
@@ -24,15 +25,13 @@ type TaskFormType = {
   onClose?: () => void;
 };
 
-type TaskParamsType = Pick<TaskType, 'title' | 'description' | 'users'>;
-
 const TaskForm = ({ mode, boardId, columnId, task, onClose }: TaskFormType) => {
   const {
     register,
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<TaskParamsType>({
+  } = useForm<FormPropsType>({
     mode: 'onTouched',
   });
 
@@ -49,7 +48,7 @@ const TaskForm = ({ mode, boardId, columnId, task, onClose }: TaskFormType) => {
     { skip: mode === 'edit' }
   );
 
-  const onSubmit: SubmitHandler<TaskParamsType> = async (data) => {
+  const onSubmit: SubmitHandler<FormPropsType> = async (data) => {
     if (mode === 'add') {
       await addTask({ ...data, userId, boardId, columnId, order: tasks?.length as number })
         .unwrap()
@@ -64,46 +63,19 @@ const TaskForm = ({ mode, boardId, columnId, task, onClose }: TaskFormType) => {
 
   return (
     <form className="form" onSubmit={handleSubmit(onSubmit)}>
-      <TextField
-        autoFocus
-        margin="dense"
-        id="title"
-        label="Task title"
-        error={!!errors?.title?.message}
-        helperText={errors?.title?.message || ' '}
-        defaultValue={task?.title}
-        fullWidth
-        {...register('title', {
-          required: {
-            value: true,
-            message: 'Title cannot be empty',
-          },
-          minLength: {
-            value: 5,
-            message: 'Please write more detailed title',
-          },
-        })}
+      <InputModal
+        errors={errors.title}
+        register={register}
+        label="title"
+        type="Task"
+        value={task?.title as string}
       />
-      <TextField
-        margin="dense"
-        id="description"
-        label="Task description"
-        multiline
-        defaultValue={task?.description}
-        rows={3}
-        error={!!errors?.description?.message}
-        helperText={errors?.description?.message || ' '}
-        fullWidth
-        {...register('description', {
-          required: {
-            value: true,
-            message: 'Description cannot be empty',
-          },
-          minLength: {
-            value: 20,
-            message: 'Please write more detailed description',
-          },
-        })}
+      <InputModal
+        errors={errors.description}
+        register={register}
+        label="description"
+        type="Task"
+        value={task?.description as string}
       />
       {users && (
         <Controller
