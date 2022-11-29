@@ -91,4 +91,5 @@ export const {
   useGetTasksSetByIdsOrUserIdOrSearchQuery,
   useUpdateTasksSetMutation,
   useGetTasksByBoardIdQuery,
+  useLazyGetTasksByBoardIdQuery,
 } = tasksApiSlice;

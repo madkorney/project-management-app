@@ -4,7 +4,12 @@ import BoardColumn from './BoardColumn';
 import { Modal } from 'components';
 import { ColumnForm } from 'components/Forms';
 
-import { useGetColumnsQuery, useLazyGetTasksQuery, useUpdateTasksSetMutation } from 'services';
+import {
+  useGetColumnsQuery,
+  useLazyGetTasksByBoardIdQuery,
+  useUpdateTasksSetMutation,
+} from 'services';
+import { isEqualArrays } from 'utils';
 
 type BoardContentProps = {
   boardId: string;
@@ -12,11 +17,11 @@ type BoardContentProps = {
 
 const BoardContent = ({ boardId }: BoardContentProps) => {
   const { data: columns } = useGetColumnsQuery(boardId);
-  const [getTasks] = useLazyGetTasksQuery();
+  const [getTasksByBoardId] = useLazyGetTasksByBoardIdQuery();
   const [updateTasksSet] = useUpdateTasksSetMutation();
 
   const handleDragEnd = async (result: DropResult) => {
-    const { destination, source, draggableId } = result;
+    const { destination, source } = result;
 
     if (!destination) {
       return;
@@ -26,39 +31,43 @@ const BoardContent = ({ boardId }: BoardContentProps) => {
       return;
     }
 
-    const startColumnTasks = (await getTasks({ columnId: source.droppableId, boardId }, true)).data;
-    const endColumnTasks = (await getTasks({ columnId: destination.droppableId, boardId }, true))
-      .data;
+    const allTasks = (await getTasksByBoardId(boardId, true)).data;
 
-    if (startColumnTasks) {
-      if (startColumnTasks === endColumnTasks) {
+    if (allTasks) {
+      const startColumnTasks = allTasks
+        .slice()
+        .filter((task) => task.columnId === source.droppableId)
+        .sort((prevTask, curTask) => prevTask.order - curTask.order);
+      const endColumnTasks = allTasks
+        .slice()
+        .filter((task) => task.columnId === destination.droppableId)
+        .sort((prevTask, curTask) => prevTask.order - curTask.order);
+
+      if (isEqualArrays(startColumnTasks, endColumnTasks)) {
         const newTasks = startColumnTasks.slice();
+        const movedElement = newTasks.splice(source.index, 1);
+        newTasks.splice(destination.index, 0, ...movedElement);
 
-        newTasks.splice(source.index, 1);
-        newTasks.splice(
-          destination.index,
-          0,
-          ...startColumnTasks.filter((task) => task._id === draggableId)
-        );
-
-        await updateTasksSet(newTasks.map((task, index) => ({ ...task, order: index })));
+        await updateTasksSet([
+          ...allTasks.filter(
+            (task) => !newTasks.map((val) => val.columnId).includes(task.columnId)
+          ),
+          ...newTasks.map((task, index) => ({ ...task, order: index })),
+        ]);
         return;
       }
 
       const newStartTasks = startColumnTasks.slice();
-      newStartTasks.splice(source.index, 1);
-      console.log(newStartTasks);
+      const movedElement = newStartTasks.splice(source.index, 1);
 
       if (endColumnTasks) {
         const newEndTasks = endColumnTasks.slice();
-        newEndTasks.splice(
-          destination.index,
-          0,
-          ...startColumnTasks.filter((task) => task._id === draggableId)
-        );
-        console.log(newEndTasks);
+        newEndTasks.splice(destination.index, 0, ...movedElement);
 
-        updateTasksSet([
+        await updateTasksSet([
+          ...allTasks.filter(
+            (task) => ![source.droppableId, destination.droppableId].includes(task.columnId)
+          ),
           ...newStartTasks.map((task, index) => ({ ...task, order: index })),
           ...newEndTasks.map((task, index) => ({
             ...task,
