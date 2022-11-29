@@ -9,12 +9,25 @@
   display: flex;
   align-items: center;
   gap: 20px;
+  flex-wrap: wrap;
+  max-width: 526px;
+}
+
+.edit-board-info {
+  display: flex;
+  margin: 0 auto;
+}
+
+.board-about {
+  max-width: 228px;
 }
 
 .board-content {
   position: relative;
   flex-grow: 1;
   width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .board {
@@ -25,18 +38,17 @@
   left: 0;
   display: flex;
   align-items: flex-start;
-  gap: 10px;
-  overflow-x: auto;
-  overflow-y: hidden;
   white-space: nowrap;
   padding-bottom: 10px;
 }
 
 .board-column {
+  margin: 0 5px;
   min-width: 240px;
   display: flex;
   flex-direction: column;
   max-height: 100%;
+  transition: 0.3s all;
 }
 
 .column-tasks {
@@ -52,4 +64,9 @@
   justify-content: space-between;
   gap: 5px;
   margin: 5px 0;
+}
+
+.MuiCardHeader-content {
+  flex: 1 1 auto;
+  width: 100%;
 }

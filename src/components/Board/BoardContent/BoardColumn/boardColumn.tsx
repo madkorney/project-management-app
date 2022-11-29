@@ -10,7 +10,7 @@ import {
 } from 'services';
 import { ColumnType, ErrorResponse } from 'types';
 
-import { Card, CardContent, CardActions, CardHeader } from '@mui/material';
+import { Card, CardContent, CardActions, CardHeader, Typography } from '@mui/material';
 import { Modal, Toast } from 'components';
 import { ColumnForm, TaskForm } from 'components/Forms';
 import Task from './Task';
@@ -65,7 +65,16 @@ const BoardColumn = (column: ColumnType) => {
           ref={provided.innerRef}
         >
           {!isEditColumnTitle ? (
-            <CardHeader className="column-title" title={title} onClick={handleClickColumnTitle} />
+            <CardHeader
+              className="column-title"
+              disableTypography
+              title={
+                <Typography variant="h5" noWrap>
+                  {title}
+                </Typography>
+              }
+              onClick={handleClickColumnTitle}
+            />
           ) : (
             <ColumnForm
               mode="edit"
@@ -77,6 +86,21 @@ const BoardColumn = (column: ColumnType) => {
           <Droppable droppableId={_id} type="task">
             {(provided) => (
               <CardContent
+                sx={{
+                  '&::-webkit-scrollbar': {
+                    width: 20,
+                  },
+                  '&::-webkit-scrollbar-track': {
+                    backgroundColor: 'orange',
+                    borderRadius: 2,
+                  },
+                  '&::-webkit-scrollbar-thumb': {
+                    backgroundColor: 'red',
+                    borderRadius: 2,
+                  },
+                  p: '0 5px',
+                  minHeight: 30,
+                }}
                 className="column-tasks"
                 ref={provided.innerRef}
                 {...provided.droppableProps}

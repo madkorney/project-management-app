@@ -13,6 +13,7 @@ import {
   DialogContent,
   DialogTitle,
   IconButton,
+  Typography,
 } from '@mui/material';
 
 type ModalPropsType = {
@@ -55,6 +56,7 @@ const Modal = ({
         onClick={handleClickOpen}
         variant={mode === 'confirm' ? 'contained' : undefined}
         className={style}
+        size="small"
         startIcon={
           mode === 'confirm' ? (
             <DeleteIcon />
@@ -67,7 +69,9 @@ const Modal = ({
           )
         }
       >
-        <span className={styleText}>{buttonText}</span>
+        <Typography className={styleText} noWrap={mode === 'task'}>
+          {buttonText}
+        </Typography>
       </Button>
       <Dialog open={open} onClose={handleClose} disableRestoreFocus>
         <DialogTitle>

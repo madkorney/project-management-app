@@ -13,13 +13,17 @@ const BoardHeader = (board: BoardType) => (
         &lt; Back to boards
       </Link>
     </Button>
-    <div className="board-about">
-      <Typography variant="h4">{board.title}</Typography>
-      <Typography>{board.description}</Typography>
+    <div className="edit-board-info">
+      <div className="board-about">
+        <Typography variant="h4" noWrap>
+          {board.title}
+        </Typography>
+        <Typography noWrap>{board.description}</Typography>
+      </div>
+      <Modal buttonText="Edit" title="Edit board" mode="edit">
+        <BoardForm mode="edit" board={board} />
+      </Modal>
     </div>
-    <Modal buttonText="Edit" title="Edit board" mode="edit">
-      <BoardForm mode="edit" board={board} />
-    </Modal>
   </div>
 );
 

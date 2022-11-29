@@ -2,6 +2,11 @@
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
-  align-items: first baseline;
-  padding: 20px;
+  align-content: flex-start;
+}
+
+.board-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }

@@ -10,9 +10,9 @@ const BoardsPage = () => {
   const { data: boards } = useGetBoardsSetByUserIdQuery(userId);
 
   return (
-    <div className="boards-container">
+    <section className="boards-container">
       {boards && boards.map((board) => <CardBoard {...board} key={board._id} />)}
-    </div>
+    </section>
   );
 };
 

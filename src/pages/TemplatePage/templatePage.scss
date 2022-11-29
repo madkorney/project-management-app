@@ -3,8 +3,13 @@
 .main-container {
   flex-grow: 1;
   display: flex;
+  overflow: auto;
   max-width: $MAX_WIDTH;
   width: 100%;
-  padding: 0 20px;
+  padding: 20px;
   margin: 0 auto;
+
+  @media screen and (max-width: 768px) {
+    padding: 10px;    
+  }
 }
