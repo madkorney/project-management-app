@@ -7,11 +7,9 @@
   "userPage": "This is your profile page. Here you can update your details or delete your account completely.",
   "delUser": "delete user",
   "updateUser": "update",
-  "formUser" : {
-    "password": "password",
-    "login": "login",
-    "name": "name",
-    "signIn": "Sign In",
-    "signUp": "Sign Up"
-  }
+  "password": "password",
+  "login": "login",
+  "name": "name",
+  "signIn": "Sign In",
+  "signUp": "Sign Up"
 }

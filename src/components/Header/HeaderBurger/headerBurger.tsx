@@ -96,7 +96,7 @@ export const HeaderBurger = ({ func, ...ask }: BurgerProps) => {
           >
             <ul className={styles.headerNavAdaptive} onClick={() => toggleDrawer(false)}>
               {!isAuthorized ? (
-                <HeaderUserLinks onSignIn={func.goSignIn} onSignUp={func.goSignUp} />
+                <HeaderUserLinks onSignIn={func.goSignIn} onSignUp={func.goSignUp} {...ask} />
               ) : (
                 <HeaderUserButtons
                   openUserPage={isOpenUserPage}

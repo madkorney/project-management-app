@@ -65,7 +65,13 @@ const Header = () => {
         <nav className={styles.headerNav}>
           <ul className={!isAuthorized ? styles.headerNav : styles.headerNavUser}>
             {!isAuthorized ? (
-              <HeaderUserLinks onSignIn={goSignIn} onSignUp={goSignUp} />
+              <HeaderUserLinks
+                onSignIn={goSignIn}
+                onSignUp={goSignUp}
+                langClick={handleLanguage}
+                buttonLangText={lang}
+                t={t}
+              />
             ) : (
               <HeaderUserButtons
                 openUserPage={isOpenUserPage}

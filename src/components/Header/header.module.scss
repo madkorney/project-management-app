@@ -23,7 +23,17 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    gap: 10px;
+    gap: 14px;
+    & li {
+      & > button {
+        width: inherit;
+      }
+    }
+    & li:last-child{
+      & > button span {
+        left: 0;
+      }
+    }
     @media (max-width: 899px) {
       display: none;
     }
@@ -32,7 +42,7 @@
   &NavUser {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 18px;
     justify-content: space-around;
 
     & li {

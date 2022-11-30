@@ -1,10 +1,6 @@
 import { Children, cloneElement, isValidElement, ReactNode, useState } from 'react';
 
-import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
-import DeleteIcon from '@mui/icons-material/Delete';
 import CloseIcon from '@mui/icons-material/Close';
-import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
-import BorderColorIcon from '@mui/icons-material/BorderColor';
 
 import {
   Button,
@@ -13,7 +9,6 @@ import {
   DialogContent,
   DialogTitle,
   IconButton,
-  Typography,
 } from '@mui/material';
 import { ModalButton } from './ModalButton/modalButton';
 
