@@ -4,6 +4,8 @@ import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
 
+import styles from './ModalButton.module.scss';
+
 type ModalButtonProps = {
   onClick: () => void;
   style?: string;
@@ -46,15 +48,8 @@ export const ModalButton = ({ onClick, style, buttonText, mode, styleText }: Mod
       <Button
         onClick={onClick}
         variant={mode === 'confirm' ? 'contained' : undefined}
+        className={styles.MuiButtonBase}
         size="small"
-        sx={{
-          fontSize: 18,
-          'span:first-child': {
-            marginRight: 0,
-            display: 'flex',
-            alignItems: 'center',
-          },
-        }}
         startIcon={<DeleteIcon sx={{ width: '22px', height: '22px', marginRight: 0 }} />}
       />
     );
