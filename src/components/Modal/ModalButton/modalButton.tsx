@@ -35,9 +35,7 @@ export const ModalButton = ({ onClick, style, buttonText, mode, styleText }: Mod
         }
       >
         {mode === 'task' || mode == 'add' ? (
-          <Typography className={styleText} noWrap={mode === 'task'}>
-            {buttonText}
-          </Typography>
+          <Typography noWrap={mode === 'task'}>{buttonText}</Typography>
         ) : (
           <span className={styleText}>{buttonText}</span>
         )}

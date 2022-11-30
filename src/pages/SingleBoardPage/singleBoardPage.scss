@@ -69,6 +69,20 @@
   justify-content: space-between;
   gap: 5px;
   margin: 5px 0;
+  & > button:first-child {
+    color: #0f0435;
+    transition: background .3s linear;
+    &:hover{
+      background: #c5c4c9;
+    }
+  }
+  & > button:last-child {
+    background: #4366a5;
+    transition: background .3s linear, color .3s linear;
+    &:hover{
+      background: #46597a;
+    }
+  }
 }
 
 .MuiCardHeader-content {

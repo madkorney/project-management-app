@@ -60,10 +60,14 @@ export const HeaderBurger = ({ func, ...ask }: BurgerProps) => {
       >
         <MenuIcon
           sx={{
-            fill: 'blue',
+            fill: '#fff',
             width: '90%',
             height: '80%',
             padding: '3px',
+            transition: 'fill .3s linear',
+            ':hover': {
+              fill: '#7b98fa',
+            },
           }}
         />
       </IconButton>
