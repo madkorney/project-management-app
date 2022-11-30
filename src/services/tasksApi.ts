@@ -1,5 +1,5 @@
 import { baseApiSlice } from './baseApi';
-import { TaskType, TasksSetType, TasksSetParamsType } from 'types';
+import { TaskType, TasksSetType } from 'types';
 import { REQUEST_METHODS, ENDPOINTS } from 'data/constants';
 
 export const tasksApiSlice = baseApiSlice.injectEndpoints({
@@ -7,6 +7,9 @@ export const tasksApiSlice = baseApiSlice.injectEndpoints({
     getTasks: build.query<TasksSetType, Pick<TaskType, 'boardId' | 'columnId'>>({
       query: ({ boardId, columnId }) =>
         `${ENDPOINTS.BOARDS}/${boardId}${ENDPOINTS.COLUMNS}/${columnId}${ENDPOINTS.TASKS}`,
+      transformResponse: (tasks: TasksSetType) => {
+        return tasks.sort((prevTask, curTask) => prevTask.order - curTask.order);
+      },
       providesTags: (result) =>
         result
           ? [...result.map(({ _id }) => ({ type: 'Tasks' as const, _id })), 'Tasks']
@@ -52,21 +55,35 @@ export const tasksApiSlice = baseApiSlice.injectEndpoints({
         },
       }),
     }),
-    updateTasksSet: build.mutation<TasksSetType, TasksSetParamsType>({
+    updateTasksSet: build.mutation<TasksSetType, TasksSetType>({
       query: (newParams) => ({
         url: ENDPOINTS.TASKSSET,
         method: REQUEST_METHODS.PATCH,
-        body: newParams,
+        body: newParams.map(({ _id, order, columnId }) => ({ _id, order, columnId })),
       }),
+      onQueryStarted(newParams, { dispatch, queryFulfilled }) {
+        const patchResult = dispatch(
+          tasksApiSlice.util.updateQueryData('getTasksByBoardId', newParams[0].boardId, (draft) => {
+            Object.assign(draft, newParams);
+          })
+        );
+        queryFulfilled.catch(patchResult.undo);
+      },
+      invalidatesTags: ['Tasks'],
     }),
     getTasksByBoardId: build.query<TasksSetType, string>({
       query: (boardId) => `${ENDPOINTS.TASKSSET}/${boardId}`,
+      providesTags: (result) =>
+        result
+          ? [...result.map(({ _id }) => ({ type: 'Tasks' as const, _id })), 'Tasks']
+          : ['Tasks'],
     }),
   }),
 });
 
 export const {
   useGetTasksQuery,
+  useLazyGetTasksQuery,
   useCreateTaskMutation,
   useGetTaskByIdQuery,
   useUpdateTaskByIdMutation,
@@ -74,4 +91,5 @@ export const {
   useGetTasksSetByIdsOrUserIdOrSearchQuery,
   useUpdateTasksSetMutation,
   useGetTasksByBoardIdQuery,
+  useLazyGetTasksByBoardIdQuery,
 } = tasksApiSlice;

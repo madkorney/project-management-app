@@ -1,8 +1,4 @@
 import { Children, cloneElement, isValidElement, ReactNode, useState } from 'react';
-import { useAppDispatch } from 'redux/hooks';
-import { setOpenUserPage } from 'redux/authSlice';
-
-import { ModalText } from 'pages/UserPage/userPage';
 
 import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -17,6 +13,7 @@ import {
   DialogContent,
   DialogTitle,
   IconButton,
+  Typography,
 } from '@mui/material';
 
 type ModalPropsType = {
@@ -39,7 +36,7 @@ const Modal = ({
   styleText,
 }: ModalPropsType) => {
   const [open, setOpen] = useState(false);
-  const dispatch = useAppDispatch();
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -51,9 +48,6 @@ const Modal = ({
   const handleConfirm = () => {
     onConfirm?.();
     setOpen(false);
-    if (title === ModalText.DELETE_USER) {
-      dispatch(setOpenUserPage(false));
-    }
   };
 
   return (
@@ -62,6 +56,7 @@ const Modal = ({
         onClick={handleClickOpen}
         variant={mode === 'confirm' ? 'contained' : undefined}
         className={style}
+        size="small"
         startIcon={
           mode === 'confirm' ? (
             <DeleteIcon />
@@ -74,9 +69,11 @@ const Modal = ({
           )
         }
       >
-        <span className={styleText}>{buttonText}</span>
+        <Typography className={styleText} noWrap={mode === 'task'}>
+          {buttonText}
+        </Typography>
       </Button>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open} onClose={handleClose} disableRestoreFocus>
         <DialogTitle>
           {title}
           {mode !== 'confirm' && (

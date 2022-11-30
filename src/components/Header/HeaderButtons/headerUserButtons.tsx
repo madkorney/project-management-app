@@ -1,5 +1,5 @@
-import Modal from 'components/Modal/modal';
-import BoardForm from 'components/Forms/boardForm';
+import Modal from 'components/Modal';
+import { BoardForm } from 'components/Forms/ModalForm';
 
 import { Button } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
@@ -13,7 +13,6 @@ type UserButtonProps = {
   onClickOut: () => void;
   onClickUser: () => void;
   onGoBoards?: () => void;
-  style?: string;
 };
 
 export const HeaderUserButtons = ({
@@ -21,7 +20,6 @@ export const HeaderUserButtons = ({
   onClickUser,
   onClickOut,
   onGoBoards,
-  style,
 }: UserButtonProps) => {
   return (
     <>

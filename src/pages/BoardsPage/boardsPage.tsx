@@ -7,12 +7,12 @@ import './boardsPage.scss';
 
 const BoardsPage = () => {
   const userId = useAppSelector((store) => store.auth.user?.id) as string;
-  const { data } = useGetBoardsSetByUserIdQuery(userId);
+  const { data: boards } = useGetBoardsSetByUserIdQuery(userId);
 
   return (
-    <div className="boards-container">
-      {data && data.map((board) => <CardBoard {...board} key={board._id} />)}
-    </div>
+    <section className="boards-container">
+      {boards && boards.map((board) => <CardBoard {...board} key={board._id} />)}
+    </section>
   );
 };
 

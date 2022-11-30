@@ -1,14 +1,15 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { Button, IconButton, TextField } from '@mui/material';
-import { Toast } from 'components';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
+import { Toast } from 'components';
+import InputModal from './InputModal';
 
 import { useCreateColumnMutation, useUpdateColumnByIdMutation, useGetColumnsQuery } from 'services';
-import { ColumnType, ErrorResponse } from 'types';
+import { ColumnType, ErrorResponse, FormPropsType } from 'types';
 
-import './boardForm.scss';
+import './modalForm.scss';
 
 type ColumnFormType = {
   mode: 'add' | 'edit';
@@ -22,28 +23,34 @@ const ColumnForm = ({ boardId, mode, column, onClose }: ColumnFormType) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<{ title: string }>({
+  } = useForm<FormPropsType>({
     mode: 'onTouched',
   });
 
   const [addColumn, { error: addError }] = useCreateColumnMutation();
   const [updateColumn, { error: updateError }] = useUpdateColumnByIdMutation();
-  const { data: columns } = useGetColumnsQuery(boardId);
+  const { data: columns, error: getError } = useGetColumnsQuery(boardId, { skip: mode === 'edit' });
 
-  const onSubmit: SubmitHandler<{ title: string }> = async (data) => {
-    if (mode === 'add') {
-      await addColumn({ ...data, boardId, order: columns?.length as number })
-        .unwrap()
-        .then(() => onClose?.());
-    }
-    if (mode === 'edit') {
-      if (data.title !== (column?.title as string)) {
-        await updateColumn({ ...(column as ColumnType), ...data })
+  const onSubmit: SubmitHandler<Pick<FormPropsType, 'title'>> = async ({ title }) => {
+    switch (mode) {
+      case 'add': {
+        await addColumn({ title, boardId, order: columns?.length as number })
           .unwrap()
           .then(() => onClose?.());
-      } else {
-        onClose?.();
+        break;
       }
+      case 'edit': {
+        if (title !== (column?.title as string)) {
+          await updateColumn({ ...(column as ColumnType), title })
+            .unwrap()
+            .then(() => onClose?.());
+        } else {
+          onClose?.();
+        }
+        break;
+      }
+      default:
+        break;
     }
   };
 
@@ -51,23 +58,12 @@ const ColumnForm = ({ boardId, mode, column, onClose }: ColumnFormType) => {
     <form className={`form ${mode}`} onSubmit={handleSubmit(onSubmit)}>
       {mode === 'add' ? (
         <>
-          <TextField
-            margin="dense"
-            id="title"
-            label="Column title"
-            error={!!errors?.title?.message}
-            helperText={errors.title?.message || ' '}
-            fullWidth
-            {...register('title', {
-              required: {
-                value: true,
-                message: 'Title cannot be empty',
-              },
-              minLength: {
-                value: 5,
-                message: 'Please write more detailed title',
-              },
-            })}
+          <InputModal
+            errors={errors.title}
+            register={register}
+            label="title"
+            type="Column"
+            value={''}
           />
           <Button variant="contained" type="submit">
             Add
@@ -77,9 +73,11 @@ const ColumnForm = ({ boardId, mode, column, onClose }: ColumnFormType) => {
         <>
           <TextField
             hiddenLabel
+            autoFocus
             defaultValue={column?.title}
             variant="standard"
             size="small"
+            error={!!errors?.title?.message}
             {...register('title', {
               required: {
                 value: true,
@@ -101,6 +99,7 @@ const ColumnForm = ({ boardId, mode, column, onClose }: ColumnFormType) => {
       )}
       {addError && <Toast message={(addError as ErrorResponse).data.message} />}
       {updateError && <Toast message={(updateError as ErrorResponse).data.message} />}
+      {getError && <Toast message={(getError as ErrorResponse).data.message} />}
     </form>
   );
 };

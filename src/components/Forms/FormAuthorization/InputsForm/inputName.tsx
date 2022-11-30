@@ -9,6 +9,7 @@ export const InputName = ({ register, errors }: FormInputsProps) => {
     <FormControl sx={{ m: 1, maxWidth: '30ch', width: '90%' }} variant="outlined">
       <TextField
         label="Name"
+        autoFocus
         {...register('name', {
           required: { value: true, message: 'cannot be empty' },
           minLength: {
