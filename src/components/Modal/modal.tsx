@@ -15,6 +15,7 @@ import {
   IconButton,
   Typography,
 } from '@mui/material';
+import { ModalButton } from './ModalButton/modalButton';
 
 type ModalPropsType = {
   children: JSX.Element;
@@ -52,27 +53,13 @@ const Modal = ({
 
   return (
     <>
-      <Button
+      <ModalButton
         onClick={handleClickOpen}
-        variant={mode === 'confirm' ? 'contained' : undefined}
-        className={style}
-        size="small"
-        startIcon={
-          mode === 'confirm' ? (
-            <DeleteIcon />
-          ) : mode === 'add' ? (
-            <PlaylistAddIcon />
-          ) : mode === 'edit' ? (
-            <BorderColorIcon />
-          ) : mode === 'task' ? undefined : (
-            <DashboardCustomizeIcon className={styleText} />
-          )
-        }
-      >
-        <Typography className={styleText} noWrap={mode === 'task'}>
-          {buttonText}
-        </Typography>
-      </Button>
+        mode={mode}
+        style={style}
+        styleText={styleText}
+        buttonText={buttonText}
+      />
       <Dialog open={open} onClose={handleClose} disableRestoreFocus>
         <DialogTitle>
           {title}
