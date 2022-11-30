@@ -7,12 +7,16 @@ import { useAppSelector } from 'redux/hooks';
 import { HeaderUserButtons, HeaderUserLinks } from '../HeaderButtons';
 
 import styles from '../header.module.scss';
+import { TFunction } from 'i18next';
 
 type BurgerProps = {
   func: { [name: string]: () => void };
+  langClick: () => void;
+  buttonLangText: string;
+  t: TFunction<'translation', undefined>;
 };
 
-export const HeaderBurger = ({ func }: BurgerProps) => {
+export const HeaderBurger = ({ func, ...ask }: BurgerProps) => {
   const { isAuthorized, isOpenUserPage } = useAppSelector((state) => state.auth);
 
   const [open, setOpen] = useState(false);
@@ -99,6 +103,7 @@ export const HeaderBurger = ({ func }: BurgerProps) => {
                   onClickOut={func.goOut}
                   onClickUser={func.goUserProfile}
                   onGoBoards={func.goBoards}
+                  {...ask}
                 />
               )}
             </ul>

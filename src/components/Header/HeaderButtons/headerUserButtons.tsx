@@ -5,13 +5,18 @@ import { Button } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import LanguageIcon from '@mui/icons-material/Language';
 
 import styles from '../header.module.scss';
+import { TFunction } from 'i18next';
 
 type UserButtonProps = {
   openUserPage: boolean;
   onClickOut: () => void;
   onClickUser: () => void;
+  langClick: () => void;
+  buttonLangText: string;
+  t: TFunction<'translation', undefined>;
   onGoBoards?: () => void;
 };
 
@@ -20,12 +25,15 @@ export const HeaderUserButtons = ({
   onClickUser,
   onClickOut,
   onGoBoards,
+  langClick,
+  buttonLangText,
+  t,
 }: UserButtonProps) => {
   return (
     <>
       <li onClick={onGoBoards}>
         <Modal
-          buttonText="Add board"
+          buttonText={`${t('addBoard')}`}
           title="Add new board"
           style={styles.MuiButtonBase}
           styleText={styles.headerTextButton}
@@ -39,7 +47,7 @@ export const HeaderUserButtons = ({
           startIcon={<DashboardIcon className={styles.headerButton} />}
           onClick={onClickUser}
         >
-          <span className={styles.headerTextButton}>boards</span>
+          <span className={styles.headerTextButton}>{t('boards')}</span>
         </Button>
       </li>
 
@@ -50,7 +58,7 @@ export const HeaderUserButtons = ({
             startIcon={<PersonIcon className={styles.headerButton} />}
             onClick={onClickUser}
           >
-            <span className={styles.headerTextButton}>profile</span>
+            <span className={styles.headerTextButton}>{t('profile')}</span>
           </Button>
         </li>
       )}
@@ -60,7 +68,16 @@ export const HeaderUserButtons = ({
           startIcon={<LogoutIcon className={styles.headerButton} />}
           onClick={onClickOut}
         >
-          <span className={styles.headerTextButton}>Log Out</span>
+          <span className={styles.headerTextButton}>{t('logOut')}</span>
+        </Button>
+      </li>
+      <li>
+        <Button
+          className={styles.MuiButtonBase}
+          startIcon={<LanguageIcon className={styles.headerButton} />}
+          onClick={langClick}
+        >
+          <span className={styles.headerTextButton}>{buttonLangText === 'ru' ? 'en' : 'ru'}</span>
         </Button>
       </li>
     </>

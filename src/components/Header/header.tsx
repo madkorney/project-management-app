@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
+import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { logOut, setOpenUserPage } from 'redux/authSlice';
 
@@ -13,6 +14,8 @@ import styles from './header.module.scss';
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { t, i18n } = useTranslation();
+  const [lang, setLang] = useState(localStorage.getItem('lang') || 'en');
   const { isAuthorized, isOpenUserPage } = useAppSelector((state) => state.auth);
 
   const goOut = () => {
@@ -39,6 +42,18 @@ const Header = () => {
     navigate('/sign-up');
   };
 
+  const handleLanguage = () => {
+    if (lang === 'en') {
+      setLang('ru');
+      i18n.changeLanguage('ru');
+      localStorage.setItem('lang', 'ru');
+    }
+    if (lang === 'ru') {
+      setLang('en');
+      i18n.changeLanguage('en');
+      localStorage.setItem('lang', 'en');
+    }
+  };
   useEffect(() => {
     location.pathname.includes('user-page') && dispatch(setOpenUserPage(true));
   }, [dispatch]);
@@ -57,6 +72,9 @@ const Header = () => {
                 onClickOut={goOut}
                 onClickUser={goUserProfile}
                 onGoBoards={goBoards}
+                langClick={handleLanguage}
+                buttonLangText={lang}
+                t={t}
               />
             )}
           </ul>
@@ -69,6 +87,9 @@ const Header = () => {
             goUserProfile,
             goBoards,
           }}
+          langClick={handleLanguage}
+          buttonLangText={lang}
+          t={t}
         />
       </div>
     </header>
