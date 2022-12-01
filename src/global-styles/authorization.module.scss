@@ -12,9 +12,13 @@
   box-shadow: 0 0 15px #4b66ea85;
   padding: 8px;
 
+
   &Container {
     align-self: center;
     margin: 0 auto;
+    @media (max-width: 557px) {
+      margin: auto;
+    }
   }
 
   &Button {
@@ -73,4 +77,5 @@
       padding-bottom: 20px;
     }
   }
+
 }
