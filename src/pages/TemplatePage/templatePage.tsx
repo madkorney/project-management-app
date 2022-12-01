@@ -14,7 +14,7 @@ const TemplatePage = () => {
   const [colorHeader, setColorHeader] = useState(ColorHeader.initColor);
 
   const handleScroll = (ev: React.UIEvent<HTMLElement>) => {
-    if (ev.currentTarget.scrollTop > 40 && colorHeader === ColorHeader.initColor) {
+    if (ev.currentTarget.scrollTop > 20 && colorHeader === ColorHeader.initColor) {
       setColorHeader(ColorHeader.createColor);
     } else if (ev.currentTarget.scrollTop < 40 && colorHeader === ColorHeader.createColor) {
       setColorHeader(ColorHeader.initColor);
