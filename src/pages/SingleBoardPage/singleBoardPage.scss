@@ -39,7 +39,18 @@
   display: flex;
   align-items: flex-start;
   white-space: nowrap;
-  padding-bottom: 10px;
+  padding: 40px 0 10px;
+
+  & > button {
+    position: absolute;
+    left: 6px;
+    top: 2px;
+    background: #fff;
+    border-radius: 5px;
+    border: 1px solid #0f0435;
+    padding: 2px 5px;
+    color: #0f0435;
+  }
 }
 
 .board-column {
@@ -69,15 +80,18 @@
   justify-content: space-between;
   gap: 5px;
   margin: 5px 0;
+
   & > button:first-child {
     color: #0f0435;
     transition: background .3s linear;
-    &:hover{
+
+    &:hover {
       background: #c5c4c9;
     }
   }
+
   & > button:last-child {
-    &:hover{
+    &:hover {
       background: #6386c700
     }
   }
