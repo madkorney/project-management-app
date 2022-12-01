@@ -60,7 +60,7 @@ const CardBoard = (board: BoardType) => {
       </CardContent>
       <CardActions sx={{ p: 2, paddingTop: 1 }}>
         <Button
-          size="small"
+          size="medium"
           variant="contained"
           sx={{ marginRight: 'auto' }}
           aria-label="Delete board"

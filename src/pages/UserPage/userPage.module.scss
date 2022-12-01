@@ -8,9 +8,10 @@
   align-items: center;
   border-radius: 15px;
   background:#fff;
-  box-shadow: 0 0 15px rgba(68, 49, 49, 0.63);
+  box-shadow: 0 0 15px #443131a1
 
   &Form {
+    width: 55%;
     display: flex;
     flex-direction: column;
     align-items: center;

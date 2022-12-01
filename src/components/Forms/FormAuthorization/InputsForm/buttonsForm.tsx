@@ -17,7 +17,7 @@ export const ButtonsForm = ({ userPage, formName, isConfirm }: ButtonProps) => {
   const { t } = useTranslation();
   return userPage ? (
     <div className={styles.formGroupButton}>
-      <Button variant="contained" type="submit" startIcon={<SendIcon />} size="small">
+      <Button variant="contained" type="submit" startIcon={<SendIcon />} size="medium">
         {t('updateUser')}
       </Button>
       <Modal

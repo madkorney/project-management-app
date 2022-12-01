@@ -77,10 +77,8 @@
     }
   }
   & > button:last-child {
-    background: #4366a5;
-    transition: background .3s linear, color .3s linear;
     &:hover{
-      background: #46597a;
+      background: #6386c700
     }
   }
 }

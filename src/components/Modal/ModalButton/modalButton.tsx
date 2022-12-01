@@ -1,4 +1,4 @@
-import { Button, Typography } from '@mui/material';
+import { Button, Typography, IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
@@ -21,7 +21,7 @@ export const ModalButton = ({ onClick, style, buttonText, mode, styleText }: Mod
         onClick={onClick}
         variant={mode === 'confirm' ? 'contained' : undefined}
         className={style}
-        size={mode === 'confirm' ? 'small' : undefined}
+        size="medium"
         startIcon={
           mode === 'confirm' ? (
             <DeleteIcon />
@@ -30,7 +30,7 @@ export const ModalButton = ({ onClick, style, buttonText, mode, styleText }: Mod
           ) : mode === 'edit' ? (
             <BorderColorIcon />
           ) : mode === 'task' ? undefined : (
-            <DashboardCustomizeIcon className={styleText} />
+            <DashboardCustomizeIcon />
           )
         }
       >
@@ -43,13 +43,9 @@ export const ModalButton = ({ onClick, style, buttonText, mode, styleText }: Mod
     );
   } else {
     return (
-      <Button
-        onClick={onClick}
-        variant={mode === 'confirm' ? 'contained' : undefined}
-        className={styles.MuiButtonBase}
-        size="small"
-        startIcon={<DeleteIcon sx={{ width: '22px', height: '22px', marginRight: 0 }} />}
-      />
+      <IconButton onClick={onClick} className={styles.MuiButtonBase} size="small">
+        <DeleteIcon className={styles.MuiSvgIcon} />
+      </IconButton>
     );
   }
 };
