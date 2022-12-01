@@ -1,4 +1,4 @@
-import { Suspense, UIEventHandler, useEffect, useState } from 'react';
+import { Suspense, useState, UIEvent } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import { Header, Footer, Loader } from 'components';
@@ -13,7 +13,7 @@ enum ColorHeader {
 const TemplatePage = () => {
   const [colorHeader, setColorHeader] = useState(ColorHeader.initColor);
 
-  const handleScroll = (ev: React.UIEvent<HTMLElement>) => {
+  const handleScroll = (ev: UIEvent<HTMLElement>) => {
     if (ev.currentTarget.scrollTop > 20 && colorHeader === ColorHeader.initColor) {
       setColorHeader(ColorHeader.createColor);
     } else if (ev.currentTarget.scrollTop < 40 && colorHeader === ColorHeader.createColor) {
