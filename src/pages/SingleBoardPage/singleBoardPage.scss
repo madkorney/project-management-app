@@ -15,6 +15,11 @@
     border: 1px solid #0f0435;
     padding: 2px 5px;
     color: #0f0435;
+    transition: background .3s linear;
+
+    &:hover {
+      background: #989EE02D;
+    }
   }
 }
 
@@ -34,21 +39,33 @@
     border: 1px solid #0f0435;
     padding: 4px 5px;
     color: #0f0435;
+    transition: background .3s linear;
+
+    &:hover {
+      background: #989EE02D;
+    }
   }
+
   @media (max-width: 528px) {
     align-items: center;
+    gap: 5px;
   }
 }
 
 .edit-board-info {
   display: flex;
   align-items: center;
+
   & > button {
     height: 30px;
     max-width: 118px;
     margin-left: 6px;
     color: #0f0435;
-    
+    transition: background .3s linear;
+
+    &:hover {
+      background: #989EE02D;
+    }
   }
 }
 
