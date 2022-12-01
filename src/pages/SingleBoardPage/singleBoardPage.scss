@@ -3,6 +3,19 @@
   flex-direction: column;
   gap: 10px;
   width: 100%;
+  @media (max-width: 528px) {
+    align-items: center;
+  }
+
+  & > button {
+    width: 206px;
+    margin-left: 6px;
+    background: #fff;
+    border-radius: 5px;
+    border: 1px solid #0f0435;
+    padding: 2px 5px;
+    color: #0f0435;
+  }
 }
 
 .board-header {
@@ -11,11 +24,32 @@
   gap: 20px;
   flex-wrap: wrap;
   max-width: 526px;
+  justify-content: space-around;
+
+  & > button {
+    width: 180px;
+    margin-left: 6px;
+    background: #fff;
+    border-radius: 5px;
+    border: 1px solid #0f0435;
+    padding: 4px 5px;
+    color: #0f0435;
+  }
+  @media (max-width: 528px) {
+    align-items: center;
+  }
 }
 
 .edit-board-info {
   display: flex;
-  margin: 0 auto;
+  align-items: center;
+  & > button {
+    height: 30px;
+    max-width: 118px;
+    margin-left: 6px;
+    color: #0f0435;
+    
+  }
 }
 
 .board-about {
@@ -39,18 +73,9 @@
   display: flex;
   align-items: flex-start;
   white-space: nowrap;
-  padding: 40px 0 10px;
+  padding-bottom: 10px;
 
-  & > button {
-    position: absolute;
-    left: 6px;
-    top: 2px;
-    background: #fff;
-    border-radius: 5px;
-    border: 1px solid #0f0435;
-    padding: 2px 5px;
-    color: #0f0435;
-  }
+
 }
 
 .board-column {
