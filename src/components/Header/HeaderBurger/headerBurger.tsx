@@ -78,14 +78,6 @@ export const HeaderBurger = ({ func, ...ask }: BurgerProps) => {
         sx={{ width: '500px' }}
         keepMounted
       >
-        <IconButton
-          sx={{ mt: 2, ':hover': { color: 'red', background: 'none' } }}
-          onClick={() => toggleDrawer(false)}
-        >
-          <CloseIcon />
-        </IconButton>
-
-        <Divider sx={{ mb: 2 }} />
         <Box
           sx={{
             height: '100%',
@@ -96,9 +88,35 @@ export const HeaderBurger = ({ func, ...ask }: BurgerProps) => {
               pt: '50px',
               width: '320px',
               height: '100%',
+              background: '#1b3c6c',
+              borderRadius: 0,
             }}
           >
+            {' '}
+            <IconButton
+              sx={{
+                marginLeft: '84%',
+                marginBottom: 1,
+                width: '40px',
+                height: '40px',
+                fontSize: '20px',
+                ':hover': { background: 'none' },
+              }}
+              onClick={() => toggleDrawer(false)}
+            >
+              <CloseIcon
+                sx={{
+                  color: '#fff',
+                  fontWeight: 'bold',
+                  width: '36px',
+                  height: '36px',
+                  transition: 'color .3s linear',
+                  ':hover': { color: '#7b98fa', background: 'none' },
+                }}
+              />
+            </IconButton>
             <ul className={styles.headerNavAdaptive} onClick={() => toggleDrawer(false)}>
+              <Divider sx={{ mb: 2, background: '#fff', width: '100%', height: '2px' }} />
               {!isAuthorized ? (
                 <HeaderUserLinks onSignIn={func.goSignIn} onSignUp={func.goSignUp} {...ask} />
               ) : (
