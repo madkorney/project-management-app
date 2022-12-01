@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { logOut, setOpenUserPage } from 'redux/authSlice';
@@ -11,7 +10,11 @@ import { HeaderLogo } from './HeaderLogo/headerLogo';
 
 import styles from './header.module.scss';
 
-const Header = () => {
+type PropHeader = {
+  bg: string;
+};
+
+const Header = ({ bg }: PropHeader) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { t, i18n } = useTranslation();
@@ -54,12 +57,13 @@ const Header = () => {
       localStorage.setItem('lang', 'en');
     }
   };
+
   useEffect(() => {
     location.pathname.includes('user-page') && dispatch(setOpenUserPage(true));
   }, [dispatch]);
 
   return (
-    <header className={styles.header}>
+    <header className={styles.header} style={{ background: bg }}>
       <div className={styles.headerContainer}>
         <HeaderLogo />
         <nav className={styles.headerNav}>
