@@ -1,9 +1,11 @@
 .single-board-page {
   display: flex;
-  align-items: start;
   flex-direction: column;
   gap: 10px;
   width: 100%;
+  @media screen and (orientation: landscape) {
+    min-height: 390px;
+  }
 
   & > button {
     width: 206px;
@@ -13,19 +15,17 @@
     border: 1px solid #0f0435;
     padding: 2px 5px;
     color: #0f0435;
-    transition: background .3s linear;
+    transition: background 0.3s linear;
     margin-bottom: 10px;
 
     &:hover {
-      background: #989EE02D;
+      background: #989ee02d;
     }
   }
 }
 
 .board-header {
   display: flex;
-  align-items: start;
-  justify-content: start;
   gap: 20px;
   flex-wrap: wrap;
   max-width: 526px;
@@ -33,15 +33,15 @@
 
   & > button {
     width: 180px;
+    height: 30px;
     background: #fff;
     border-radius: 5px;
     border: 1px solid #0f0435;
-    padding: 4px 5px;
     color: #0f0435;
-    transition: background .3s linear;
+    transition: background 0.3s linear;
 
     &:hover {
-      background: #989EE02D;
+      background: #989ee02d;
     }
   }
 
@@ -59,10 +59,10 @@
     max-width: 118px;
     margin-left: 6px;
     color: #0f0435;
-    transition: background .3s linear;
+    transition: background 0.3s linear;
 
     &:hover {
-      background: #989EE02D;
+      background: #989ee02d;
     }
   }
 }
@@ -139,7 +139,7 @@
   & > button:first-child {
     color: #0f0435;
     max-width: 70%;
-    transition: background .3s linear;
+    transition: background 0.3s linear;
 
     &:hover {
       background: #c5c4c9;
@@ -148,7 +148,7 @@
 
   & > button:last-child {
     &:hover {
-      background: #6386c700
+      background: #6386c700;
     }
   }
 }
