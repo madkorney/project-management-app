@@ -88,7 +88,7 @@ const BoardColumn = (column: ColumnType) => {
               <CardContent
                 sx={{
                   '&::-webkit-scrollbar': {
-                    width: 6,
+                    width: 8,
                   },
                   '&::-webkit-scrollbar-track': {
                     backgroundColor: '#7daaec',
