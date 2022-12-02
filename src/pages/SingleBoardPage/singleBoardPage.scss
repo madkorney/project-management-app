@@ -92,6 +92,13 @@
   white-space: nowrap;
   padding-bottom: 10px;
 
+  & > div {
+    & > div:last-child {
+      & > button:first-child {
+        color: #007293ba;
+      }
+    }
+  }
 
 }
 
