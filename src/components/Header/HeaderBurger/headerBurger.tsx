@@ -86,7 +86,7 @@ export const HeaderBurger = ({ func, ...props }: BurgerProps) => {
             sx={{
               pt: '10px',
               width: '320px',
-              height: '100%',
+              minHeight: '100%',
               background: '#1b3c6c',
               borderRadius: 0,
             }}
