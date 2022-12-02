@@ -94,7 +94,7 @@ export const HeaderBurger = ({ func, ...props }: BurgerProps) => {
             {' '}
             <IconButton
               sx={{
-                marginLeft: '84%',
+                marginLeft: '80%',
                 marginBottom: 1,
                 width: '40px',
                 height: '40px',
@@ -114,8 +114,8 @@ export const HeaderBurger = ({ func, ...props }: BurgerProps) => {
                 }}
               />
             </IconButton>
+            <Divider sx={{ mb: 2, ml: 3, background: '#fff', width: '82%', height: '2px' }} />
             <ul className={styles.headerNavAdaptive} onClick={() => toggleDrawer(false)}>
-              <Divider sx={{ mb: 2, background: '#fff', width: '100%', height: '2px' }} />
               {!isAuthorized ? (
                 <HeaderUserLinks onSignIn={func.goSignIn} onSignUp={func.goSignUp} {...props} />
               ) : (
