@@ -16,8 +16,9 @@
   &Container {
     align-self: center;
     margin: 0 auto;
-    @media (max-width: 557px) {
+    @media (max-width: 914px) {
       margin: auto;
+      margin-top: 20px;
     }
   }
 

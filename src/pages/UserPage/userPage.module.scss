@@ -11,6 +11,17 @@
   background: #fff;
   box-shadow: 0 0 15px #203DA9A1;
 
+  @media (max-width: 998px) {
+    width: 90%;
+    margin: auto;
+
+  }
+  @media (max-width: 577px) {
+    flex-direction: column;
+    width: 90%;
+    margin-top: 20px;
+    padding: 4px;
+  }
 
   &Form {
     width: 55%;
@@ -37,16 +48,5 @@
     }
   }
 
-  @media (max-width: 998px) {
-    width: 90%;
-  }
-  @media (max-width: 557px) {
-    flex-direction: column;
-    width: 90%;
-    margin-bottom: 20px;
-    padding: 4px;
-  }
-  @media (max-width: 378px) {
-    margin: auto;
-  }
+
 }
