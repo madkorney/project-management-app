@@ -1,6 +1,19 @@
 .form {
   max-width: 400px;
+
+  & > button {
+    margin-top: 5px;
+    padding: 2px 8px;
+    background: #0f286b;
+    transition: background .2s linear;
+    font-weight: bold;
+
+    &:hover {
+      background: #0F286B9B;
+    }
+  }
 }
+
 
 .form.edit {
   width: unset;
