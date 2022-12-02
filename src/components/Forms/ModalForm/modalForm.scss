@@ -1,5 +1,6 @@
 .form {
   max-width: 400px;
+
   & > button {
     margin-top: 5px;
     padding: 2px 8px;
@@ -17,17 +18,20 @@
 .form.edit {
   display: flex;
   padding: 1rem;
-  width: 86%;
+  width: 88%;
+
   & > button {
     background: none;
     color: #007293ba;
     padding: 0;
     transition: color .2s linear;
+
     &:hover {
       color: #FF0000;
     }
   }
-  & > button:first-child{
-    padding-left: 5px;
+
+  & div:first-child {
+    padding-right: 2px;
   }
 }
