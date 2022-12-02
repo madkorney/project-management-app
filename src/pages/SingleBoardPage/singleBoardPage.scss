@@ -1,11 +1,9 @@
 .single-board-page {
   display: flex;
+  align-items: start;
   flex-direction: column;
   gap: 10px;
   width: 100%;
-  @media (max-width: 528px) {
-    align-items: center;
-  }
 
   & > button {
     width: 206px;
@@ -16,6 +14,7 @@
     padding: 2px 5px;
     color: #0f0435;
     transition: background .3s linear;
+    margin-bottom: 10px;
 
     &:hover {
       background: #989EE02D;
@@ -25,15 +24,15 @@
 
 .board-header {
   display: flex;
-  align-items: center;
+  align-items: start;
+  justify-content: start;
   gap: 20px;
   flex-wrap: wrap;
   max-width: 526px;
-  justify-content: space-around;
+  margin-left: 6px;
 
   & > button {
     width: 180px;
-    margin-left: 6px;
     background: #fff;
     border-radius: 5px;
     border: 1px solid #0f0435;
@@ -47,7 +46,6 @@
   }
 
   @media (max-width: 528px) {
-    align-items: center;
     gap: 5px;
   }
 }
@@ -93,13 +91,20 @@
   padding-bottom: 10px;
 
   & > div {
+    position: relative;
+    padding-right: 4px;
     & > div:last-child {
       & > button:first-child {
         color: #007293ba;
       }
+      & > button:last-child {
+        position: absolute;
+        top: 16px;
+        right: 2px;
+        color: #007293ba;
+      }
     }
   }
-
 }
 
 .board-column {
@@ -128,10 +133,12 @@
   display: flex;
   justify-content: space-between;
   gap: 5px;
-  margin: 5px 0;
+  margin: 0 0 10px;
+  cursor: pointer;
 
   & > button:first-child {
     color: #0f0435;
+    max-width: 70%;
     transition: background .3s linear;
 
     &:hover {

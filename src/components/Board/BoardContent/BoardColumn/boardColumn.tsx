@@ -91,10 +91,12 @@ const BoardColumn = (column: ColumnType) => {
                     width: 8,
                   },
                   '&::-webkit-scrollbar-track': {
-                    backgroundColor: '#7daaec',
+                    backgroundColor: '#7daaec75',
+                    borderRadius: 20,
                   },
                   '&::-webkit-scrollbar-thumb': {
-                    backgroundColor: '#233653',
+                    backgroundColor: '#3471879e',
+                    borderRadius: 20,
                   },
                   p: '0 5px',
                   minHeight: 30,

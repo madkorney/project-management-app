@@ -16,7 +16,7 @@ type BurgerProps = {
   t: TFunction<'translation', undefined>;
 };
 
-export const HeaderBurger = ({ func, ...ask }: BurgerProps) => {
+export const HeaderBurger = ({ func, ...props }: BurgerProps) => {
   const { isAuthorized, isOpenUserPage } = useAppSelector((state) => state.auth);
 
   const [open, setOpen] = useState(false);
@@ -47,7 +47,6 @@ export const HeaderBurger = ({ func, ...ask }: BurgerProps) => {
         aria-label="open drawer"
         onClick={() => toggleDrawer(!open)}
         sx={{
-          mr: '5px',
           display: {
             xs: 'flex',
             md: 'none',
@@ -85,7 +84,7 @@ export const HeaderBurger = ({ func, ...ask }: BurgerProps) => {
         >
           <Paper
             sx={{
-              pt: '50px',
+              pt: '10px',
               width: '320px',
               height: '100%',
               background: '#1b3c6c',
@@ -118,14 +117,14 @@ export const HeaderBurger = ({ func, ...ask }: BurgerProps) => {
             <ul className={styles.headerNavAdaptive} onClick={() => toggleDrawer(false)}>
               <Divider sx={{ mb: 2, background: '#fff', width: '100%', height: '2px' }} />
               {!isAuthorized ? (
-                <HeaderUserLinks onSignIn={func.goSignIn} onSignUp={func.goSignUp} {...ask} />
+                <HeaderUserLinks onSignIn={func.goSignIn} onSignUp={func.goSignUp} {...props} />
               ) : (
                 <HeaderUserButtons
                   openUserPage={isOpenUserPage}
                   onClickOut={func.goOut}
                   onClickUser={func.goUserProfile}
                   onGoBoards={func.goBoards}
-                  {...ask}
+                  {...props}
                 />
               )}
             </ul>

@@ -20,7 +20,7 @@ const BoardHeader = (board: BoardType) => {
       </Button>
       <div className="edit-board-info">
         <div className="board-about">
-          <Typography variant="h4" sx={{ textDecoration: 'underline' }} noWrap>
+          <Typography variant="h4" noWrap>
             {board.title}
           </Typography>
           <Typography noWrap>{board.description}</Typography>
