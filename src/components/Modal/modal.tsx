@@ -1,10 +1,6 @@
 import { Children, cloneElement, isValidElement, ReactNode, useState } from 'react';
 
-import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
-import DeleteIcon from '@mui/icons-material/Delete';
 import CloseIcon from '@mui/icons-material/Close';
-import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
-import BorderColorIcon from '@mui/icons-material/BorderColor';
 
 import {
   Button,
@@ -13,8 +9,8 @@ import {
   DialogContent,
   DialogTitle,
   IconButton,
-  Typography,
 } from '@mui/material';
+import { ModalButton } from './ModalButton/modalButton';
 
 type ModalPropsType = {
   children: JSX.Element;
@@ -52,27 +48,13 @@ const Modal = ({
 
   return (
     <>
-      <Button
+      <ModalButton
         onClick={handleClickOpen}
-        variant={mode === 'confirm' ? 'contained' : undefined}
-        className={style}
-        size="small"
-        startIcon={
-          mode === 'confirm' ? (
-            <DeleteIcon />
-          ) : mode === 'add' ? (
-            <PlaylistAddIcon />
-          ) : mode === 'edit' ? (
-            <BorderColorIcon />
-          ) : mode === 'task' ? undefined : (
-            <DashboardCustomizeIcon className={styleText} />
-          )
-        }
-      >
-        <Typography className={styleText} noWrap={mode === 'task'}>
-          {buttonText}
-        </Typography>
-      </Button>
+        mode={mode}
+        style={style}
+        styleText={styleText}
+        buttonText={buttonText}
+      />
       <Dialog open={open} onClose={handleClose} disableRestoreFocus>
         <DialogTitle>
           {title}

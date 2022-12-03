@@ -88,15 +88,15 @@ const BoardColumn = (column: ColumnType) => {
               <CardContent
                 sx={{
                   '&::-webkit-scrollbar': {
-                    width: 10,
+                    width: 8,
                   },
                   '&::-webkit-scrollbar-track': {
-                    backgroundColor: 'orange',
-                    borderRadius: 2,
+                    backgroundColor: '#7daaec75',
+                    borderRadius: 20,
                   },
                   '&::-webkit-scrollbar-thumb': {
-                    backgroundColor: 'red',
-                    borderRadius: 2,
+                    backgroundColor: '#3471879e',
+                    borderRadius: 20,
                   },
                   p: '0 5px',
                   minHeight: 30,

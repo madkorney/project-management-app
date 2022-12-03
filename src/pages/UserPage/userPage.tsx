@@ -11,6 +11,7 @@ import Form from 'components/Forms/FormAuthorization';
 import { Toast } from 'components';
 
 import styles from './userPage.module.scss';
+import { useTranslation } from 'react-i18next';
 
 export enum ModalText {
   DELETE_USER = 'Delete user',
@@ -21,6 +22,7 @@ export enum ModalText {
 const UserPage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
   const [signIn] = useSignInMutation();
   const [deleteUser] = useDeleteUserByIdMutation();
   const [updateUser, { error }] = useUpdateUserByIdMutation();
@@ -66,9 +68,10 @@ const UserPage = () => {
       {error && <Toast message={(error as ErrorResponse).data.message} />}
       {!error && isMessageUser && <Toast message={isMessageUser} />}
       <div className={styles.userDescription}>
-        <h2>Hi, {login && login.slice(0, 1).toUpperCase() + login.slice(1)}</h2>
-        <p>This is your profile page.</p>
-        <p>Here you can update your details or completely delete your account.</p>
+        <h2>
+          {t('userHi')}, {login && login.slice(0, 1).toUpperCase() + login.slice(1)}
+        </h2>
+        <p>{t('userPage')}</p>
       </div>
       <Form
         className={styles.userForm}

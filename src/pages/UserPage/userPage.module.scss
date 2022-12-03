@@ -1,38 +1,53 @@
 .user {
-  align-self: center;
   display: flex;
   max-width: 580px;
   margin: 0 auto;
   padding: 10px;
+  height: auto;
   justify-content: center;
   align-items: center;
+  align-self: center;
   border-radius: 15px;
-  box-shadow: 0 0 15px rgba(68, 49, 49, 0.63);
+  background: #fff;
+  box-shadow: 0 0 15px #203DA9A1;
+
+  @media (max-width: 998px) {
+    width: 90%;
+    margin: auto;
+
+  }
+  @media (max-width: 665px) {
+    flex-direction: column;
+    width: 90%;
+    margin-top: 20px;
+    padding: 4px;
+  }
 
   &Form {
+    width: 55%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-bottom: 20px;
+    @media (max-width: 665px) {
+      max-width: 100%;
+      width: 100%;
+    }
   }
 
   &Description {
     max-width: 50%;
+    width: 100%;
     padding: 10px;
 
-    @media (max-width: 498px) {
+    @media (max-width: 665px) {
+      max-width: 100%;
+      width: 100%;
       margin: 0 auto;
       text-align: center;
       padding-bottom: 20px;
     }
   }
 
-  @media (max-width: 998px) {
-    width: 90%;
-  }
-  @media (max-width: 498px) {
-    flex-direction: column;
-    width: 90%;
-    margin-bottom: 20px;
-    padding: 4px;
-  }
+
 }

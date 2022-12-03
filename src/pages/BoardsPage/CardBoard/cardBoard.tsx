@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import {
   useDeleteBoardByIdMutation,
@@ -20,6 +20,7 @@ const CardBoard = (board: BoardType) => {
   const [deleteTaskById] = useDeleteTaskByIdMutation();
   const { data: columns } = useGetColumnsQuery(board._id, { skip });
   const { data: tasks } = useGetTasksByBoardIdQuery(board._id, { skip });
+  const navigate = useNavigate();
 
   const handleDelete = async () => {
     setSkip(false);
@@ -60,12 +61,15 @@ const CardBoard = (board: BoardType) => {
       </CardContent>
       <CardActions sx={{ p: 2, paddingTop: 1 }}>
         <Button
-          size="small"
+          size="medium"
           variant="contained"
           sx={{ marginRight: 'auto' }}
           aria-label="Delete board"
+          onClick={() => {
+            navigate(`${board._id}`);
+          }}
         >
-          <Link to={board._id}>Open</Link>
+          Open
         </Button>
         <Modal buttonText="Delete" title="Delete board" mode="confirm" onConfirm={handleDelete}>
           <p>

@@ -5,6 +5,7 @@ import Modal from 'components/Modal/modal';
 import { ModalText } from 'pages/UserPage/userPage';
 
 import styles from 'global-styles/authorization.module.scss';
+import { useTranslation } from 'react-i18next';
 
 type ButtonProps = {
   formName: string;
@@ -13,13 +14,14 @@ type ButtonProps = {
 };
 
 export const ButtonsForm = ({ userPage, formName, isConfirm }: ButtonProps) => {
+  const { t } = useTranslation();
   return userPage ? (
     <div className={styles.formGroupButton}>
-      <Button variant="contained" type="submit" startIcon={<SendIcon />} size="small">
-        Update
+      <Button variant="contained" type="submit" startIcon={<SendIcon />} size="medium">
+        {t('updateUser')}
       </Button>
       <Modal
-        buttonText={ModalText.DELETE_USER}
+        buttonText={`${t('delUser')}`}
         title="Delete user"
         mode="confirm"
         onConfirm={isConfirm}

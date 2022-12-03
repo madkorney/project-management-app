@@ -3,19 +3,81 @@
   flex-direction: column;
   gap: 10px;
   width: 100%;
+
+  ::-webkit-scrollbar {
+    height: 8px;
+    background: rgba(66, 136, 238, 0.65);
+    border-radius: 20px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #050b52;
+    border-radius: 20px;
+    height: 8px;
+  }
+
+  @media screen and (orientation: landscape) {
+    min-height: 390px;
+  }
+
+  & > button {
+    width: 206px;
+    margin-left: 6px;
+    background: #fff;
+    border-radius: 5px;
+    border: 1px solid #0f0435;
+    padding: 2px 5px;
+    color: #0f0435;
+    transition: background 0.3s linear;
+    margin-bottom: 10px;
+
+    &:hover {
+      background: #989ee02d;
+    }
+  }
 }
 
 .board-header {
   display: flex;
-  align-items: center;
   gap: 20px;
   flex-wrap: wrap;
   max-width: 526px;
+  margin-left: 6px;
+
+  & > button {
+    width: 180px;
+    height: 30px;
+    background: #fff;
+    border-radius: 5px;
+    border: 1px solid #0f0435;
+    color: #0f0435;
+    transition: background 0.3s linear;
+
+    &:hover {
+      background: #989ee02d;
+    }
+  }
+
+  @media (max-width: 528px) {
+    gap: 5px;
+  }
 }
 
 .edit-board-info {
   display: flex;
-  margin: 0 auto;
+  align-items: center;
+
+  & > button {
+    height: 30px;
+    max-width: 118px;
+    margin-left: 6px;
+    color: #0f0435;
+    transition: background 0.3s linear;
+
+    &:hover {
+      background: #989ee02d;
+    }
+  }
 }
 
 .board-about {
@@ -40,6 +102,24 @@
   align-items: flex-start;
   white-space: nowrap;
   padding-bottom: 10px;
+
+  & > div {
+    position: relative;
+    padding-right: 4px;
+
+    & > div:last-child {
+      & > button:first-child {
+        color: #007293ba;
+      }
+
+      & > button:last-child {
+        position: absolute;
+        top: 16px;
+        right: 2px;
+        color: #007293ba;
+      }
+    }
+  }
 }
 
 .board-column {
@@ -68,7 +148,24 @@
   display: flex;
   justify-content: space-between;
   gap: 5px;
-  margin: 5px 0;
+  margin: 0 0 10px;
+  cursor: pointer;
+
+  & > button:first-child {
+    color: #0f0435;
+    max-width: 70%;
+    transition: background 0.3s linear;
+
+    &:hover {
+      background: #c5c4c9;
+    }
+  }
+
+  & > button:last-child {
+    &:hover {
+      background: #6386c700;
+    }
+  }
 }
 
 .MuiCardHeader-content {

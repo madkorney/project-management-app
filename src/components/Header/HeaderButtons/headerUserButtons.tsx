@@ -5,6 +5,7 @@ import { Button } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import { TFunction } from 'i18next';
 
 import styles from '../header.module.scss';
 
@@ -12,6 +13,8 @@ type UserButtonProps = {
   openUserPage: boolean;
   onClickOut: () => void;
   onClickUser: () => void;
+
+  t: TFunction<'translation', undefined>;
   onGoBoards?: () => void;
 };
 
@@ -20,12 +23,13 @@ export const HeaderUserButtons = ({
   onClickUser,
   onClickOut,
   onGoBoards,
+  t,
 }: UserButtonProps) => {
   return (
     <>
       <li onClick={onGoBoards}>
         <Modal
-          buttonText="Add board"
+          buttonText={`${t('addBoard')}`}
           title="Add new board"
           style={styles.MuiButtonBase}
           styleText={styles.headerTextButton}
@@ -39,7 +43,7 @@ export const HeaderUserButtons = ({
           startIcon={<DashboardIcon className={styles.headerButton} />}
           onClick={onClickUser}
         >
-          <span className={styles.headerTextButton}>boards</span>
+          <span className={styles.headerTextButton}>{t('boards')}</span>
         </Button>
       </li>
 
@@ -50,7 +54,7 @@ export const HeaderUserButtons = ({
             startIcon={<PersonIcon className={styles.headerButton} />}
             onClick={onClickUser}
           >
-            <span className={styles.headerTextButton}>profile</span>
+            <span className={styles.headerTextButton}>{t('profile')}</span>
           </Button>
         </li>
       )}
@@ -60,7 +64,7 @@ export const HeaderUserButtons = ({
           startIcon={<LogoutIcon className={styles.headerButton} />}
           onClick={onClickOut}
         >
-          <span className={styles.headerTextButton}>Log Out</span>
+          <span className={styles.headerTextButton}>{t('logOut')}</span>
         </Button>
       </li>
     </>

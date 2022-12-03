@@ -93,21 +93,23 @@ const BoardContent = ({ boardId }: BoardContentProps) => {
   };
 
   return (
-    <div className="board-content">
-      <DragDropContext onDragEnd={handleDragEnd}>
-        <Droppable droppableId={boardId} direction="horizontal" type="column">
-          {(provided) => (
-            <div className="board" ref={provided.innerRef} {...provided.droppableProps}>
-              {columns && columns.map((column) => <BoardColumn {...column} key={column._id} />)}
-              {provided.placeholder}
-              <Modal buttonText="Add column" title="Add column" mode="add">
-                <ColumnForm boardId={boardId} mode="add" />
-              </Modal>
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
-    </div>
+    <>
+      <Modal buttonText="Add column" title="Add column" mode="add">
+        <ColumnForm boardId={boardId} mode="add" />
+      </Modal>
+      <div className="board-content">
+        <DragDropContext onDragEnd={handleDragEnd}>
+          <Droppable droppableId={boardId} direction="horizontal" type="column">
+            {(provided) => (
+              <div className="board" ref={provided.innerRef} {...provided.droppableProps}>
+                {columns && columns.map((column) => <BoardColumn {...column} key={column._id} />)}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
+      </div>
+    </>
   );
 };
 
