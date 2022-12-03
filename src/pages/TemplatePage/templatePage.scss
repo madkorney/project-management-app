@@ -9,6 +9,16 @@
   padding: 20px;
   margin: 0 auto;
 
+  &::-webkit-scrollbar {
+    width: 8px;
+    background: #4288EEA5;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #050b52;
+    width: 8px;
+  }
+
   @media screen and (max-width: 768px) {
     padding: 10px;
   }
