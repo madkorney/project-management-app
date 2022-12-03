@@ -7,6 +7,7 @@ import { logOut, setOpenUserPage } from 'redux/authSlice';
 import { HeaderUserButtons, HeaderUserLinks } from './HeaderButtons';
 import { HeaderBurger } from './HeaderBurger/headerBurger';
 import { HeaderLogo } from './HeaderLogo/headerLogo';
+import { LangButton } from './LangButton/langButton';
 
 import styles from './header.module.scss';
 
@@ -47,17 +48,16 @@ const Header = ({ bg }: PropHeader) => {
 
   const handleLanguage = () => {
     if (lang === 'en') {
-      setLang('ru');
       i18n.changeLanguage('ru');
+      setLang('ru');
       localStorage.setItem('lang', 'ru');
     }
     if (lang === 'ru') {
-      setLang('en');
       i18n.changeLanguage('en');
+      setLang('en');
       localStorage.setItem('lang', 'en');
     }
   };
-
   useEffect(() => {
     location.pathname.includes('user-page') && dispatch(setOpenUserPage(true));
   }, [dispatch]);
@@ -66,41 +66,34 @@ const Header = ({ bg }: PropHeader) => {
     <header className={styles.header} style={{ background: bg }}>
       <div className={styles.headerContainer}>
         <HeaderLogo />
-        <nav className={styles.headerNav}>
-          <ul className={!isAuthorized ? styles.headerNav : styles.headerNavUser}>
-            {!isAuthorized ? (
-              <HeaderUserLinks
-                onSignIn={goSignIn}
-                onSignUp={goSignUp}
-                langClick={handleLanguage}
-                buttonLangText={lang}
-                t={t}
-              />
-            ) : (
-              <HeaderUserButtons
-                openUserPage={isOpenUserPage}
-                onClickOut={goOut}
-                onClickUser={goUserProfile}
-                onGoBoards={goBoards}
-                langClick={handleLanguage}
-                buttonLangText={lang}
-                t={t}
-              />
-            )}
-          </ul>
-        </nav>
-        <HeaderBurger
-          func={{
-            goSignIn,
-            goSignUp,
-            goOut,
-            goUserProfile,
-            goBoards,
-          }}
-          langClick={handleLanguage}
-          buttonLangText={lang}
-          t={t}
-        />
+        <div className={styles.headerNavBlock}>
+          <nav className={styles.headerNav}>
+            <ul className={!isAuthorized ? styles.headerNav : styles.headerNavUser}>
+              {!isAuthorized ? (
+                <HeaderUserLinks onSignIn={goSignIn} onSignUp={goSignUp} t={t} />
+              ) : (
+                <HeaderUserButtons
+                  openUserPage={isOpenUserPage}
+                  onClickOut={goOut}
+                  onClickUser={goUserProfile}
+                  onGoBoards={goBoards}
+                  t={t}
+                />
+              )}
+            </ul>
+          </nav>
+          <LangButton langClick={handleLanguage} buttonLangText={lang} />
+          <HeaderBurger
+            func={{
+              goSignIn,
+              goSignUp,
+              goOut,
+              goUserProfile,
+              goBoards,
+            }}
+            t={t}
+          />
+        </div>
       </div>
     </header>
   );

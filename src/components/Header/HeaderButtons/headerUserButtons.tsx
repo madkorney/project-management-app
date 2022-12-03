@@ -5,17 +5,15 @@ import { Button } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import LanguageIcon from '@mui/icons-material/Language';
+import { TFunction } from 'i18next';
 
 import styles from '../header.module.scss';
-import { TFunction } from 'i18next';
 
 type UserButtonProps = {
   openUserPage: boolean;
   onClickOut: () => void;
   onClickUser: () => void;
-  langClick: () => void;
-  buttonLangText: string;
+
   t: TFunction<'translation', undefined>;
   onGoBoards?: () => void;
 };
@@ -25,8 +23,6 @@ export const HeaderUserButtons = ({
   onClickUser,
   onClickOut,
   onGoBoards,
-  langClick,
-  buttonLangText,
   t,
 }: UserButtonProps) => {
   return (
@@ -69,15 +65,6 @@ export const HeaderUserButtons = ({
           onClick={onClickOut}
         >
           <span className={styles.headerTextButton}>{t('logOut')}</span>
-        </Button>
-      </li>
-      <li>
-        <Button
-          className={styles.MuiButtonBase}
-          startIcon={<LanguageIcon className={styles.headerButton} />}
-          onClick={langClick}
-        >
-          <span className={styles.headerTextButton}>{buttonLangText === 'ru' ? 'en' : 'ru'}</span>
         </Button>
       </li>
     </>

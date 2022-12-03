@@ -11,12 +11,10 @@ import { TFunction } from 'i18next';
 
 type BurgerProps = {
   func: { [name: string]: () => void };
-  langClick: () => void;
-  buttonLangText: string;
   t: TFunction<'translation', undefined>;
 };
 
-export const HeaderBurger = ({ func, ...props }: BurgerProps) => {
+export const HeaderBurger = ({ func, t }: BurgerProps) => {
   const { isAuthorized, isOpenUserPage } = useAppSelector((state) => state.auth);
 
   const [open, setOpen] = useState(false);
@@ -55,6 +53,7 @@ export const HeaderBurger = ({ func, ...props }: BurgerProps) => {
           width: '45px',
           height: '45px',
           padding: '1px',
+          mt: '5px',
         }}
       >
         <MenuIcon
@@ -117,14 +116,14 @@ export const HeaderBurger = ({ func, ...props }: BurgerProps) => {
             <Divider sx={{ mb: 2, ml: 3, background: '#fff', width: '82%', height: '2px' }} />
             <ul className={styles.headerNavAdaptive} onClick={() => toggleDrawer(false)}>
               {!isAuthorized ? (
-                <HeaderUserLinks onSignIn={func.goSignIn} onSignUp={func.goSignUp} {...props} />
+                <HeaderUserLinks onSignIn={func.goSignIn} onSignUp={func.goSignUp} t={t} />
               ) : (
                 <HeaderUserButtons
                   openUserPage={isOpenUserPage}
                   onClickOut={func.goOut}
                   onClickUser={func.goUserProfile}
                   onGoBoards={func.goBoards}
-                  {...props}
+                  t={t}
                 />
               )}
             </ul>

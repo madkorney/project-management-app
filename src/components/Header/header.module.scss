@@ -39,13 +39,18 @@
 
     & li:last-child {
       & > button span {
-        left: 0;
+        left: -10px;
       }
     }
 
     @media (max-width: 899px) {
       display: none;
     }
+  }
+
+  &NavBlock {
+    display: flex;
+    align-items: center;
   }
 
   &NavUser {
@@ -64,7 +69,7 @@
 
     & li:last-child {
       & > button span {
-        left: 0;
+        left: -10px;
       }
     }
   }
@@ -142,7 +147,29 @@
       }
     }
   }
+
+  &Lang {
+    position: relative;
+    width: 50px;
+    margin-right: 10px;
+    @media (max-width: 798px) {
+      margin-right: 4px;
+    }
+
+    & > button {
+      width: inherit;
+      color: #fff;
+      transition: color .3s linear;
+
+      & > span:first-child {
+        position: absolute;
+        top: 8px;
+        left: 4px;
+      }
+    }
+  }
 }
+
 
 .MuiButtonBase {
   position: relative;
