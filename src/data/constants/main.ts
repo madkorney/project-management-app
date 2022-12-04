@@ -49,3 +49,24 @@ export const TECHNOLOGIES = [
     link: 'https://github.com/atlassian/react-beautiful-dnd',
   },
 ];
+
+export const TEAMMATES = [
+  {
+    nick: 'madkorney',
+    avatar: 'https://avatars.githubusercontent.com/u/1611438?v=4',
+    name: 'Sergey',
+    did: 'Team-lead, project config',
+  },
+  {
+    nick: 'Kornull',
+    avatar: 'https://avatars.githubusercontent.com/u/96052707?v=4',
+    name: 'Uladzimir',
+    did: 'Sign-In/Sign-Up and Profile pages, localization, burger-menu, sticky header, styles',
+  },
+  {
+    nick: 'sylarBrest',
+    avatar: 'https://avatars.githubusercontent.com/u/81831257?v=4',
+    name: 'Aliaksandr',
+    did: "Welcome, Boards and Single-board pages, modal forms, drag'n'drop, private/public routes, API calls",
+  },
+];

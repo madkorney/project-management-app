@@ -11,5 +11,56 @@
   "login": "login",
   "name": "name",
   "signIn": "Sign In",
-  "signUp": "Sign Up"
+  "signUp": "Sign Up",
+  "pros": [
+    {
+      "id": 1,
+      "pro": "create boards for your projects with description"
+    },
+    {
+      "id": 2,
+      "pro": "create columns with any title uou want"
+    },
+    {
+      "id": 3,
+      "pro": "rearrange columns if necessary"
+    },
+    {
+      "id": 4,
+      "pro": "create tasks in each column and assign teammates to tasks"
+    },
+    {
+      "id": 5,
+      "pro": "rearrange tasks within one column or even between columns"
+    },
+    {
+      "id": 6,
+      "pro": "create unlimited number of projects, columns ans tasks"
+    },
+    {
+      "id": 7,
+      "pro": "edit/delete boards/columns/tasks"
+    },
+    {
+      "id": 8,
+      "pro": "free a lot of time to work with your projects"
+    }
+  ],
+  "team": {
+    "team": "Our team",
+    "teammates": [
+      {
+        "name": "Sergey",
+        "did": "Team-lead, project config"
+      },
+      {
+        "name": "Uladzimir",
+        "did": "Sign-In/Sign-Up and Profile pages, localization, burger-menu, sticky header, styles"
+      },
+      {
+        "name": "Aliaksandr",
+        "did": "Welcome, Boards and Single-board pages, modal forms, drag'n'drop, private/public routes, API calls"
+      }
+    ]
+  }
 }
