@@ -10,34 +10,42 @@ import beautifulDNDLogo from 'assets/beautiful-dnd.png';
 export const TECHNOLOGIES = [
   {
     name: 'React',
-    src: reactLogo,
+    image: reactLogo,
+    link: 'https://reactjs.org/',
   },
   {
     name: 'Typescript',
-    src: typescriptLogo,
+    image: typescriptLogo,
+    link: 'https://www.typescriptlang.org/',
   },
   {
     name: 'React Router',
-    src: reactRouterLogo,
+    image: reactRouterLogo,
+    link: 'https://reactrouter.com/',
   },
   {
-    name: 'Redux Toolkit (with RTK Query)',
-    src: reduxLogo,
+    name: 'Redux Toolkit',
+    image: reduxLogo,
+    link: 'https://redux-toolkit.js.org/',
   },
   {
     name: 'Material UI',
-    src: materialUILogo,
+    image: materialUILogo,
+    link: 'https://mui.com/',
   },
   {
     name: 'i18next',
-    src: i18nextLogo,
+    image: i18nextLogo,
+    link: 'https://www.i18next.com/',
   },
   {
     name: 'React Hook Form',
-    src: reactHookFormLogo,
+    image: reactHookFormLogo,
+    link: 'https://react-hook-form.com/',
   },
   {
     name: "Beautiful d'n'd",
-    src: beautifulDNDLogo,
+    image: beautifulDNDLogo,
+    link: 'https://github.com/atlassian/react-beautiful-dnd',
   },
 ];

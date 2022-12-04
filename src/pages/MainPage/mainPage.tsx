@@ -1,17 +1,17 @@
-import { Card, CardContent, CardMedia, Typography } from '@mui/material';
+import { Card, CardActionArea, CardContent, CardMedia, Typography } from '@mui/material';
 import { TECHNOLOGIES } from 'data/constants';
 
 import './mainPage.scss';
 
 const MainPage = () => {
   return (
-    <div>
+    <section className="welcome-page">
       <h1 className="main-question">
         Dont know what to do next and what your teammates responsible for?
       </h1>
       <p className="main-answer">
-        With the Project Tracker you can effectively manage your projects, share with the teammates,
-        make a plan of your project and control all stages of your projects.
+        With the Project Tracker you can effectively manage your projects, share with teammates,
+        make a plan of your work and control all stages of your project.
       </p>
       <p>With our app you can:</p>
       <ul className="main-pros">
@@ -31,36 +31,55 @@ const MainPage = () => {
         Our app created as a final project of course RS School React 2022 Q3 with a stack of
         technologies
       </p>
-      <ul className="main-technology-list">
+      <div className="main-technology-list">
         {TECHNOLOGIES.map((tech, index) => (
-          <li key={index} className="main-technology-item">
-            <img className="main-technology-image" src={tech.src} alt={tech.name} />
-            <p>{tech.name}</p>
-          </li>
+          <Card key={index}>
+            <CardActionArea href={tech.link}>
+              <CardMedia
+                component="img"
+                image={tech.image}
+                alt={tech.name}
+                sx={{
+                  backgroundColor: '#ffffff',
+                  objectFit: 'contain',
+                  p: 1,
+                }}
+              />
+              <CardContent sx={{ p: 0.5 }}>
+                <Typography sx={{ textAlign: 'center' }}>{tech.name}</Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
         ))}
-      </ul>
-      <p>Our team</p>
+      </div>
+      <h3>Our team</h3>
       <div className="main-team">
         <Card className="main-team-member">
           <CardMedia component="img" image="https://avatars.githubusercontent.com/u/1611438?v=4" />
           <CardContent>
-            <Typography variant="h5">madkorney</Typography>
+            <Typography variant="h5">Sergey</Typography>
+            <Typography>Team-lead, project config</Typography>
           </CardContent>
         </Card>
         <Card className="main-team-member">
           <CardMedia component="img" image="https://avatars.githubusercontent.com/u/96052707?v=4" />
           <CardContent>
-            <Typography variant="h5">Kornull</Typography>
+            <Typography variant="h5">Uladzimir</Typography>
+            <Typography>Sign-In/Sign-Up and Profile pages, localization, styles</Typography>
           </CardContent>
         </Card>
         <Card className="main-team-member">
           <CardMedia component="img" image="https://avatars.githubusercontent.com/u/81831257?v=4" />
           <CardContent>
-            <Typography variant="h5">sylarBrest</Typography>
+            <Typography variant="h5">Aliaksandr</Typography>
+            <Typography>
+              Welcome, Boards and Single-board pages, modal forms, dragndrop, private/public routes,
+              API slices
+            </Typography>
           </CardContent>
         </Card>
       </div>
-    </div>
+    </section>
   );
 };
 

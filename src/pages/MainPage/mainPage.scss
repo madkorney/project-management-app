@@ -1,21 +1,23 @@
+.welcome-page {
+  margin-bottom: 10px;
+}
+
+.main-pros {
+  list-style: none;
+}
+
+.main-pros li::before {
+  content: '✓';
+}
+
 .main-technology-list {
-  display: flex;
-  flex-wrap: wrap;
-}
+  display: grid;
+  grid: repeat(2, 1fr) / repeat(4, 1fr);
+  gap: 10px;
 
-.main-technology-item {
-  display: flex;
-  gap: 5px;
-  align-items: center;
-  max-width: 275px;
-  width: 100%;
-}
-
-.main-technology-image {
-  background-color: #ffffff;
-  width: 50px;
-  height: 50px;
-  object-fit: contain;
+  @media screen and (max-width: 600px) {
+    grid: repeat(4, 1fr) / repeat(2, 1fr);
+  }
 }
 
 .main-team {
