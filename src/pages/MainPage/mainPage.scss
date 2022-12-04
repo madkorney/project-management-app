@@ -22,11 +22,20 @@
 
 .main-team {
   display: flex;
-  flex-wrap: wrap;
-  margin: 0 auto;
-  width: auto;
+  gap: 10px;
+  justify-content: center;
+
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .main-team-member {
-  max-width: 300px;
+  max-width: 400px;
+  width: 100%;
+
+  @media screen and (max-width: 600px) {
+    max-width: 250px;
+  }
 }

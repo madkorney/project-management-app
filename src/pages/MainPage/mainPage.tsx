@@ -25,8 +25,6 @@ const MainPage = () => {
         <li>free a lot of time to work with your projects</li>
       </ul>
 
-      <p className="main-answer">Use Project Tracker and leave feedback!</p>
-
       <p>
         Our app created as a final project of course RS School React 2022 Q3 with a stack of
         technologies
@@ -65,7 +63,9 @@ const MainPage = () => {
           <CardMedia component="img" image="https://avatars.githubusercontent.com/u/96052707?v=4" />
           <CardContent>
             <Typography variant="h5">Uladzimir</Typography>
-            <Typography>Sign-In/Sign-Up and Profile pages, localization, styles</Typography>
+            <Typography>
+              Sign-In/Sign-Up and Profile pages, localization, burger-menu, sticky header, styles
+            </Typography>
           </CardContent>
         </Card>
         <Card className="main-team-member">
@@ -79,6 +79,9 @@ const MainPage = () => {
           </CardContent>
         </Card>
       </div>
+      <h4 className="main-answer" style={{ paddingBottom: '10px' }}>
+        Use Project Tracker & leave feedback!
+      </h4>
     </section>
   );
 };
