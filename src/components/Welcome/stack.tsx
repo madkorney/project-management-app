@@ -17,7 +17,7 @@ export const Stack = () => (
             }}
           />
           <CardContent sx={{ p: 0.5 }}>
-            <Typography sx={{ textAlign: 'center' }}>{tech.name}</Typography>
+            <Typography sx={{ textAlign: 'center', color: '#1b3c6c' }}>{tech.name}</Typography>
           </CardContent>
         </CardActionArea>
       </Card>

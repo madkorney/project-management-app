@@ -1,4 +1,6 @@
 import { useTranslation } from 'react-i18next';
+import { List, ListItem, ListItemIcon, ListItemText, Typography } from '@mui/material';
+import CheckIcon from '@mui/icons-material/Check';
 
 type ProsType = {
   id: number;
@@ -8,9 +10,21 @@ type ProsType = {
 export const Pros = () => {
   const { t } = useTranslation();
 
-  const pros: ProsType = t('pros', { returnObjects: true });
+  const pros: ProsType = t('pros.all', { returnObjects: true });
 
   return (
-    <ul className="main-pros">{pros && pros.map((item) => <li key={item.id}>{item.pro}</li>)}</ul>
+    <>
+      <Typography sx={{ marginTop: 2 }}>{t('pros.description')}</Typography>
+      <List>
+        {pros.map((item) => (
+          <ListItem key={item.id} disablePadding>
+            <ListItemIcon sx={{ minWidth: 32 }}>
+              <CheckIcon />
+            </ListItemIcon>
+            <ListItemText primary={item.pro} />
+          </ListItem>
+        ))}
+      </List>
+    </>
   );
 };

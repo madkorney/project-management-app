@@ -1,13 +1,11 @@
-.welcome-page {
-  margin-bottom: 10px;
-}
+.main-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 
-.main-pros {
-  list-style: none;
-}
-
-.main-pros li::before {
-  content: '✓ ';
+  @media screen and (max-width: 968px) {
+    flex-direction: column;
+  }
 }
 
 .main-technology-list {

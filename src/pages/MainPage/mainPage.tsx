@@ -1,31 +1,35 @@
-import { Team, Stack } from 'components/Welcome';
-import { Pros } from 'components/Welcome/pros';
+import { useTranslation } from 'react-i18next';
+
+import { CardMedia, Typography } from '@mui/material';
+import { Pros, Stack, Team } from 'components/Welcome';
+
+import video from 'assets/working.webp';
 
 import './mainPage.scss';
 
 const MainPage = () => {
-  return (
-    <section className="welcome-page">
-      <h1 className="main-question">
-        Dont know what to do next and what your teammates responsible for?
-      </h1>
-      <p className="main-answer">
-        With the Project Tracker you can effectively manage your projects, share with teammates,
-        make a plan of your work and control all stages of your project.
-      </p>
-      <p>With our app you can:</p>
-      <Pros />
+  const { t } = useTranslation();
 
-      <p>
-        Our app created as a final project of course RS School React 2022 Q3 with a stack of
-        technologies
-      </p>
+  return (
+    <section>
+      <div className="main-content">
+        <div>
+          <Typography variant="h5" sx={{ fontWeight: 700 }}>
+            {t('main.question')}
+          </Typography>
+          <Typography variant="h6" sx={{ marginTop: 2 }}>
+            {t('main.answer')}
+          </Typography>
+        </div>
+        <CardMedia component="img" image={video} sx={{ maxWidth: 600, paddingTop: 1 }} />
+      </div>
+      <Pros />
+      <Typography>{t('main.stack')}</Typography>
       <Stack />
-      <h3>Our team</h3>
       <Team />
-      <h4 className="main-answer" style={{ paddingBottom: '10px' }}>
-        Use Project Tracker & leave feedback!
-      </h4>
+      <Typography variant="h6" sx={{ marginTop: 2, paddingBottom: 2, textAlign: 'center' }}>
+        {t('main.feedback')}
+      </Typography>
     </section>
   );
 };

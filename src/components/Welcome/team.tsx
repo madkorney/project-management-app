@@ -14,16 +14,21 @@ export const Team = () => {
   const teammates: TeamType = t('team.teammates', { returnObjects: true });
 
   return (
-    <div className="main-team">
-      {TEAMMATES.map((teammate, index) => (
-        <Card className="main-team-member" key={teammate.nick}>
-          <CardMedia component="img" image={teammate.avatar} />
-          <CardContent>
-            <Typography variant="h5">{teammates[index].name}</Typography>
-            <Typography>{teammates[index].did}</Typography>
-          </CardContent>
-        </Card>
-      ))}
-    </div>
+    <>
+      <Typography variant="h6" sx={{ textAlign: 'center', marginTop: 2 }}>
+        {t('team.description')}
+      </Typography>
+      <div className="main-team">
+        {TEAMMATES.map((teammate, index) => (
+          <Card className="main-team-member" key={teammate.nick}>
+            <CardMedia component="img" image={teammate.avatar} />
+            <CardContent>
+              <Typography variant="h5">{teammates[index].name}</Typography>
+              <Typography>{teammates[index].did}</Typography>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </>
   );
 };
