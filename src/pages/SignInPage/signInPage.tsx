@@ -10,7 +10,7 @@ import { Typography } from '@mui/material';
 import Form from 'components/Forms/FormAuthorization';
 import { Toast } from 'components';
 
-import styles from 'global-styles/authorization.module.scss';
+import styles from 'components/Forms/FormAuthorization/authorization.module.scss';
 
 const SignInPage = () => {
   const navigate = useNavigate();

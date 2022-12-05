@@ -4,7 +4,7 @@ import SendIcon from '@mui/icons-material/Send';
 import Modal from 'components/Modal/modal';
 import { ModalText } from 'pages/UserPage/userPage';
 
-import styles from 'global-styles/authorization.module.scss';
+import styles from '../authorization.module.scss';
 import { useTranslation } from 'react-i18next';
 
 type ButtonProps = {

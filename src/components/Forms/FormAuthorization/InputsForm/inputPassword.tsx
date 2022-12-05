@@ -9,7 +9,7 @@ import {
   REGEXP_PASSWORD_VALID_CHARACTERS,
 } from 'data/constants';
 
-import styles from 'global-styles/authorization.module.scss';
+import styles from '../authorization.module.scss';
 
 export const InputPassword = ({
   errors,
