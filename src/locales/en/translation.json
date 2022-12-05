@@ -145,5 +145,12 @@
       "column": "Column",
       "task": "Task"
     }
+  },
+  "errorPage": {
+    "ops": "Ooops... ",
+    "notPage": "This page does not exist!",
+    "please": "Please click ",
+    "click": "here ",
+    "errorText": "or any button. And if you want, you can even click on the logo!"
   }
 }

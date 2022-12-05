@@ -1,24 +1,26 @@
 import { Typography } from '@mui/material';
-import styles from './notFoundPage.module.scss';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
+import styles from './notFoundPage.module.scss';
 
 const NotFoundPage = () => {
+  const { t } = useTranslation();
   return (
     <div className={styles.page}>
-      <h2 className={styles.pageTitle}>
-        Ooops... <span className={styles.pageSpan}>404</span>!
-      </h2>
+      <Typography variant="h4">
+        {t('errorPage.ops')}
+        <span className={styles.pageSpan}>404</span>!
+      </Typography>
       <Typography sx={{ fontSize: '22px', marginBottom: '10px' }}>
-        This page does not exist!
+        {t('errorPage.notPage')}
       </Typography>
       <Typography sx={{ fontSize: '22px' }}>
-        Please click{' '}
-        {
-          <Link className={styles.pageLink} to="/">
-            here{' '}
-          </Link>
-        }
-        or any button. And if you want, you can even click on the logo!
+        {t('errorPage.please')}
+        <Link className={styles.pageLink} to="/">
+          {t('errorPage.click')}
+        </Link>
+        {t('errorPage.errorText')}
       </Typography>
     </div>
   );
