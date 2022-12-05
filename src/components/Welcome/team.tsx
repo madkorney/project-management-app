@@ -18,7 +18,7 @@ export const Team = () => {
       <Typography variant="h6" sx={{ textAlign: 'center', marginTop: 2 }}>
         {t('team.description')}
       </Typography>
-      <div className="main-team">
+      <div className="main-team" id="team">
         {TEAMMATES.map((teammate, index) => (
           <Card className="main-team-member" key={teammate.nick}>
             <CardMedia component="img" image={teammate.avatar} />

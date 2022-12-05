@@ -53,10 +53,6 @@
     "description": "Our team",
     "teammates": [
       {
-        "name": "Sergey",
-        "did": "Team-lead, project config"
-      },
-      {
         "name": "Uladzimir",
         "did": "Sign-In/Sign-Up and Profile pages, localization, burger-menu, sticky header, styles"
       },

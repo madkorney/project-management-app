@@ -52,10 +52,6 @@ export const TECHNOLOGIES = [
 
 export const TEAMMATES = [
   {
-    nick: 'madkorney',
-    avatar: 'https://avatars.githubusercontent.com/u/1611438?v=4',
-  },
-  {
     nick: 'Kornull',
     avatar: 'https://avatars.githubusercontent.com/u/96052707?v=4',
   },
