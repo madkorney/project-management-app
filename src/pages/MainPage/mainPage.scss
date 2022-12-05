@@ -1,0 +1,39 @@
+.main-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  @media screen and (max-width: 968px) {
+    flex-direction: column;
+  }
+}
+
+.main-technology-list {
+  display: grid;
+  grid: repeat(2, 1fr) / repeat(4, 1fr);
+  gap: 10px;
+
+  @media screen and (max-width: 600px) {
+    grid: repeat(4, 1fr) / repeat(2, 1fr);
+  }
+}
+
+.main-team {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.main-team-member {
+  max-width: 400px;
+  width: 100%;
+
+  @media screen and (max-width: 600px) {
+    max-width: 250px;
+  }
+}

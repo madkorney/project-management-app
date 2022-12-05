@@ -89,6 +89,11 @@ const BoardForm = ({ mode, board, onClose }: BoardFormType) => {
                   placeholder="Users"
                 />
               )}
+              renderOption={(props, option) => (
+                <li {...props} key={option._id}>
+                  {option.name}
+                </li>
+              )}
             />
           )}
         />
