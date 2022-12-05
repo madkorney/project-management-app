@@ -18,6 +18,7 @@ const resources = {
 i18next.use(initReactI18next).init({
   resources,
   lng: localStorage.getItem('lang') || 'en',
+  returnNull: false,
 });
 
 export default i18next;
