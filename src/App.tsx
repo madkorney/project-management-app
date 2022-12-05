@@ -3,13 +3,14 @@ import { Route, Routes } from 'react-router-dom';
 
 import { PrivateRoute, PublicRoute } from 'routes';
 
-import { MainPage, NotFoundPage, TemplatePage } from 'pages';
+import { MainPage, TemplatePage } from 'pages';
 
 const SignUpPage = lazy(() => import('pages/SignUpPage'));
 const SignInPage = lazy(() => import('pages/SignInPage'));
 const BoardsPage = lazy(() => import('pages/BoardsPage'));
 const UserPage = lazy(() => import('pages/UserPage'));
 const SingleBoardPage = lazy(() => import('pages/SingleBoardPage'));
+const NotFoundPage = lazy(() => import('pages/NotFoundPage'));
 
 const App = () => {
   return (
