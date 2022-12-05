@@ -6,7 +6,7 @@
 
   ::-webkit-scrollbar {
     height: 8px;
-    background: #4288EEA5;
+    background: #4288eea5;
     border-radius: 20px;
   }
 
@@ -71,6 +71,10 @@
   display: flex;
   align-items: center;
 
+  @media (max-width: 360px) {
+    width: 100%;
+  }
+
   & > button {
     height: 30px;
     max-width: 118px;
@@ -86,6 +90,10 @@
 
 .board-about {
   max-width: 222px;
+
+  @media (max-width: 360px) {
+    max-width: 170px;
+  }
 }
 
 .board-content {
