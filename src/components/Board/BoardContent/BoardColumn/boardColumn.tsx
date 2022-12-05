@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Draggable, Droppable } from '@hello-pangea/dnd';
+import { useTranslation } from 'react-i18next';
+import { Draggable, Droppable } from 'react-beautiful-dnd';
 
 import {
   useDeleteColumnByIdMutation,
@@ -18,6 +19,7 @@ import Task from './Task';
 const BoardColumn = (column: ColumnType) => {
   const { _id, boardId, order, title } = column;
   const [isEditColumnTitle, setIsEditColumnTitle] = useState(false);
+  const { t } = useTranslation();
 
   const [deleteColumnById] = useDeleteColumnByIdMutation();
   const [deleteTaskById] = useDeleteTaskByIdMutation();
@@ -116,11 +118,11 @@ const BoardColumn = (column: ColumnType) => {
             )}
           </Droppable>
           <CardActions className="column-actions">
-            <Modal buttonText="Add task" title="Add task" mode="add">
+            <Modal buttonText={t('add.task')} title={t('add.task')} mode="add">
               <TaskForm mode="add" boardId={boardId} columnId={_id} />
             </Modal>
-            <Modal title="Delete column" mode="confirm" onConfirm={handleDelete}>
-              <p>You want to delete this column with all tasks in it. Are you sure?</p>
+            <Modal title={t('delete.column')} mode="confirm" onConfirm={handleDelete}>
+              <Typography>{t('confirmation.column')}</Typography>
             </Modal>
           </CardActions>
           {error && <Toast message={(error as ErrorResponse).data.message} />}

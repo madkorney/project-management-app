@@ -18,10 +18,10 @@ import { Toast } from 'components';
 
 import styles from './userPage.module.scss';
 import { useTranslation } from 'react-i18next';
+import { Typography } from '@mui/material';
 
 export enum ModalText {
-  DELETE = 'Are you sure you want to delete your account?',
-  PROFILE_UPDATE = 'Profile update.',
+  PROFILE_UPDATE = 'Profile updated',
 }
 
 const UserPage = () => {
@@ -79,15 +79,15 @@ const UserPage = () => {
       {error && <Toast message={(error as ErrorResponse).data.message} />}
       {!error && isMessageUser && <Toast message={isMessageUser} />}
       <div className={styles.userDescription}>
-        <h2 className={styles.userTitle}>
-          {t('userHi')} {userName && userName.slice(0, 1).toUpperCase() + userName.slice(1)}!
-        </h2>
-        <p>{t('userPage')}</p>
+        <Typography variant="h5">
+          {t('userHi')}, {userName && userName.slice(0, 1).toUpperCase() + userName.slice(1)}!
+        </Typography>
+        <Typography sx={{ marginTop: 2 }}>{t('userPage')}</Typography>
       </div>
       <Form
         className={styles.userForm}
         onSubmit={onSubmit}
-        formName="User page"
+        formName={t('userPage')}
         formLink=""
         nameFiled={true}
         userPage={true}

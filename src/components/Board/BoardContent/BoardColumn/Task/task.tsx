@@ -1,4 +1,5 @@
-import { Draggable } from '@hello-pangea/dnd';
+import { useTranslation } from 'react-i18next';
+import { Draggable } from 'react-beautiful-dnd';
 
 import {
   useDeleteTaskByIdMutation,
@@ -9,12 +10,14 @@ import { ErrorResponse, TaskType } from 'types';
 
 import { Modal, Toast } from 'components';
 import { TaskForm } from 'components/Forms/ModalForm';
+import { Typography } from '@mui/material';
 
 const Task = (task: TaskType) => {
   const { _id, columnId, boardId, title, order } = task;
   const [deleteTask, { error }] = useDeleteTaskByIdMutation();
   const [updateTasksSet] = useUpdateTasksSetMutation();
   const [getTasks] = useLazyGetTasksQuery();
+  const { t } = useTranslation();
 
   const handleDelete = async () => {
     await deleteTask({ _id, columnId, boardId });
@@ -41,11 +44,11 @@ const Task = (task: TaskType) => {
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
-          <Modal buttonText={title} title="Edit task" mode="task">
+          <Modal buttonText={title} title={t('edit.task')} mode="task">
             <TaskForm mode="edit" boardId={boardId} columnId={columnId} task={task} />
           </Modal>
-          <Modal title="Delete task" mode="confirm" onConfirm={handleDelete}>
-            <p>You want to delete this task. Are you sure?</p>
+          <Modal title={t('delete.task')} mode="confirm" onConfirm={handleDelete}>
+            <Typography>{t('confirmation.task')}</Typography>
           </Modal>
           {error && <Toast message={(error as ErrorResponse).data.message} />}
         </div>

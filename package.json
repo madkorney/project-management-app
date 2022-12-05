@@ -1,12 +1,10 @@
 {
   "name": "mindbox-todo-app",
   "version": "0.1.0",
-  "homepage": "https://madkorney.github.io/project-management-app/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
-    "@hello-pangea/dnd": "^16.2.0",
     "@mui/icons-material": "^5.10.9",
     "@mui/material": "^5.10.13",
     "@reduxjs/toolkit": "^1.9.0",

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { ButtonsForm, InputLogin, InputName, InputPassword, LinkAuthorization } from './InputsForm';
+
 import { UserSignUpType } from 'types';
 
 type FormProps = {

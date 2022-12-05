@@ -1,4 +1,5 @@
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import { useAppSelector } from 'redux/hooks';
 
@@ -26,6 +27,8 @@ const BoardForm = ({ mode, board, onClose }: BoardFormType) => {
   } = useForm<FormPropsType>({
     mode: 'onTouched',
   });
+
+  const { t } = useTranslation();
 
   const [addBoard, { error: addError }] = useCreateBoardMutation();
   const [updateBoard, { error: editError }] = useUpdateBoardByIdMutation();
@@ -77,7 +80,7 @@ const BoardForm = ({ mode, board, onClose }: BoardFormType) => {
               getOptionLabel={(option) => option.name}
               filterSelectedOptions
               limitTags={2}
-              noOptionsText="No users found"
+              noOptionsText={t('users.noUsers')}
               onChange={(_, value) => onChange(value.map((key) => key._id))}
               isOptionEqualToValue={(option, value) => option._id === value._id}
               renderInput={(params) => (
@@ -85,8 +88,8 @@ const BoardForm = ({ mode, board, onClose }: BoardFormType) => {
                   {...params}
                   {...field}
                   variant="standard"
-                  label="Assigned users"
-                  placeholder="Users"
+                  label={t('users.assigned')}
+                  placeholder={t('users.placeholder')}
                 />
               )}
               renderOption={(props, option) => (
@@ -99,7 +102,7 @@ const BoardForm = ({ mode, board, onClose }: BoardFormType) => {
         />
       )}
       <Button variant="contained" type="submit">
-        {mode === 'edit' ? 'save' : mode}
+        {mode === 'edit' ? t('save') : t('add.common')}
       </Button>
       {addError && <Toast message={(addError as ErrorResponse).data.message} />}
       {editError && <Toast message={(editError as ErrorResponse).data.message} />}

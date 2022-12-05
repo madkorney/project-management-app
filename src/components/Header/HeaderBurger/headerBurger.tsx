@@ -1,13 +1,14 @@
-import { Box, Divider, Drawer, IconButton, Paper } from '@mui/material';
 import { useState } from 'react';
-import MenuIcon from '@mui/icons-material/Menu';
-import CloseIcon from '@mui/icons-material/Close';
+import { TFunction } from 'i18next';
 
 import { useAppSelector } from 'redux/hooks';
+
+import { Box, Divider, Drawer, IconButton, Paper } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 import { HeaderUserButtons, HeaderUserLinks } from '../HeaderButtons';
 
 import styles from '../header.module.scss';
-import { TFunction } from 'i18next';
 
 type BurgerProps = {
   func: { [name: string]: () => void };
@@ -38,6 +39,7 @@ export const HeaderBurger = ({ func, t }: BurgerProps) => {
     },
     false
   );
+
   return (
     <>
       <IconButton

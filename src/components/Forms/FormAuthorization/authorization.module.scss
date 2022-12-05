@@ -10,25 +10,25 @@
   border: 2px solid #0000003d;
   border-radius: 15px;
   box-shadow: 0 0 15px #4b66ea85;
-  padding: 8px;
+  padding: 4px;
 
   & > form {
     & > button {
       padding: 2px 8px;
       background: #0f286b;
-      transition: background .2s linear;
+      transition: background 0.2s linear;
       font-weight: bold;
 
       &:hover {
-        background: #0F286B9B;
+        background: #0f286b9b;
       }
     }
   }
 
-
   &Container {
     align-self: center;
     margin: 0 auto;
+
     @media (max-width: 914px) {
       margin: auto;
       margin-top: 20px;
@@ -66,7 +66,7 @@
   }
 
   &Error {
-    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
     color: #d32f2f;
     font-weight: 400;
     font-size: 0.75rem;
@@ -94,10 +94,10 @@
     & > button {
       padding: 2px 8px;
       background: #0f286b;
-      transition: background .2s linear;
+      transition: background 0.2s linear;
 
       &:hover {
-        background: #0F286B9B;
+        background: #0f286b9b;
       }
     }
   }

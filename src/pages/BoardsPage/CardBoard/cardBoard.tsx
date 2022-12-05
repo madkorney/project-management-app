@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import {
   useDeleteBoardByIdMutation,
@@ -15,6 +16,7 @@ import { useState } from 'react';
 
 const CardBoard = (board: BoardType) => {
   const [skip, setSkip] = useState(true);
+  const { t } = useTranslation();
   const [deleteBoardById] = useDeleteBoardByIdMutation();
   const [deleteColumnById] = useDeleteColumnByIdMutation();
   const [deleteTaskById] = useDeleteTaskByIdMutation();
@@ -64,18 +66,20 @@ const CardBoard = (board: BoardType) => {
           size="medium"
           variant="contained"
           sx={{ marginRight: 'auto' }}
-          aria-label="Delete board"
+          aria-label={t('delete.board')}
           onClick={() => {
             navigate(`${board._id}`);
           }}
         >
-          Open
+          {t('open')}
         </Button>
-        <Modal buttonText="Delete" title="Delete board" mode="confirm" onConfirm={handleDelete}>
-          <p>
-            You want to delete this board. This will also delete all columns and all tasks in this
-            board. Are you sure?
-          </p>
+        <Modal
+          buttonText={t('delete.common')}
+          title={t('delete.board')}
+          mode="confirm"
+          onConfirm={handleDelete}
+        >
+          <Typography>{t('confirmation.board')}</Typography>
         </Modal>
       </CardActions>
     </Card>

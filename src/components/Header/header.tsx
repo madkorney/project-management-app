@@ -1,8 +1,9 @@
-import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
-import { logOut, setOpenUserPage } from 'redux/authSlice';
+import { logOut, setOpenUserPage, setUserLang } from 'redux/authSlice';
 
 import { HeaderUserButtons, HeaderUserLinks } from './HeaderButtons';
 import { HeaderBurger } from './HeaderBurger/headerBurger';
@@ -50,14 +51,17 @@ const Header = ({ bg }: PropHeader) => {
     if (lang === 'en') {
       i18n.changeLanguage('ru');
       setLang('ru');
+      dispatch(setUserLang('ru'));
       localStorage.setItem('lang', 'ru');
     }
     if (lang === 'ru') {
       i18n.changeLanguage('en');
       setLang('en');
+      dispatch(setUserLang('en'));
       localStorage.setItem('lang', 'en');
     }
   };
+
   useEffect(() => {
     location.pathname.includes('user-page') && dispatch(setOpenUserPage(true));
   }, [dispatch]);

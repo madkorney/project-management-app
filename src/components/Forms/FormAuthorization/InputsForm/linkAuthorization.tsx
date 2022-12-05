@@ -1,4 +1,7 @@
 import { NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
+import { Typography } from '@mui/material';
 
 import styles from '../authorization.module.scss';
 
@@ -7,12 +10,14 @@ type LinkProps = {
 };
 
 export const LinkAuthorization = ({ linkName }: LinkProps) => {
+  const { t } = useTranslation();
+
   return (
-    <span className={styles.formText}>
-      {linkName === 'sign-in' ? 'Already have an account? ' : "Don't have an account? "}
+    <Typography className={styles.formText} variant="body2">
+      {linkName === 'sign-in' ? t('auth.registered.yes') : t('auth.registered.no')}
       <NavLink className={styles.formLink} to={`/${linkName}`}>
-        Click Here
+        {t('auth.link')}
       </NavLink>
-    </span>
+    </Typography>
   );
 };

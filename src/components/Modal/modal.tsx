@@ -1,6 +1,5 @@
 import { Children, cloneElement, isValidElement, ReactNode, useState } from 'react';
-
-import CloseIcon from '@mui/icons-material/Close';
+import { useTranslation } from 'react-i18next';
 
 import {
   Button,
@@ -10,6 +9,7 @@ import {
   DialogTitle,
   IconButton,
 } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import { ModalButton } from './ModalButton/modalButton';
 
 type ModalPropsType = {
@@ -32,6 +32,7 @@ const Modal = ({
   styleText,
 }: ModalPropsType) => {
   const [open, setOpen] = useState(false);
+  const { t } = useTranslation();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -85,9 +86,9 @@ const Modal = ({
         {mode === 'confirm' && (
           <DialogActions>
             <Button autoFocus onClick={handleConfirm}>
-              Delete
+              {t('delete.common')}
             </Button>
-            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleClose}>{t('cancel')}</Button>
           </DialogActions>
         )}
       </Dialog>
