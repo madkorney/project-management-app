@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { Draggable } from '@hello-pangea/dnd';
+import { Draggable } from 'react-beautiful-dnd';
 
 import {
   useDeleteTaskByIdMutation,

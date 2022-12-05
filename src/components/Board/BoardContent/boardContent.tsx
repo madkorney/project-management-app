@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { DragDropContext, Droppable, DropResult } from '@hello-pangea/dnd';
+import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
 
 import BoardColumn from './BoardColumn';
 import { Loader, Modal } from 'components';
