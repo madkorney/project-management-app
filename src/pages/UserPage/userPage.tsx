@@ -12,6 +12,7 @@ import { Toast } from 'components';
 
 import styles from './userPage.module.scss';
 import { useTranslation } from 'react-i18next';
+import { Typography } from '@mui/material';
 
 export enum ModalText {
   DELETE_USER = 'Delete user',
@@ -68,10 +69,10 @@ const UserPage = () => {
       {error && <Toast message={(error as ErrorResponse).data.message} />}
       {!error && isMessageUser && <Toast message={isMessageUser} />}
       <div className={styles.userDescription}>
-        <h2>
+        <Typography variant="h5">
           {t('userHi')}, {login && login.slice(0, 1).toUpperCase() + login.slice(1)}
-        </h2>
-        <p>{t('userPage')}</p>
+        </Typography>
+        <Typography>{t('userPage')}</Typography>
       </div>
       <Form
         className={styles.userForm}

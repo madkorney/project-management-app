@@ -72,10 +72,10 @@ const CardBoard = (board: BoardType) => {
           Open
         </Button>
         <Modal buttonText="Delete" title="Delete board" mode="confirm" onConfirm={handleDelete}>
-          <p>
+          <Typography>
             You want to delete this board. This will also delete all columns and all tasks in this
             board. Are you sure?
-          </p>
+          </Typography>
         </Modal>
       </CardActions>
     </Card>

@@ -1,4 +1,4 @@
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 
 import Modal from 'components/Modal/modal';
@@ -26,7 +26,7 @@ export const ButtonsForm = ({ userPage, formName, isConfirm }: ButtonProps) => {
         mode="confirm"
         onConfirm={isConfirm}
       >
-        <p>{ModalText.DELETE}</p>
+        <Typography>{ModalText.DELETE}</Typography>
       </Modal>
     </div>
   ) : (

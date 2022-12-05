@@ -9,6 +9,7 @@ import { ErrorResponse, TaskType } from 'types';
 
 import { Modal, Toast } from 'components';
 import { TaskForm } from 'components/Forms/ModalForm';
+import { Typography } from '@mui/material';
 
 const Task = (task: TaskType) => {
   const { _id, columnId, boardId, title, order } = task;
@@ -45,7 +46,7 @@ const Task = (task: TaskType) => {
             <TaskForm mode="edit" boardId={boardId} columnId={columnId} task={task} />
           </Modal>
           <Modal title="Delete task" mode="confirm" onConfirm={handleDelete}>
-            <p>You want to delete this task. Are you sure?</p>
+            <Typography>You want to delete this task. Are you sure?</Typography>
           </Modal>
           {error && <Toast message={(error as ErrorResponse).data.message} />}
         </div>

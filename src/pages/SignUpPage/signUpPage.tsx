@@ -9,6 +9,7 @@ import { Toast } from 'components';
 import Form from 'components/Forms/FormAuthorization';
 
 import styles from 'global-styles/authorization.module.scss';
+import { Typography } from '@mui/material';
 
 const SignUpPage = () => {
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ const SignUpPage = () => {
   return (
     <div className={styles.formContainer}>
       <div className={styles.form}>
-        <h2>Sign Up</h2>
+        <Typography variant="h5">Sign Up</Typography>
         {error && <Toast message={(error as ErrorResponse).data.message} />}
         <Form onSubmit={onSubmit} formName="Sign Up" formLink="sign-in" nameFiled={true} />
       </div>

@@ -120,7 +120,9 @@ const BoardColumn = (column: ColumnType) => {
               <TaskForm mode="add" boardId={boardId} columnId={_id} />
             </Modal>
             <Modal title="Delete column" mode="confirm" onConfirm={handleDelete}>
-              <p>You want to delete this column with all tasks in it. Are you sure?</p>
+              <Typography>
+                You want to delete this column with all tasks in it. Are you sure?
+              </Typography>
             </Modal>
           </CardActions>
           {error && <Toast message={(error as ErrorResponse).data.message} />}

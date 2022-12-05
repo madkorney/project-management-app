@@ -5,6 +5,7 @@ import { setCredentials } from 'redux/authSlice';
 import { useSignInMutation } from 'services';
 import { AuthInfoType, ErrorResponse } from 'types';
 
+import { Typography } from '@mui/material';
 import Form from 'components/Forms/FormAuthorization';
 import { Toast } from 'components';
 
@@ -31,7 +32,7 @@ const SignInPage = () => {
   return (
     <div className={styles.formContainer}>
       <div className={styles.form}>
-        <h2>Sign In</h2>
+        <Typography variant="h5">Sign In</Typography>
         {error && <Toast message={(error as ErrorResponse).data.message} />}
         <Form onSubmit={onSubmit} formName="Sign In" formLink="sign-up" nameFiled={false} />
       </div>

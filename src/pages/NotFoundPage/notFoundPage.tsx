@@ -1,7 +1,9 @@
+import { Typography } from '@mui/material';
+
 const NotFoundPage = () => {
   return (
     <div className="not-found-container">
-      <p>Sorry! the page you requested not found ...</p>
+      <Typography>Sorry! the page you requested not found ...</Typography>
     </div>
   );
 };
