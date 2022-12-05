@@ -16,6 +16,10 @@
     height: 8px;
   }
 
+  @media (max-width: 510px) {
+    min-height: 406px;
+  }
+
   @media screen and (orientation: landscape) {
     min-height: 390px;
   }

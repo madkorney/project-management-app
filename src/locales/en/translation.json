@@ -132,5 +132,18 @@
     "responsible": "Responsible users",
     "noUsers": "No users found"
   },
-  "backLink": "Back to boards"
+  "backLink": "Back to boards",
+  "modal": {
+    "title": "Title",
+    "description": "Description",
+    "validate": {
+      "required": "{{val}} cannot be empty",
+      "minLength": "Please write more detailed {{val}}"
+    },
+    "type": {
+      "board": "Board",
+      "column": "Column",
+      "task": "Task"
+    }
+  }
 }
