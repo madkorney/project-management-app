@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { Button, Typography } from '@mui/material';
 import { BoardForm } from 'components/Forms/ModalForm';
@@ -7,7 +8,9 @@ import { Modal } from 'components';
 import { BoardType } from 'types';
 
 const BoardHeader = (board: BoardType) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
+
   return (
     <div className="board-header">
       <Button
@@ -25,7 +28,7 @@ const BoardHeader = (board: BoardType) => {
           </Typography>
           <Typography noWrap>{board.description}</Typography>
         </div>
-        <Modal buttonText="Edit" title="Edit board" mode="edit">
+        <Modal buttonText={t('edit.common')} title={t('edit.board')} mode="edit">
           <BoardForm mode="edit" board={board} />
         </Modal>
       </div>

@@ -1,8 +1,8 @@
+import { TFunction } from 'i18next';
+
 import { Button } from '@mui/material';
 import LoginIcon from '@mui/icons-material/Login';
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
-
-import { TFunction } from 'i18next';
 
 import styles from '../header.module.scss';
 

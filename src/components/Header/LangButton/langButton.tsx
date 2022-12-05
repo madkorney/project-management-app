@@ -1,6 +1,7 @@
 import { Button } from '@mui/material';
-import styles from '../header.module.scss';
 import LanguageIcon from '@mui/icons-material/Language';
+
+import styles from '../header.module.scss';
 
 type LangProps = {
   langClick: () => void;

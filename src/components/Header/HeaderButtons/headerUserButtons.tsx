@@ -1,11 +1,11 @@
-import Modal from 'components/Modal';
-import { BoardForm } from 'components/Forms/ModalForm';
+import { TFunction } from 'i18next';
 
 import { Button } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import { TFunction } from 'i18next';
+import Modal from 'components/Modal';
+import { BoardForm } from 'components/Forms/ModalForm';
 
 import styles from '../header.module.scss';
 
@@ -29,8 +29,8 @@ export const HeaderUserButtons = ({
     <>
       <li onClick={onGoBoards}>
         <Modal
-          buttonText={`${t('addBoard')}`}
-          title="Add new board"
+          buttonText={t('add.board')}
+          title={t('add.board')}
           style={styles.MuiButtonBase}
           styleText={styles.headerTextButton}
         >

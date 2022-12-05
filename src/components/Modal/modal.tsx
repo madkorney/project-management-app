@@ -1,6 +1,5 @@
 import { Children, cloneElement, isValidElement, ReactNode, useState } from 'react';
-
-import CloseIcon from '@mui/icons-material/Close';
+import { useTranslation } from 'react-i18next';
 
 import {
   Button,
@@ -10,8 +9,8 @@ import {
   DialogTitle,
   IconButton,
 } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import { ModalButton } from './ModalButton/modalButton';
-import { useTranslation } from 'react-i18next';
 
 type ModalPropsType = {
   children: JSX.Element;

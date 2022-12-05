@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { DragDropContext, Droppable, DropResult } from '@hello-pangea/dnd';
 
 import BoardColumn from './BoardColumn';
@@ -17,6 +18,7 @@ type BoardContentProps = {
 };
 
 const BoardContent = ({ boardId }: BoardContentProps) => {
+  const { t } = useTranslation();
   const { data: columns } = useGetColumnsQuery(boardId);
   const [getTasksByBoardId] = useLazyGetTasksByBoardIdQuery();
   const [updateTasksSet] = useUpdateTasksSetMutation();
@@ -94,7 +96,7 @@ const BoardContent = ({ boardId }: BoardContentProps) => {
 
   return (
     <>
-      <Modal buttonText="Add column" title="Add column" mode="add">
+      <Modal buttonText={t('add.column')} title={t('add.column')} mode="add">
         <ColumnForm boardId={boardId} mode="add" />
       </Modal>
       <div className="board-content">

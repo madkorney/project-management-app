@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
 
+import { useAppDispatch } from 'redux/hooks';
+import { setOpenUserPage } from 'redux/authSlice';
+
 import LOGO from 'img/logo.svg';
 
 import styles from '../header.module.scss';
-import { useAppDispatch } from 'redux/hooks';
-import { setOpenUserPage } from 'redux/authSlice';
 
 export const HeaderLogo = () => {
   const dispatch = useAppDispatch();

@@ -1,6 +1,7 @@
-import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { logOut, setOpenUserPage } from 'redux/authSlice';
 
