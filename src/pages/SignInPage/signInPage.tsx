@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { useAppDispatch } from 'redux/hooks';
 import { setCredentials } from 'redux/authSlice';
@@ -15,6 +16,7 @@ const SignInPage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [signIn, { error }] = useSignInMutation();
+  const { t } = useTranslation();
 
   const onSubmit = async (dataLogin: AuthInfoType) => {
     await signIn(dataLogin)
@@ -32,9 +34,9 @@ const SignInPage = () => {
   return (
     <div className={styles.formContainer}>
       <div className={styles.form}>
-        <Typography variant="h5">Sign In</Typography>
+        <Typography variant="h5">{t('signIn')}</Typography>
         {error && <Toast message={(error as ErrorResponse).data.message} />}
-        <Form onSubmit={onSubmit} formName="Sign In" formLink="sign-up" nameFiled={false} />
+        <Form onSubmit={onSubmit} formName={t('signIn')} formLink="sign-up" nameFiled={false} />
       </div>
     </div>
   );

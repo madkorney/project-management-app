@@ -17,7 +17,7 @@ import { Typography } from '@mui/material';
 export enum ModalText {
   DELETE_USER = 'Delete user',
   DELETE = 'Are you sure you want to delete your account?',
-  PROFILE_UPDATE = 'Profile update.',
+  PROFILE_UPDATE = 'Profile updated',
 }
 
 const UserPage = () => {
@@ -77,7 +77,7 @@ const UserPage = () => {
       <Form
         className={styles.userForm}
         onSubmit={onSubmit}
-        formName="User page"
+        formName={t('userPage')}
         formLink=""
         nameFiled={true}
         userPage={true}

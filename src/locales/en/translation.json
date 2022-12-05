@@ -5,7 +5,6 @@
   "addBoard": "add board",
   "userHi": "Hi",
   "userPage": "This is your profile page. Here you can update your details or delete your account completely.",
-  "delUser": "delete user",
   "updateUser": "update",
   "password": "password",
   "login": "login",
@@ -67,5 +66,16 @@
     "answer": "With the Project Tracker you can effectively manage your projects, share with teammates, make a plan of your work and control all stages of your project.",
     "stack": "Our app created as a final project of course RS School React 2022 Q3 with a stack of technologies",
     "feedback": "Try Project Tracker and leave us a feedback!"
-  }
+  },
+  "confirmation": {
+    "board": "You want to delete this board. This will also delete all columns and all tasks in this board. Are you sure?"
+  },
+  "delete": {
+    "common": "Delete",
+    "board": "Delete board",
+    "column": "Delete column",
+    "task": "Delete task",
+    "user": "Delete user"
+  },
+  "open": "Open"
 }

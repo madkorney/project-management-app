@@ -20,6 +20,7 @@ const TemplatePage = () => {
       setColorHeader(ColorHeader.initColor);
     }
   };
+
   return (
     <>
       <Header bg={colorHeader} />
