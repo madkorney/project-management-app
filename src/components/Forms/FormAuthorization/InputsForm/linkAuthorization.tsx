@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 
-import styles from 'global-styles/authorization.module.scss';
+import styles from '../authorization.module.scss';
 
 type LinkProps = {
   linkName: string;
