@@ -1,4 +1,5 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import { Button, IconButton, TextField } from '@mui/material';
 import CheckIcon from '@mui/icons-material/Check';
@@ -27,6 +28,7 @@ const ColumnForm = ({ boardId, mode, column, onClose }: ColumnFormType) => {
     mode: 'onTouched',
   });
 
+  const { t } = useTranslation();
   const [addColumn, { error: addError }] = useCreateColumnMutation();
   const [updateColumn, { error: updateError }] = useUpdateColumnByIdMutation();
   const { data: columns, error: getError } = useGetColumnsQuery(boardId, { skip: mode === 'edit' });
@@ -66,7 +68,7 @@ const ColumnForm = ({ boardId, mode, column, onClose }: ColumnFormType) => {
             value={''}
           />
           <Button variant="contained" type="submit">
-            Add
+            {t('add.common')}
           </Button>
         </>
       ) : (
@@ -89,10 +91,10 @@ const ColumnForm = ({ boardId, mode, column, onClose }: ColumnFormType) => {
               },
             })}
           />
-          <IconButton aria-label="save" type="submit" size="small">
+          <IconButton aria-label={t('save')} type="submit" size="small">
             <CheckIcon />
           </IconButton>
-          <IconButton aria-label="cancel" onClick={onClose} size="small">
+          <IconButton aria-label={t('cancel')} onClick={onClose} size="small">
             <CloseIcon />
           </IconButton>
         </>

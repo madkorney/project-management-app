@@ -18,8 +18,9 @@ const BoardHeader = (board: BoardType) => {
         onClick={() => {
           navigate('/boards');
         }}
+        sx={{ minWidth: 'fit-content' }}
       >
-        &lt; Back to boards
+        &lt; {t('backLink')}
       </Button>
       <div className="edit-board-info">
         <div className="board-about">

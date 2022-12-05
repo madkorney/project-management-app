@@ -2,7 +2,6 @@
   "logOut": "Log out",
   "profile": "Profile",
   "boards": "Boards",
-  "addBoard": "Add board",
   "userHi": "Hi",
   "userPage": "This is your profile page. Here you can update your details or delete your account completely.",
   "update": "Update",
@@ -125,5 +124,13 @@
     "common": "Edit",
     "board": "$t(edit.common) board",
     "task": "$t(edit.common) task"
-  }
+  },
+  "save": "Save",
+  "users": {
+    "placeholder": "Users",
+    "assigned": "Assigned users",
+    "responsible": "Responsible users",
+    "noUsers": "No users found"
+  },
+  "backLink": "Back to boards"
 }

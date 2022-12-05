@@ -1,4 +1,5 @@
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import { useAppSelector } from 'redux/hooks';
 
@@ -35,6 +36,7 @@ const TaskForm = ({ mode, boardId, columnId, task, onClose }: TaskFormType) => {
     mode: 'onTouched',
   });
 
+  const { t } = useTranslation();
   const [addTask, { error: addError }] = useCreateTaskMutation();
   const [updateTask, { error: editError }] = useUpdateTaskByIdMutation();
   const { data: boardData } = useGetBoardByIdQuery(boardId);
@@ -93,7 +95,7 @@ const TaskForm = ({ mode, boardId, columnId, task, onClose }: TaskFormType) => {
               getOptionLabel={(option) => option.name}
               filterSelectedOptions
               limitTags={2}
-              noOptionsText="No users found"
+              noOptionsText={t('users.noUsers')}
               onChange={(_, value) => onChange(value.map((key) => key._id))}
               isOptionEqualToValue={(option, value) => option._id === value._id}
               renderInput={(params) => (
@@ -101,16 +103,21 @@ const TaskForm = ({ mode, boardId, columnId, task, onClose }: TaskFormType) => {
                   {...params}
                   {...field}
                   variant="standard"
-                  label="Resposible users"
-                  placeholder="Users"
+                  label={t('users.responsible')}
+                  placeholder={t('users.placeholder')}
                 />
+              )}
+              renderOption={(props, option) => (
+                <li {...props} key={option._id}>
+                  {option.name}
+                </li>
               )}
             />
           )}
         />
       )}
       <Button variant="contained" type="submit">
-        {mode === 'edit' ? 'save' : mode}
+        {mode === 'edit' ? t('save') : t('add.common')}
       </Button>
       {addError && <Toast message={(addError as ErrorResponse).data.message} />}
       {editError && <Toast message={(editError as ErrorResponse).data.message} />}
