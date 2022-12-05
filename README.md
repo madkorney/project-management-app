@@ -1,52 +1,45 @@
-# project-management-app
-RS School React 2022Q3 course final task - Project Management App 
+# Project Tracker
+Project Tracker — Project management system app, made as a final project of course [RS School](https://rs.school/) [React 2022 Q3](https://rs.school/react/).
+With the requirements of [task](https://github.com/rolling-scopes-school/tasks/blob/master/tasks/react/project-management-system-EN.md), app contains welcome page, user authorization, boards list page, selected board management with drag'n'drop.
 
+***
 
+## Technical requirements
+### Frontend
+Framework (library): *React (Create-react-app)*
 
+Routing: *React Router*
 
-# Getting Started with Create React App
+Global store: *Redux Toolkit*
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+API calls: *Redux Toolkit Query*
 
-## Available Scripts
+Components: *Material UI*
 
-In the project directory, you can run:
+Localization: *i18next*
 
-### `npm start`
+Forms: *React Hook Form*
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Drag'n'drop: *Beautiful dnd*
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Languages: *TypeScript*, *SCSS*, *HTML*
 
-### `npm test`
+Packer: *Webpack*
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Linters: *ESlint*, *Prettier*
 
-### `npm run build`
+Version control system: *Git*
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Service for software development: *GitHub*
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The choice of the stack was due to the knowledge gained during the course and the interest in mastering new technologies. The application of knowledge allowed us to create a modern web application that meets the technical requirements.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+***
 
-### `npm run eject`
+### Backend
+[App backend](https://github.com/sylarBrest/final-task-backend) taken from [final task](https://github.com/rolling-scopes-school/tasks/blob/master/tasks/react/project-management-system-EN.md) with small improvements.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+***
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Deploy
+[App deploy](https://app-project-tracker.netlify.app/) is on *Netlify*.
