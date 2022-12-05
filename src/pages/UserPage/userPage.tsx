@@ -42,7 +42,6 @@ const UserPage = () => {
     dispatch(logOut());
     navigate('/');
   };
-  console.log('run');
 
   const onSubmit = async (dataUser: UserSignUpType) => {
     id &&
