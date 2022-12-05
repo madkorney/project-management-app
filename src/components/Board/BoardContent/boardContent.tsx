@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { DragDropContext, Droppable, DropResult } from '@hello-pangea/dnd';
 
 import BoardColumn from './BoardColumn';
-import { Modal } from 'components';
+import { Loader, Modal } from 'components';
 import { ColumnForm } from 'components/Forms/ModalForm';
 
 import {
@@ -19,7 +19,7 @@ type BoardContentProps = {
 
 const BoardContent = ({ boardId }: BoardContentProps) => {
   const { t } = useTranslation();
-  const { data: columns } = useGetColumnsQuery(boardId);
+  const { data: columns, isLoading } = useGetColumnsQuery(boardId);
   const [getTasksByBoardId] = useLazyGetTasksByBoardIdQuery();
   const [updateTasksSet] = useUpdateTasksSetMutation();
   const [updateColumnsSet] = useUpdateColumnsSetMutation();
@@ -104,6 +104,11 @@ const BoardContent = ({ boardId }: BoardContentProps) => {
           <Droppable droppableId={boardId} direction="horizontal" type="column">
             {(provided) => (
               <div className="board" ref={provided.innerRef} {...provided.droppableProps}>
+                {isLoading && (
+                  <div style={{ margin: '0 auto' }}>
+                    <Loader />
+                  </div>
+                )}
                 {columns && columns.map((column) => <BoardColumn {...column} key={column._id} />)}
                 {provided.placeholder}
               </div>
