@@ -1,0 +1,186 @@
+.single-board-page {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+
+  ::-webkit-scrollbar {
+    height: 8px;
+    background: #4288eea5;
+    border-radius: 20px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #050b52;
+    border-radius: 20px;
+    height: 8px;
+  }
+
+  @media (max-width: 510px) {
+    min-height: 406px;
+  }
+
+  @media screen and (orientation: landscape) {
+    min-height: 390px;
+  }
+
+  & > button {
+    width: 206px;
+    margin-left: 6px;
+    background: #fff;
+    border-radius: 5px;
+    border: 1px solid #0f0435;
+    padding: 2px 5px;
+    color: #0f0435;
+    transition: background 0.3s linear;
+    margin-bottom: 10px;
+
+    &:hover {
+      background: #989ee02d;
+    }
+  }
+}
+
+.board-header {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  max-width: 526px;
+  margin-left: 6px;
+
+  & > button {
+    width: 180px;
+    height: 30px;
+    background: #fff;
+    border-radius: 5px;
+    border: 1px solid #0f0435;
+    color: #0f0435;
+    transition: background 0.3s linear;
+
+    &:hover {
+      background: #989ee02d;
+    }
+  }
+
+  @media (max-width: 528px) {
+    gap: 5px;
+  }
+}
+
+.edit-board-info {
+  display: flex;
+  align-items: center;
+
+  @media (max-width: 360px) {
+    width: 100%;
+  }
+
+  & > button {
+    height: 30px;
+    max-width: 118px;
+    margin-left: 6px;
+    color: #0f0435;
+    transition: background 0.3s linear;
+
+    &:hover {
+      background: #989ee02d;
+    }
+  }
+}
+
+.board-about {
+  max-width: 222px;
+
+  @media (max-width: 360px) {
+    max-width: 170px;
+  }
+}
+
+.board-content {
+  position: relative;
+  flex-grow: 1;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.board {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  align-items: flex-start;
+  white-space: nowrap;
+  padding-bottom: 10px;
+
+  & > div {
+    position: relative;
+    padding-right: 4px;
+
+    & > div:last-child {
+      & > button:first-child {
+        color: #007293ba;
+      }
+
+      & > button:last-child {
+        position: absolute;
+        top: 16px;
+        right: 2px;
+        color: #007293ba;
+      }
+    }
+  }
+}
+
+.board-column {
+  margin: 0 5px;
+  min-width: 240px;
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  transition: 0.3s all;
+}
+
+.column-tasks {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.column-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.task {
+  background-color: #e4e4e4;
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+  margin: 0 0 10px;
+  cursor: pointer;
+
+  & > button:first-child {
+    color: #0f0435;
+    max-width: 70%;
+    transition: background 0.3s linear;
+
+    &:hover {
+      background: #c5c4c9;
+    }
+  }
+
+  & > button:last-child {
+    &:hover {
+      background: #6386c700;
+    }
+  }
+}
+
+.MuiCardHeader-content {
+  flex: 1 1 auto;
+  width: 100%;
+}

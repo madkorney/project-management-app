@@ -1,0 +1,78 @@
+@import 'global-styles/variables';
+
+.footer {
+  width: 100%;
+  background-color: #667593;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  max-width: $MAX_WIDTH;
+  margin: 0 auto;
+  padding: 10px 20px;
+
+  .github {
+    display: flex;
+    gap: 10px;
+
+    .link {
+      width: 40px;
+      height: 40px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      border-radius: 50%;
+
+      @media only screen and (max-width: 470px) {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    &__sylarbrest {
+      background-image: url('https://avatars.githubusercontent.com/u/81831257?v=4');
+    }
+
+    &__madkorney {
+      background-image: url('https://avatars.githubusercontent.com/u/1611438?v=4');
+    }
+
+    &__kornull {
+      background-image: url('https://avatars.githubusercontent.com/u/96052707?v=4');
+    }
+
+    @media only screen and (max-width: 470px) {
+      gap: 3px;
+    }
+  }
+
+  .copyright {
+    display: flex;
+    gap: 10px;
+    font-size: 1rem;
+    color: $COLOR-PRIMARY;
+    text-decoration: none;
+  }
+
+  .rss-logo {
+    width: 110px;
+    height: 40px;
+    background: url('https://rs.school/images/rs_school_js.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+    transition: 1s;
+
+    @media only screen and (max-width: 470px) {
+      height: 20px;
+      width: 55px;
+    }
+  }
+
+  @media only screen and (max-width: 470px) {
+    padding: 10px;
+    height: auto;
+  }
+}

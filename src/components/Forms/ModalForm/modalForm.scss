@@ -1,0 +1,37 @@
+.form {
+  max-width: 400px;
+
+  & > button {
+    margin-top: 5px;
+    padding: 2px 8px;
+    background: #0f286b;
+    transition: background .2s linear;
+    font-weight: bold;
+
+    &:hover {
+      background: #0F286B9B;
+    }
+  }
+}
+
+
+.form.edit {
+  display: flex;
+  padding: 1rem;
+  width: 88%;
+
+  & > button {
+    background: none;
+    color: #007293ba;
+    padding: 0;
+    transition: color .2s linear;
+
+    &:hover {
+      color: #FF0000;
+    }
+  }
+
+  & div:first-child {
+    padding-right: 2px;
+  }
+}

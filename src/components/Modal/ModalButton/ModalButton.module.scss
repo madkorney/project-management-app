@@ -1,0 +1,27 @@
+.MuiButtonBase {
+  display: flex;
+  align-items: center;
+  transition: color .3s linear, background .3s linear;
+
+  & > span:first-child {
+    display: flex;
+    margin-right: 0;
+    align-items: center;
+  }
+
+  &:hover {
+    color: #d9cfd0;
+    svg {
+      transition: color .3s linear;
+      color: #ff2626;
+    }
+  }
+}
+
+.MuiSvgIcon {
+  width: 22px;
+  height: 22px;
+  margin-right: 0;
+  color: #007293BA;
+  transition: color .3s linear;
+}

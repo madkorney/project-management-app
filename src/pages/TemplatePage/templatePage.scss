@@ -1,0 +1,27 @@
+@import 'global-styles/variables';
+
+.main-container {
+  flex-grow: 1;
+  display: flex;
+  overflow: auto;
+  max-width: $MAX_WIDTH;
+  width: 100%;
+  padding: 10px 20px;
+  margin: 2px auto;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    background: #4288EEA5;
+    border-radius: 20px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #1b3c6c;
+    width: 8px;
+    border-radius: 20px;
+  }
+
+  @media screen and (max-width: 768px) {
+    padding: 10px;
+  }
+}

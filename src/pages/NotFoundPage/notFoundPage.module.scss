@@ -1,0 +1,26 @@
+.page {
+  margin: 0 auto;
+  padding-top: 50px;
+  text-align: center;
+
+  &Title {
+    font-size: 30px;
+    margin-bottom: 10px;
+  }
+
+  &Span {
+    color: #FF0000;
+  }
+
+  &Link {
+    color: #FF0000;
+    text-decoration: none;
+    font-style: italic;
+    font-weight: bold;
+    transition: color .2s linear;
+
+    &:hover {
+      color: #009dff;
+    }
+  }
+}

@@ -1,0 +1,156 @@
+{
+  "logOut": "Log out",
+  "profile": "Profile",
+  "boards": "Boards",
+  "userHi": "Hi",
+  "userPage": "This is your profile page. Here you can update your details or delete your account completely.",
+  "update": "Update",
+  "pros": {
+    "description": "With our app you can:",
+    "all": [
+      {
+        "id": 1,
+        "pro": "create boards for your projects with description"
+      },
+      {
+        "id": 2,
+        "pro": "create columns with any title you want"
+      },
+      {
+        "id": 3,
+        "pro": "rearrange columns if necessary"
+      },
+      {
+        "id": 4,
+        "pro": "create tasks in each column and assign teammates to tasks"
+      },
+      {
+        "id": 5,
+        "pro": "rearrange tasks within one column or even between columns"
+      },
+      {
+        "id": 6,
+        "pro": "create unlimited number of projects, columns ans tasks"
+      },
+      {
+        "id": 7,
+        "pro": "edit/delete boards/columns/tasks"
+      },
+      {
+        "id": 8,
+        "pro": "free a lot of time to work with your projects"
+      }
+    ]
+  },
+  "team": {
+    "description": "Our team",
+    "teammates": [
+      {
+        "name": "Uladzimir",
+        "did": "Sign-In/Sign-Up and Profile pages, localization, burger-menu, sticky header, styles"
+      },
+      {
+        "name": "Aliaksandr",
+        "did": "Welcome, Boards and Single-board pages, modal forms, drag'n'drop, private/public routes, API calls"
+      }
+    ]
+  },
+  "main": {
+    "question": "Don't know what to do next and what your teammates responsible for?",
+    "answer": "With the Project Tracker you can effectively manage your projects, share with teammates, make a plan of your work and control all stages of your project.",
+    "stack": "Our app created as a final project of course RS School React 2022 Q3 with a stack of technologies",
+    "feedback": "Try Project Tracker and leave us a feedback!"
+  },
+  "confirmation": {
+    "board": "You want to delete this board. This will also delete all columns and all tasks in this board. Are you sure?",
+    "column": "You want to delete this column with all tasks in it. Are you sure?",
+    "task": "You want to delete this task. Are you sure?",
+    "user": "Are you sure you want to delete your account?"
+  },
+  "delete": {
+    "common": "Delete",
+    "board": "$t(delete.common) board",
+    "column": "$t(delete.common) column",
+    "task": "$t(delete.common) task",
+    "user": "$t(delete.common) user"
+  },
+  "open": "Open",
+  "cancel": "Cancel",
+  "validate": {
+    "login": {
+      "required": "cannot be empty",
+      "minLength": "must be at least 3 characters",
+      "validChars": "can contain only latin letters, digits and underscore",
+      "firstLetter": "should begin from letter or digit"
+    },
+    "name": {
+      "required": "cannot be empty",
+      "minLength": "must be at least 2 characters",
+      "validChars": "can contain only letters, space and dash",
+      "firstLetter": "should begin with capital letter",
+      "lastLetter": "should end with letter"
+    },
+    "password": {
+      "required": "cannot be empty",
+      "minLength": "must be at least {{minPasswordLength}} characters",
+      "validChars": "contains non-valid symbol",
+      "oneDigit": "should contain at least one digit",
+      "oneLowercase": "should contain at least one lowercase letter",
+      "oneUppercase": "should contain at least one capital letter",
+      "oneSpecialChar": "should contain at least one special character"
+    }
+  },
+  "inputs": {
+    "login": "Login",
+    "name": "Name",
+    "password": "Password"
+  },
+  "auth": {
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "registered": {
+      "yes": "Already have an account? ",
+      "no": "Don't have an account? "
+    },
+    "link": "Click here"
+  },
+  "add": {
+    "common": "Add",
+    "board": "$t(add.common) board",
+    "column": "$t(add.common) column",
+    "task": "$t(add.common) task"
+  },
+  "edit": {
+    "common": "Edit",
+    "board": "$t(edit.common) board",
+    "task": "$t(edit.common) task"
+  },
+  "save": "Save",
+  "users": {
+    "placeholder": "Users",
+    "assigned": "Assigned users",
+    "responsible": "Responsible users",
+    "noUsers": "No users found"
+  },
+  "backLink": "Back to boards",
+  "modal": {
+    "title": "Title",
+    "description": "Description",
+    "validate": {
+      "required": "{{val}} cannot be empty",
+      "minLength": "Please write more detailed {{val}}"
+    },
+    "type": {
+      "board": "Board",
+      "column": "Column",
+      "task": "Task"
+    }
+  },
+  "errorPage": {
+    "ops": "Ooops... ",
+    "notPage": "This page does not exist!",
+    "please": "Please click ",
+    "click": "here ",
+    "errorText": "or any button. And if you want, you can even click on the logo!"
+  }
+}

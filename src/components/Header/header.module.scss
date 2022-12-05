@@ -1,0 +1,190 @@
+@import 'global-styles/variables';
+
+.header {
+  position: sticky;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+  padding: 5px;
+  transition: background .3s linear;
+
+
+  &Container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: $MAX_WIDTH;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    @media (max-width: 768px) {
+      padding: 0 10px;
+    }
+  }
+
+  &Nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    gap: 14px;
+
+    & li {
+      & > button {
+        width: inherit;
+        color: #fff;
+      }
+    }
+
+    & li:last-child {
+      & > button span {
+        left: -10px;
+      }
+    }
+
+    @media (max-width: 899px) {
+      display: none;
+    }
+  }
+
+  &NavBlock {
+    display: flex;
+    align-items: center;
+  }
+
+  &NavUser {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    justify-content: space-around;
+
+    & li {
+      & > button {
+        width: inherit;
+        color: #fff;
+        transition: color .3s linear;
+      }
+    }
+
+    & li:last-child {
+      & > button span {
+        left: -10px;
+      }
+    }
+  }
+
+  &NavAdaptive {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    gap: 10px;
+    padding: 0 20px 0 24px;
+    max-width: 460px;
+    width: 100%;
+    font-size: 20px;
+
+    & li {
+      width: 90%;
+    }
+
+    & button {
+      position: relative;
+      display: block;
+      width: inherit;
+      text-align: left;
+      font-size: 18px;
+      color: #fff;
+      padding-left: 20px;
+
+      & > span:first-child {
+        position: absolute;
+        top: 10px;
+        margin: 0;
+      }
+    }
+  }
+
+  &Button {
+    width: 20px;
+    margin-right: 0;
+  }
+
+  &UserName {
+    display: flex;
+    align-items: center;
+  }
+
+  &TextButton {
+    max-width: 300px;
+    height: 20px;
+    font-style: initial;
+    font-weight: bold;
+  }
+
+  &TextButtonBurger {
+    max-width: 300px;
+    height: 20px;
+    font-size: 22px;
+    font-style: initial;
+    font-weight: bold;
+  }
+
+  &Logo {
+    width: 190px;
+    height: 50px;
+    overflow: hidden;
+
+    &Img {
+      width: 100%;
+      height: 50px;
+      transition: fill 0.2s linear;
+      fill: #fff;
+
+      &:hover {
+        fill: #7b98fa;
+      }
+    }
+  }
+
+  &Lang {
+    position: relative;
+    width: 50px;
+    margin-right: 10px;
+    @media (max-width: 798px) {
+      margin-right: 4px;
+    }
+
+    & > button {
+      width: inherit;
+      color: #fff;
+      transition: color .3s linear;
+
+      & > span:first-child {
+        position: absolute;
+        top: 8px;
+        left: 4px;
+      }
+    }
+  }
+}
+
+
+.MuiButtonBase {
+  position: relative;
+  width: 100px;
+  font-weight: bold;
+  text-align: center;
+  padding: 0;
+
+  & > span:first-child {
+    position: absolute;
+    left: -12px;
+    top: 8px;
+  }
+
+  &:hover {
+    color: #7b98fa;
+  }
+}

@@ -1,0 +1,29 @@
+.boards-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  align-items: center;
+  justify-content: center;
+
+  & div {
+    & div:last-child {
+      & button {
+        color: #0f0435;
+        background: #fff;
+        padding: 2px 5px;
+        font-weight: bold;
+        transition: background .3s linear;
+        &:hover{
+          background: #989EE02D;
+        }
+      }
+    }
+  }
+}
+
+.board-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
