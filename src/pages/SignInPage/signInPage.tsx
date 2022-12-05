@@ -34,9 +34,14 @@ const SignInPage = () => {
   return (
     <div className={styles.formContainer}>
       <div className={styles.form}>
-        <Typography variant="h5">{t('signIn')}</Typography>
+        <Typography variant="h5">{t('auth.signIn')}</Typography>
         {error && <Toast message={(error as ErrorResponse).data.message} />}
-        <Form onSubmit={onSubmit} formName={t('signIn')} formLink="sign-up" nameFiled={false} />
+        <Form
+          onSubmit={onSubmit}
+          formName={t('auth.signIn')}
+          formLink="sign-up"
+          nameFiled={false}
+        />
       </div>
     </div>
   );

@@ -11,6 +11,7 @@ import {
   IconButton,
 } from '@mui/material';
 import { ModalButton } from './ModalButton/modalButton';
+import { useTranslation } from 'react-i18next';
 
 type ModalPropsType = {
   children: JSX.Element;
@@ -32,6 +33,7 @@ const Modal = ({
   styleText,
 }: ModalPropsType) => {
   const [open, setOpen] = useState(false);
+  const { t } = useTranslation();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -85,9 +87,9 @@ const Modal = ({
         {mode === 'confirm' && (
           <DialogActions>
             <Button autoFocus onClick={handleConfirm}>
-              Delete
+              {t('delete.common')}
             </Button>
-            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleClose}>{t('cancel')}</Button>
           </DialogActions>
         )}
       </Dialog>

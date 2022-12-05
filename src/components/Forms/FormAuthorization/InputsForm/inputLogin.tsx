@@ -1,30 +1,33 @@
+import { useTranslation } from 'react-i18next';
+
 import { FormControl, TextField } from '@mui/material';
+
 import { FormInputsProps } from '../types';
 import { REGEXP_LOGIN_VALID_CHARACTERS } from 'data/constants';
 
 export const InputLogin = ({ register, errors }: FormInputsProps) => {
+  const { t } = useTranslation();
   const isError = !!errors;
 
   return (
     <FormControl sx={{ m: 1, maxWidth: '30ch', width: '90%' }} variant="outlined">
       <TextField
-        label="Login"
+        label={t('inputs.login')}
         {...register('login', {
-          required: { value: true, message: 'cannot be empty' },
+          required: { value: true, message: t('validate.login.required') },
           minLength: {
             value: 3,
-            message: 'must be at least 3 characters',
+            message: t('validate.login.minLength'),
           },
           validate: {
             shouldStartFromLetter: (login) =>
-              new RegExp(/[a-zA-Z0-9]/).test(login[0]) || 'should begin from letter or digit',
+              new RegExp(/[a-zA-Z0-9]/).test(login[0]) || `${t('validate.login.firstLetter')}`,
             containOnlyValidCharacters: (login) =>
-              REGEXP_LOGIN_VALID_CHARACTERS.test(login) ||
-              'can contain only latin letters, digits and underscore',
+              REGEXP_LOGIN_VALID_CHARACTERS.test(login) || `${t('validate.login.validChars')}`,
           },
         })}
         error={isError}
-        helperText={errors ? `Login ${errors.message}` : ' '}
+        helperText={errors ? `${t('inputs.login')} ${errors.message}` : ' '}
       />
     </FormControl>
   );

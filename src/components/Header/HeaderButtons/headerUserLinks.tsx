@@ -21,7 +21,7 @@ export const HeaderUserLinks = ({ onSignIn, onSignUp, t }: AuthorizationButtonsP
           startIcon={<LoginIcon className={styles.headerButton} />}
           onClick={onSignIn}
         >
-          <span className={styles.headerTextButton}>{t('signIn')}</span>
+          <span className={styles.headerTextButton}>{t('auth.signIn')}</span>
         </Button>
       </li>
       <li>
@@ -30,7 +30,7 @@ export const HeaderUserLinks = ({ onSignIn, onSignUp, t }: AuthorizationButtonsP
           startIcon={<AppRegistrationIcon className={styles.headerButton} />}
           onClick={onSignUp}
         >
-          <span className={styles.headerTextButton}>{t('signUp')}</span>
+          <span className={styles.headerTextButton}>{t('auth.signUp')}</span>
         </Button>
       </li>
     </>

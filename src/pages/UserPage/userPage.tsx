@@ -21,7 +21,6 @@ import { useTranslation } from 'react-i18next';
 import { Typography } from '@mui/material';
 
 export enum ModalText {
-  DELETE = 'Are you sure you want to delete your account?',
   PROFILE_UPDATE = 'Profile updated',
 }
 

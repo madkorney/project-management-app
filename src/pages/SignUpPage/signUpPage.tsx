@@ -42,9 +42,9 @@ const SignUpPage = () => {
   return (
     <div className={styles.formContainer}>
       <div className={styles.form}>
-        <Typography variant="h5">{t('signUp')}</Typography>
+        <Typography variant="h5">{t('auth.signUp')}</Typography>
         {error && <Toast message={(error as ErrorResponse).data.message} />}
-        <Form onSubmit={onSubmit} formName={t('signUp')} formLink="sign-in" nameFiled={true} />
+        <Form onSubmit={onSubmit} formName={t('auth.signUp')} formLink="sign-in" nameFiled={true} />
       </div>
     </div>
   );
