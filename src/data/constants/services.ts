@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://localhost:3001';
+export const BASE_URL = 'https://final-task-backend-production-87eb.up.railway.app';
 
 export enum STATUS_CODES {
   OK = 200,
