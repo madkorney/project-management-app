@@ -3,7 +3,13 @@ import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { logOut, setCredentials } from 'redux/authSlice';
-import { useDeleteUserByIdMutation, useSignInMutation, useUpdateUserByIdMutation } from 'services';
+import {
+  useDeleteUserByIdMutation,
+  useGetUserByIdQuery,
+  useSignInMutation,
+  useUpdateUserByIdMutation,
+} from 'services';
+
 import { updateProfile } from './userPage.utils';
 import { ErrorResponse, UserSignUpType } from 'types';
 
@@ -14,7 +20,6 @@ import styles from './userPage.module.scss';
 import { useTranslation } from 'react-i18next';
 
 export enum ModalText {
-  DELETE_USER = 'Delete user',
   DELETE = 'Are you sure you want to delete your account?',
   PROFILE_UPDATE = 'Profile update.',
 }
@@ -26,8 +31,10 @@ const UserPage = () => {
   const [signIn] = useSignInMutation();
   const [deleteUser] = useDeleteUserByIdMutation();
   const [updateUser, { error }] = useUpdateUserByIdMutation();
-  const { id, login } = useAppSelector((state) => state.auth.user!);
+  const { id } = useAppSelector((state) => state.auth.user!);
   const [isMessageUser, setMessageUser] = useState('');
+  const [userNmae, setUserName] = useState('');
+  const userData = useGetUserByIdQuery(id);
 
   const handleDeleteUser = async () => {
     localStorage.removeItem('pma_token');
@@ -63,13 +70,17 @@ const UserPage = () => {
     }
   }, [isMessageUser]);
 
+  useEffect(() => {
+    if (userData.currentData?.name) setUserName(userData.currentData.name);
+  }, [userData.currentData]);
+
   return (
     <div className={styles.user}>
       {error && <Toast message={(error as ErrorResponse).data.message} />}
       {!error && isMessageUser && <Toast message={isMessageUser} />}
       <div className={styles.userDescription}>
         <h2>
-          {t('userHi')}, {login && login.slice(0, 1).toUpperCase() + login.slice(1)}
+          {t('userHi')}, {userNmae && userNmae.slice(0, 1).toUpperCase() + userNmae.slice(1)}
         </h2>
         <p>{t('userPage')}</p>
       </div>
